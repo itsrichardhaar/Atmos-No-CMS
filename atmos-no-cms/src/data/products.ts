@@ -10,7 +10,7 @@ export const products: Product[] = [
     startingFrom: 555,
     image: "/assets/products/element.png",
     categories: ["Indoor Performance", "Compact & Versatile"],
-    specs: ["P1.2 • P1.5 • P1.8", "600–1200 nits", "HDR ready"],
+    specs: ["E2.6 / EX2.6  •  E2.9 / EX2.9  •  E3.9  •  E4.8 / EX4.8"],
     description:
       "Element Series delivers accurate color and flexible configurations for retail and corporate environments.",
     shopUrl: "https://your-shop.myshopify.com/products/element",
@@ -24,7 +24,7 @@ export const products: Product[] = [
     startingFrom: 555,
     image: "/assets/products/kiosk.png",
     categories: ["Indoor Performance", "Compact & Versatile"],
-    specs: ["P1.9 • P2.5 • P3.9", "Tool-less access", "Front service"],
+    specs: ["KI1.2  •  KI1.5  •  KI1.8  •  KI2.5"],
     shopUrl: "https://your-shop.myshopify.com/products/kiosk",
   },
   {
@@ -36,7 +36,7 @@ export const products: Product[] = [
     startingFrom: 595,
     image: "/assets/products/phantom.png",
     categories: ["Creative & Immersive", "Indoor Performance"],
-    specs: ["P1.9 • P2.6 • P3.9", "Ultra-smooth gradients", "HDR10 compatible"],
+    specs: ["PH3.9  •  PH7.8"],
     description:
       "Phantom Series pairs striking contrast with smooth motion for experiential spaces, showrooms, and stages.",
     shopUrl: "https://your-shop.myshopify.com/products/phantom",
@@ -50,7 +50,7 @@ export const products: Product[] = [
     startingFrom: 655,
     image: "/assets/products/stratos.png",
     categories: ["Outdoor & Weatherproof"],
-    specs: ["P3.9 • P4.8 • P6.6", "3500–6000 nits", "IP65 rated"],
+    specs: ["STR4.4  •  STR5.7  •  STR8  •  STR10"],
     description:
       "Stratos Series is engineered for outdoor reliability with high brightness and weatherproof construction.",
     shopUrl: "https://your-shop.myshopify.com/products/stratos",
@@ -64,7 +64,7 @@ export const products: Product[] = [
     startingFrom: 585,
     image: "/assets/products/trek.png",
     categories: ["Compact & Versatile", "Creative & Immersive"],
-    specs: ["P2.6 • P3.9", "Lightweight frames", "Fast-lock hardware"],
+    specs: ["TRX2.5  •  TRX2.6  •  TRX2.9  •  TRX3.9  •  TRX4.8"],
     description:
       "Trek Series is a flexible panel system ideal for pop-ups, events, and rapid set/strike workflows.",
     shopUrl: "https://your-shop.myshopify.com/products/trek",
@@ -78,7 +78,7 @@ export const products: Product[] = [
     startingFrom: 635,
     image: "/assets/products/vision.png",
     categories: ["Indoor Performance"],
-    specs: ["P0.9 • P1.2 • P1.5", "High refresh > 3840 Hz", "Calibrated color"],
+    specs: ["V1.9  •  V2.9 / VX2.6  •  V2.9 / VX2.9  •  V3.9 / VX3.9"],
     description:
       "Vision Series delivers fine-pitch pixel density and precise color calibration for command centers and boardrooms.",
     shopUrl: "https://your-shop.myshopify.com/products/vision",
@@ -92,7 +92,7 @@ export const products: Product[] = [
     startingFrom: 565,
     image: "/assets/products/vivid.png",
     categories: ["Indoor Performance", "Creative & Immersive"],
-    specs: ["P1.5 • P1.8 • P2.5", "Wide color gamut", "Low latency"],
+    specs: ["VI.7  •  VI.9  •  VI1.5  •  VI1.8  •  VI2.3"],
     description:
       "Vivid Series focuses on saturated color and simple installs for retail, hospitality, and venues.",
     shopUrl: "https://your-shop.myshopify.com/products/vivid",
@@ -106,7 +106,7 @@ export const products: Product[] = [
     startingFrom: 545,
     image: "/assets/products/vue.png",
     categories: ["Compact & Versatile"],
-    specs: ["P1.9 • P2.5 • P3.9", "Front/Rear service", "Energy efficient"],
+    specs: ["VU1.2  •  VU1.5  •  VU1.8  •  VU2.5"],
     description:
       "Vue Series offers a balanced package of brightness, efficiency, and serviceability for broad use cases.",
     shopUrl: "https://your-shop.myshopify.com/products/vue",

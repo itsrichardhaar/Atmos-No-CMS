@@ -16,6 +16,7 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.series && <span className="pc__series">{product.series}</span>}
         </h3>
         {product.tagline && <p className="pc__tagline">{product.tagline}</p>}
+        {product.specs && <p className="pc__specs">{product.specs}</p>}
       </header>
 
       {product.startingFrom && (
