@@ -1,0 +1,33 @@
+.dot-grid{
+  position: absolute;
+  inset: 0;
+  /* background behind the dots */
+  background-color: var(--dg-bg, transparent);
+  /* dot pattern via radial-gradient */
+  background-image:
+    radial-gradient(circle at center,
+      color-mix(in oklab, var(--dg-color, #ffffff) calc(100% * var(--dg-opacity, 1)), transparent),
+      color-mix(in oklab, var(--dg-color, #ffffff) calc(100% * var(--dg-opacity, 1)), transparent) var(--dg-size, 2px),
+      transparent var(--dg-size, 2px));
+  background-size: var(--dg-gap, 22px) var(--dg-gap, 22px);
+  background-position: var(--dg-offset-x, 0px) var(--dg-offset-y, 0px);
+  pointer-events: none; /* background only */
+  z-index: 0;
+}
+
+/* Soft radial fade toward edges (Safari needs -webkit-mask) */
+.dot-grid--fade{
+  -webkit-mask-image: radial-gradient(600px circle at 50% 40%, #000 45%, transparent 100%);
+  mask-image: radial-gradient(600px circle at 50% 40%, #000 45%, transparent 100%);
+}
+
+/* Optional: very subtle drift animation; disabled for reduced motion */
+@media (prefers-reduced-motion: no-preference){
+  .dot-grid{
+    animation: dg-drift 24s linear infinite;
+  }
+  @keyframes dg-drift{
+    0%   { background-position: var(--dg-offset-x,0px) var(--dg-offset-y,0px); }
+    100% { background-position: calc(var(--dg-offset-x,0px) + 40px) calc(var(--dg-offset-y,0px) + 40px); }
+  }
+}
