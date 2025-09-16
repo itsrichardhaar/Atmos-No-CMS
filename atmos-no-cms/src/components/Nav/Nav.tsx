@@ -2,6 +2,7 @@
 import { NavLink, Link, useLocation } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import useLockBodyScroll from "../../hooks/useLockBodyScroll"
+import HamburgerButton from "../HamburgerButton/Hamburger";
 import logo from "../../assets/Company Logo.png" 
 import "./Nav.css"
 
@@ -38,13 +39,11 @@ export default function Nav() {
             <img src={logo} alt="ATMOS LED" className="nav__logo-img" />
         </Link>
 
-        <button
-            className={`burger ${open ? "is-open" : ""}`}
-            aria-expanded={open}
-            onClick={() => setOpen(v => !v)}   // toggles open/close
-            >
-            <span /><span /><span />
-        </button>
+        <HamburgerButton
+        isOpen={open}
+        onToggle={() => setOpen(o => !o)}
+        className="site-hamburger"
+      />
 
       </div>
 
