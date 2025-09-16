@@ -2,6 +2,7 @@
 import { NavLink, Link, useLocation } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import useLockBodyScroll from "../../hooks/useLockBodyScroll"
+import logo from "../../assets/Company Logo.png" 
 import "./Nav.css"
 
 export default function Nav() {
@@ -33,7 +34,9 @@ export default function Nav() {
   return (
     <header className={`nav ${open ? "is-open" : ""}`}>
       <div className="container nav__bar">
-        <Link to="/" className="nav__logo" aria-label="Go to home">ATMOS</Link>
+        <Link to="/" className="nav__logo" aria-label="Go to home">
+            <img src={logo} alt="ATMOS LED" className="nav__logo-img" />
+        </Link>
 
         <button
             className={`burger ${open ? "is-open" : ""}`}

@@ -4,7 +4,11 @@
   display: flex; align-items: center; justify-content: space-between;
   height: 64px;
 }
-.nav__logo { font-weight: 700; letter-spacing: .02em }
+.nav__logo { 
+    font-weight: 700; 
+    letter-spacing: .02em;
+    margin-top: 40px;
+}
 
 /* Burger */
 .burger {
@@ -22,7 +26,7 @@
   position: absolute; 
   width: 22px; 
   height: 2px; 
-  background: #fff;
+  background: #2899D5;
   transition: transform .18s ease, 
   opacity .18s ease, top .18s ease;
 }
@@ -39,7 +43,7 @@
     position: sticky;
     top: 0;
     z-index: 2100;                 /* higher than overlay */
-    background: rgb(16, 21, 34);
+    background: #000;
     backdrop-filter: blur(6px);
 }
 

@@ -1,6 +1,6 @@
 /* --------- Base / theme --------- */
 :root{
-  --bg:rgb(16, 21, 34);
+  --bg:#000;
   --text:#fff;
   --muted:#666;
   --border:#e0e0e0;
