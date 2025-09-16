@@ -103,9 +103,9 @@
   text-align: left;
   color: #fff;                         /* black panel assumed */
   font-family: var(--ff-display, inherit);
-  font-weight: 700;
+  font-weight: 400;
   font-size: 80px; /* smaller than before */
-  line-height: 1.1;                    /* tight */
+  line-height: 1;                    /* tight */
   letter-spacing: -0.01em;
   padding: .1rem 0;                    /* remove chunky padding */
   border-radius: 8px;
