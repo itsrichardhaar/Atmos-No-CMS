@@ -13,7 +13,7 @@ export default function Hero() {
             transition={{ duration: 0.4 }}
             className="hero__title"
           >
-            Your Vision in Full View.
+            Your Vision. In Full View.
           </motion.h1>
 
           <motion.p

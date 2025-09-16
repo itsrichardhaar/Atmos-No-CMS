@@ -25,9 +25,9 @@
 }
 
 .hero__title {
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
-  line-height: 1.1;
-  font-weight: 700;
+  font-size: 160px;
+  line-height: 1;
+  font-weight: 600;
   letter-spacing: -0.02em;
   margin: 0;
 }
@@ -67,14 +67,14 @@
   color: #fff;
   box-shadow: var(--shadow);
 }
-.btn--primary:hover { background: var(--primary-2); transform: translateY(-1px); }
+.btn--primary:hover { background: var(--primary-2);}
 
 .btn--ghost {
   border-color: var(--border);
   color: var(--text);
   background: #fff;
 }
-.btn--ghost:hover { border-color: #ccc; transform: translateY(-1px); }
+.btn--ghost:hover { border-color: #ccc;}
 
 .hero__media {
   border-radius: 24px;

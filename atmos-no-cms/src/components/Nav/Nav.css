@@ -67,6 +67,10 @@
 .menu__panel { 
     position: absolute; 
     inset: 0; 
+    padding: clamp(16px, 3vw, 28px);
+    display: grid;
+    grid-template-rows: 1fr auto;       /* links take space, meta sticks to bottom */
+    justify-items: start;  
     background: #000;   /* your black */
     transform: translateX(100%); 
     transition: transform .28s ease; 
@@ -89,27 +93,78 @@
 .menu__links{
   display: flex;
   flex-direction: column;
-  align-items: left;
-  gap: 0.15rem;          /* space between links */
-  padding-left: 10px;
-  margin-inline: auto;
+  gap: .25rem;                         /* tighter spacing between items */
+  width: min(680px, 92vw);
 }
 
 .menu__link{
-  display: block;                     /* stack + full clickable row */
+  display: block;
   width: 100%;
   text-align: left;
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  font-weight: 600;
-  color: #fff;                        /* assuming black panel */
-  padding: 0.4rem 0.5rem;
-  border-radius: 12px;
+  color: #fff;                         /* black panel assumed */
+  font-family: var(--ff-display, inherit);
+  font-weight: 700;
+  font-size: 80px; /* smaller than before */
+  line-height: 1.1;                    /* tight */
+  letter-spacing: -0.01em;
+  padding: .1rem 0;                    /* remove chunky padding */
+  border-radius: 8px;
   outline: none;
 }
 
 .menu__link:hover, .menu__link:focus { text-decoration: underline; }
 .menu__link.is-active { text-decoration: underline; }
 
+.menu__meta{
+  margin-top: 1rem;
+  color: rgba(255,255,255,.85);
+  font-size: .95rem;
+  display: grid;
+  gap: .45rem;
+}
+
+/* phone/email rows */
+.meta__row{
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: inherit;
+  text-decoration: none;
+}
+.meta__row:hover{ text-decoration: underline; }
+.meta__icon{
+  width: 20px; height: 20px;
+  fill: var(--accent);
+  color: var(--accent);
+}
+
+.meta__row:hover .meta__icon {
+    color: #fff;
+}
+
+/* social icons row */
+.menu__social{
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-top: .4rem;
+  flex-wrap: wrap;
+}
+.social__link{
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 6px;
+  color: var(--accent);
+}
+.social__link:hover{ color: #fff; }
+.social__icon{ width: 20px; height: 20px; fill: currentColor; }
+
+/* label to the right of icons */
+.menu__social-label{
+  margin-left: .5rem;
+  color: rgba(255,255,255,.9);
+  font-weight: 600;
+  font-size: .95rem;
+}
 .menu__cta { margin-top: 1.5rem }
 
 .btn {
