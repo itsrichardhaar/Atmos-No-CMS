@@ -1,10 +1,11 @@
 // src/pages/Home.tsx
-import Page from "../components/Page"
+import Hero from "../components/Hero/Hero"
 
 export default function Home() {
   return (
-    <Page title="Home">
-      <p>Welcome to Atmos LED!</p>
-    </Page>
+    <>
+      <Hero />
+      {/* ...rest of homepage sections... */}
+    </>
   )
 }

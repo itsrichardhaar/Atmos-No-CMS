@@ -1,0 +1,102 @@
+/* Header shell */
+
+.nav__bar {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav__logo { font-weight: 700; letter-spacing: .02em }
+
+/* Burger */
+.burger {
+  position: relative;
+  width: 44px; height: 44px;
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+  background: transparent;
+  border-radius: 10px; 
+  cursor: pointer;
+  z-index: 2002;
+}
+.burger span {
+  position: absolute; 
+  width: 22px; 
+  height: 2px; 
+  background: #fff;
+  transition: transform .18s ease, 
+  opacity .18s ease, top .18s ease;
+}
+.burger span:nth-child(1) { top: 14px; }
+.burger span:nth-child(2) { top: 21px; }
+.burger span:nth-child(3) { top: 28px; }
+.burger.is-open span:nth-child(1) { top: 21px; transform: rotate(45deg); }
+.burger.is-open span:nth-child(2) { opacity: 0; }
+.burger.is-open span:nth-child(3) { top: 21px; transform: rotate(-45deg); }
+
+/* Backdrop (click to close) */
+/* Keep burger clickable above the overlay */
+.nav { 
+    position: sticky;
+    top: 0;
+    z-index: 2100;                 /* higher than overlay */
+    background: rgb(16, 21, 34);
+    backdrop-filter: blur(6px);
+}
+
+/* Backdrop/panel just under header but above page */
+.menu { 
+    position: fixed;
+  inset: 0;
+  z-index: 2000;                 /* lower than header */
+  background: rgba(0,0,0,.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;}
+.menu--open { opacity: 1; pointer-events: auto; }
+
+/* Full takeover panel */
+.menu__panel { 
+    position: absolute; 
+    inset: 0; 
+    background: #000;   /* your black */
+    transform: translateX(100%); 
+    transition: transform .28s ease; 
+    min-height: 100dvh;   
+}
+@supports not (height: 100dvh) {
+  .menu__panel { min-height: 100vh; }  /* fallback */
+}
+.menu--open .menu__panel { 
+    transform: translateX(0); 
+    padding-top: calc(2rem + env(safe-area-inset-top));
+}
+
+/* When menu is open, dim the header and make the burger/logo white */
+.nav.is-open { background: transparent; border-bottom: none; }
+.nav.is-open .nav__logo { color: #fff; }
+.nav.is-open .burger { border-color: rgba(255,255,255,0.45); }
+.nav.is-open .burger span { background: #fff; }
+
+
+.menu__link {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text);
+  padding: .25rem .5rem;
+  border-radius: 12px;
+  outline: none;
+}
+.menu__link:hover, .menu__link:focus { text-decoration: underline; }
+.menu__link.is-active { text-decoration: underline; }
+
+.menu__cta { margin-top: 1.5rem }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: .4rem; padding: .7rem 1.2rem; border-radius: var(--radius);
+  border: 1px solid var(--border); text-decoration: none; font-weight: 500;
+}
+.btn--primary { background: var(--primary); color: #fff; box-shadow: var(--shadow) }
+.btn--primary:hover { background: var(--primary-2) }
+

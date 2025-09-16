@@ -38,24 +38,6 @@ button{
 }
 button:hover{ background:var(--primary-2) }
 
-/* --------- Navbar --------- */
-.nav-header{
-  position: sticky; top:0; z-index:50;
-  background:rgb(16, 21, 34);
-  backdrop-filter: blur(6px);
-  border-bottom:1px solid rgb(148, 163, 184);
-}
-.nav-inner{
-  display:flex; align-items:center; justify-content:space-between;
-  height:64px;
-}
-.logo{ font-weight:600; letter-spacing:.2px }
-.nav-links{ display:flex; gap:.75rem }
-.nav-link{
-  padding:.5rem .75rem; border-radius:var(--radius);
-}
-.nav-link.active{ text-decoration:underline }
-
 /* --------- Sections --------- */
 .section{ padding: 3rem 0 }
 .section-header{ margin-bottom:1.25rem }

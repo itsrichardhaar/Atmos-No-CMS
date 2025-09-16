@@ -1,3 +1,4 @@
+// src/pages/About.tsx
 import Page from "../components/Page"
 
 export default function About() {
