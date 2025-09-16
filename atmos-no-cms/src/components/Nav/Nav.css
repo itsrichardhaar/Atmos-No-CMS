@@ -2,12 +2,12 @@
 
 .nav__bar {
   display: flex; align-items: center; justify-content: space-between;
-  height: 64px;
+  height: 94px;
 }
 .nav__logo { 
     font-weight: 700; 
     letter-spacing: .02em;
-    margin-top: 40px;
+    margin-top: 10px
 }
 
 .mobile__logo { 
