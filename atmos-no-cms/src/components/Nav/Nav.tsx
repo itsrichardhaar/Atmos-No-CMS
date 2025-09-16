@@ -57,10 +57,12 @@ export default function Nav() {
         }}
       >
         <nav className="menu__panel" aria-label="Primary">
-          <NavLink to="/" end className={linkClass} ref={firstLinkRef}>Home</NavLink>
-          <NavLink to="/about" className={linkClass}>About</NavLink>
-          <NavLink to="/products" className={linkClass}>Products</NavLink>
-          <NavLink to="/contact" className={linkClass}>Contact</NavLink>
+          <div className="menu__links">
+            <NavLink to="/" end className={linkClass} ref={firstLinkRef}>Home</NavLink>
+            <NavLink to="/about" className={linkClass}>About</NavLink>
+            <NavLink to="/products" className={linkClass}>Products</NavLink>
+            <NavLink to="/contact" className={linkClass}>Contact</NavLink>
+        </div>
 
           <div className="menu__cta">
             <a
@@ -69,7 +71,7 @@ export default function Nav() {
               target="_blank"
               rel="noreferrer"
             >
-              Shop on Shopify ↗
+              Shop Our Products ↗
             </a>
           </div>
         </nav>
