@@ -11,7 +11,7 @@ export default function Nav() {
       <nav className="flex gap-3">
         <NavLink to="/" end className={active}>Home</NavLink>
         <NavLink to="/about" className={active}>About</NavLink>
-        <NavLink to="/work" className={active}>Work</NavLink>
+        <NavLink to="/products" className={active}>Products</NavLink>
         <NavLink to="/contact" className={active}>Contact</NavLink>
       </nav>
     </header>
