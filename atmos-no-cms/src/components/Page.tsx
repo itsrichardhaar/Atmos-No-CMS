@@ -1,3 +1,4 @@
+// src/components/Page.tsx
 import type { PropsWithChildren } from "react"
 
 export default function Page({ title, children }: PropsWithChildren<{ title: string }>) {

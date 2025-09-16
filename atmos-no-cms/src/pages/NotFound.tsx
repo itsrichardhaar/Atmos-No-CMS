@@ -1,3 +1,4 @@
+// src/pages/NotFound.tsx
 import { Link } from "react-router-dom"
 import Page from "../components/Page"
 

@@ -1,3 +1,4 @@
+// src/pages/Contact.tsx
 import Page from "../components/Page"
 
 export default function Contact() {

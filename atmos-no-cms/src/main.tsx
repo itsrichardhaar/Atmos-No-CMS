@@ -7,7 +7,7 @@ import About from "./pages/About"
 import Contact from "./pages/Contact"
 import Products from "./pages/Products"
 import NotFound from "./pages/NotFound"
-import "./index.css"
+import "./app.css"
 
 const router = createBrowserRouter([
   {
