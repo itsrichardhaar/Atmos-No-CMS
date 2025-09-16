@@ -9,7 +9,7 @@ export default function Home() {
       <Hero />
       <ProductGrid
         title="Our Products"
-        products={products.slice(0, 6)}  // show first 6; tweak as you like
+        products={products.slice(0, 8)}  // show first 6; tweak as you like
         showViewAll
       />
     </>
