@@ -8,7 +8,7 @@ export default function Nav() {
   return (
     <header className="nav-header">
       <div className="container nav-inner">
-        <Link to="/" className="logo">MySite</Link>
+        <Link to="/" className="logo">Atmos LED</Link>
         <nav className="nav-links">
           <NavLink to="/" end className={linkClass}>Home</NavLink>
           <NavLink to="/about" className={linkClass}>About</NavLink>

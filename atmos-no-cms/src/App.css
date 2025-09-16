@@ -1,7 +1,7 @@
 /* --------- Base / theme --------- */
 :root{
-  --bg:#fff;
-  --text:#222;
+  --bg:rgb(16, 21, 34);
+  --text:#fff;
   --muted:#666;
   --border:#e0e0e0;
   --primary:#000;
@@ -41,9 +41,9 @@ button:hover{ background:var(--primary-2) }
 /* --------- Navbar --------- */
 .nav-header{
   position: sticky; top:0; z-index:50;
-  background:rgba(255,255,255,.8);
+  background:rgb(16, 21, 34);
   backdrop-filter: blur(6px);
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid rgb(148, 163, 184);
 }
 .nav-inner{
   display:flex; align-items:center; justify-content:space-between;
