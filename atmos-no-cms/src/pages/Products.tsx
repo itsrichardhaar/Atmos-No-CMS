@@ -1,10 +1,20 @@
 // src/pages/Products.tsx
-import Page from "../components/Page"
+import { useEffect } from "react";
+import ProductGrid from "../components/ProductGrid/ProductGrid";
+import { products } from "../data/products";
 
 export default function Products() {
+  // (nice-to-have) set page title
+  useEffect(() => { document.title = "Products — ATMOS LED"; }, []);
+
   return (
-    <Page title="Products">
-      <p>Products page content.</p>
-    </Page>
-  )
+    <main>
+      <ProductGrid
+        title="Our Products"
+        products={products}   // full list
+        withFilters           // show category pills
+        showViewAll={false}   // already on /products
+      />
+    </main>
+  );
 }
