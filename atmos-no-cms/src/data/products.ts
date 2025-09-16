@@ -8,7 +8,7 @@ export const products: Product[] = [
     series: "Series",
     tagline: "Efficient. Accurate. Versatile.",
     startingFrom: 555,
-    image: "/assets/products/element.jpg",
+    image: "/assets/products/element.png",
     categories: ["Indoor Performance", "Compact & Versatile"],
     specs: ["P1.2 • P1.5 • P1.8", "600–1200 nits", "HDR ready"],
     description:
@@ -22,7 +22,7 @@ export const products: Product[] = [
     series: "Series",
     tagline: "Modular kiosk-ready panels.",
     startingFrom: 555,
-    image: "/assets/products/kiosk.jpg",
+    image: "/assets/products/kiosk.png",
     categories: ["Indoor Performance", "Compact & Versatile"],
     specs: ["P1.9 • P2.5 • P3.9", "Tool-less access", "Front service"],
     shopUrl: "https://your-shop.myshopify.com/products/kiosk",
@@ -34,7 +34,7 @@ export const products: Product[] = [
     series: "Series",
     tagline: "High-impact visuals for bold spaces.",
     startingFrom: 595,
-    image: "/assets/products/phantom.jpg",
+    image: "/assets/products/phantom.png",
     categories: ["Creative & Immersive", "Indoor Performance"],
     specs: ["P1.9 • P2.6 • P3.9", "Ultra-smooth gradients", "HDR10 compatible"],
     description:
@@ -48,7 +48,7 @@ export const products: Product[] = [
     series: "Series",
     tagline: "Outdoor brightness. Built to endure.",
     startingFrom: 655,
-    image: "/assets/products/stratos.jpg",
+    image: "/assets/products/stratos.png",
     categories: ["Outdoor & Weatherproof"],
     specs: ["P3.9 • P4.8 • P6.6", "3500–6000 nits", "IP65 rated"],
     description:
@@ -62,7 +62,7 @@ export const products: Product[] = [
     series: "Series",
     tagline: "Portable, rental-friendly LED.",
     startingFrom: 585,
-    image: "/assets/products/trek.jpg",
+    image: "/assets/products/trek.png",
     categories: ["Compact & Versatile", "Creative & Immersive"],
     specs: ["P2.6 • P3.9", "Lightweight frames", "Fast-lock hardware"],
     description:
@@ -76,7 +76,7 @@ export const products: Product[] = [
     series: "Series",
     tagline: "Fine-pitch clarity for premium interiors.",
     startingFrom: 635,
-    image: "/assets/products/vision.jpg",
+    image: "/assets/products/vision.png",
     categories: ["Indoor Performance"],
     specs: ["P0.9 • P1.2 • P1.5", "High refresh > 3840 Hz", "Calibrated color"],
     description:
@@ -90,7 +90,7 @@ export const products: Product[] = [
     series: "Series",
     tagline: "Punchy color. Effortless install.",
     startingFrom: 565,
-    image: "/assets/products/vivid.jpg",
+    image: "/assets/products/vivid.png",
     categories: ["Indoor Performance", "Creative & Immersive"],
     specs: ["P1.5 • P1.8 • P2.5", "Wide color gamut", "Low latency"],
     description:
@@ -104,7 +104,7 @@ export const products: Product[] = [
     series: "Series",
     tagline: "Balanced performance, smart value.",
     startingFrom: 545,
-    image: "/assets/products/vue.jpg",
+    image: "/assets/products/vue.png",
     categories: ["Compact & Versatile"],
     specs: ["P1.9 • P2.5 • P3.9", "Front/Rear service", "Energy efficient"],
     description:
@@ -118,7 +118,7 @@ export const products: Product[] = [
   series: "Series",
   tagline: "Punchy color. Effortless install.",
   startingFrom: 555, 
-  image: "/assets/products/vivid.jpg",
+  image: "/assets/products/vivid.png",
   categories: ["Indoor Performance", "Creative & Immersive"],
   specs: ["V1.7", "V1.9", "V1.12", "V1.5", "V1.8", "V2.3"],
   description:
@@ -132,7 +132,7 @@ export const products: Product[] = [
   series: "Series",
   tagline: "Balanced performance, smart value.",
   startingFrom: 555,
-  image: "/assets/products/vue.jpg",
+  image: "/assets/products/vue.png",
   categories: ["Compact & Versatile"],
   specs: ["VU1.2", "VU1.5", "VU1.8", "VU2.5"],
   description:
