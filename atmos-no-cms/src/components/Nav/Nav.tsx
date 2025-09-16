@@ -64,7 +64,7 @@ export default function Nav() {
             <Link to="/" className="mobile__logo" aria-label="Go to home">
                 <img src={logo} alt="ATMOS LED" className="nav__logo-img" />
             </Link>
-            <NavLink to="/about" className={linkClass} ref={firstLinkRef}>About</NavLink>
+            <NavLink to="/about" className={linkClass}>About</NavLink>
             <NavLink to="/products" className={linkClass}>Products</NavLink>
             <NavLink to="/markets" className={linkClass}>Markets</NavLink>
             <NavLink to="/contact" className={linkClass}>Contact</NavLink>
