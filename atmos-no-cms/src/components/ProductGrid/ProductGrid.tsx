@@ -1,5 +1,6 @@
 // src/components/ProductGrid.tsx
 import { useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "../ProductCard/ProductCard";
 import type { Product } from "../../types/product";
 import { Link } from "react-router-dom";
@@ -28,8 +29,21 @@ export default function ProductGrid({
 
   const [active, setActive] = useState<string>(defaultCategory);
 
-  const isVisible = (p: Product) =>
-    active === "All" ? true : p.categories.includes(active as any);
+  // Stable order: remember each product's original index
+  const orderMap = useMemo(() => {
+    const m = new Map<string, number>();
+    products.forEach((p, i) => m.set(p.id, i));
+    return m;
+  }, [products]);
+
+  const visible = useMemo(() => {
+    const list =
+      active === "All"
+        ? products
+        : products.filter(p => p.categories.includes(active as any));
+    // sort by original index to preserve order across filters
+    return [...list].sort((a, b) => (orderMap.get(a.id)! - orderMap.get(b.id)!));
+  }, [active, products, orderMap]);
 
   return (
     <section className="pg">
@@ -59,19 +73,26 @@ export default function ProductGrid({
           </div>
         )}
 
-        <div className="pg__grid">
-          {products.map(p => (
-            <div
-              key={p.id}
-              className={`pg__cell ${isVisible(p) ? "" : "is-hidden"}`}
-              aria-hidden={!isVisible(p)}
-            >
-              <ProductCard product={p} />
-            </div>
-          ))}
-        </div>
+        {/* Animate grid reflow + item enter/exit */}
+        <motion.div className="pg__grid" layout>
+            <AnimatePresence mode="popLayout">
+                {visible.map((p) => (
+                <motion.div
+                    key={p.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.48, ease: [0.4, 0, 0, 1] }}
+                >
+                    <ProductCard product={p} />
+                </motion.div>
+                ))}
+            </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
 }
+
 
