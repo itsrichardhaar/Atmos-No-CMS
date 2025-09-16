@@ -61,10 +61,15 @@ export default function Nav() {
       >
         <nav className="menu__panel" aria-label="Primary">
           <div className="menu__links">
-            <NavLink to="/" end className={linkClass} ref={firstLinkRef}>Home</NavLink>
-            <NavLink to="/about" className={linkClass}>About</NavLink>
+            <Link to="/" className="mobile__logo" aria-label="Go to home">
+                <img src={logo} alt="ATMOS LED" className="nav__logo-img" />
+            </Link>
+            <NavLink to="/about" className={linkClass} ref={firstLinkRef}>About</NavLink>
             <NavLink to="/products" className={linkClass}>Products</NavLink>
+            <NavLink to="/markets" className={linkClass}>Markets</NavLink>
             <NavLink to="/contact" className={linkClass}>Contact</NavLink>
+            <NavLink to="/calculator" className={linkClass}>Calculator</NavLink>
+            <NavLink to="/shop" className={linkClass}>Shop</NavLink>
         </div>
 
           <div className="menu__cta">
@@ -76,6 +81,9 @@ export default function Nav() {
             >
               Shop Our Products ↗
             </a>
+          </div>
+          <div className="menu__contact">
+            
           </div>
         </nav>
       </div>

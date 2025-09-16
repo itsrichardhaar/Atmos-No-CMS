@@ -1,5 +1,5 @@
 .hero {
-  padding: clamp(2rem, 5vw, 4.5rem) 0;
+  padding: clamp(3rem, 8vw, 6rem) 0;
   background: var(--bg);
 }
 
@@ -18,8 +18,14 @@
 
 .hero__copy {}
 
+.hero--center .hero__copy--center {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
 .hero__title {
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
   line-height: 1.1;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -27,17 +33,20 @@
 }
 
 .hero__subtitle {
-  margin: 0.9rem 0 0;
+  margin-top: 0.9rem;
   color: var(--muted);
-  max-width: 60ch;
+  max-width: 65ch;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero__actions {
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
   margin-top: 1.25rem;
+  display: flex;
+  gap: .75rem;
 }
+
+.hero__actions--center { justify-content: center; }
 
 /* Buttons (rely on your global vars) */
 .btn {
