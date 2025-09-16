@@ -1,6 +1,24 @@
 .hero {
-  padding: clamp(3rem, 8vw, 6rem) 0;
-  background: var(--bg);
+  position: relative;
+  /* use dynamic viewport height so mobile browser chrome doesn't crop */
+  min-height: 70dvh;                /* adjust to taste; 100dvh for full-bleed */
+  padding: clamp(2rem, 6vw, 4rem) 0;
+  background: #000;                 /* fallback behind transparent canvas */
+  color: #fff;  
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__center {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .hero__grid {
