@@ -1,11 +1,17 @@
 // src/pages/Home.tsx
 import Hero from "../components/Hero/Hero"
+import ProductGrid from "../components/ProductGrid/ProductGrid";
+import { products } from "../data/products";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      {/* ...rest of homepage sections... */}
+      <ProductGrid
+        title="Our Products"
+        products={products.slice(0, 6)}  // show first 6; tweak as you like
+        showViewAll
+      />
     </>
-  )
+  );
 }

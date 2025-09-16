@@ -5,11 +5,12 @@ import App from "./App"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
-import Products from "./pages/Products"
 import Markets from "./pages/Markets"
 import Shop from "./pages/Shop"
 import Calculator from "./pages/Calculator"
 import NotFound from "./pages/NotFound"
+import ProductsPage from "./pages/Products";
+import ProductDetail from "./pages/ProductDetail";
 import "./App.css"
 
 const router = createBrowserRouter([
@@ -18,11 +19,12 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
-      { path: "products", element: <Products /> },
+      { path: "products", element: <ProductsPage /> },
       { path: "contact", element: <Contact /> },
       { path: "markets", element: <Markets /> },
       { path: "calculator", element: <Calculator /> },
       { path: "shop", element: <Shop /> },
+      { path: "products/:slug", element: <ProductDetail /> },
       { path: "*", element: <NotFound /> },
     ],
   },
