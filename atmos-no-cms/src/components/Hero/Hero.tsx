@@ -13,45 +13,81 @@ export default function Hero() {
     const dotEl = dotsRef.current!;
     if (!sectionEl || !dotEl) return;
 
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
     const getHeaderH = () => {
-      const v = getComputedStyle(document.documentElement)
-        .getPropertyValue("--header-h").trim();
+      const v = getComputedStyle(document.documentElement).getPropertyValue("--header-h").trim();
       const n = parseFloat(v || "0");
       return Number.isFinite(n) ? n : 0;
     };
 
-    const onScroll = () => {
+    // Simple easing so hue change feels smooth
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3); // cubic-out
+
+    const update = () => {
       const rect = sectionEl.getBoundingClientRect();
       const vh = window.innerHeight || 1;
-      const headerH = getHeaderH();                         // px
-      const effVh = Math.max(1, vh - headerH);             // effective viewport
+      const headerH = getHeaderH();
+      const effVh = Math.max(1, vh - headerH);
 
-      // As the 200vh section moves, rect.top goes from 0 → -effVh during reveal
-      const prog = Math.min(1, Math.max(0, (-rect.top) / effVh));
+      // 0 → 1 across the reveal
+      const progRaw = Math.min(1, Math.max(0, (-rect.top) / effVh));
+      const prog = ease(progRaw);
 
-      const start = 0;                                     // px
-      const end = Math.max(effVh * 1.6, 1200);              // px
+      // Outer radius (unchanged)
+      const start = 0;
+      const end = Math.max(effVh * 1.6, 1200);
       const r = start + (end - start) * prog;
-
       dotEl.style.setProperty("--maskR", `${Math.round(r)}px`);
 
-      if (prog >= 0.999) {
+      // === NEW: colorize dots by hue (keep single mask) ===
+      if (!prefersReducedMotion) {
+        // Option A: tasteful sweep (blue → magenta)
+        const hue = (prog * 720) % 360;
+
+        // Start bright, ease down a touch as you scroll
+        const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+        const l = clamp(86 - 8 * prog, 70, 90);   // 86% → ~78%
+        const s = clamp(96 - 6 * prog, 80, 100);  // 96% → ~90%
+        const a = 0.34 - 0.10 * prog;             // 0.34 → 0.24 (optional)
+
+        dotEl.style.setProperty("--dg-hue", `${Math.round(hue)}`);
+        dotEl.style.setProperty("--dg-l", `${l}%`);
+        dotEl.style.setProperty("--dg-s", `${s}%`);
+        dotEl.style.setProperty("--dg-alpha", `${a.toFixed(3)}`);
+      }
+
+      if (progRaw >= 0.999) {
         sectionEl.classList.add("reveal-done");
         document.documentElement.setAttribute("data-hero-reveal", "done");
+
+        // Optionally “freeze” final color to a brand hue:
+        // dotEl.style.setProperty("--dg-hue", "330");
       } else {
         sectionEl.classList.remove("reveal-done");
         document.documentElement.setAttribute("data-hero-reveal", "active");
       }
     };
 
+    // Use rAF to avoid jank on fast scroll
+    let ticking = false;
+    const onScrollOrResize = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
+
     // mark as active immediately to keep nav transparent
     document.documentElement.setAttribute("data-hero-reveal", "active");
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    update();
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize);
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
       document.documentElement.setAttribute("data-hero-reveal", "done");
     };
   }, []);
@@ -66,11 +102,14 @@ export default function Hero() {
             ref={dotsRef}
             className="dotgrid dotgrid--reveal"
             style={{
-              // @ts-ignore
-              "--dg-color": "rgba(255,255,255,0.24)",
-              "--dg-size": "2px",
-              "--dg-gap": "22px",
-            }}
+                // @ts-ignore
+                "--dg-size": "2px",
+                "--dg-gap": "22px",
+                "--dg-hue": "210",   // any starting hue
+                "--dg-s": "96%",     // ↑ brighter
+                "--dg-l": "86%",     // ↑ brighter
+                "--dg-alpha": "0.34" // ↑ slightly more visible
+            } as React.CSSProperties}
           />
         </div>
 
@@ -113,6 +152,7 @@ export default function Hero() {
     </section>
   );
 }
+
 
 
 

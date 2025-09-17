@@ -5,21 +5,27 @@
   z-index: 0;
   pointer-events: none;
 
+  /* Dot layout defaults (can be overridden inline) */
+  --dg-size: 2px;   /* dot diameter */
+  --dg-gap: 22px;   /* cell size */
 
-  --dg-color: rgba(255,255,255,0.22);
-  --dg-size: 2px;
-  --dg-gap: 22px;
-  --dg-offset-x: 0px;
-  --dg-offset-y: 0px;
+  /* HSL-driven color */
+  --dg-hue: 210; --dg-s: 96%; --dg-l: 86%; --dg-alpha: 0.34;
+  --dg-color: hsl(var(--dg-hue) var(--dg-s) var(--dg-l) / var(--dg-alpha));
+  --dg-s: 90%;
+  --dg-l: 78%;
+  --dg-alpha: 0.24;
+  
 
   background-image:
     radial-gradient(circle at center,
       var(--dg-color) var(--dg-size),
       transparent calc(var(--dg-size) + 0.01px));
-  background-size: var(--dg-gap) var(--dg-gap);
-  background-position: var(--dg-offset-x) var(--dg-offset-y);
-  background-repeat: repeat;
+  background-size: var(--dg-gap) var(--dg-gap);      /* ← back in */
+  background-position: 0 0;                          /* optional: support offsets later */
+  background-repeat: repeat;                         /* ← back in */
 }
+
 
 /* Outside dots as you scroll */
 .dotgrid--reveal{
