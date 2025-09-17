@@ -1,3 +1,5 @@
+// src/components/Hamburger.tsx
+
 import "./Hamburger.css";
 
 type Props = {
