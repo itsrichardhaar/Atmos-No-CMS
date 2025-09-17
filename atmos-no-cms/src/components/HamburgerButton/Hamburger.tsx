@@ -1,3 +1,4 @@
+import React from "react";
 import "./Hamburger.css";
 
 type Props = {
