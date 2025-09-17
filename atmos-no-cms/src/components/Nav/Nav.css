@@ -1,9 +1,34 @@
 /* Header shell */
 
-.nav__bar {
-  display: flex; align-items: center; justify-content: space-between;
-  height: 94px;
+/* Header shell */
+.nav{
+  position: fixed;                        /* was sticky */
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  z-index: 2100;
+  background: transparent;                /* initial over-hero */
+  transition: background-color .28s ease, box-shadow .28s ease;
 }
+
+.nav__bar{
+  display:flex; align-items:center; justify-content:space-between;
+  height: 100%;
+}
+
+/* transparent at top of page */
+.nav.is-transparent{
+  background: transparent;
+  box-shadow: none;
+}
+
+/* turns solid after small scroll */
+.nav.is-solid{
+  background: #000;
+  box-shadow: 0 1px 0 rgba(255,255,255,.06); /* subtle edge (optional) */
+}
+
+/* keep when menu is open */
+.nav.is-open{ background: transparent; border-bottom: none; }
 .nav__logo { 
     font-weight: 700; 
     letter-spacing: .02em;
@@ -16,6 +41,7 @@
 }
 
 /* Burger */
+/*
 .burger {
   position: relative;
   width: 44px; height: 44px;
@@ -41,16 +67,9 @@
 .burger.is-open span:nth-child(1) { top: 21px; transform: rotate(45deg); }
 .burger.is-open span:nth-child(2) { opacity: 0; }
 .burger.is-open span:nth-child(3) { top: 21px; transform: rotate(-45deg); }
-
+*/
 /* Backdrop (click to close) */
 /* Keep burger clickable above the overlay */
-.nav { 
-    position: sticky;
-    top: 0;
-    z-index: 2100;                 /* higher than overlay */
-    background: transparent;
-    /* backdrop-filter: blur(6px); */
-}
 
 /* Backdrop/panel just under header but above page */
 .menu { 

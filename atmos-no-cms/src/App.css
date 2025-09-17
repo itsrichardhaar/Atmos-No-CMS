@@ -34,6 +34,9 @@
 
   /* Font Family */
   --ff-display: "Funnel Display Variable", "Funnel Display", Inter, system-ui, sans-serif;
+
+  /* Header / Nav */
+  --header-h: 94px;
 }
 
 h1,h2,h3,h4,h5,h6,

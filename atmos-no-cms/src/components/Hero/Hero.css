@@ -1,6 +1,7 @@
 .hero {
   position: relative;                 /* NEW: to layer the bg */
-  padding: clamp(3rem, 8vw, 6rem) 0;
+  --hero-pad-y: clamp(3rem, 8vw, 6rem);
+  padding: calc(var(--hero-pad-y) + var(--header-h)) 0 var(--hero-pad-y);
   background: var(--bg);
   color: #fff;                        /* ensures readable text on dark bg */
 }
@@ -18,14 +19,13 @@
 .hero .container,
 .hero__copy { position: relative; z-index: 1; }
 
-/* (keep the rest of your existing rules) */
 
 /* ===============================
    Radial shape divider (bottom)
    =============================== */
 .hero__divider{
   --divider-height: clamp(90px, 12vw, 180px);       /* overall divider height */
-  --divider-bg: var(--page-bg, #000);            /* color of the next section */
+  --divider-bg: var(--page-bg, #000);            
   --arc-tightness: 140%;                            /* ellipse vertical scale (bigger = softer) */
   --arc-cut: 35%;                                   /* where the transparent center stops */
   --arc-solid: 62%;                                 /* where the opaque area begins */

@@ -2,51 +2,51 @@
 import { NavLink, Link, useLocation } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import useLockBodyScroll from "../../hooks/useLockBodyScroll"
-import HamburgerButton from "../HamburgerButton/Hamburger";
-import logo from "../../assets/Company Logo.png" 
+import HamburgerButton from "../HamburgerButton/Hamburger"
+import logo from "../../assets/Company Logo.png"
 import "./Nav.css"
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
+  const [solid, setSolid] = useState(false)             // NEW
   const location = useLocation()
   const firstLinkRef = useRef<HTMLAnchorElement>(null)
 
-  // Close on route change
   useEffect(() => { setOpen(false) }, [location.pathname])
-
-  // Lock scroll
   useLockBodyScroll(open)
 
-  // Focus first link when opened
-  useEffect(() => {
-    if (open) setTimeout(() => firstLinkRef.current?.focus(), 0)
-  }, [open])
+  useEffect(() => { if (open) setTimeout(() => firstLinkRef.current?.focus(), 0) }, [open])
 
-  // Close on Escape
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false) }
     window.addEventListener("keydown", onKey)
     return () => window.removeEventListener("keydown", onKey)
   }, [])
 
+  // —— solid background once we’ve scrolled a bit
+  useEffect(() => {
+    const onScroll = () => setSolid(window.scrollY > 10)
+    onScroll() // set initial state on load
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     isActive ? "menu__link is-active" : "menu__link"
 
   return (
-    <header className={`nav ${open ? "is-open" : ""}`}>
+    <header className={`nav ${open ? "is-open" : ""} ${solid ? "is-solid" : "is-transparent"}`}>
       <div className="container nav__bar">
         <Link to="/" className="nav__logo" aria-label="Go to home">
-            <img src={logo} alt="ATMOS LED" className="nav__logo-img" />
+          <img src={logo} alt="ATMOS LED" className="nav__logo-img" />
         </Link>
 
         <HamburgerButton
-        isOpen={open}
-        onToggle={() => setOpen(o => !o)}
-        className="site-hamburger"
-      />
-
+          isOpen={open}
+          onToggle={() => setOpen(o => !o)}
+          className="site-hamburger"
+        />
       </div>
-
       {/* Backdrop + sliding panel */}
       <div
         id="site-menu"
