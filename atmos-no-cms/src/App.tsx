@@ -8,6 +8,7 @@ export default function App() {
   return (
     <div className="min-h-dvh">
       <Nav />
+      <div className="nav-spacer" aria-hidden="true" />
 
       {/* Ensure we reset scroll on route change */}
       <ScrollToTop />

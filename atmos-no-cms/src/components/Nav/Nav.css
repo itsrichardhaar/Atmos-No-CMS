@@ -1,13 +1,25 @@
 /* Header shell */
 
 /* Header shell */
-.nav{
-  position: fixed;                        /* was sticky */
-  top: 0; left: 0; right: 0;
-  height: var(--header-h);
+.nav {
+  position: sticky;
+  top: 0;
   z-index: 2100;
-  background: transparent;                /* initial over-hero */
-  transition: background-color .28s ease, box-shadow .28s ease;
+  background: rgba(0,0,0,0.9);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background-color .35s ease, border-color .35s ease;
+}
+
+.nav-spacer { height: 0; }
+
+html[data-hero-reveal="active"] .nav {
+  position: fixed;        /* <-- out of flow, no layout nudge */
+  top: 0; left: 0; right: 0;
+  background: transparent;
+  border-color: transparent;
+}
+html[data-hero-reveal="active"] .nav-spacer {
+  height: var(--header-h);  /* <-- reserves the same space the sticky nav would */
 }
 
 .nav__bar{
@@ -28,7 +40,7 @@
 }
 
 /* keep when menu is open */
-.nav.is-open{ background: transparent; border-bottom: none; }
+.nav.is-open{ background: transparent !important; border-bottom: none; border-color: none !important;}
 .nav__logo { 
     font-weight: 700; 
     letter-spacing: .02em;

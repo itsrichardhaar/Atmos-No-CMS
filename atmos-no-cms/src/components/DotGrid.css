@@ -1,4 +1,4 @@
-/* Dots-only layer */
+/* Dots-only layer (no background-color here — base is in .hero__bg-base) */
 .dotgrid{
   position: absolute;
   inset: 0;
