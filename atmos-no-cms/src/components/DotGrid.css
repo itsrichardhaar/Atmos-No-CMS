@@ -1,33 +1,28 @@
-.dot-grid{
+/* src/components/DotGrid.css (or your app.css) */
+.dotgrid {
   position: absolute;
-  inset: 0;
-  /* background behind the dots */
-  background-color: var(--dg-bg, transparent);
-  /* dot pattern via radial-gradient */
+  inset: 0;                 /* fill the hero */
+  z-index: 0;               /* behind hero content */
+  pointer-events: none;     /* background only */
+
+  /* tweak these tokens */
+  --dg-bg: #000;            /* section background */
+  --dg-color: rgba(255,255,255,0.22); /* dot color */
+  --dg-size: 2px;           /* dot diameter */
+  --dg-gap: 22px;           /* spacing between dots */
+
+  background-color: var(--dg-bg);
   background-image:
     radial-gradient(circle at center,
-      color-mix(in oklab, var(--dg-color, #ffffff) calc(100% * var(--dg-opacity, 1)), transparent),
-      color-mix(in oklab, var(--dg-color, #ffffff) calc(100% * var(--dg-opacity, 1)), transparent) var(--dg-size, 2px),
-      transparent var(--dg-size, 2px));
-  background-size: var(--dg-gap, 22px) var(--dg-gap, 22px);
-  background-position: var(--dg-offset-x, 0px) var(--dg-offset-y, 0px);
-  pointer-events: none; /* background only */
-  z-index: 0;
+      var(--dg-color) var(--dg-size),
+      transparent calc(var(--dg-size) + 0.01px));
+  background-size: var(--dg-gap) var(--dg-gap);
+  background-position: 0 0;
 }
 
-/* Soft radial fade toward edges (Safari needs -webkit-mask) */
-.dot-grid--fade{
-  -webkit-mask-image: radial-gradient(600px circle at 50% 40%, #000 45%, transparent 100%);
-  mask-image: radial-gradient(600px circle at 50% 40%, #000 45%, transparent 100%);
+/* Optional soft edge fade (remove if you want full strength) */
+.dotgrid--fade {
+  -webkit-mask-image: radial-gradient(700px circle at 50% 40%, #000 45%, transparent 100%);
+  mask-image: radial-gradient(700px circle at 50% 40%, #000 45%, transparent 100%);
 }
 
-/* Optional: very subtle drift animation; disabled for reduced motion */
-@media (prefers-reduced-motion: no-preference){
-  .dot-grid{
-    animation: dg-drift 24s linear infinite;
-  }
-  @keyframes dg-drift{
-    0%   { background-position: var(--dg-offset-x,0px) var(--dg-offset-y,0px); }
-    100% { background-position: calc(var(--dg-offset-x,0px) + 40px) calc(var(--dg-offset-y,0px) + 40px); }
-  }
-}

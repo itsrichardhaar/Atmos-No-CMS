@@ -1,10 +1,25 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import "./Hero.css"
+import "../DotGrid.css";
 
 export default function Hero() {
   return (
-    <section className="hero hero--center">
+    <section className="hero hero--center hero--full">
+        {/* STATIC DOT GRID BACKGROUND */}
+      <div className="hero__bg" aria-hidden="true">
+        <div
+          className="dotgrid dotgrid--fade"
+          // tweak tokens inline if you want
+          style={{
+            // @ts-ignore — CSS custom props
+            "--dg-bg": "#000",
+            "--dg-color": "rgba(255,255,255,0.24)",
+            "--dg-size": "2px",
+            "--dg-gap": "22px",
+          }}
+        />
+      </div>
       <div className="container">
         <div className="hero__copy hero__copy--center">
           <motion.h1
@@ -32,6 +47,8 @@ export default function Hero() {
           </div>
         </div>
       </div>
+      {/* Radial shape divider */}
+      <div className="hero__divider" aria-hidden="true" />
     </section>
   )
 }

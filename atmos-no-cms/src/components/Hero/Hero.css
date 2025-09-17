@@ -1,6 +1,55 @@
 .hero {
+  position: relative;                 /* NEW: to layer the bg */
   padding: clamp(3rem, 8vw, 6rem) 0;
   background: var(--bg);
+  color: #fff;                        /* ensures readable text on dark bg */
+}
+
+/* Optional: full-viewport hero */
+.hero--full { min-height: 100dvh; }
+
+.hero__bg {
+  position: absolute;                 /* NEW: full-cover background */
+  inset: 0;
+  z-index: 0;
+}
+
+/* foreground stays above the bg */
+.hero .container,
+.hero__copy { position: relative; z-index: 1; }
+
+/* (keep the rest of your existing rules) */
+
+/* ===============================
+   Radial shape divider (bottom)
+   =============================== */
+.hero__divider{
+  --divider-height: clamp(90px, 12vw, 180px);       /* overall divider height */
+  --divider-bg: var(--page-bg, #000);            /* color of the next section */
+  --arc-tightness: 140%;                            /* ellipse vertical scale (bigger = softer) */
+  --arc-cut: 35%;                                   /* where the transparent center stops */
+  --arc-solid: 62%;                                 /* where the opaque area begins */
+
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -1px;                                     /* avoid hairline gaps */
+  height: var(--divider-height);
+  background: var(--divider-bg);
+  z-index: 2;                                       /* above dot grid, below content */
+  pointer-events: none;
+
+  /* Mask carves a gentle upward arc into the divider
+     so it looks like the hero fades into the next section. */
+  -webkit-mask-image: radial-gradient(
+    100% var(--arc-tightness) at 50% 0%,
+    transparent 0 var(--arc-cut),
+    #000 var(--arc-solid)
+  );
+  mask-image: radial-gradient(
+    100% var(--arc-tightness) at 50% 0%,
+    transparent 0 var(--arc-cut),
+    #000 var(--arc-solid)
+  );
 }
 
 .hero__grid {
