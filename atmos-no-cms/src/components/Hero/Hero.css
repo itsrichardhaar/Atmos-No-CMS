@@ -1,21 +1,19 @@
 .hero {
-  position: relative;                 /* NEW: to layer the bg */
+  position: relative;                 
   --hero-pad-y: clamp(3rem, 8vw, 6rem);
   padding: calc(var(--hero-pad-y) + var(--header-h)) 0 var(--hero-pad-y);
   background: var(--bg);
-  color: #fff;                        /* ensures readable text on dark bg */
+  color: #fff;                        
 }
 
-/* Optional: full-viewport hero */
 .hero--full { min-height: 100dvh; }
 
 .hero__bg {
-  position: absolute;                 /* NEW: full-cover background */
+  position: absolute;                
   inset: 0;
   z-index: 0;
 }
 
-/* foreground stays above the bg */
 .hero .container,
 .hero__copy { position: relative; z-index: 1; }
 
@@ -38,8 +36,6 @@
   z-index: 2;                                       /* above dot grid, below content */
   pointer-events: none;
 
-  /* Mask carves a gentle upward arc into the divider
-     so it looks like the hero fades into the next section. */
   -webkit-mask-image: radial-gradient(
     100% var(--arc-tightness) at 50% 0%,
     transparent 0 var(--arc-cut),
