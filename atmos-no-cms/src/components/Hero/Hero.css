@@ -1,41 +1,44 @@
-.hero {
-  position: relative;                 
-  --hero-pad-y: clamp(3rem, 8vw, 6rem);
-  padding: calc(var(--hero-pad-y) + var(--header-h)) 0 var(--hero-pad-y);
+/* 200vh section so the first 100vh is used for the reveal */
+.hero.hero--reveal{
+  position: relative;
+  height: 250vh;                          /* <-- key: consumes first viewport */
+  color: #fff;
   background: var(--bg);
-  color: #fff;                        
+  --hero-pad-y: clamp(3rem, 8vw, 6rem);
 }
 
-.hero--full { min-height: 100dvh; }
-
-.hero__bg {
-  position: absolute;                
-  inset: 0;
-  z-index: 0;
+/* Sticky inner that stays fixed during the first viewport */
+.hero__sticky{
+  position: sticky;
+  top: 0;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--hero-pad-y) + var(--header-h)) 0 var(--hero-pad-y);
 }
 
-.hero .container,
-.hero__copy { position: relative; z-index: 1; }
+/* Background layers inside the sticky block so they don't scroll */
+.hero__bg { position: absolute; inset: 0; z-index: 0; }
+.hero__bg-base { position: absolute; inset: 0; background: #000; }
 
+.hero .container, .hero__copy { position: relative; z-index: 1; }
 
 /* ===============================
    Radial shape divider (bottom)
    =============================== */
 .hero__divider{
-  --divider-height: clamp(90px, 12vw, 180px);       /* overall divider height */
-  --divider-bg: var(--page-bg, #000);            
-  --arc-tightness: 140%;                            /* ellipse vertical scale (bigger = softer) */
-  --arc-cut: 35%;                                   /* where the transparent center stops */
-  --arc-solid: 62%;                                 /* where the opaque area begins */
-
+  --divider-height: clamp(90px, 12vw, 180px);
+  --divider-bg: var(--page-bg, #000);
+  --arc-tightness: 140%;
+  --arc-cut: 35%;
+  --arc-solid: 62%;
   position: absolute;
   left: 0; right: 0;
-  bottom: -1px;                                     /* avoid hairline gaps */
+  bottom: -1px;
   height: var(--divider-height);
   background: var(--divider-bg);
-  z-index: 2;                                       /* above dot grid, below content */
+  z-index: 2;
   pointer-events: none;
-
   -webkit-mask-image: radial-gradient(
     100% var(--arc-tightness) at 50% 0%,
     transparent 0 var(--arc-cut),
@@ -48,26 +51,22 @@
   );
 }
 
-.hero__grid {
+/* Grid & typography (as you had) */
+.hero__grid{
   display: grid;
   align-items: center;
   gap: 2rem;
   grid-template-columns: 1.1fr 1fr;
 }
+@media (max-width: 900px){ .hero__grid{ grid-template-columns: 1fr; } }
 
-@media (max-width: 900px) {
-  .hero__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.hero--center .hero__copy--center {
+.hero--center .hero__copy--center{
   text-align: center;
   margin: 0 auto;
   max-width: 900px;
 }
 
-.hero__title {
+.hero__title{
   font-size: 160px;
   line-height: 1;
   font-weight: 600;
@@ -75,7 +74,7 @@
   margin: 0;
 }
 
-.hero__subtitle {
+.hero__subtitle{
   margin-top: 0.9rem;
   color: var(--muted);
   max-width: 85ch;
@@ -84,52 +83,20 @@
   color: #fff;
 }
 
-.hero__actions {
-  margin-top: 1.25rem;
-  display: flex;
-  gap: .75rem;
-}
+.hero__actions{ margin-top: 1.25rem; display:flex; gap:.75rem; }
+.hero__actions--center{ justify-content: center; }
 
-.hero__actions--center { justify-content: center; }
-
-/* Buttons (rely on your global vars) */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.65rem 1.1rem;
-  border-radius: var(--radius);
-  text-decoration: none;
-  font-weight: 500;
-  border: 1px solid transparent;
+/* Buttons */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:.4rem; padding:.65rem 1.1rem; border-radius:var(--radius);
+  text-decoration:none; font-weight:500; border:1px solid transparent;
   transition: transform .12s ease, background-color .12s ease, border-color .12s ease;
 }
+.btn--primary{ background:var(--primary); color:#fff; box-shadow:var(--shadow); }
+.btn--primary:hover{ background:var(--primary-2); }
+.btn--ghost{ border-color:var(--border); color:var(--text); background:#fff; }
+.btn--ghost:hover{ border-color:#ccc; }
 
-.btn--primary {
-  background: var(--primary);
-  color: #fff;
-  box-shadow: var(--shadow);
-}
-.btn--primary:hover { background: var(--primary-2);}
-
-.btn--ghost {
-  border-color: var(--border);
-  color: var(--text);
-  background: #fff;
-}
-.btn--ghost:hover { border-color: #ccc;}
-
-.hero__media {
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  aspect-ratio: 4 / 3;
-}
-
-.hero__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+.hero__media{ border-radius:24px; overflow:hidden; box-shadow:var(--shadow); aspect-ratio:4/3; }
+.hero__img{ width:100%; height:100%; object-fit:cover; display:block; }

@@ -1,28 +1,56 @@
-/* src/components/DotGrid.css (or your app.css) */
-.dotgrid {
+/* Dots-only layer */
+.dotgrid{
   position: absolute;
-  inset: 0;                 /* fill the hero */
-  z-index: 0;               /* behind hero content */
-  pointer-events: none;     /* background only */
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
 
-  /* tweak these tokens */
-  --dg-bg: #000;            /* section background */
-  --dg-color: rgba(255,255,255,0.22); /* dot color */
-  --dg-size: 2px;           /* dot diameter */
-  --dg-gap: 22px;           /* spacing between dots */
 
-  background-color: var(--dg-bg);
+  --dg-color: rgba(255,255,255,0.22);
+  --dg-size: 2px;
+  --dg-gap: 22px;
+  --dg-offset-x: 0px;
+  --dg-offset-y: 0px;
+
   background-image:
     radial-gradient(circle at center,
       var(--dg-color) var(--dg-size),
       transparent calc(var(--dg-size) + 0.01px));
   background-size: var(--dg-gap) var(--dg-gap);
-  background-position: 0 0;
+  background-position: var(--dg-offset-x) var(--dg-offset-y);
+  background-repeat: repeat;
 }
 
-/* Optional soft edge fade (remove if you want full strength) */
-.dotgrid--fade {
-  -webkit-mask-image: radial-gradient(700px circle at 50% 40%, #000 45%, transparent 100%);
-  mask-image: radial-gradient(700px circle at 50% 40%, #000 45%, transparent 100%);
+/* Outside dots as you scroll */
+.dotgrid--reveal{
+  --maskR: 80px; 
+  --maskAlpha: 1.3;
+  --maskFeather: 120px;
+
+ -webkit-mask-image: radial-gradient(
+    circle at 50% 40%,
+    rgba(255,255,255,var(--maskAlpha)) 0 calc(var(--maskR) - var(--maskFeather)),
+    rgba(255,255,255, calc(var(--maskAlpha) * 0.4)) calc(var(--maskR) - var(--maskFeather) + 1px) calc(var(--maskR) - 1px),
+    transparent var(--maskR)
+  );
+  mask-image: radial-gradient(
+    circle at 50% 40%,
+    rgba(255,255,255,var(--maskAlpha)) 0 calc(var(--maskR) - var(--maskFeather)),
+    rgba(255,255,255, calc(var(--maskAlpha) * 0.4)) calc(var(--maskR) - var(--maskFeather) + 1px) calc(var(--maskR) - 1px),
+    transparent var(--maskR)
+  );
 }
+
+
+.dotgrid--fade {
+  -webkit-mask-image: radial-gradient(700px circle at 50% 40%, #fff 45%, transparent 100%);
+  mask-image: radial-gradient(700px circle at 50% 40%, #fff 45%, transparent 100%);
+}
+
+/* When reveal completes, drop the mask entirely for crisp full-screen dots */
+.hero.reveal-done .dotgrid--reveal{
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
 
