@@ -6,15 +6,15 @@
   pointer-events: none;
 
   /* Dot layout defaults (can be overridden inline) */
-  --dg-size: 2px;   /* dot diameter */
-  --dg-gap: 22px;   /* cell size */
+  --dg-size: 3px;   /* dot diameter */
+  --dg-gap: 18px;   /* cell size */
 
   /* HSL-driven color */
-  --dg-hue: 210; --dg-s: 96%; --dg-l: 86%; --dg-alpha: 0.34;
+  --dg-hue: 210;
   --dg-color: hsl(var(--dg-hue) var(--dg-s) var(--dg-l) / var(--dg-alpha));
-  --dg-s: 90%;
-  --dg-l: 78%;
-  --dg-alpha: 0.24;
+  --dg-s: 100%;
+  --dg-l: 92%;
+  --dg-alpha: 0.52;
   
 
   background-image:

@@ -21,7 +21,7 @@ export default function Hero() {
       return Number.isFinite(n) ? n : 0;
     };
 
-    // Simple easing so hue change feels smooth
+    // Simple easing so hue 
     const ease = (t: number) => 1 - Math.pow(1 - t, 3); // cubic-out
 
     const update = () => {
@@ -40,15 +40,15 @@ export default function Hero() {
       const r = start + (end - start) * prog;
       dotEl.style.setProperty("--maskR", `${Math.round(r)}px`);
 
-      // === NEW: colorize dots by hue (keep single mask) ===
+      
       if (!prefersReducedMotion) {
-        // Option A: tasteful sweep (blue → magenta)
+       
         const hue = (prog * 720) % 360;
 
         // Start bright, ease down a touch as you scroll
         const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
-        const l = clamp(86 - 8 * prog, 70, 90);   // 86% → ~78%
-        const s = clamp(96 - 6 * prog, 80, 100);  // 96% → ~90%
+        const l = clamp(94 - 2 * prog, 88, 96);   // 86% → ~78%
+        const s = clamp(100 - 2 * prog, 92, 100);  // 96% → ~90%
         const a = 0.34 - 0.10 * prog;             // 0.34 → 0.24 (optional)
 
         dotEl.style.setProperty("--dg-hue", `${Math.round(hue)}`);
