@@ -75,8 +75,8 @@
 }
 
 .logoRow img {
-  height: 22px; /* keep them small like screenshot */
-  width: auto;
+  height: auto; 
+  width: 80%;
   opacity: 0.95;
   filter: grayscale(100%) brightness(1.35);
 }

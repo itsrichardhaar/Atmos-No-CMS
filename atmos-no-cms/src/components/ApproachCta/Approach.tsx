@@ -47,11 +47,11 @@ export default function Approach() {
           </div>
           <ul className={styles.logoRow} aria-label="Partner logos">
             {/* Swap src paths with your actual SVG/PNG assets */}
-            <li><img src="/logos/webflow.svg"  alt="Webflow"  /></li>
-            <li><img src="/logos/relume.svg"   alt="Relume"   /></li>
-            <li><img src="/logos/webflow.svg"  alt="Webflow"  /></li>
-            <li><img src="/logos/relume.svg"   alt="Relume"   /></li>
-            <li><img src="/logos/webflow.svg"  alt="Webflow"  /></li>
+            <li><img src="/assets/logos/webflow.svg"  alt="Webflow"  /></li>
+            <li><img src="/assets/logos/relume.svg"   alt="Relume"   /></li>
+            <li><img src="/assets/logos/webflow.svg"  alt="Webflow"  /></li>
+            <li><img src="/assets/logos/relume.svg"   alt="Relume"   /></li>
+            <li><img src="/assets/logos/webflow.svg"  alt="Webflow"  /></li>
           </ul>
         </div>
       </div>
