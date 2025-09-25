@@ -15,7 +15,7 @@ export default function Footer() {
               {/* Put your white logo in /public/brand/atmos-led-logo.svg */}
               <img
                 className={styles.logo}
-                src="/src/assets/Company Logo.png"
+                src="/assets/logos/Company Logo.png"
                 alt="Atmos LED"
                 width={160}
                 height={44}

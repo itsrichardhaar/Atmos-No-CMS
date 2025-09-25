@@ -3,7 +3,7 @@ import { NavLink, Link, useLocation } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import useLockBodyScroll from "../../hooks/useLockBodyScroll"
 import HamburgerButton from "../HamburgerButton/Hamburger"
-import logo from "../../assets/Company Logo.png"
+import logo from "/assets/logos/Company Logo.png"
 import "./Nav.css"
 
 export default function Nav() {
