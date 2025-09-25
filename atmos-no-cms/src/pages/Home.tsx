@@ -2,6 +2,7 @@
 import Hero from "../components/Hero/Hero"
 import ProductGrid from "../components/ProductGrid/ProductGrid";
 import { products } from "../data/products";
+import Approach from "../components/ApproachCta/Approach";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         withFilters  // show first 6; tweak as you like
         showViewAll
       />
+       <Approach />
     </>
   );
 }
