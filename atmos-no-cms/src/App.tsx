@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router-dom"
 import { AnimatePresence, motion } from "framer-motion"
 import Nav from "./components/Nav/Nav"
 import ScrollToTop from "./components/ScrollToTop";
+import Footer from "./components/Footer/Footer";
 
 export default function App() {
   const location = useLocation();
@@ -24,6 +25,7 @@ export default function App() {
           <Outlet />
         </motion.div>
       </AnimatePresence>
+      <Footer />
     </div>
   );
 }

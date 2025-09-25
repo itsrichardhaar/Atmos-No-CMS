@@ -1,0 +1,92 @@
+.footer {
+  background: #000;           /* solid black like screenshot */
+  color: #e6eef5;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px 20px 28px;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Left column */
+.leftCol {}
+
+.logo {
+  display: block;
+  width: 160px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.contactBlock { margin-top: 8px; }
+.contactTitle { font-size: 14px; color: #b9c6d3; margin-bottom: 8px; }
+.contactList { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.contactItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #e6eef5;
+  text-decoration: none;
+}
+.contactItem:hover { text-decoration: underline; }
+
+/* Social icons row */
+.socials { list-style: none; padding: 0; margin: 16px 0 0; display: flex; gap: 14px; }
+.socials a { color: #e6eef5; text-decoration: none; opacity: .9; }
+.socials a:hover { opacity: 1; }
+
+/* Right column nav */
+.rightCol { justify-self: end; }
+.menu { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; text-align: right; }
+.menu a { color: #ffffff; text-decoration: none; font-size: 14px; }
+.menu a:hover { text-decoration: underline; }
+
+/* Divider */
+.hr { border: 0; border-top: 1px solid rgba(255,255,255,0.12); margin: 26px 0; }
+
+/* Bottom bar */
+.bottom {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+.copy { color: #c8d4df; font-size: 13px; }
+.legal {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; gap: 24px; align-items: center;
+}
+.legal a { color: #c8d4df; text-decoration: none; font-size: 13px; }
+.legal a:hover { text-decoration: underline; }
+
+/* Masked icons (SVGs in /public/icons/) */
+.icon, .iconLg {
+  display: inline-block;
+  background: currentColor;
+}
+.icon { width: 16px; height: 16px; }
+.iconLg { width: 20px; height: 20px; }
+
+
+.iPhone    { -webkit-mask: url("/icons/phone.svg") no-repeat center / contain; mask: url("/icons/phone.svg") no-repeat center / contain; }
+.iMail     { -webkit-mask: url("/icons/mail.svg")  no-repeat center / contain; mask: url("/icons/mail.svg")  no-repeat center / contain; }
+.iFacebook { -webkit-mask: url("/icons/facebook.svg") no-repeat center / contain; mask: url("/icons/facebook.svg") no-repeat center / contain; }
+.iYoutube  { -webkit-mask: url("/icons/youtube.svg")  no-repeat center / contain; mask: url("/icons/youtube.svg")  no-repeat center / contain; }
+.iLinkedin { -webkit-mask: url("/icons/linkedin.svg") no-repeat center / contain; mask: url("/icons/linkedin.svg") no-repeat center / contain; }
+.iInstagram{ -webkit-mask: url("/icons/instagram.svg") no-repeat center / contain; mask: url("/icons/instagram.svg") no-repeat center / contain; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .top { grid-template-columns: 1fr; gap: 28px; }
+  .rightCol { justify-self: start; }
+  .menu { text-align: left; grid-auto-rows: min-content; }
+  .bottom { grid-template-columns: 1fr; row-gap: 12px; }
+}
