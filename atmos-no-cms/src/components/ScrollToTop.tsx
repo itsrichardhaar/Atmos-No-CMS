@@ -1,18 +1,16 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-/** Scrolls to top on pathname change. Preserves hash (#anchor) jumps. */
 export default function ScrollToTop() {
-  const { pathname, hash, key } = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    if (hash) {
-      // If navigating to /page#id, honor the anchor
-      const el = document.querySelector(hash);
-      if (el) { el.scrollIntoView({ behavior: "auto", block: "start" }); return; }
+    // Avoid the browser trying to restore scroll during SPA nav
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
     }
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, [pathname, key, hash]);
+    window.scrollTo({ top: 0, left: 0 }); // no "smooth"
+  }, [pathname]);
 
   return null;
 }

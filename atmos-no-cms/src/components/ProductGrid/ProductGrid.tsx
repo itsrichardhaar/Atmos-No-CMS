@@ -1,8 +1,8 @@
-// src/components/ProductGrid.tsx
+// src/components/ProductGrid/ProductGrid.tsx
 import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import ProductCard from "../ProductCard/ProductCard";
-import type { Product } from "../../types/product";
+import type { Product, ProductCategory } from "../../types/product"; // ← import ProductCategory
 import { Link } from "react-router-dom";
 import "./ProductGrid.css";
 
@@ -11,8 +11,11 @@ type Props = {
   products: Product[];
   showViewAll?: boolean;
   withFilters?: boolean;
-  defaultCategory?: string | "All";
+  defaultCategory?: ProductCategory | "All";   // ← union, not plain string
 };
+
+// Convenience union
+type CatOrAll = ProductCategory | "All";
 
 export default function ProductGrid({
   title = "Our Products",
@@ -21,29 +24,35 @@ export default function ProductGrid({
   withFilters = false,
   defaultCategory = "All",
 }: Props) {
-  const categories = useMemo(() => {
-    const set = new Set<string>();
-    products.forEach(p => p.categories.forEach(c => set.add(c)));
-    return ["All", ...Array.from(set)];
+  // De-dupe (optional hardening)
+  const data = useMemo(() => {
+    const byId = new Map<string, Product>();
+    for (const p of products) if (!byId.has(p.id)) byId.set(p.id, p);
+    return Array.from(byId.values());
   }, [products]);
 
-  const [active, setActive] = useState<string>(defaultCategory);
+  // Build category list with correct typing
+  const categories = useMemo<CatOrAll[]>(() => {
+    const set = new Set<ProductCategory>();
+    data.forEach(p => p.categories.forEach(c => set.add(c)));
+    return ["All", ...Array.from(set)];
+  }, [data]);
 
-  // Stable order: remember each product's original index
+  // Active filter is a ProductCategory or "All"
+  const [active, setActive] = useState<CatOrAll>(defaultCategory);
+
+  // Stable original order
   const orderMap = useMemo(() => {
     const m = new Map<string, number>();
-    products.forEach((p, i) => m.set(p.id, i));
+    data.forEach((p, i) => m.set(p.id, i));
     return m;
-  }, [products]);
+  }, [data]);
 
+  // Filter with proper narrowing (no casts needed)
   const visible = useMemo(() => {
-    const list =
-      active === "All"
-        ? products
-        : products.filter(p => p.categories.includes(active as any));
-    // sort by original index to preserve order across filters
+    const list = active === "All" ? data : data.filter(p => p.categories.includes(active));
     return [...list].sort((a, b) => (orderMap.get(a.id)! - orderMap.get(b.id)!));
-  }, [active, products, orderMap]);
+  }, [active, data, orderMap]);
 
   return (
     <section className="pg">
@@ -59,7 +68,7 @@ export default function ProductGrid({
 
         {withFilters && (
           <div className="pg__filters" role="tablist" aria-label="Filter by category">
-            {categories.map(cat => (
+            {categories.map((cat) => (
               <button
                 key={cat}
                 type="button"
@@ -73,26 +82,25 @@ export default function ProductGrid({
           </div>
         )}
 
-        {/* Animate grid reflow + item enter/exit */}
         <motion.div className="pg__grid" layout>
-            <AnimatePresence mode="popLayout">
-                {visible.map((p) => (
-                <motion.div
-                    key={p.id}
-                    layout
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.48, ease: [0.4, 0, 0, 1] }}
-                >
-                    <ProductCard product={p} />
-                </motion.div>
-                ))}
-            </AnimatePresence>
+          {/* remove AnimatePresence here */}
+          {visible.map((p) => (
+            <motion.div
+              key={p.slug}
+              layout
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              // remove exit prop
+              transition={{ duration: 0.48, ease: [0.4, 0, 0, 1] }}
+            >
+              <ProductCard product={p} />
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
   );
 }
+
 
 

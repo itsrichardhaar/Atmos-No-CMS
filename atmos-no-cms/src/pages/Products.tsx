@@ -10,10 +10,10 @@ export default function Products() {
   return (
     <main>
       <ProductGrid
-        title="Our Products"
-        products={products}   // full list
-        withFilters           // show category pills
-        showViewAll={false}   // already on /products
+          title="Our Products"
+          products={products.slice(0, 8)}
+          withFilters  // show first 6; tweak as you like
+          showViewAll
       />
     </main>
   );
