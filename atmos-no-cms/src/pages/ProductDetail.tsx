@@ -38,7 +38,7 @@ export default function ProductDetail() {
             <div className="product__specs">
               {product.specs.map((s, i) => <p key={i} className="product__spec">
               <img
-                src="/public/icons/product-spec-icon.svg"
+                src="/icons/product-spec-icon.svg"
                 alt=""
                 aria-hidden="true"
                 className="product__specImg"
