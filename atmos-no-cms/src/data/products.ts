@@ -12,7 +12,7 @@ export const products: Product[] = [
     categories: ["Indoor Performance", "Compact & Versatile"],
     specs: ["E2.6 / EX2.6  •  E2.9 / EX2.9  •  E3.9  •  E4.8 / EX4.8"],
     description:
-      "Element Series delivers accurate color and flexible configurations for retail and corporate environments.",
+      "The Element Series is our IP65-rated LED panel designed for excellent visuals for any indoor installation or production deployment. Built for demanding outdoor environments, it features a durable die-cast aluminum cabinet and a modular design with fast-locking mechanisms. With high brightness, wide viewing angles, and front-and-back maintenance, it ensures seamless visuals even in direct sunlight—ideal for concerts, sports, exhibitions, and stage productions. ",
     shopUrl: "https://your-shop.myshopify.com/products/element",
   },
   {

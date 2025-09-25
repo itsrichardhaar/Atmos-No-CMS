@@ -30,18 +30,31 @@ export default function ProductDetail() {
           </h1>
           {product.tagline && <p className="product__tagline">{product.tagline}</p>}
           {product.description && <p className="product__desc">{product.description}</p>}
-
+          <div className="pixel__heading__wrapper">
+          <p className="pixel__heading">Vision Series is Avaialable</p>
+          <p className="pixel__heading">In The Following Pixel Pitches:</p>
+          </div>
           {product.specs.length > 0 && (
-            <ul className="product__specs">
-              {product.specs.map((s, i) => <li key={i}>{s}</li>)}
-            </ul>
+            <div className="product__specs">
+              {product.specs.map((s, i) => <p key={i} className="product__spec">
+              <img
+                src="/public/icons/product-spec-icon.svg"
+                alt=""
+                aria-hidden="true"
+                className="product__specImg"
+                width={24}
+                height={24}
+              />
+              <span>{s}</span>
+              </p>)}
+            </div>
           )}
 
           <div className="product__actions">
             {!!product.startingFrom && <span className="product__price">Starting at ${product.startingFrom}</span>}
             {product.shopUrl && (
               <a href={product.shopUrl} target="_blank" rel="noreferrer" className="btn btn--primary">
-                Buy on Shopify ↗
+                Shop {product.name} Series ↗
               </a>
             )}
           </div>
