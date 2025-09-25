@@ -3,6 +3,7 @@ import Hero from "../components/Hero/Hero"
 import ProductGrid from "../components/ProductGrid/ProductGrid";
 import { products } from "../data/products";
 import Approach from "../components/ApproachCta/Approach";
+import BuildDisplayCta from "../components/BuildDisplayCta/BuildDisplayCta";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         showViewAll
       />
        <Approach />
+       <BuildDisplayCta />
     </>
   );
 }
