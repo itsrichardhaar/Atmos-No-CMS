@@ -1,0 +1,18 @@
+.wrap {
+  position: relative;
+  z-index: 0;                  /* stays BEHIND the arrow divider */
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  opacity: var(--glow-opacity, 0.65);
+  background:
+    radial-gradient(
+      var(--glow-size, 1000px 600px) at var(--glow-at, 50% 35%),
+      var(--glow-start, #29a8ff),
+      var(--glow-end, rgba(0,0,0,0)) 70%
+    );
+  filter: none; /* add blur() if you want softer */
+}

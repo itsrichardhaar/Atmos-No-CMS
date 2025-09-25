@@ -6,6 +6,12 @@ export type ProductCategory =
 | "Creative & Immersive"
 | "Compact & Versatile";
 
+
+export type ProductUses = {
+  heading: string;
+  body: string;
+};
+
 export type Product = {
     id: string;
     slug: string;
@@ -18,4 +24,7 @@ export type Product = {
     specs: string[];
     description?: string;
     shopUrl?: string;
+    glowColor?: string;
+    useTitle?: string;
+    productUses?: ProductUses[];
 };

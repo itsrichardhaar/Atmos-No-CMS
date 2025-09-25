@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { products } from "../data/products";
 import "./ProductDetail.css";
+import ProductUses from "../components/ProductUses/ProductUses";
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -18,7 +19,11 @@ export default function ProductDetail() {
   }
 
   return (
-    <section className="product">
+    // inject CSS var for the glow color
+    <section
+      className="product"
+      style={{ ['--glow-color' as any]: product.glowColor ?? '#29a8ff' }}
+    >
       <div className="container product__wrap">
         <div className="product__media">
           <img src={product.image} alt={product.name} />
@@ -28,25 +33,30 @@ export default function ProductDetail() {
           <h1 className="product__title">
             {product.name} {product.series && <span className="product__series">{product.series}</span>}
           </h1>
+
           {product.tagline && <p className="product__tagline">{product.tagline}</p>}
           {product.description && <p className="product__desc">{product.description}</p>}
+
           <div className="pixel__heading__wrapper">
-          <p className="pixel__heading">Vision Series is Avaialable</p>
-          <p className="pixel__heading">In The Following Pixel Pitches:</p>
+            <p className="pixel__heading">Vision Series is Avaialable</p>
+            <p className="pixel__heading">In The Following Pixel Pitches:</p>
           </div>
+
           {product.specs.length > 0 && (
             <div className="product__specs">
-              {product.specs.map((s, i) => <p key={i} className="product__spec">
-              <img
-                src="/icons/product-spec-icon.svg"
-                alt=""
-                aria-hidden="true"
-                className="product__specImg"
-                width={24}
-                height={24}
-              />
-              <span>{s}</span>
-              </p>)}
+              {product.specs.map((s, i) => (
+                <p key={i} className="product__spec">
+                  <img
+                    src="/icons/product-spec-icon.svg"
+                    alt=""
+                    aria-hidden="true"
+                    className="product__specImg"
+                    width={24}
+                    height={24}
+                  />
+                  <span>{s}</span>
+                </p>
+              ))}
             </div>
           )}
 
@@ -62,6 +72,16 @@ export default function ProductDetail() {
           <Link to="/products" className="product__back">← Back to all products</Link>
         </div>
       </div>
+
+      {/* ===== Layers inside the SAME section ===== */}
+      {/* Glow (behind) */}
+      <div className="product__glow" aria-hidden="true" />
+      {/* Arrow divider (above the glow) */}
+      <img className="product__arrow" src="/assets/images/Arrow.svg" alt="" aria-hidden="true" />
+      <ProductUses
+        title={product.useTitle || `Practical Solutions Powered by the ${product.name} Series`}
+        items={product.productUses || []}
+      />
     </section>
   );
 }

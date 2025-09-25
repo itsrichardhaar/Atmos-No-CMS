@@ -1,0 +1,15 @@
+.wrap {
+  position: relative;
+  z-index: 0;               /* sits behind following content if needed */
+  pointer-events: none;
+}
+
+.art {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* scales nicely */
+  opacity: 0.5;             /* tweak to match your comp */
+  filter: drop-shadow(0 12px 40px rgba(0,0,0,.35));
+}

@@ -1,12 +1,23 @@
-.product{ padding: 36px 0 72px; color:#fff; }
-.product__wrap{ display:grid; gap:24px; grid-template-columns: 1.1fr 1fr; }
-@media (max-width: 900px){ .product__wrap{ grid-template-columns: 1fr; } }
-
-.product__media{
-  background: #0b0f14; border-radius: 16px; overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
+.product { 
+  padding: 36px 0 72px; 
+  color:#fff; 
 }
-.product__media img{ width:100%; height:auto; display:block; }
+.product__wrap { 
+  display:grid; 
+  gap:24px; 
+  grid-template-columns: 1.1fr 1fr; 
+}
+@media (max-width: 900px){ 
+  .product__wrap { 
+    grid-template-columns: 1fr; 
+  } 
+}
+
+.product__media img { 
+  width:100%; 
+  height:auto; 
+  display:block; 
+}
 
 .pixel__heading__wrapper {
   line-height: 0.5;
@@ -21,8 +32,8 @@
   text-transform: uppercase;
 }
 
-.product__title{ font-family: var(--ff-display, inherit); font-size: clamp(2rem,4vw,3rem); line-height:1.1; margin:0; }
-.product__series{ margin-left:8px; font-size:.85rem; opacity:.8; font-weight:700; }
+.product__title{ font-family: var(--ff-display, inherit); font-size: 80px; line-height:1.1; margin:0; }
+.product__series{ margin-left:-10px; font-size:20px; opacity:1; font-weight:700; }
 .product__tagline{ margin:6px 0 8px; color: rgba(255,255,255,.85); }
 .product__desc{ color: rgba(255,255,255,.8); }
 
@@ -46,6 +57,36 @@
   margin-top: 6px;
 }
 
+.product-hero__glow {
+  position: absolute;
+  left: 50%;
+  top: calc(100% - 240px);   /* nudge upward so it appears just under the image */
+  transform: translateX(-50%);
+  width: min(1400px, 95vw);
+  height: 740px;
+  pointer-events: none;
+  z-index: 0;
+
+  /* uses CSS var injected from React inline style */
+  background: radial-gradient(
+    1200px 740px at 50% 35%,
+    var(--glow-color, #29a8ff),
+    rgba(0,0,0,0) 70%
+  );
+}
+
+.product-hero__arrow {
+  position: absolute;
+  left: 50%;
+  top: 100%;                 /* at the bottom edge of the hero section */
+  transform: translate(-50%, -48%); /* pull it up to “split” sections */
+  width: min(980px, 85vw);
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .6;               /* tweak to match your comp */
+  filter: drop-shadow(0 12px 40px rgba(0,0,0,.35));
+}
 
 .product__actions{ display:flex; gap:10px; align-items:center; margin-top: 14px; }
 .product__price{ color:#9fd6f6; font-weight: 700; }
