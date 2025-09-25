@@ -33,7 +33,7 @@
 }
 
 .product__title{ font-family: var(--ff-display, inherit); font-size: 80px; line-height:1.1; margin:0; }
-.product__series{ margin-left:-10px; font-size:20px; opacity:1; font-weight:700; }
+.product__series{ margin-left:-10px; font-size:24px; opacity:1; font-weight:400; }
 .product__tagline{ margin:6px 0 8px; color: rgba(255,255,255,.85); }
 .product__desc{ color: rgba(255,255,255,.8); }
 
