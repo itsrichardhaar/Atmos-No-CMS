@@ -24,7 +24,7 @@
 .mg__subtitle{
   margin: 0;
   color: #fff;
-  font-size: 16px;
+  font-size: clamp(15px, 1.2vw, 18px);
   line-height: 1.55;
   max-width: 70ch;               /* readable width */
 }
