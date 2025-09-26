@@ -1,9 +1,28 @@
 .product { 
   padding: 36px 0 72px; 
   color:#fff; 
+  position: relative;        /* anchor for ::before */
+  overflow: visible;
 }
+
+.product::before {
+  content: "";
+  position: absolute;
+  inset: 0;                  /* covers the whole section (shows at the top too) */
+  pointer-events: none;
+  z-index: 0;                /* behind content & arrow */
+  background: radial-gradient(
+    760px 760px at 50% 50%,          /* your current numbers—tweak as you like */
+    color-mix(in srgb, var(--glow-color, #29a8ff) 45%, transparent),
+    transparent 78%
+  );
+  opacity: .75;              /* dimmer overall */
+  filter: blur(0.5px);
+}
+
 .product__wrap { 
   display:grid; 
+  position: relative; z-index: 1;
   gap:24px; 
   grid-template-columns: 1.1fr 1fr; 
 }
@@ -59,7 +78,7 @@
   margin-top: 6px;
   z-index: 1;
 }
-
+/*
 .product__glow {
   position: absolute;
   left: 50%;
@@ -76,7 +95,7 @@
   opacity: .75;    
   filter: blur(0.5px);    
 }
-
+*/
 .arrow-wrapper {
   background: #000;
   height: 30vh;
@@ -86,7 +105,7 @@
   position: absolute;
   left: 90%;
   right: 0;
-  top: 110%;
+  top: 50%;
   bottom: 0;                
   transform: translate(-50%, -48%); 
   width: min(980px, 85vw);
