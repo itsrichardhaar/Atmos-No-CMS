@@ -5,6 +5,7 @@
   padding: 40px 0 64px;
   overflow: hidden;
   z-index: 2 !important;
+  margin-top: -100px;
 }
 
 .inner {
