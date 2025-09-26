@@ -8,7 +8,8 @@ export const markets: Market[] = [
     name: "Corporate Events",
     blurb:
       "Transform conferences and keynotes with vivid large-format displays and stage visuals.",
-    image: "/assets/markets/corporate-events.jpg",
+    gridImage: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/hero/corporate.png",
+    heroImage: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/hero/corporate.png",
   },
   {
     id: "m2",
@@ -16,7 +17,8 @@ export const markets: Market[] = [
     name: "House of Worship",
     blurb:
       "From ambient glows to bold stage looks, enhance storytelling and connection.",
-    image: "/assets/markets/house-of-worship.jpg",
+    gridImage: "",
+    heroImage: "/assets/markets/education-institutions.jpg",
   },
   {
     id: "m3",
@@ -24,7 +26,8 @@ export const markets: Market[] = [
     name: "Concerts & Tours",
     blurb:
       "Road-ready systems that survive travel, set fast, and dazzle every show.",
-    image: "/assets/markets/concerts-tours.jpg",
+    gridImage: "",
+    heroImage: "/assets/markets/education-institutions.jpg",
   },
   {
     id: "m4",
@@ -32,7 +35,8 @@ export const markets: Market[] = [
     name: "Retail & Hospitality",
     blurb:
       "Capture attention with digital canvases for promotions, ambience, and brand moments.",
-    image: "/assets/markets/retail-hospitality.jpg",
+    gridImage: "",
+    heroImage: "/assets/markets/education-institutions.jpg",
   },
   {
     id: "m5",
@@ -40,7 +44,8 @@ export const markets: Market[] = [
     name: "Virtual Production",
     blurb:
       "LED volumes and backgrounds for immersive in-camera workflows.",
-    image: "/assets/markets/virtual-production.jpg",
+    gridImage: "",
+    heroImage: "/assets/markets/education-institutions.jpg",
   },
   {
     id: "m6",
@@ -48,7 +53,8 @@ export const markets: Market[] = [
     name: "Immersive Productions",
     blurb:
       "Interactive, experiential environments that react and engage.",
-    image: "/assets/markets/immersive-productions.jpg",
+    gridImage: "",
+    heroImage: "/assets/markets/education-institutions.jpg",
   },
   {
     id: "m7",
@@ -56,6 +62,7 @@ export const markets: Market[] = [
     name: "Education & Institutions",
     blurb:
       "Clarity for lectures, assemblies, and presentations across campuses.",
-    image: "/assets/markets/education-institutions.jpg",
+    gridImage: "",
+    heroImage: "/assets/markets/education-institutions.jpg",
   },
 ];

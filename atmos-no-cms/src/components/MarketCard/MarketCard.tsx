@@ -11,7 +11,7 @@ export default function MarketCard({ market }: { market: Market }) {
         className="mc__imageWrap"
         aria-label={`${market.name} details`}
       >
-        <img className="mc__image" src={market.image} alt={market.name} loading="lazy" />
+        <img className="mc__image" src={market.gridImage} alt={market.name} loading="lazy" />
         <div className="mc__shade" />
       </Link>
 

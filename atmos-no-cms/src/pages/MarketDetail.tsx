@@ -22,7 +22,7 @@ export default function MarketDetail() {
     <section className="market">
       <div className="container market__wrap">
         <div className="market__hero">
-          <img src={market.image} alt={market.name} />
+          <img src={market.heroImage} alt={market.name} />
           <h1 className="market__title">{market.name}</h1>
           <p className="market__blurb">{market.blurb}</p>
         </div>
