@@ -10,7 +10,7 @@
   position: absolute;
   inset: 0;                  /* covers the whole section (shows at the top too) */
   pointer-events: none;
-  z-index: 0;                /* behind content & arrow */
+  z-index: 0 !important;               /* behind content & arrow */
   background: radial-gradient(
     760px 760px at 50% 50%,          /* your current numbers—tweak as you like */
     color-mix(in srgb, var(--glow-color, #29a8ff) 45%, transparent),
@@ -22,7 +22,8 @@
 
 .product__wrap { 
   display:grid; 
-  position: relative; z-index: 1;
+  position: relative; 
+  z-index: 2 !important;
   gap:24px; 
   grid-template-columns: 1.1fr 1fr; 
 }
@@ -103,14 +104,14 @@
 
 .product__arrow {
   position: absolute;
-  left: 90%;
+  left: 80%;
   right: 0;
   top: 50%;
   bottom: 0;                
   transform: translate(-50%, -48%); 
   width: min(980px, 85vw);
   height: auto;
-  z-index: 2;
+  z-index: 1 !important;
   pointer-events: none;
   opacity: 1;               
 }

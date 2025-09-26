@@ -4,6 +4,7 @@
   color: #fff;
   padding: 40px 0 64px;
   overflow: hidden;
+  z-index: 2 !important;
 }
 
 .inner {
@@ -41,7 +42,7 @@
   color: #2899D5; /* blue accent like your comp */
   font-size: 40px;
   margin: 0 0 8px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .cardBody {
