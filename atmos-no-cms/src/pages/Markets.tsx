@@ -1,10 +1,11 @@
-// src/pages/Markets.tsx
-import Page from "../components/Page"
+// src/pages/Markets.tsx (index)
+import MarketGrid from "../components/MarketGrid/MarketGrid";
+import { markets } from "../data/markets";
 
-export default function Markets() {
+export default function MarketsPage() {
   return (
-    <Page title="Markets">
-      <p>Markets page content.</p>
-    </Page>
-  )
+    <main>
+      <MarketGrid title="Markets We Serve" markets={markets} />
+    </main>
+  );
 }

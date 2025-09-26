@@ -3,6 +3,7 @@ import { products } from "../data/products";
 import "./ProductDetail.css";
 import ProductUses from "../components/ProductUses/ProductUses";
 
+
 export default function ProductDetail() {
   const { slug } = useParams();
   const product = products.find(p => p.slug === slug);

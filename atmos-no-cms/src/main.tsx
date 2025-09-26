@@ -11,6 +11,7 @@ import Calculator from "./pages/Calculator"
 import NotFound from "./pages/NotFound"
 import ProductsPage from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
+import MarketDetail from "./pages/MarketDetail"
 import "./App.css"
 
 const router = createBrowserRouter([
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: "calculator", element: <Calculator /> },
       { path: "shop", element: <Shop /> },
       { path: "products/:slug", element: <ProductDetail /> },
+      { path: "markets/:slug", element: <MarketDetail /> },
       { path: "*", element: <NotFound /> },
     ],
   },
