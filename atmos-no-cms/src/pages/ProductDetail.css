@@ -32,10 +32,10 @@
   text-transform: uppercase;
 }
 
-.product__title{ font-family: var(--ff-display, inherit); font-size: 80px; line-height:1.1; margin:0; }
-.product__series{ margin-left:-10px; font-size:24px; opacity:1; font-weight:400; }
-.product__tagline{ margin:6px 0 8px; color: rgba(255,255,255,.85); }
-.product__desc{ color: rgba(255,255,255,.8); }
+.product__title{ font-family: var(--ff-display, inherit); font-size: 80px; line-height:1.1; margin:0;}
+.product__series{ margin-left:-10px; font-size:24px; opacity:1; font-weight:400;}
+.product__tagline{ margin:6px 0 8px; color: #fff;}
+.product__desc{ color: #fff;}
 
 .product__specs { 
   margin: 12px 0 0; 
@@ -44,17 +44,20 @@
   font-size: 24px;
   white-space: none;
   text-wrap: nowrap;
+  z-index: 1;
 }
 
 .product__spec {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  margin: 0;          /* respects your spacing system */
+  margin: 0;
+  z-index: 1;          /* respects your spacing system */
 }
 
 .product__specImg {
   margin-top: 6px;
+  z-index: 1;
 }
 
 .product-hero__glow {
@@ -75,17 +78,23 @@
   );
 }
 
-.product-hero__arrow {
+.arrow-wrapper {
+  background: #CCCCCC;
+  height: 30vh;
+}
+
+.product__arrow {
   position: absolute;
-  left: 50%;
-  top: 100%;                 /* at the bottom edge of the hero section */
+  left: 90%;
+  right: 0;
+  top: 130%;
+  bottom: 0;                /* at the bottom edge of the hero section */
   transform: translate(-50%, -48%); /* pull it up to “split” sections */
   width: min(980px, 85vw);
   height: auto;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
-  opacity: .6;               /* tweak to match your comp */
-  filter: drop-shadow(0 12px 40px rgba(0,0,0,.35));
+  opacity: 1;               /* tweak to match your comp */
 }
 
 .product__actions{ display:flex; gap:10px; align-items:center; margin-top: 14px; }

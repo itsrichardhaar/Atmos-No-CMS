@@ -77,7 +77,9 @@ export default function ProductDetail() {
       {/* Glow (behind) */}
       <div className="product__glow" aria-hidden="true" />
       {/* Arrow divider (above the glow) */}
+      <div className="arrow-wrapper">
       <img className="product__arrow" src="/assets/images/Arrow.svg" alt="" aria-hidden="true" />
+      </div>
       <ProductUses
         title={product.useTitle || `Practical Solutions Powered by the ${product.name} Series`}
         items={product.productUses || []}
