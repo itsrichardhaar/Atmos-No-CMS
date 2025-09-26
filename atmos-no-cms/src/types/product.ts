@@ -19,7 +19,7 @@ export type Product = {
     series?: string;
     tagline?: string;
     startingFrom?: number;
-    image: string;
+    image?: string;
     categories: ProductCategory[];
     specs: string[];
     description?: string;
