@@ -5,7 +5,9 @@ import { markets } from "../data/markets";
 export default function MarketsPage() {
   return (
     <main>
-      <MarketGrid title="Markets We Serve" markets={markets} />
+      <MarketGrid 
+      title="" 
+      markets={markets} />
     </main>
   );
 }

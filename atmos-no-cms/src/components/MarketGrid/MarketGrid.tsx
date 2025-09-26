@@ -4,12 +4,19 @@ import type { Market } from "../../types/market";
 import MarketCard from "../MarketCard/MarketCard";
 import "./MarketGrid.css";
 
-export default function MarketGrid({ title = "Markets", markets }: { title?: string; markets: Market[] }) {
+type Props = {
+  title?: string;
+  subtitle?: string;             
+  markets: Market[];
+};
+
+export default function MarketGrid({ title = "Markets", subtitle, markets }: Props) {
   return (
     <section className="mg">
       <div className="container">
-        <div className="mg__header">
+        <div className={`mg__header ${subtitle ? "mg__header--withSub" : ""}`}>
           <h2 className="mg__title">{title}</h2>
+          {subtitle && <p className="mg__subtitle">{subtitle}</p>}
         </div>
 
         <motion.div className="mg__grid" layout>
@@ -29,3 +36,4 @@ export default function MarketGrid({ title = "Markets", markets }: { title?: str
     </section>
   );
 }
+

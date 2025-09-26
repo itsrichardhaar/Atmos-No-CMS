@@ -1,7 +1,34 @@
 /* src/components/MarketGrid/MarketGrid.css */
 .mg{ padding: 28px 0 56px; color:#fff; position: relative; }
-.mg__header{ display:flex; align-items:end; justify-content:space-between; gap:12px; margin-bottom:10px; }
-.mg__title{ font-family: var(--ff-display, inherit); font-weight:400; margin:0; color:#2899D5; }
+
+.mg__header{ 
+  display:flex; 
+  flex-direction: column;        /* stack title + subtitle */
+  align-items: flex-start;
+  gap: 8px;                      /* spacing between title and subtitle */
+  margin-bottom: 10px;           /* current spacing → grid when NO subtitle */
+}
+
+.mg__header--withSub{
+  margin-bottom: 40px;           /* a little extra room when subtitle exists */
+}
+
+.mg__title{
+  font-family: var(--ff-display, inherit);
+  font-weight: 400;
+  margin: 0;
+  color: #fff;
+  width: 40%;
+}
+
+.mg__subtitle{
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.55;
+  max-width: 70ch;               /* readable width */
+}
+
 
 .mg__grid{
   display:grid;
