@@ -52,7 +52,7 @@
   align-items: flex-start;
   gap: 8px;
   margin: 0;
-  z-index: 1;          /* respects your spacing system */
+  z-index: 1;         
 }
 
 .product__specImg {
@@ -60,26 +60,25 @@
   z-index: 1;
 }
 
-.product-hero__glow {
+.product__glow {
   position: absolute;
   left: 50%;
-  top: calc(100% - 240px);   /* nudge upward so it appears just under the image */
   transform: translateX(-50%);
-  width: min(1400px, 95vw);
+  width: 100%;
   height: 740px;
   pointer-events: none;
   z-index: 0;
-
-  /* uses CSS var injected from React inline style */
   background: radial-gradient(
-    1200px 740px at 50% 35%,
-    var(--glow-color, #29a8ff),
-    rgba(0,0,0,0) 70%
+    760px 760px at 50% 0%,          
+    color-mix(in srgb, var(--glow-color, #29a8ff) 45%, transparent), 
+    transparent 78%                          
   );
+  opacity: .75;    
+  filter: blur(0.5px);    
 }
 
 .arrow-wrapper {
-  background: #CCCCCC;
+  background: #000;
   height: 30vh;
 }
 
@@ -87,14 +86,14 @@
   position: absolute;
   left: 90%;
   right: 0;
-  top: 130%;
-  bottom: 0;                /* at the bottom edge of the hero section */
-  transform: translate(-50%, -48%); /* pull it up to “split” sections */
+  top: 110%;
+  bottom: 0;                
+  transform: translate(-50%, -48%); 
   width: min(980px, 85vw);
   height: auto;
   z-index: 2;
   pointer-events: none;
-  opacity: 1;               /* tweak to match your comp */
+  opacity: 1;               
 }
 
 .product__actions{ display:flex; gap:10px; align-items:center; margin-top: 14px; }

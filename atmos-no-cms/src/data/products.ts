@@ -28,7 +28,7 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/element",
-    glowColor: "#3BBE7A"
+    glowColor: "#D81279"
   },
   {
     id: "p2",
@@ -57,7 +57,7 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/kiosk",
-    glowColor: "#3BBE7A"
+    glowColor: "#DC902A"
   },
   {
     id: "p3",
@@ -86,7 +86,7 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/phantom",
-    glowColor: "#3BBE7A"
+    glowColor: "#1D458B"
   },
   {
     id: "p4",
@@ -115,7 +115,7 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/stratos",
-    glowColor: "#3BBE7A"
+    glowColor: "#F18037"
   },
   {
     id: "p5",
@@ -144,7 +144,7 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/trek",
-    glowColor: "#3BBE7A"
+    glowColor: "#035F66"
   },
   {
     id: "p6",
@@ -173,7 +173,7 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/vision",
-    glowColor: "#3BBE7A"
+    glowColor: "#6A449B"
   },
   {
     id: "p7",
@@ -202,7 +202,7 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/vivid",
-    glowColor: "#3BBE7A"
+    glowColor: "#223C78"
   },
   {
     id: "p8",
@@ -231,7 +231,7 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/vue",
-    glowColor: "#3BBE7A"
+    glowColor: "#F5CC19"
   },
   {
   id: "p7",
