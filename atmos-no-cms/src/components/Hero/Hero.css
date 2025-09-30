@@ -24,15 +24,24 @@
   z-index: 1;
 }
 
-/* Background layers inside the sticky block so they don't scroll */
-.hero__bg { position: absolute; inset: 0; z-index: 0; }
-.hero__bg-base { position: absolute; inset: 0; background: #000; }
+
+.hero__bg { 
+  position: absolute; 
+  inset: 0; 
+  z-index: 0; 
+}
+.hero__bg-base { 
+  position: absolute; 
+  inset: 0; 
+  background: #000; 
+}
 
 .hero .container, .hero__copy { position: relative; z-index: 1; }
 
 /* ===============================
    Radial shape divider (bottom)
    =============================== */
+
 .hero__divider{
   --divider-height: clamp(90px, 12vw, 180px);
   --divider-bg: var(--page-bg, #000);
@@ -58,14 +67,17 @@
   );
 }
 
-/* Grid & typography (as you had) */
 .hero__grid{
   display: grid;
   align-items: center;
   gap: 2rem;
   grid-template-columns: 1.1fr 1fr;
 }
-@media (max-width: 900px){ .hero__grid{ grid-template-columns: 1fr; } }
+@media (max-width: 900px) { 
+  .hero__grid { 
+    grid-template-columns: 1fr; 
+  } 
+}
 
 .hero--center .hero__copy--center{
   text-align: center;
@@ -75,7 +87,7 @@
 }
 
 .hero__title{
-  font-size: 160px;
+  font-size: clamp(44px, 10vw, 160px);
   line-height: 1;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -92,11 +104,17 @@
   color: #fff;
 }
 
-.hero__actions{ margin-top: 1.25rem; display:flex; gap:.75rem; }
-.hero__actions--center{ justify-content: center; }
+.hero__actions { 
+  margin-top: 1.25rem; 
+  display:flex; 
+  gap:.75rem; }
+
+.hero__actions--center { 
+  justify-content: center; 
+}
 
 /* Buttons */
-.btn{
+.btn {
   display:inline-flex; align-items:center; justify-content:center;
   gap:.4rem; padding:.65rem 1.1rem; border-radius:var(--radius);
   text-decoration:none; font-weight:500; border:1px solid transparent;

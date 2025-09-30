@@ -46,7 +46,7 @@
 .title {
   margin: 0 0 12px;
   font-weight: 400;
-  font-size: 80px;
+  font-size: clamp(var(--h2-min), 6.2vw, var(--h2-max)); line-height: 1.0;
   line-height: 1.05;
 }
 
