@@ -2,6 +2,7 @@
 import MarketGrid from "../components/MarketGrid/MarketGrid";
 import { markets } from "../data/markets";
 import "./Markets.css"; 
+import Unmatched from "../components/UnmatchedCta/Unmatched";
 import BuildDisplayCta from "../components/BuildDisplayCta/BuildDisplayCta";
 
 
@@ -24,7 +25,8 @@ export default function MarketsPage() {
       <MarketGrid 
         title=""
         markets={markets} />
-      
+      <Unmatched />
+      <img className="market__arrow" src="/assets/images/Arrow.svg" alt="" aria-hidden="true" />
       <BuildDisplayCta />
     </main>
   );
