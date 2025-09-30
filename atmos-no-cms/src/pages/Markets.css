@@ -1,0 +1,52 @@
+
+.markets{
+  position: relative;
+  background: linear-gradient(180deg, #000 0%, #0b0f12 55%, #227099 100%);
+  color: #fff; 
+}
+
+
+.markets__hero{
+  position: relative;
+  padding: clamp(56px, 12vw, 180px) 0 clamp(24px, 6vw, 72px);
+  overflow: clip;
+}
+
+.markets__hero > .container {
+  position: relative;
+  z-index: 1; /* text above ::before */
+}
+
+
+.markets__hero::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background-image: radial-gradient(#2899D5 1px, transparent 1px);
+  background-size: 20px 20px;
+
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+  z-index: 0;
+}
+
+.markets__title{
+  margin: 0 0 .5rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  font-size: clamp(44px, 10vw, 160px); 
+}
+
+.markets__sub{
+  margin: 0;
+  line-height: 1.5;
+  font-size: clamp(16px, 2.2vw, 18px);
+  font-weight: 400;
+  color: #fff;
+}
+
+:root{ --header-h: 94px; }
+.markets__hero{ padding-top: calc(clamp(56px, 12vw, 180px) + var(--header-h)); }
