@@ -2,6 +2,7 @@
 import MarketGrid from "../components/MarketGrid/MarketGrid";
 import { markets } from "../data/markets";
 import "./Markets.css"; 
+import BuildDisplayCta from "../components/BuildDisplayCta/BuildDisplayCta";
 
 
 export default function MarketsPage() {
@@ -23,6 +24,8 @@ export default function MarketsPage() {
       <MarketGrid 
         title=""
         markets={markets} />
+      
+      <BuildDisplayCta />
     </main>
   );
 }

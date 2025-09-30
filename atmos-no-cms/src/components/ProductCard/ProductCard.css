@@ -24,3 +24,7 @@
 .pc__specs { margin-left: 2px; font-size: 0.8rem; color: #fff; font-weight: 400; }
 .pc__tagline{ margin: 2px 0 0; color: rgba(255,255,255,.75); font-size: .92rem; }
 .pc__ctaRow{ margin-top: 6px; }
+.btn--primary {
+  background: #00456A;
+  padding: 5px 14px;
+}
