@@ -139,8 +139,8 @@ export default function Hero() {
               </motion.p>
 
               <div className="hero__actions hero__actions--center">
-                <Link to="/products" className="btn btn--primary">
-                  Shop our Products ↗
+                <Link to="/products" className="btn btn--hero">
+                  Shop Our Products
                 </Link>
               </div>
             </div>
