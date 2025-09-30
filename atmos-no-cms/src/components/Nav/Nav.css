@@ -13,13 +13,13 @@
 .nav-spacer { height: 0; }
 
 html[data-hero-reveal="active"] .nav {
-  position: fixed;        /* <-- out of flow, no layout nudge */
+  position: fixed;       
   top: 0; left: 0; right: 0;
   background: transparent;
   border-color: transparent;
 }
 html[data-hero-reveal="active"] .nav-spacer {
-  height: var(--header-h);  /* <-- reserves the same space the sticky nav would */
+  height: var(--header-h);  
 }
 
 .nav__bar{
@@ -27,19 +27,19 @@ html[data-hero-reveal="active"] .nav-spacer {
   height: 100%;
 }
 
-/* transparent at top of page */
+
 .nav.is-transparent{
   background: transparent;
   box-shadow: none;
 }
 
-/* turns solid after small scroll */
+
 .nav.is-solid{
   background: #000;
-  box-shadow: 0 1px 0 rgba(255,255,255,.06); /* subtle edge (optional) */
+  box-shadow: 0 1px 0 rgba(255,255,255,.06); 
 }
 
-/* keep when menu is open */
+
 .nav.is-open{ background: transparent !important; border-bottom: none; border-color: none !important;}
 .nav__logo { 
     font-weight: 700; 
@@ -80,14 +80,11 @@ html[data-hero-reveal="active"] .nav-spacer {
 .burger.is-open span:nth-child(2) { opacity: 0; }
 .burger.is-open span:nth-child(3) { top: 21px; transform: rotate(-45deg); }
 */
-/* Backdrop (click to close) */
-/* Keep burger clickable above the overlay */
 
-/* Backdrop/panel just under header but above page */
 .menu { 
     position: fixed;
   inset: 0;
-  z-index: 2000;                 /* lower than header */
+  z-index: 2000;                 
   background: rgba(0,0,0,.25);
   opacity: 0;
   pointer-events: none;
@@ -100,15 +97,15 @@ html[data-hero-reveal="active"] .nav-spacer {
     inset: 0; 
     padding: clamp(16px, 3vw, 28px);
     display: grid;
-    grid-template-rows: 1fr auto;       /* links take space, meta sticks to bottom */
+    grid-template-rows: 1fr auto;       
     justify-items: start;  
-    background: #000;   /* your black */
+    background: #000;   
     transform: translateX(100%); 
     transition: transform .48s ease; 
     min-height: 100dvh;   
 }
 @supports not (height: 100dvh) {
-  .menu__panel { min-height: 100vh; }  /* fallback */
+  .menu__panel { min-height: 100vh; }  
 }
 .menu--open .menu__panel { 
     transform: translateX(0); 
@@ -124,7 +121,7 @@ html[data-hero-reveal="active"] .nav-spacer {
 .menu__links{
   display: flex;
   flex-direction: column;
-  gap: .25rem;                         /* tighter spacing between items */
+  gap: .25rem;                       
   width: min(680px, 92vw);
 }
 
@@ -132,13 +129,13 @@ html[data-hero-reveal="active"] .nav-spacer {
   display: block;
   width: 100%;
   text-align: left;
-  color: #fff;                         /* black panel assumed */
+  color: #fff;                         
   font-family: var(--ff-display, inherit);
   font-weight: 400;
-  font-size: 80px; /* smaller than before */
-  line-height: 1;                    /* tight */
+  font-size: clamp(32px, 8vw, 80px);
+  line-height: 1;                   
   letter-spacing: -0.01em;
-  padding: .1rem 0;                    /* remove chunky padding */
+  padding: .1rem 0;                    
   border-radius: 8px;
   outline: none;
 }
