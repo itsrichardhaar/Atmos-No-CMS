@@ -1,7 +1,7 @@
 
 .markets{
   position: relative;
-  background: linear-gradient(180deg, #000 0%, #0b0f12 55%, #227099 100%);
+  background: linear-gradient(180deg, #000 0%, #363636 55%, #000 100%);
   color: #fff; 
 }
 
@@ -14,7 +14,7 @@
 
 .markets__hero > .container {
   position: relative;
-  z-index: 1; /* text above ::before */
+  z-index: 1; 
 }
 
 
