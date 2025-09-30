@@ -63,5 +63,11 @@
   color: #fff;
 }
 
+@media screen and (max-width: 480px) {
+    .market__arrow {
+        top: 85% !important;
+    }
+}
+
 :root{ --header-h: 94px; }
 .markets__hero{ padding-top: calc(clamp(56px, 12vw, 180px) + var(--header-h)); }
