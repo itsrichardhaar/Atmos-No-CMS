@@ -38,19 +38,19 @@
 .market__title{
   margin: 0 0 12px;
   font-family: var(--ff-display, inherit);
-  font-size: clamp(32px, 6vw, 64px);
-  line-height: 1.05;
-  font-weight: 700;
+  font-size: clamp(44px, 10vw, 160px); 
+  width: 70%;
+  line-height: 0.8;
+  font-weight: 400;
   color: #fff;
   text-shadow: 0 2px 10px rgba(0,0,0,.4);
 }
 .market__blurb{
   margin: 0;
-  color: #d6dde5;
-  font-size: 14px;
+  color: #fff;
+  font-size: 18px;
   line-height: 1.55;
   max-width: 72ch;
-  text-shadow: 0 1px 6px rgba(0,0,0,.35);
 }
 
 /* content below hero */
