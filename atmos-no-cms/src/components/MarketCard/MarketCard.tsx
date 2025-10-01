@@ -23,8 +23,12 @@ export default function MarketCard({ market }: { market: Market }) {
       </header>
 
       <div className="mc__ctaRow">
-        <Link to={`/markets/${market.slug}`} className="btn btn--secondary btn--sm">
-          Learn More
+        <Link to={`/markets/${market.slug}`} className="btn btn--secondary">
+          <span className="btn__label">Learn More</span>
+          <span className="btn__arrows" aria-hidden="true">
+            <span className="btn__arrow btn__arrow--off"></span>
+            <span className="btn__arrow btn__arrow--on"></span>
+          </span>
         </Link>
       </div>
     </article>

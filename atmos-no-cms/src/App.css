@@ -1,4 +1,7 @@
-/* --------- Base / theme --------- */
+/**
+ ======== Base / Theme ======== 
+ **/
+ 
 :root{
   --bg:#000;
   --text:#fff;
@@ -37,15 +40,18 @@
 
   /* Header / Nav */
   --header-h: 94px;
+
+  --chev-right: url("/icons/chev-right.svg");
+
 }
 
 h1,h2,h3,h4,h5,h6,
 .section-title,
-.nav__logo, /* if your logo is text anywhere */
+.nav__logo, 
 .hero__title {
   font-family: var(--ff-display);
-  font-weight: 600;                 /* tweak per section */
-  letter-spacing: -0.01em;          /* display fonts like a tiny negative tracking */
+  font-weight: 600;                 
+  letter-spacing: -0.01em;          
 }
 
 /* Headings */
@@ -63,7 +69,9 @@ h6 { font-size: clamp(var(--h6-min), 2.8vw, var(--h6-max)); line-height: 1.4; }
 .text-lg { font-size: var(--text-lg); }
 .text-xl { font-size: var(--text-xl); }
 
-*{ box-sizing:border-box }
+* { 
+  box-sizing:border-box 
+}
 html,body{ margin:0; padding:0 }
 body{
   font-family: "Funnel Sans", sans-serif;
@@ -73,12 +81,23 @@ body{
 }
 
 /* layout helpers */
-.container{ max-width:1200px; margin:0 auto; padding:0 1rem }
 
-/* links & buttons */
-a{ color:inherit; text-decoration:none }
-a:hover{ text-decoration:none }
+.container { 
+  max-width:1200px; 
+  margin:0 auto; 
+  padding:0 1rem 
+}
 
+/* ======== Links & Buttons ======== */
+
+a { color:inherit; 
+  text-decoration:none 
+}
+a:hover { 
+  text-decoration:none 
+}
+
+/* ======== base button ======== */
 button {
   background:var(--primary);
   color:#fff;
@@ -90,6 +109,10 @@ button {
   box-shadow: var(--shadow);
 }
 button:hover{ background:var(--primary-2) }
+
+/**
+ ======== hero button ======== 
+ **/
 
 .btn--hero {
   background: #fff;
@@ -106,27 +129,109 @@ button:hover{ background:var(--primary-2) }
   transition: all 0.3s ease;
 }
 
+/**
+ ======== primary button ======== 
+ **/
+
 .btn--primary {
   font-size: 18px !important;
   background: #00456A;
   border: solid #00456A 2px;
   border-radius: 50px;
-  padding: 5px 14px;
-  transition: all 0.3s ease;
+  padding: 5px 18px 5px 18px; 
+  color: #fff;
+  transition: background .3s ease, border-color .3s ease, color .3s ease;
+  
+  /* arrow hover animation */
+  position: relative;
+  display: inline-flex;
+  width: auto;
+  max-width: max-content;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 1.5rem;
+  overflow: hidden;               
+  line-height: 1.2;               
 }
+
 
 .btn--primary:hover {
   background: #39BAFF;
   border: solid #39BAFF 2px;
-  transition: all 0.3s ease;
 }
+
+.btn__label { 
+  line-height:1.2; 
+}
+
+
+.btn__arrows{
+  position:relative;
+  width:16px;                         
+  height:16px;                        
+  overflow:hidden;                    
+  flex:0 0 16px;                      
+}
+
+.btn__arrow{
+  position:absolute;
+  inset:0;
+  background: currentColor;
+  -webkit-mask: var(--chev-right) center / contain no-repeat;
+          mask: var(--chev-right) center / contain no-repeat;
+  transition: transform .28s ease, opacity .28s ease;
+}
+
+.btn__arrow--off{
+  transform: translateX(0);
+  opacity:1;
+}
+
+.btn__arrow--on{
+  transform: translateX(150%);
+  opacity:0;
+}
+
+.btn--primary:hover .btn__arrow--on,
+.btn--primary:focus-visible .btn__arrow--on{
+  transform: translateX(0);
+  opacity:1;
+}
+
+.btn--primary:hover .btn__arrow--off,
+.btn--primary:focus-visible .btn__arrow--off{
+  transform: translateX(-150%);
+  opacity:0;
+}
+
+.btn--primary:focus-visible{
+  outline:2px solid #fff;
+  outline-offset:2px;
+}
+
+/**
+ ======== secondary button ======== 
+ **/
 
 .btn--secondary {
   font-size: 18px !important;
   background: #000;
+  border: solid #00456A 2px;
   border-radius: 50px;
-  border: 2px #00456A solid;
-  transition: all 0.3s ease;
+  padding: 5px 18px 5px 18px; 
+  color: #fff;
+  transition: background .3s ease, border-color .3s ease, color .3s ease;
+  
+  /* arrow hover animation */
+  position: relative;
+  display: inline-flex;
+  width: auto;
+  max-width: max-content;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 1.5rem;
+  overflow: hidden;               
+  line-height: 1.2;  
 }
 
 .btn--secondary:hover {
@@ -135,14 +240,67 @@ button:hover{ background:var(--primary-2) }
   transition: all 0.3s ease;
 }
 
+.btn__label{ line-height:1.2; }
 
-/* --------- Sections --------- */
+
+.btn__arrows{
+  position:relative;
+  width:16px;                         
+  height:16px;                        
+  overflow:hidden;                    
+  flex:0 0 16px;                      
+}
+
+.btn__arrow{
+  position:absolute;
+  inset:0;
+  background: currentColor;
+  -webkit-mask: var(--chev-right) center / contain no-repeat;
+          mask: var(--chev-right) center / contain no-repeat;
+  transition: transform .28s ease, opacity .28s ease;
+}
+
+.btn__arrow--off{
+  transform: translateX(0);
+  opacity:1;
+}
+
+.btn__arrow--on{
+  transform: translateX(150%);
+  opacity:0;
+}
+
+.btn--secondary:hover .btn__arrow--on,
+.btn--secondary:focus-visible .btn__arrow--on{
+  transform: translateX(0);
+  opacity:1;
+}
+
+.btn--secondary:hover .btn__arrow--off,
+.btn--secondary:focus-visible .btn__arrow--off{
+  transform: translateX(-150%);
+  opacity:0;
+}
+
+.btn--secondary:focus-visible{
+  outline:2px solid #fff;
+  outline-offset:2px;
+}
+
+
+/**
+ ======== Sections ======== 
+ **/
+
 .section{ padding: 3rem 0 }
 .section-header{ margin-bottom:1.25rem }
 .section-title{ font-size:clamp(1.5rem, 2vw, 2rem); font-weight:600 }
 .section-sub{ color:var(--muted); font-size:.95rem }
 
-/* --------- Cards / grids --------- */
+/**
+ ======== Cards / Grids ======== 
+ **/
+
 .grid{ display:grid; gap:1.25rem }
 .grid-2{ grid-template-columns: repeat(2, minmax(0,1fr)); }
 .grid-3{ grid-template-columns: repeat(3, minmax(0,1fr)); }
@@ -164,7 +322,10 @@ button:hover{ background:var(--primary-2) }
   background:#000; color:#fff; border-radius:999px;
 }
 
-/* --------- Footer --------- */
+/**
+ ======== Footer ======== 
+ **/
+
 .footer{ border-top:1px solid var(--border); margin-top:2rem }
 .footer-inner{ padding:2rem 0; color:var(--muted); display:flex; gap:1rem; justify-content:space-between; flex-wrap:wrap }
 

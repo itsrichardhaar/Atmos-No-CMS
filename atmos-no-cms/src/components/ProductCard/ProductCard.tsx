@@ -19,13 +19,13 @@ export default function ProductCard({ product }: { product: Product }) {
         {product.specs && <p className="pc__specs">{product.specs}</p>}
       </header>
 
-      {product.startingFrom && (
-        <div className="pc__ctaRow">
-          <Link to={`/products/${product.slug}`} className="btn btn--primary">
-            Starting at ${product.startingFrom}
-          </Link>
-        </div>
-      )}
+      <Link to={`/products/${product.slug}`} className="btn btn--primary">
+      <span className="btn__label">Starting at ${product.startingFrom}</span>
+      <span className="btn__arrows" aria-hidden="true">
+        <span className="btn__arrow btn__arrow--off"></span>
+        <span className="btn__arrow btn__arrow--on"></span>
+      </span>
+    </Link>
     </article>
   );
 }
