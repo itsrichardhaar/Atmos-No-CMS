@@ -1,0 +1,63 @@
+/* src/components/FeatureGrid/FeatureGrid.module.css */
+.section {
+  color: #d7dde4;                 /* inherit-ish for dark pages */
+}
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 20px;
+  position: relative;
+  z-index: 3 !important;
+}
+.h2 {
+  margin: 0 0 22px;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.1;
+  color: #fff;
+}
+
+.grid {
+  display: grid;
+  gap: 28px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.cols2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cols3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cols4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (max-width: 1000px) {
+  .cols3, .cols4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .cols2, .cols3, .cols4 { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 20px 18px;
+  min-height: 180px;
+}
+.icon {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 12px;
+  opacity: 1;
+  color: #2899D5;
+}
+.cardTitle {
+  margin: 0 0 8px;
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.25;
+  color: #2899D5;                 
+  font-weight: 700;
+}
+.cardBody {
+  margin: 0;
+  font-size: clamp(14px, 1.3vw, 16px);
+  line-height: 1.65;
+  color: #fff;
+}

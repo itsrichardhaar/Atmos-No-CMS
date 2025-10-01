@@ -22,7 +22,7 @@ export default function Unmatched() {
             <p className={styles.tagline}>
               Create immersive visuals that captivate audiences.
             </p>
-            <h2 id="unmatched-heading" className={styles.h2}>Unmatched Visual Performance Across Every Environment</h2>
+            <h3 id="unmatched-heading" className={styles.h3}>Unmatched Visual Performance Across Every Environment</h3>
             <p className={styles.p}>
               From immersive indoor displays to weatherproof outdoor solutions, Atmos LED delivers vibrant, high-definition visuals that engage audiences and elevate experiences in any setting.
             </p>

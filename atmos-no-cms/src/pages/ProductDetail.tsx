@@ -20,7 +20,7 @@ export default function ProductDetail() {
   }
 
   return (
-    // inject CSS var for the glow color
+    
     <section
       className="product"
       style={{ ['--glow-color' as any]: product.glowColor ?? '#29a8ff' }}
@@ -74,10 +74,9 @@ export default function ProductDetail() {
         </div>
       </div>
 
-      {/* ===== Layers inside the SAME section ===== */}
       {/* Glow (behind) */}
       <div className="product__glow" aria-hidden="true" />
-      {/* Arrow divider (above the glow) */}
+ 
       <div className="arrow-wrapper">
       <img className="product__arrow" src="/assets/images/Arrow.svg" alt="" aria-hidden="true" />
       </div>

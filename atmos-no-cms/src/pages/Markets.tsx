@@ -4,6 +4,8 @@ import { markets } from "../data/markets";
 import "./Markets.css"; 
 import Unmatched from "../components/UnmatchedCta/Unmatched";
 import BuildDisplayCta from "../components/BuildDisplayCta/BuildDisplayCta";
+import { Features } from "../data/features";
+import FeatureGrid from "../components/FeatureGrid/FeatureGrid";
 
 
 export default function MarketsPage() {
@@ -20,13 +22,12 @@ export default function MarketsPage() {
           </div>
         </div>
       </section>
-
-      {/* Grid (no extra heading here) */}
       <MarketGrid 
         title=""
         markets={markets} />
       <Unmatched />
       <img className="market__arrow" src="/assets/images/Arrow.svg" alt="" aria-hidden="true" />
+      <FeatureGrid title="Why Atmos LED" items={Features} columns={3} />
       <BuildDisplayCta />
     </main>
   );

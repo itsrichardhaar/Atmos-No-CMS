@@ -33,12 +33,12 @@
   z-index: 4 !important;
 }
 
-.h2 {
+.h3 {
   margin: 0 0 12px;
-  font-size: clamp(var(--h2-min), 6.2vw, var(--h2-max)); line-height: 1.0;
+  font-size: clamp(var(--h3-min), 6.2vw, var(--h3-max));
   line-height: 1;
   font-weight: 400;
-  color: #2899D5; /* bright cyan/blue like mock */
+  color: #2899D5 !important; /* bright cyan/blue like mock */
 }
 
 .p {

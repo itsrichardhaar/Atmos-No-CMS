@@ -1,4 +1,4 @@
-/* full-bleed hero stays the same */
+
 .market--heroBleed .market__hero{
   position: relative;
   width: 100vw;
@@ -13,7 +13,7 @@
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
 }
 
-/* optional darker overlay from earlier (using ::before/::after) */
+
 .market--heroBleed .market__hero::before{
   content:""; position:absolute; inset:0; background: rgba(0,0,0,.35); z-index:1; pointer-events:none;
 }
@@ -23,18 +23,18 @@
   z-index:2; pointer-events:none;
 }
 
-/* NEW: inner container that matches page content width/padding */
+
 .market__heroInner{
-  position: absolute; inset: 0; display: flex; align-items: flex-end; z-index: 3; /* above overlays */
+  position: absolute; inset: 0; display: flex; align-items: flex-end; z-index: 3; 
 }
 .market__heroContent{
   width: 100%;
-  max-width: 1200px;          /* ← matches page content */
+  max-width: 1200px;          
   margin: 0 auto;
-  padding: 0 20px 28px;       /* same side padding + bottom spacing */
+  padding: 0 20px 28px;       
 }
 
-/* Text no longer absolute */
+
 .market__title{
   margin: 0 0 12px;
   font-family: var(--ff-display, inherit);
@@ -53,7 +53,7 @@
   max-width: 72ch;
 }
 
-/* content below hero */
+
 .market__wrap{
   max-width: 1200px; margin: 24px auto 0; padding: 0 20px; position: relative; z-index: 1;
 }

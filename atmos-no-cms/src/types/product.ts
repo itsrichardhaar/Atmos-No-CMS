@@ -12,6 +12,12 @@ export type ProductUses = {
   body: string;
 };
 
+export type FeatureItem = {
+  icon?: string;   
+  title: string;
+  body: string;
+};
+
 export type Product = {
     id: string;
     slug: string;
@@ -27,4 +33,5 @@ export type Product = {
     glowColor?: string;
     useTitle?: string;
     productUses?: ProductUses[];
+    features?: FeatureItem[];
 };
