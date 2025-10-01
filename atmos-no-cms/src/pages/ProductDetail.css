@@ -112,7 +112,7 @@
   right: 0;
   top: 55%;
   bottom: 0;                
-  transform: translate(-50%, -78%); 
+  transform: translate(-50%, -88%); 
   width: min(980px, 85vw);
   height: auto;
   z-index: 1 !important;
