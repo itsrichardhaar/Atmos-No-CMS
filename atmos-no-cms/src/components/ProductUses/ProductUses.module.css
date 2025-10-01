@@ -14,7 +14,7 @@
 }
 
 .title {
-  font-size: 80px;
+  font-size: clamp(36px, 10vw, 80px);
   line-height: 1.05;
   font-weight: 400;
   letter-spacing: .2px;
@@ -40,7 +40,8 @@
 
 .cardHead {
   color: #2899D5; /* blue accent like your comp */
-  font-size: 40px;
+  font-size: clamp(22px, 2.2vw, 40px);
+  line-height: 1.2;
   margin: 0 0 8px;
   font-weight: 600;
 }
@@ -48,8 +49,9 @@
 .cardBody {
   color: #fff;
   margin: 0;
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: clamp(14px, 1.3vw, 16px);
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 @media (max-width: 900px) {

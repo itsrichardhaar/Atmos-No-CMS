@@ -32,9 +32,9 @@ export default function ProductDetail() {
         </div>
 
         <div className="product__info">
-          <h1 className="product__title">
+          <h2 className="product__title">
             {product.name} {product.series && <span className="product__series">{product.series}</span>}
-          </h1>
+          </h2>
 
           {product.tagline && <p className="product__tagline">{product.tagline}</p>}
           {product.description && <p className="product__desc">{product.description}</p>}
