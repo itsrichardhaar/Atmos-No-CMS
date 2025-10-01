@@ -1,0 +1,46 @@
+/* src/components/BackgroundGlow/BackgroundGlow.css */
+
+:root{
+  --glow-c1: rgba(87, 255, 57, 0.18);  
+  --glow-c2: rgba(34, 112, 153, 0.12); 
+}
+
+.background-glow{
+  position: relative;
+  z-index: 0; 
+  height: 30vh;
+  margin-block: -140px;            
+}
+
+.background-glow::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-40%); 
+  
+ 
+  width: clamp(700px, 90vw, 1400px);
+  height: clamp(700px, 90vw, 1400px);
+  border-radius: 50%;
+
+  
+  background: radial-gradient(
+    circle,
+    var(--glow-c1) 0%,
+    var(--glow-c2) 60%,
+    transparent 75%
+  );
+
+  filter: blur(18px);  
+  pointer-events: none;
+  z-index: -1;          
+}
+
+@media (max-width: 640px){
+  :root{
+    --glow-c1: rgba(87, 255, 57, 0.14);
+    --glow-c2: rgba(34, 112, 153, 0.10);
+  }
+}
+
