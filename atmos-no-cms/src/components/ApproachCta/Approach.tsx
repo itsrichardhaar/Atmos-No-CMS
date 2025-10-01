@@ -19,7 +19,7 @@ export default function Approach() {
 
           {/* Right copy */}
           <div className={styles.copy}>
-            <h2 id="approach-heading" className={styles.h2}>Our Approach</h2>
+            <h3 id="approach-heading" className={styles.h2}>Our Approach</h3>
             <p className={styles.p}>
               At Atmos LED, we bring clarity to a fast-moving industry by reshaping what it
               means to deliver professional-grade visual technology. Rather than simply

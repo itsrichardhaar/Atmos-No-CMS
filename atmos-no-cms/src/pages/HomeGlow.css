@@ -1,0 +1,23 @@
+/* src/pages/HomeGlow.css */
+
+/* Create a local stacking context so we control z-index cleanly */
+.slice-glow {
+  position: relative;
+  isolation: isolate;        /* new stacking context */
+}
+
+/* Both sections should sit ABOVE the glow */
+.slice-glow > *:not(.background-glow) {
+  position: relative;
+  z-index: 1;
+  overflow: visible;          /* ensure they don't clip the glow */
+}
+
+/* Make the glow a purely visual layer under both sections */
+.slice-glow .background-glow {
+  position: absolute;
+  inset: -260px 0;            /* bleed up and down into both sections */
+  height: 0;                  /* don't affect layout */
+  z-index: 0;
+  pointer-events: none;
+}
