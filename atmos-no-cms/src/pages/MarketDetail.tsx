@@ -2,6 +2,7 @@
 import { useParams, Link } from "react-router-dom";
 import { markets } from "../data/markets";
 import "./MarketDetail.css";
+import BuildDisplayCta from "../components/BuildDisplayCta/BuildDisplayCta";
 
 export default function MarketDetail() {
   const { slug } = useParams();
@@ -81,6 +82,7 @@ export default function MarketDetail() {
           </section>
         ) : null}
       </div>
+      <BuildDisplayCta />
     </section>
   );
 }
