@@ -28,12 +28,10 @@
 <img src="https://img.shields.io/badge/React%20Router-CA4245.svg?style=flat&logo=React-Router&logoColor=white" alt="React%20Router">
 
 </div>
-<div>
+
+<br>
 <em>Project Demo Link:</em>
 <a href="https://atmos-no-cms.vercel.app">Demo Project</a>
-</div>
-<br>
-
 ---
 
 ## Table of Contents
