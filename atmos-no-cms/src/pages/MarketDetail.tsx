@@ -30,7 +30,6 @@ export default function MarketDetail() {
         <div className="market__heroInner">
           <div className="market__heroContent">
             <h1 className="market__title">{market.name}</h1>
-            {market.blurb && <p className="market__blurb">{market.blurb}</p>}
           </div>
         </div>
       </div>
