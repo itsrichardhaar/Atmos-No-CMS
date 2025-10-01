@@ -58,4 +58,112 @@
   max-width: 1200px; margin: 24px auto 0; padding: 0 20px; position: relative; z-index: 1;
 }
 
+/* =========================
+   Intro split
+   ========================= */
+.marketIntro{
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 34px;
+  align-items: center;
+  margin: 42px 0 32px;
+}
+.marketIntro__media img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.marketIntro__headline{
+  margin: 0 0 14px;
+  font-family: var(--ff-display, inherit);
+  font-size: clamp(28px, 4.8vw, 56px);
+  line-height: 1.1;
+  font-weight: 700;
+  color: #fff;
+}
+.marketIntro__body{
+  margin: 0;
+  color: #cfe3f2;
+  font-size: clamp(15px, 1.2vw, 16px);
+  line-height: 1.7;
+}
+@media (max-width: 900px){
+  .marketIntro{
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
+
+/* =========================
+   Benefits
+   ========================= */
+.marketBenefits{
+  position: relative;
+  margin: 48px 0 10px;
+}
+.marketBenefits__title{
+  text-align: center;
+  margin: 0 0 26px;
+  font-size: clamp(26px, 4vw, 42px);
+  line-height: 1.15;
+  color: var(--market-accent, #2899D5);
+  font-weight: 800;
+}
+.marketBenefits__grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 26px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+@media (max-width: 1100px){
+  .marketBenefits__grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 640px){
+  .marketBenefits__grid{ grid-template-columns: 1fr; }
+}
+.marketBenefits__card{
+  text-align: left;
+}
+.marketBenefits__thumb{
+  display: grid;
+  place-items: center;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 0 14px;
+  background: radial-gradient( circle at 50% 60%, rgba(255,255,255,.06), rgba(255,255,255,.02) );
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--market-accent, #2899D5) 65%, transparent);
+}
+.marketBenefits__thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.marketBenefits__h3{
+  margin: 0 0 6px;
+  font-size: clamp(18px, 2.2vw, 20px);
+  line-height: 1.3;
+  color: #fff;
+  font-weight: 700;
+}
+.marketBenefits__p{
+  margin: 0;
+  color: #c5d0da;
+  font-size: clamp(14px, 1.3vw, 16px);
+  line-height: 1.6;
+}
+
+/* Center the circle visually when the column is wide */
+.marketBenefits__card { display: grid; grid-template-rows: auto auto 1fr; justify-items: start; }
+.marketBenefits__card .marketBenefits__thumb { justify-self: start; }
+@media (min-width: 1101px){
+  .marketBenefits__card { justify-items: center; text-align: center; }
+  .marketBenefits__card .marketBenefits__thumb { justify-self: center; }
+}
 
