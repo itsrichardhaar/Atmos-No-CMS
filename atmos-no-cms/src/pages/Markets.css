@@ -11,6 +11,7 @@
   position: relative;
   padding: clamp(56px, 12vw, 180px) 0 clamp(24px, 6vw, 72px);
   overflow: clip;
+  margin-top: -94px;
 }
 
 .markets__hero > .container {
