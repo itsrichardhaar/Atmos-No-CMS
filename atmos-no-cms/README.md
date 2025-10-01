@@ -32,6 +32,8 @@
 <br>
 <em>Project Demo Link:</em>
 <a href="https://atmos-no-cms.vercel.app">Demo Project</a>
+
+<br>
 ---
 
 ## Table of Contents
