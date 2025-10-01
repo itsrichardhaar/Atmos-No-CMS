@@ -1,6 +1,5 @@
 .section {
   position: relative;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 20%, rgba(0,0,0,.9) 100%);
   color: #fff;
   padding: 40px 0 64px;
   overflow: hidden;

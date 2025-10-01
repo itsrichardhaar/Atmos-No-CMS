@@ -28,7 +28,45 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/element",
-    glowColor: "#D81279"
+    glowColor: "#D81279",
+    features: [
+      { icon: "/icons/features/burst.svg",
+        title: "Stunning Visuals with High Refresh Rates",
+        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+      },
+      { icon: "/icons/features/shield.svg",
+        title: "Durable LED Panels Built to Last",
+        body: "Die-cast aluminum + protective features for long-term performance in tough environments."
+      },
+      { icon: "/icons/features/matrix.svg",
+        title: "Flexible Pixel Pitches for Every Project",
+        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+      },
+      { icon: "/icons/features/headset.svg",
+        title: "Expert Support and Trusted Warranty",
+        body: "U.S.-based support, fast integration, and a trusted two-year warranty."
+      },
+      { icon: "/icons/features/sun.svg",
+        title: "Energy Efficiency with Brilliant Brightness",
+        body: "600–10,000 nits with efficient power design to reduce operating costs."
+      },
+      { icon: "/icons/features/layers.svg",
+        title: "Lightweight Panels for Easy Installation",
+        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
+      },
+      { icon: "/icons/features/shape.svg",
+        title: "Creative LED Solutions for Unique Designs",
+        body: "Flat, curved, convex/concave—engineered for custom builds."
+      },
+      { icon: "/icons/features/eye.svg",
+        title: "Vivid Color Accuracy and Wide Viewing",
+        body: "Ultra-wide angles and high contrast ensure consistent visuals."
+      },
+      { icon: "/icons/features/storm.svg",
+        title: "Weatherproof Displays for Outdoor Reliability",
+        body: "IP-rated protection for harsh environments and round-the-clock operation."
+      },
+    ],
   },
   {
     id: "p2",
@@ -57,7 +95,45 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/kiosk",
-    glowColor: "#DC902A"
+    glowColor: "#DC902A",
+    features: [
+      { icon: "/icons/features/burst.svg",
+        title: "Stunning Visuals with High Refresh Rates",
+        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+      },
+      { icon: "/icons/features/shield.svg",
+        title: "Durable LED Panels Built to Last",
+        body: "Die-cast aluminum + protective features for long-term performance in tough environments."
+      },
+      { icon: "/icons/features/matrix.svg",
+        title: "Flexible Pixel Pitches for Every Project",
+        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+      },
+      { icon: "/icons/features/headset.svg",
+        title: "Expert Support and Trusted Warranty",
+        body: "U.S.-based support, fast integration, and a trusted two-year warranty."
+      },
+      { icon: "/icons/features/sun.svg",
+        title: "Energy Efficiency with Brilliant Brightness",
+        body: "600–10,000 nits with efficient power design to reduce operating costs."
+      },
+      { icon: "/icons/features/layers.svg",
+        title: "Lightweight Panels for Easy Installation",
+        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
+      },
+      { icon: "/icons/features/shape.svg",
+        title: "Creative LED Solutions for Unique Designs",
+        body: "Flat, curved, convex/concave—engineered for custom builds."
+      },
+      { icon: "/icons/features/eye.svg",
+        title: "Vivid Color Accuracy and Wide Viewing",
+        body: "Ultra-wide angles and high contrast ensure consistent visuals."
+      },
+      { icon: "/icons/features/storm.svg",
+        title: "Weatherproof Displays for Outdoor Reliability",
+        body: "IP-rated protection for harsh environments and round-the-clock operation."
+      },
+    ],
   },
   {
     id: "p3",
@@ -86,7 +162,45 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/phantom",
-    glowColor: "#1D458B"
+    glowColor: "#1D458B",
+    features: [
+      { icon: "/icons/features/burst.svg",
+        title: "Stunning Visuals with High Refresh Rates",
+        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+      },
+      { icon: "/icons/features/shield.svg",
+        title: "Durable LED Panels Built to Last",
+        body: "Die-cast aluminum + protective features for long-term performance in tough environments."
+      },
+      { icon: "/icons/features/matrix.svg",
+        title: "Flexible Pixel Pitches for Every Project",
+        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+      },
+      { icon: "/icons/features/headset.svg",
+        title: "Expert Support and Trusted Warranty",
+        body: "U.S.-based support, fast integration, and a trusted two-year warranty."
+      },
+      { icon: "/icons/features/sun.svg",
+        title: "Energy Efficiency with Brilliant Brightness",
+        body: "600–10,000 nits with efficient power design to reduce operating costs."
+      },
+      { icon: "/icons/features/layers.svg",
+        title: "Lightweight Panels for Easy Installation",
+        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
+      },
+      { icon: "/icons/features/shape.svg",
+        title: "Creative LED Solutions for Unique Designs",
+        body: "Flat, curved, convex/concave—engineered for custom builds."
+      },
+      { icon: "/icons/features/eye.svg",
+        title: "Vivid Color Accuracy and Wide Viewing",
+        body: "Ultra-wide angles and high contrast ensure consistent visuals."
+      },
+      { icon: "/icons/features/storm.svg",
+        title: "Weatherproof Displays for Outdoor Reliability",
+        body: "IP-rated protection for harsh environments and round-the-clock operation."
+      },
+    ],
   },
   {
     id: "p4",
@@ -115,7 +229,45 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/stratos",
-    glowColor: "#F18037"
+    glowColor: "#F18037",
+    features: [
+      { icon: "/icons/features/burst.svg",
+        title: "Stunning Visuals with High Refresh Rates",
+        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+      },
+      { icon: "/icons/features/shield.svg",
+        title: "Durable LED Panels Built to Last",
+        body: "Die-cast aluminum + protective features for long-term performance in tough environments."
+      },
+      { icon: "/icons/features/matrix.svg",
+        title: "Flexible Pixel Pitches for Every Project",
+        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+      },
+      { icon: "/icons/features/headset.svg",
+        title: "Expert Support and Trusted Warranty",
+        body: "U.S.-based support, fast integration, and a trusted two-year warranty."
+      },
+      { icon: "/icons/features/sun.svg",
+        title: "Energy Efficiency with Brilliant Brightness",
+        body: "600–10,000 nits with efficient power design to reduce operating costs."
+      },
+      { icon: "/icons/features/layers.svg",
+        title: "Lightweight Panels for Easy Installation",
+        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
+      },
+      { icon: "/icons/features/shape.svg",
+        title: "Creative LED Solutions for Unique Designs",
+        body: "Flat, curved, convex/concave—engineered for custom builds."
+      },
+      { icon: "/icons/features/eye.svg",
+        title: "Vivid Color Accuracy and Wide Viewing",
+        body: "Ultra-wide angles and high contrast ensure consistent visuals."
+      },
+      { icon: "/icons/features/storm.svg",
+        title: "Weatherproof Displays for Outdoor Reliability",
+        body: "IP-rated protection for harsh environments and round-the-clock operation."
+      },
+    ],
   },
   {
     id: "p5",
@@ -144,7 +296,45 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/trek",
-    glowColor: "#035F66"
+    glowColor: "#035F66",
+    features: [
+      { icon: "/icons/features/burst.svg",
+        title: "Stunning Visuals with High Refresh Rates",
+        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+      },
+      { icon: "/icons/features/shield.svg",
+        title: "Durable LED Panels Built to Last",
+        body: "Die-cast aluminum + protective features for long-term performance in tough environments."
+      },
+      { icon: "/icons/features/matrix.svg",
+        title: "Flexible Pixel Pitches for Every Project",
+        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+      },
+      { icon: "/icons/features/headset.svg",
+        title: "Expert Support and Trusted Warranty",
+        body: "U.S.-based support, fast integration, and a trusted two-year warranty."
+      },
+      { icon: "/icons/features/sun.svg",
+        title: "Energy Efficiency with Brilliant Brightness",
+        body: "600–10,000 nits with efficient power design to reduce operating costs."
+      },
+      { icon: "/icons/features/layers.svg",
+        title: "Lightweight Panels for Easy Installation",
+        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
+      },
+      { icon: "/icons/features/shape.svg",
+        title: "Creative LED Solutions for Unique Designs",
+        body: "Flat, curved, convex/concave—engineered for custom builds."
+      },
+      { icon: "/icons/features/eye.svg",
+        title: "Vivid Color Accuracy and Wide Viewing",
+        body: "Ultra-wide angles and high contrast ensure consistent visuals."
+      },
+      { icon: "/icons/features/storm.svg",
+        title: "Weatherproof Displays for Outdoor Reliability",
+        body: "IP-rated protection for harsh environments and round-the-clock operation."
+      },
+    ],
   },
   {
     id: "p6",
@@ -173,7 +363,45 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/vision",
-    glowColor: "#6A449B"
+    glowColor: "#6A449B",
+    features: [
+      { icon: "/icons/features/burst.svg",
+        title: "Stunning Visuals with High Refresh Rates",
+        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+      },
+      { icon: "/icons/features/shield.svg",
+        title: "Durable LED Panels Built to Last",
+        body: "Die-cast aluminum + protective features for long-term performance in tough environments."
+      },
+      { icon: "/icons/features/matrix.svg",
+        title: "Flexible Pixel Pitches for Every Project",
+        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+      },
+      { icon: "/icons/features/headset.svg",
+        title: "Expert Support and Trusted Warranty",
+        body: "U.S.-based support, fast integration, and a trusted two-year warranty."
+      },
+      { icon: "/icons/features/sun.svg",
+        title: "Energy Efficiency with Brilliant Brightness",
+        body: "600–10,000 nits with efficient power design to reduce operating costs."
+      },
+      { icon: "/icons/features/layers.svg",
+        title: "Lightweight Panels for Easy Installation",
+        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
+      },
+      { icon: "/icons/features/shape.svg",
+        title: "Creative LED Solutions for Unique Designs",
+        body: "Flat, curved, convex/concave—engineered for custom builds."
+      },
+      { icon: "/icons/features/eye.svg",
+        title: "Vivid Color Accuracy and Wide Viewing",
+        body: "Ultra-wide angles and high contrast ensure consistent visuals."
+      },
+      { icon: "/icons/features/storm.svg",
+        title: "Weatherproof Displays for Outdoor Reliability",
+        body: "IP-rated protection for harsh environments and round-the-clock operation."
+      },
+    ],
   },
   {
     id: "p7",
@@ -202,7 +430,45 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/vivid",
-    glowColor: "#223C78"
+    glowColor: "#223C78",
+    features: [
+      { icon: "/icons/features/burst.svg",
+        title: "Stunning Visuals with High Refresh Rates",
+        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+      },
+      { icon: "/icons/features/shield.svg",
+        title: "Durable LED Panels Built to Last",
+        body: "Die-cast aluminum + protective features for long-term performance in tough environments."
+      },
+      { icon: "/icons/features/matrix.svg",
+        title: "Flexible Pixel Pitches for Every Project",
+        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+      },
+      { icon: "/icons/features/headset.svg",
+        title: "Expert Support and Trusted Warranty",
+        body: "U.S.-based support, fast integration, and a trusted two-year warranty."
+      },
+      { icon: "/icons/features/sun.svg",
+        title: "Energy Efficiency with Brilliant Brightness",
+        body: "600–10,000 nits with efficient power design to reduce operating costs."
+      },
+      { icon: "/icons/features/layers.svg",
+        title: "Lightweight Panels for Easy Installation",
+        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
+      },
+      { icon: "/icons/features/shape.svg",
+        title: "Creative LED Solutions for Unique Designs",
+        body: "Flat, curved, convex/concave—engineered for custom builds."
+      },
+      { icon: "/icons/features/eye.svg",
+        title: "Vivid Color Accuracy and Wide Viewing",
+        body: "Ultra-wide angles and high contrast ensure consistent visuals."
+      },
+      { icon: "/icons/features/storm.svg",
+        title: "Weatherproof Displays for Outdoor Reliability",
+        body: "IP-rated protection for harsh environments and round-the-clock operation."
+      },
+    ],
   },
   {
     id: "p8",
@@ -231,7 +497,45 @@ export const products: Product[] = [
       }
     ],
     shopUrl: "https://your-shop.myshopify.com/products/vue",
-    glowColor: "#F5CC19"
+    glowColor: "#F5CC19",
+    features: [
+      { icon: "/icons/features/burst.svg",
+        title: "Stunning Visuals with High Refresh Rates",
+        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+      },
+      { icon: "/icons/features/shield.svg",
+        title: "Durable LED Panels Built to Last",
+        body: "Die-cast aluminum + protective features for long-term performance in tough environments."
+      },
+      { icon: "/icons/features/matrix.svg",
+        title: "Flexible Pixel Pitches for Every Project",
+        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+      },
+      { icon: "/icons/features/headset.svg",
+        title: "Expert Support and Trusted Warranty",
+        body: "U.S.-based support, fast integration, and a trusted two-year warranty."
+      },
+      { icon: "/icons/features/sun.svg",
+        title: "Energy Efficiency with Brilliant Brightness",
+        body: "600–10,000 nits with efficient power design to reduce operating costs."
+      },
+      { icon: "/icons/features/layers.svg",
+        title: "Lightweight Panels for Easy Installation",
+        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
+      },
+      { icon: "/icons/features/shape.svg",
+        title: "Creative LED Solutions for Unique Designs",
+        body: "Flat, curved, convex/concave—engineered for custom builds."
+      },
+      { icon: "/icons/features/eye.svg",
+        title: "Vivid Color Accuracy and Wide Viewing",
+        body: "Ultra-wide angles and high contrast ensure consistent visuals."
+      },
+      { icon: "/icons/features/storm.svg",
+        title: "Weatherproof Displays for Outdoor Reliability",
+        body: "IP-rated protection for harsh environments and round-the-clock operation."
+      },
+    ],
   },
   {
   id: "p7",
@@ -260,7 +564,45 @@ export const products: Product[] = [
     }
   ],
   shopUrl: "https://your-shop.myshopify.com/products/vivid",
-  glowColor: "#3BBE7A"
+  glowColor: "#3BBE7A",
+  features: [
+      { icon: "/icons/features/burst.svg",
+        title: "Stunning Visuals with High Refresh Rates",
+        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+      },
+      { icon: "/icons/features/shield.svg",
+        title: "Durable LED Panels Built to Last",
+        body: "Die-cast aluminum + protective features for long-term performance in tough environments."
+      },
+      { icon: "/icons/features/matrix.svg",
+        title: "Flexible Pixel Pitches for Every Project",
+        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+      },
+      { icon: "/icons/features/headset.svg",
+        title: "Expert Support and Trusted Warranty",
+        body: "U.S.-based support, fast integration, and a trusted two-year warranty."
+      },
+      { icon: "/icons/features/sun.svg",
+        title: "Energy Efficiency with Brilliant Brightness",
+        body: "600–10,000 nits with efficient power design to reduce operating costs."
+      },
+      { icon: "/icons/features/layers.svg",
+        title: "Lightweight Panels for Easy Installation",
+        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
+      },
+      { icon: "/icons/features/shape.svg",
+        title: "Creative LED Solutions for Unique Designs",
+        body: "Flat, curved, convex/concave—engineered for custom builds."
+      },
+      { icon: "/icons/features/eye.svg",
+        title: "Vivid Color Accuracy and Wide Viewing",
+        body: "Ultra-wide angles and high contrast ensure consistent visuals."
+      },
+      { icon: "/icons/features/storm.svg",
+        title: "Weatherproof Displays for Outdoor Reliability",
+        body: "IP-rated protection for harsh environments and round-the-clock operation."
+      },
+    ],
   },
   {
   id: "p8",
@@ -289,7 +631,45 @@ export const products: Product[] = [
     }
   ],
   shopUrl: "https://your-shop.myshopify.com/products/vue",
-  glowColor: "#3BBE7A"
+  glowColor: "#3BBE7A",
+  features: [
+      { icon: "/icons/features/burst.svg",
+        title: "Stunning Visuals with High Refresh Rates",
+        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+      },
+      { icon: "/icons/features/shield.svg",
+        title: "Durable LED Panels Built to Last",
+        body: "Die-cast aluminum + protective features for long-term performance in tough environments."
+      },
+      { icon: "/icons/features/matrix.svg",
+        title: "Flexible Pixel Pitches for Every Project",
+        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+      },
+      { icon: "/icons/features/headset.svg",
+        title: "Expert Support and Trusted Warranty",
+        body: "U.S.-based support, fast integration, and a trusted two-year warranty."
+      },
+      { icon: "/icons/features/sun.svg",
+        title: "Energy Efficiency with Brilliant Brightness",
+        body: "600–10,000 nits with efficient power design to reduce operating costs."
+      },
+      { icon: "/icons/features/layers.svg",
+        title: "Lightweight Panels for Easy Installation",
+        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
+      },
+      { icon: "/icons/features/shape.svg",
+        title: "Creative LED Solutions for Unique Designs",
+        body: "Flat, curved, convex/concave—engineered for custom builds."
+      },
+      { icon: "/icons/features/eye.svg",
+        title: "Vivid Color Accuracy and Wide Viewing",
+        body: "Ultra-wide angles and high contrast ensure consistent visuals."
+      },
+      { icon: "/icons/features/storm.svg",
+        title: "Weatherproof Displays for Outdoor Reliability",
+        body: "IP-rated protection for harsh environments and round-the-clock operation."
+      },
+    ],
   },
 ];
 

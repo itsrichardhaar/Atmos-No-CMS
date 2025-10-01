@@ -12,7 +12,7 @@
   pointer-events: none;
   z-index: 0 !important;               /* behind content & arrow */
   background: radial-gradient(
-    760px 760px at 50% 50%,          /* your current numbers—tweak as you like */
+    760px 760px at 48% 35%,          /* your current numbers—tweak as you like */
     color-mix(in srgb, var(--glow-color, #29a8ff) 45%, transparent),
     transparent 78%
   );
@@ -108,7 +108,7 @@
   right: 0;
   top: 55%;
   bottom: 0;                
-  transform: translate(-50%, -48%); 
+  transform: translate(-50%, -78%); 
   width: min(980px, 85vw);
   height: auto;
   z-index: 1 !important;

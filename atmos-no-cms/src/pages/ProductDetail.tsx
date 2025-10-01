@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { products } from "../data/products";
 import "./ProductDetail.css";
 import ProductUses from "../components/ProductUses/ProductUses";
+import FeatureGrid from "../components/FeatureGrid/FeatureGrid";
 
 
 export default function ProductDetail() {
@@ -84,6 +85,13 @@ export default function ProductDetail() {
         title={product.useTitle || `Practical Solutions Powered by the ${product.name} Series`}
         items={product.productUses || []}
       />
+      {product.features?.length ? (
+        <FeatureGrid
+          title={`Why ${product.name}?`}
+          items={product.features}
+          columns={3}
+        />
+      ) : null}
     </section>
   );
 }
