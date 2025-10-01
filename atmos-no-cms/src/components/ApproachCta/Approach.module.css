@@ -1,6 +1,8 @@
 .section {
-  /* dark radial like screenshot */
   color: #d7dde4;
+  position: relative;  /* required for z-index to apply */
+  z-index: 2;          /* above the glow */
+  overflow: visible;
 }
 
 .inner {
@@ -36,7 +38,7 @@
   font-size: clamp(var(--h2-min), 6.2vw, var(--h2-max)); line-height: 1.0;
   line-height: 1.2;
   font-weight: 400;
-  color: #2899D5; /* bright cyan/blue like mock */
+  color: #2899D5; 
 }
 
 .p {
@@ -46,7 +48,7 @@
   color: #fff;
 }
 
-/* Partner strip */
+/* Partner icon strip */
 .strip {
   display: grid;
   grid-template-columns: 1fr auto;

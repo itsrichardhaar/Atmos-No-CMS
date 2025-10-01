@@ -1,8 +1,8 @@
 /* src/components/BackgroundGlow/BackgroundGlow.css */
 
 :root{
-  --glow-c1: rgba(87, 255, 57, 0.18);  
-  --glow-c2: rgba(34, 112, 153, 0.12); 
+  --glow-c1: rgba(87, 255, 57, 0.15);  
+  --glow-c2: rgba(34, 112, 153, 0.10); 
 }
 
 .background-glow{
