@@ -66,7 +66,7 @@ export default function ProductDetail() {
             {!!product.startingFrom && <span className="product__price">Starting at ${product.startingFrom}</span>}
             {product.shopUrl && (
               <a href={product.shopUrl} target="_blank" rel="noreferrer" className="btn btn--primary">
-                Shop {product.name} Series ↗
+                Shop {product.name} Series
               </a>
             )}
           </div>
