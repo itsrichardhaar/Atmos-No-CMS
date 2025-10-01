@@ -655,10 +655,9 @@ Build Atmos-No-CMS from the source and install dependencies:
 
 **Navigate to the project root:**
 
-    ```sh
-    ❯ cd atmos-no-cms
-    ```
-
+```sh
+❯ cd atmos-no-cms
+```
 
 Run the project with:
 
