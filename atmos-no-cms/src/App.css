@@ -107,6 +107,7 @@ button:hover{ background:var(--primary-2) }
 }
 
 .btn--primary {
+  font-size: 18px !important;
   background: #00456A;
   border: solid #00456A 2px;
   border-radius: 50px;
@@ -115,12 +116,13 @@ button:hover{ background:var(--primary-2) }
 }
 
 .btn--primary:hover {
-  background: #000;
-  border: solid #00456A 2px;
+  background: #39BAFF;
+  border: solid #39BAFF 2px;
   transition: all 0.3s ease;
 }
 
 .btn--secondary {
+  font-size: 18px !important;
   background: #000;
   border-radius: 50px;
   border: 2px #00456A solid;
@@ -128,7 +130,8 @@ button:hover{ background:var(--primary-2) }
 }
 
 .btn--secondary:hover {
-  background: #00456A;
+  background: #39BAFF;
+  border: 2px #39BAFF solid;
   transition: all 0.3s ease;
 }
 
