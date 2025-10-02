@@ -162,7 +162,7 @@
   line-height: 1.6;
 }
 
-/* Center the circle visually when the column is wide */
+
 .marketBenefits__card { display: grid; grid-template-rows: auto auto 1fr; justify-items: start; }
 .marketBenefits__card .marketBenefits__thumb { justify-self: start; }
 @media (min-width: 1101px){

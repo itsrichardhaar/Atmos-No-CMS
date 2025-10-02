@@ -72,22 +72,22 @@ export const markets: Market[] = [
       title:"Atmos LED Benefits",
       items: [
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-1.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/houses-of-worship/worship-benefit-1.png",
           title: "Vivid visuals that support worship and teaching",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-2.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/houses-of-worship/worship-benefit-2.png",
           title: "Wide angles so no seat misses a detail",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-3.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/houses-of-worship/worship-benefit-3.png",
           title: "Seamless integration with AV systems",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-4.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/houses-of-worship/worship-benefit-4.png",
           title: "Long-lasting, energy-efficient performance",
           body: "",
         }
@@ -119,22 +119,22 @@ export const markets: Market[] = [
       title:"Atmos LED Benefits",
       items: [
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-1.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/concerts-and-tours/concerts-benefit-1.png",
           title: "Crash-proof protection for frequent setup and transport",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-2.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/concerts-and-tours/concerts-benefit-2.png",
           title: "High brightness for indoor or outdoor venues",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-3.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/concerts-and-tours/concerts-benefit-3.png",
           title: "Flexible panel designs for creative stage environments",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-4.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/concerts-and-tours/concerts-benefit-4.png",
           title: "Tool-free, fast installation and teardown",
           body: "",
         }
@@ -167,22 +167,22 @@ export const markets: Market[] = [
       title:"Atmos LED Benefits",
       items: [
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-1.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/retail-and-hospitality/retail-benefit-1.png",
           title: "Eye-catching visuals to increase foot traffic",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-2.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/retail-and-hospitality/retail-benefit-2.png",
           title: "Seamless integration with store layouts and signage",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-3.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/retail-and-hospitality/retail-benefit-3.png",
           title: "Lightweight, slim designs for easy placement",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-4.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/retail-and-hospitality/retail-benefit-4.png",
           title: "Reliable, energy-efficient performance for long-term use",
           body: "",
         }
@@ -214,22 +214,22 @@ export const markets: Market[] = [
       title:"Atmos LED Benefits",
       items: [
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-1.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/virtual-production/virtual-benefit-1.png",
           title: "Ultra-fine pixel pitches for broadcast-quality imagery",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-2.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/virtual-production/virtual-benefit-2.png",
           title: "Seamless color calibration for true-to-life accuracy",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-3.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/virtual-production/virtual-benefit-3.png",
           title: "Wide viewing angles for multi-camera setups",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-4.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/virtual-production/virtual-benefit-4.png",
           title: "Reliable integration with industry-standard processing",
           body: "",
         }
@@ -262,22 +262,22 @@ export const markets: Market[] = [
       title:"Atmos LED Benefits",
       items: [
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-1.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/immersive-environments/immersive-benefit-1.png",
           title: "Support for curved, concave, and convex builds",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-2.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/immersive-environments/immersive-benefit-2.png",
           title: "Transparent and interactive LED options",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-3.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/immersive-environments/immersive-benefit-3.png",
           title: "High brightness for indoor or outdoor installations",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-4.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/immersive-environments/immersive-benefit-4.png",
           title: "Advanced engineering support for custom projects",
           body: "",
         }
@@ -310,22 +310,22 @@ export const markets: Market[] = [
       title:"Atmos LED Benefits",
       items: [
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-1.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/education-and-institutions/education-benefit-1.png",
           title: "Clear, large-format visuals for classrooms and auditoriums",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-2.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/education-and-institutions/education-benefit-2.png",
           title: "Energy-efficient operation for budget-conscious institutions",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-3.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/education-and-institutions/education-benefit-3.png",
           title: "Simple maintenance and long-term reliability",
           body: "",
         },
         {
-          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/corporate-events/corp-benefit-4.png",
+          image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/education-and-institutions/education-benefit-4.png",
           title: "Versatile applications for events, signage, and branding",
           body: "",
         }
