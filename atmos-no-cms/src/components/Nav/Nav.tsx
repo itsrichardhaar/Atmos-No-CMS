@@ -58,6 +58,12 @@ export default function Nav() {
           if ((e.target as HTMLElement).classList.contains("menu")) setOpen(false)
         }}
       >
+        {/* Staggered sweep layers (decorative) */}
+        <div className="menu__prelayers" aria-hidden="true">
+          <span className="menu__prelayer" data-i="1" />
+          <span className="menu__prelayer" data-i="2" />
+          <span className="menu__prelayer" data-i="3" />
+        </div>
         <nav className="menu__panel" aria-label="Primary">
           <div className="menu__links">
             <Link to="/" className="mobile__logo" aria-label="Go to home">
