@@ -79,7 +79,7 @@ export default function Footer() {
               <li><Link to="/products">Products</Link></li>
               <li><Link to="/markets">Markets</Link></li>
               <li><Link to="/contact">Contact</Link></li>
-              <li><a href="/calculator">Calculator</a></li>
+              <li><a href="https://mapoutcreative.com/atmosled/">Calculator</a></li>
               <li><a href="/shop">Shop</a></li>
             </ul>
           </nav>
