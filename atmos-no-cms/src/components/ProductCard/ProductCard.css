@@ -17,7 +17,7 @@
 
   position: relative;
   overflow: hidden; /* keeps border mask tidy */
-  border: 1px solid rgba(255,255,255,0.08);
+  /* border: 1px solid transparent !important; */
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
@@ -77,4 +77,24 @@
 .pc__specs{ margin-left:2px; font-size:.8rem; color:#fff; font-weight:400; }
 .pc__tagline{ margin:2px 0 0; color: rgba(255,255,255,.75); font-size:16px; }
 
+@-moz-document url-prefix() {
+  .pc.pc--glow::after {
+    /* kill the mask path Firefox struggles with */
+    mask: none !important;
+    -webkit-mask: none !important;
 
+    /* draw only on the border via border-image */
+    border: 6px solid transparent;          /* ring thickness */
+    background: none !important;            /* don't layer the old bg */
+    border-image: radial-gradient(
+        var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+        rgba(var(--glow-rgb), calc(var(--glow-intensity) * 0.85)) 0%,
+        rgba(var(--glow-rgb), calc(var(--glow-intensity) * 0.45)) 32%,
+        transparent 60%
+      ) 1;
+    /* preserve shape & stacking */
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
