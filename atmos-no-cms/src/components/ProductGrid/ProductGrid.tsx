@@ -1,8 +1,8 @@
 // src/components/ProductGrid/ProductGrid.tsx
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import ProductCard from "../ProductCard/ProductCard";
-import type { Product, ProductCategory } from "../../types/product"; // ← import ProductCategory
+import type { Product, ProductCategory } from "../../types/product";
 import { Link } from "react-router-dom";
 import "./ProductGrid.css";
 
@@ -11,11 +11,186 @@ type Props = {
   products: Product[];
   showViewAll?: boolean;
   withFilters?: boolean;
-  defaultCategory?: ProductCategory | "All";   // ← union, not plain string
+  defaultCategory?: ProductCategory | "All";
 };
 
-// Convenience union
 type CatOrAll = ProductCategory | "All";
+
+/** ---- CursorSpotlight (global glow + per-card border glow) ----------------- */
+function CursorSpotlight({
+  gridRef,
+  radius = 300,
+  glowRGB = "40,153,213",
+  disabled = false,
+}: {
+  gridRef: React.RefObject<HTMLDivElement | null>;
+  radius?: number;
+  glowRGB?: string; // "r,g,b"
+  disabled?: boolean;
+}) {
+  const spotRef = useRef<HTMLDivElement | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const runningRef = useRef(false);
+
+  // Per-card state
+  type CardState = {
+    el: HTMLElement;
+    // current (animated)
+    x: number; y: number; i: number;
+    // targets (from pointer)
+    tx: number; ty: number; ti: number;
+  };
+  const statesRef = useRef<CardState[]>([]);
+  const insideRef = useRef(false);
+
+  useEffect(() => {
+    if (disabled) return;
+
+    // Create faint global cursor glow
+    const spot = document.createElement("div");
+    spot.className = "pg-spotlight";
+    spot.style.cssText = `
+      position: fixed; width:${radius * 2.3}px; height:${radius * 2.3}px;
+      border-radius:50%; transform:translate(-50%,-50%);
+      pointer-events:none; z-index:5; opacity:0; mix-blend-mode:screen;
+      background: radial-gradient(circle,
+        rgba(${glowRGB}, 0.14) 0%,
+        rgba(${glowRGB}, 0.07) 25%,
+        rgba(${glowRGB}, 0.03) 50%,
+        transparent 70%);
+      transition:opacity .25s ease;
+    `;
+    document.body.appendChild(spot);
+    spotRef.current = spot;
+
+    const ensureStates = () => {
+      if (!gridRef.current) return;
+      const els = Array.from(gridRef.current.querySelectorAll<HTMLElement>(".pc"));
+      // Rebuild if counts differ
+      if (statesRef.current.length !== els.length) {
+        statesRef.current = els.map((el) => ({
+          el,
+          x: 50, y: 50, i: 0,
+          tx: 50, ty: 50, ti: 0,
+        }));
+      }
+    };
+
+    const onMove = (e: MouseEvent) => {
+      if (!gridRef.current) return;
+
+      ensureStates();
+
+      // keep the global glow under the cursor
+      spot.style.left = `${e.clientX}px`;
+      spot.style.top = `${e.clientY}px`;
+
+      const rect = gridRef.current.getBoundingClientRect();
+      const inside =
+        e.clientX >= rect.left && e.clientX <= rect.right &&
+        e.clientY >= rect.top  && e.clientY <= rect.bottom;
+
+      insideRef.current = inside;
+      spot.style.opacity = inside ? "1" : "0";
+
+      if (!inside) {
+        // fade all targets to zero; tick loop will ease them out
+        statesRef.current.forEach(s => { s.ti = 0; });
+        return;
+      }
+
+      const proximity = radius * 0.5;
+      const fade = radius * 0.75;
+
+      // Update targets (NOT directly the vars)
+      statesRef.current.forEach((s) => {
+        const r = s.el.getBoundingClientRect();
+        const relX = ((e.clientX - r.left) / r.width) * 100;
+        const relY = ((e.clientY - r.top) / r.height) * 100;
+        s.tx = relX;
+        s.ty = relY;
+
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const halfMax = Math.max(r.width, r.height) / 2;
+        const dist = Math.hypot(e.clientX - cx, e.clientY - cy) - halfMax;
+        const d = Math.max(0, dist);
+
+        let intensity = 0;
+        if (d <= proximity) intensity = 1;
+        else if (d <= fade) intensity = (fade - d) / (fade - proximity);
+        s.ti = intensity;
+      });
+
+      // kick the lerp loop if not running
+      if (!runningRef.current) {
+        runningRef.current = true;
+        tick();
+      }
+    };
+
+    const onLeaveDoc = () => {
+      insideRef.current = false;
+      spot.style.opacity = "0";
+      // glide out
+      statesRef.current.forEach(s => { s.ti = 0; });
+      if (!runningRef.current) {
+        runningRef.current = true;
+        tick();
+      }
+    };
+
+    const LERP = (a: number, b: number, t: number) => a + (b - a) * t;
+    const tick = () => {
+      // easing amounts: lower = slower / smoother
+      const tPos = 0.18;   // position smoothing
+      const tInt = 0.15;   // intensity smoothing
+
+      let anyMoving = false;
+
+      statesRef.current.forEach((s) => {
+        const nx = LERP(s.x, s.tx, tPos);
+        const ny = LERP(s.y, s.ty, tPos);
+        const ni = LERP(s.i, s.ti, tInt);
+
+        // tiny threshold to stop micro-updates
+        if (Math.abs(nx - s.x) > 0.02 || Math.abs(ny - s.y) > 0.02 || Math.abs(ni - s.i) > 0.01) {
+          anyMoving = true;
+        }
+
+        s.x = nx; s.y = ny; s.i = ni;
+
+        // write CSS vars (smoothed)
+        s.el.style.setProperty("--glow-x", `${s.x}%`);
+        s.el.style.setProperty("--glow-y", `${s.y}%`);
+        s.el.style.setProperty("--glow-intensity", `${s.i}`);
+        s.el.style.setProperty("--glow-radius", `${radius}px`);
+        s.el.style.setProperty("--glow-rgb", glowRGB);
+      });
+
+      if (anyMoving || insideRef.current) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        runningRef.current = false;
+        rafRef.current = null;
+      }
+    };
+
+    // listeners
+    document.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseleave", onLeaveDoc);
+
+    return () => {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseleave", onLeaveDoc);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      spotRef.current?.remove();
+    };
+  }, [gridRef, radius, glowRGB, disabled]);
+
+  return null;
+}
+/** -------------------------------------------------------------------------- */
 
 export default function ProductGrid({
   title = "Our Products",
@@ -24,35 +199,32 @@ export default function ProductGrid({
   withFilters = false,
   defaultCategory = "All",
 }: Props) {
-  // De-dupe (optional hardening)
   const data = useMemo(() => {
     const byId = new Map<string, Product>();
     for (const p of products) if (!byId.has(p.id)) byId.set(p.id, p);
     return Array.from(byId.values());
   }, [products]);
 
-  // Build category list with correct typing
   const categories = useMemo<CatOrAll[]>(() => {
     const set = new Set<ProductCategory>();
-    data.forEach(p => p.categories.forEach(c => set.add(c)));
+    data.forEach((p) => p.categories.forEach((c) => set.add(c)));
     return ["All", ...Array.from(set)];
   }, [data]);
 
-  // Active filter is a ProductCategory or "All"
   const [active, setActive] = useState<CatOrAll>(defaultCategory);
 
-  // Stable original order
   const orderMap = useMemo(() => {
     const m = new Map<string, number>();
     data.forEach((p, i) => m.set(p.id, i));
     return m;
   }, [data]);
 
-  // Filter with proper narrowing (no casts needed)
   const visible = useMemo(() => {
-    const list = active === "All" ? data : data.filter(p => p.categories.includes(active));
+    const list = active === "All" ? data : data.filter((p) => p.categories.includes(active));
     return [...list].sort((a, b) => (orderMap.get(a.id)! - orderMap.get(b.id)!));
   }, [active, data, orderMap]);
+
+  const gridRef = useRef<HTMLDivElement>(null);
 
   return (
     <section className="pg">
@@ -82,15 +254,16 @@ export default function ProductGrid({
           </div>
         )}
 
-        <motion.div className="pg__grid" layout>
-          {/* remove AnimatePresence here */}
+        {/* global cursor glow + per-card var updates */}
+        <CursorSpotlight gridRef={gridRef} radius={300} glowRGB="40,153,213" />
+
+        <motion.div className="pg__grid" layout ref={gridRef}>
           {visible.map((p) => (
             <motion.div
               key={p.slug}
               layout
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              // remove exit prop
               transition={{ duration: 0.48, ease: [0.4, 0, 0, 1] }}
             >
               <ProductCard product={p} />
@@ -101,6 +274,7 @@ export default function ProductGrid({
     </section>
   );
 }
+
 
 
 
