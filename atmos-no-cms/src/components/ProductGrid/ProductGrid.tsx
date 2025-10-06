@@ -16,7 +16,11 @@ type Props = {
 
 type CatOrAll = ProductCategory | "All";
 
-/** ---- CursorSpotlight (global glow + per-card border glow) ----------------- */
+/** ============== 
+ * 
+ * CursorSpotlight / Card Glow
+ * 
+ * ==============  */
 function CursorSpotlight({
   gridRef,
   radius = 300,
@@ -25,19 +29,16 @@ function CursorSpotlight({
 }: {
   gridRef: React.RefObject<HTMLDivElement | null>;
   radius?: number;
-  glowRGB?: string; // "r,g,b"
+  glowRGB?: string; 
   disabled?: boolean;
 }) {
   const spotRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const runningRef = useRef(false);
 
-  // Per-card state
   type CardState = {
     el: HTMLElement;
-    // current (animated)
     x: number; y: number; i: number;
-    // targets (from pointer)
     tx: number; ty: number; ti: number;
   };
   const statesRef = useRef<CardState[]>([]);
@@ -46,7 +47,6 @@ function CursorSpotlight({
   useEffect(() => {
     if (disabled) return;
 
-    // Create faint global cursor glow
     const spot = document.createElement("div");
     spot.className = "pg-spotlight";
     spot.style.cssText = `
@@ -66,7 +66,7 @@ function CursorSpotlight({
     const ensureStates = () => {
       if (!gridRef.current) return;
       const els = Array.from(gridRef.current.querySelectorAll<HTMLElement>(".pc"));
-      // Rebuild if counts differ
+
       if (statesRef.current.length !== els.length) {
         statesRef.current = els.map((el) => ({
           el,
@@ -81,7 +81,6 @@ function CursorSpotlight({
 
       ensureStates();
 
-      // keep the global glow under the cursor
       spot.style.left = `${e.clientX}px`;
       spot.style.top = `${e.clientY}px`;
 
@@ -94,7 +93,6 @@ function CursorSpotlight({
       spot.style.opacity = inside ? "1" : "0";
 
       if (!inside) {
-        // fade all targets to zero; tick loop will ease them out
         statesRef.current.forEach(s => { s.ti = 0; });
         return;
       }
@@ -102,7 +100,6 @@ function CursorSpotlight({
       const proximity = radius * 0.5;
       const fade = radius * 0.75;
 
-      // Update targets (NOT directly the vars)
       statesRef.current.forEach((s) => {
         const r = s.el.getBoundingClientRect();
         const relX = ((e.clientX - r.left) / r.width) * 100;
@@ -122,7 +119,6 @@ function CursorSpotlight({
         s.ti = intensity;
       });
 
-      // kick the lerp loop if not running
       if (!runningRef.current) {
         runningRef.current = true;
         tick();
@@ -132,7 +128,6 @@ function CursorSpotlight({
     const onLeaveDoc = () => {
       insideRef.current = false;
       spot.style.opacity = "0";
-      // glide out
       statesRef.current.forEach(s => { s.ti = 0; });
       if (!runningRef.current) {
         runningRef.current = true;
@@ -142,9 +137,8 @@ function CursorSpotlight({
 
     const LERP = (a: number, b: number, t: number) => a + (b - a) * t;
     const tick = () => {
-      // easing amounts: lower = slower / smoother
-      const tPos = 0.18;   // position smoothing
-      const tInt = 0.15;   // intensity smoothing
+      const tPos = 0.18;   
+      const tInt = 0.15;  
 
       let anyMoving = false;
 
@@ -153,14 +147,12 @@ function CursorSpotlight({
         const ny = LERP(s.y, s.ty, tPos);
         const ni = LERP(s.i, s.ti, tInt);
 
-        // tiny threshold to stop micro-updates
         if (Math.abs(nx - s.x) > 0.02 || Math.abs(ny - s.y) > 0.02 || Math.abs(ni - s.i) > 0.01) {
           anyMoving = true;
         }
 
         s.x = nx; s.y = ny; s.i = ni;
 
-        // write CSS vars (smoothed)
         s.el.style.setProperty("--glow-x", `${s.x}%`);
         s.el.style.setProperty("--glow-y", `${s.y}%`);
         s.el.style.setProperty("--glow-intensity", `${s.i}`);
@@ -176,7 +168,6 @@ function CursorSpotlight({
       }
     };
 
-    // listeners
     document.addEventListener("mousemove", onMove, { passive: true });
     document.addEventListener("mouseleave", onLeaveDoc);
 
@@ -190,7 +181,13 @@ function CursorSpotlight({
 
   return null;
 }
-/** -------------------------------------------------------------------------- */
+/** ================================================================= */
+
+/** ============== 
+ * 
+ * Product Grid
+ * 
+ * ==============  */
 
 export default function ProductGrid({
   title = "Our Products",
@@ -253,8 +250,7 @@ export default function ProductGrid({
             ))}
           </div>
         )}
-
-        {/* global cursor glow + per-card var updates */}
+        
         <CursorSpotlight gridRef={gridRef} radius={300} glowRGB="40,153,213" />
 
         <motion.div className="pg__grid" layout ref={gridRef}>
