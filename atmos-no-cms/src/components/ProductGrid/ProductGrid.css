@@ -47,7 +47,14 @@
   cursor: pointer;
   font-weight: 600;
 }
-.pill.is-active{ background: rgba(68,174,234,.22); color:#fff; border-color: rgba(68,174,234,.5); }
+
+.pill:hover {
+  background: rgba(68,174,234,.22);
+  color:#fff;
+  border-color: rgba(68,174,234,.5);
+}
+
+.pill.is-active{ background:#39BAFF; color:#fff; border-color: #39BAFF; }
 
 .pg__grid{
   display:grid;
