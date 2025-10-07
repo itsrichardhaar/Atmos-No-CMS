@@ -6,8 +6,8 @@ type Props = {
   title?: string;
   subtitle?: string;
   buttonText?: string;
-  to?: string;                 // react-router link
-  imageSrc?: string;           // background image path
+  to?: string;                 
+  imageSrc?: string;           
 };
 
 export default function BuildDisplayCta({

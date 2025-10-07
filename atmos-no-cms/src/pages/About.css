@@ -1,0 +1,124 @@
+/* // src/pages/About.css */
+
+.aboutTeam {
+  margin: 54px 0 10px;
+}
+.aboutTeam__title {
+  margin: 0 0 20px;
+  font-size: clamp(36px, 4vw, 80px);
+  line-height: 1.15;
+  font-weight: 400;
+  color: var(--market-accent, #2899D5);
+}
+.aboutTeam__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+@media (max-width: 900px){
+  .aboutTeam__grid { grid-template-columns: 1fr; }
+}
+.aboutTeam__card {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 22px;
+  align-items: start;
+}
+@media (max-width: 720px){
+  .aboutTeam__card { grid-template-columns: 1fr; }
+}
+.aboutTeam__photoWrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 60%, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  box-shadow:
+    inset 0 0 0 2px color-mix(in srgb, var(--market-accent, #2899D5) 65%, transparent),
+    0 20px 60px rgba(0,0,0,.35);
+}
+.aboutTeam__photoWrap img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.aboutTeam__name {
+  margin: 0 0 6px;
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.3;
+}
+.aboutTeam__title {
+  margin: 0 0 10px;
+  color: #c5d0da;
+  font-size: 15px;
+}
+.aboutTeam__bio {
+  margin: 0 0 12px;
+  color: #c5d0da;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.aboutTeam__links {
+  display: flex; gap: 14px;
+}
+.aboutTeam__links a {
+  color: #c5d0da; text-decoration: none; border-bottom: 1px dotted #4b5a66;
+}
+.aboutTeam__links a:hover { color: #fff; border-bottom-color: #fff; }
+
+/* CTA row */
+.aboutCTA {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 16px 24px;
+  margin: 64px 0 20px;
+  padding: 22px 0;
+  border-top: 1px solid rgba(255,255,255,.08);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.aboutCTA__h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 600;
+}
+.aboutCTA__p { margin: 0; color: #c5d0da; }
+.aboutCTA__actions { justify-self: end; }
+@media (max-width: 800px){
+  .aboutCTA { grid-template-columns: 1fr; }
+  .aboutCTA__actions { justify-self: start; }
+}
+
+/* FAQs */
+.aboutFaqs { margin: 54px 0 100px; }
+.aboutFaqs__title {
+  margin: 0 0 18px;
+  font-size: clamp(28px, 3.6vw, 40px);
+  color: #fff;
+  font-weight: 600;
+}
+.aboutFaqs__list { display: grid; gap: 12px; }
+.aboutFaqs__item {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.aboutFaqs__q {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 18px;
+  color: #fff;
+  font-weight: 600;
+}
+.aboutFaqs__a {
+  margin: 0;
+  padding: 0 18px 18px;
+  color: #c5d0da;
+  line-height: 1.6;
+  font-size: 16px;
+}
