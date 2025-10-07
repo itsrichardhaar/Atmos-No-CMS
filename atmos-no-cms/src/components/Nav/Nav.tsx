@@ -66,9 +66,6 @@ export default function Nav() {
         </div>
         <nav className="menu__panel" aria-label="Primary">
           <div className="menu__links">
-            <Link to="/" className="mobile__logo" aria-label="Go to home">
-                <img src={logo} alt="ATMOS LED" className="nav__logo-img" />
-            </Link>
             <NavLink to="/about" className={linkClass}>About</NavLink>
             <NavLink to="/products" className={linkClass}>Products</NavLink>
             <NavLink to="/markets" className={linkClass}>Markets</NavLink>

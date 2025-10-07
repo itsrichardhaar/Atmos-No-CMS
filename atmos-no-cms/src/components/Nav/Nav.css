@@ -45,7 +45,8 @@ html[data-hero-reveal="active"] .nav-spacer {
 .nav__logo { 
     font-weight: 700; 
     letter-spacing: .02em;
-    margin-top: 10px
+    margin-top: 10px;
+    z-index: 2002;
 }
 
 .mobile__logo { 
@@ -134,6 +135,8 @@ html[data-hero-reveal="active"] .nav-spacer {
   flex-direction: column;
   gap: .25rem;                       
   width: min(680px, 92vw);
+  padding-top: 100px;
+  padding-left: 90px;
 }
 
 .menu__link{
@@ -164,6 +167,7 @@ html[data-hero-reveal="active"] .nav-spacer {
   font-size: .95rem;
   display: grid;
   gap: .45rem;
+  padding-left: 90px;
 }
 
 /* phone/email rows */
