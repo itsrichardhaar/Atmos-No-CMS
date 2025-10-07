@@ -39,7 +39,7 @@ export default function MarketCard({ market }: { market: Market }) {
         <motion.div 
           initial={{ opacity: 0, x: -10 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.05 }}
+          transition={{ duration: 0.5, delay: 0.08 }}
           viewport={{ once: true }}
         
         >

@@ -72,7 +72,15 @@ h6 { font-size: clamp(var(--h6-min), 2.8vw, var(--h6-max)); line-height: 1.4; }
 * { 
   box-sizing:border-box 
 }
-html,body{ margin:0; padding:0 }
+html,body { 
+  margin: 0; 
+  padding: 0;
+  overflow-x: hidden;
+  @supports (overflow-x: clip) {
+  html, body { overflow-x: clip; } /* modern, avoids creating a scroll container */
+}
+
+}
 body{
   font-family: "Funnel Sans", sans-serif;
   background: var(--bg);
