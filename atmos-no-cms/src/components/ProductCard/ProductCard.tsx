@@ -8,7 +8,17 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <article className="pc pc--glow">
       <Link to={`/products/${product.slug}`} className="pc__imageWrap" aria-label={`${product.name} details`}>
-        <img className="pc__image" src={product.image} alt={product.name} loading="lazy" />
+        <motion.div
+          className="pc__imageAnim"
+          style={{ transformOrigin: "50% 50%" }}
+          initial={{ opacity: 0, scale: 0 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0.4 }}
+        >
+          <img className="pc__image" src={product.image} alt={product.name} loading="lazy" />
+          <div className="pc__fx" />
+        </motion.div>
         <div className="pc__fx" />
       </Link>
 
@@ -20,7 +30,7 @@ export default function ProductCard({ product }: { product: Product }) {
           viewport={{ once: true }}
           className="pc__title">
           <Link to={`/products/${product.slug}`}>{product.name}</Link>
-          {product.series && 
+            {product.series && 
           <motion.span 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -28,17 +38,17 @@ export default function ProductCard({ product }: { product: Product }) {
             viewport={{ once: true }}
             className="pc__series">
               {product.series}
-            </motion.span>}
+          </motion.span>}
         </motion.h3>
-        {product.tagline && 
-        <motion.p 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          viewport={{ once: true }}
-          className="pc__tagline">
-            {product.tagline}
-        </motion.p>}
+          {product.tagline && 
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            viewport={{ once: true }}
+            className="pc__tagline">
+              {product.tagline}
+          </motion.p>}
         {product.specs && 
         <motion.p 
           initial={{ opacity: 0 }}
