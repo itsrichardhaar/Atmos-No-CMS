@@ -27,7 +27,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  padding: 5px;                 /* border thickness of the glow */
+  padding: 2px;                 /* border thickness of the glow */
   border-radius: inherit;
   pointer-events: none;
   z-index: 1;
