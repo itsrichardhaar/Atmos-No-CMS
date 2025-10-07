@@ -36,6 +36,13 @@ export default function MarketCard({ market }: { market: Market }) {
       </header>
 
       <div className="mc__ctaRow">
+        <motion.div 
+          initial={{ opacity: 0, x: -10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          viewport={{ once: true }}
+        
+        >
         <Link to={`/markets/${market.slug}`} className="btn btn--secondary">
           <span className="btn__label">Learn More</span>
           <span className="btn__arrows" aria-hidden="true">
@@ -43,6 +50,7 @@ export default function MarketCard({ market }: { market: Market }) {
             <span className="btn__arrow btn__arrow--on"></span>
           </span>
         </Link>
+        </motion.div>
       </div>
     </article>
   );

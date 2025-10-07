@@ -59,7 +59,13 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.specs}
         </motion.p>}
       </header>
-
+      
+      <motion.div 
+          initial={{ opacity: 0, x: -10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          viewport={{ once: true }}
+          >
       <Link to={`/products/${product.slug}`} className="btn btn--primary">
         <span className="btn__label">Starting at ${product.startingFrom}</span>
         <span className="btn__arrows" aria-hidden="true">
@@ -67,6 +73,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="btn__arrow btn__arrow--on"></span>
         </span>
       </Link>
+      </motion.div>
     </article>
   );
 }
