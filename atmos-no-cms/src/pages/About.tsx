@@ -18,9 +18,9 @@ const heroImage =
 
 const intro = {
   image: "/assets/about/about-intro.jpg", 
-  headline: "Driven by experts\nwho power your vision.",
+  headline: "Our Team",
   body:
-    "Atmos LED combines high-performance engineering with U.S.-based support and a trusted partner network. We design, deploy, and stand behind immersive LED environments that deliver business impact.",
+    "Driven by experts who power your vision.",
 };
 
 const team: TeamMember[] = [
@@ -67,8 +67,8 @@ const faqs: { q: string; a: string }[] = [
 
 export default function About() {
   return (
-    <section className="market market--heroBleed">
-      <div className="market__hero">
+    <section className="about about--heroBleed">
+      <div className="about__hero">
         <img
           src={heroImage}
           alt="About Atmos LED"
@@ -76,34 +76,23 @@ export default function About() {
           decoding="async"
           fetchPriority="high"
         />
-        <div className="market__heroInner">
-          <div className="market__heroContent">
-            <h1 className="market__title">About Us</h1>
+        <div className="about__heroInner">
+          <div className="about__heroContent">
+            <h1 className="about__title">About Us</h1>
           </div>
         </div>
       </div>
 
       {/* CONTENT */}
-      <div className="container market__wrap">
-        <section className="marketIntro">
-          <figure className="marketIntro__media">
-            <img src={intro.image} alt="" loading="lazy" decoding="async" />
-          </figure>
-          <div className="marketIntro__copy">
-            <h2 className="marketIntro__headline">
-              {intro.headline.split("\n").map((line, i) => (
-                <span key={i}>
-                  {line}
-                  <br />
-                </span>
-              ))}
-            </h2>
-            <p className="marketIntro__body">{intro.body}</p>
+      <div className="container about__wrap">
+        <section className="aboutIntro aboutIntro--single">
+          <div className="aboutIntro__copy">
+            <h2 className="aboutIntro__headline">{intro.headline}</h2>
+            <p className="aboutIntro__body">{intro.body}</p>
           </div>
         </section>
 
         <section className="aboutTeam">
-          <h2 className="aboutTeam__title">Our team</h2>
           <ul className="aboutTeam__grid" role="list">
             {team.map((m, i) => (
               <li key={i} className="aboutTeam__card">
