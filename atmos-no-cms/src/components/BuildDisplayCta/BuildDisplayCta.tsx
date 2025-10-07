@@ -41,7 +41,6 @@ export default function BuildDisplayCta({
             className={styles.subtitle}>
               {subtitle}
           </motion.p>
-
           <Link to={to} className={styles.button} aria-label={buttonText}>
             {buttonText}
           </Link>

@@ -1,6 +1,26 @@
 import styles from "../ApproachCta/Approach.module.css";
 import { motion } from "framer-motion";
 
+const logoGroup = {
+  hidden: { opacity: 1 }, 
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12, 
+    
+    },
+  },
+};
+
+const logoItem = {
+  hidden: { opacity: 0, y: -10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7 }, 
+  },
+};
+
 export default function Approach() {
   return (
     <section className={styles.section} aria-labelledby="approach-heading">
@@ -61,14 +81,21 @@ export default function Approach() {
               Used by the world’s leading companies
             </small>
           </div>
-          <ul className={styles.logoRow} aria-label="Partner logos">
+          <motion.ul 
+            className={styles.logoRow} 
+            aria-label="Partner logos"
+            variants={logoGroup}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             {/* Swap src paths with your actual SVG/PNG assets */}
-            <li><img src="/assets/logos/webflow.svg"  alt="Webflow"  /></li>
-            <li><img src="/assets/logos/relume.svg"   alt="Relume"   /></li>
-            <li><img src="/assets/logos/webflow.svg"  alt="Webflow"  /></li>
-            <li><img src="/assets/logos/relume.svg"   alt="Relume"   /></li>
-            <li><img src="/assets/logos/webflow.svg"  alt="Webflow"  /></li>
-          </ul>
+            <motion.li variants={logoItem}><img src="/assets/logos/webflow.svg"  alt="Webflow"  /></motion.li>
+            <motion.li variants={logoItem}><img src="/assets/logos/relume.svg"   alt="Relume"   /></motion.li>
+            <motion.li variants={logoItem}><img src="/assets/logos/webflow.svg"  alt="Webflow"  /></motion.li>
+            <motion.li variants={logoItem}><img src="/assets/logos/relume.svg"   alt="Relume"   /></motion.li>
+            <motion.li variants={logoItem}><img src="/assets/logos/webflow.svg"  alt="Webflow"  /></motion.li>
+          </motion.ul>
         </div>
       </div>
     </section>
