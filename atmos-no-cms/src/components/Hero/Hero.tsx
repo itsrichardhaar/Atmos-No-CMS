@@ -118,16 +118,16 @@ export default function Hero() {
           <div className="container">
             <div className="hero__copy hero__copy--center">
               <motion.h1
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.5 }}
                 className="hero__title"
               >
                 Your Vision. In Full View.
               </motion.h1>
 
               <motion.p
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.05 }}
                 className="hero__subtitle"
@@ -138,11 +138,15 @@ export default function Hero() {
                 and long-term performance for any environment.
               </motion.p>
 
-              <div className="hero__actions hero__actions--center">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.4}}
+                className="hero__actions hero__actions--center">
                 <Link to="/products" className="btn btn--hero">
                   Shop Our Products
                 </Link>
-              </div>
+              </motion.div>
             </div>
           </div>
 

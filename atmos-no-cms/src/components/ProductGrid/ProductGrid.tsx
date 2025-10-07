@@ -227,7 +227,13 @@ export default function ProductGrid({
     <section className="pg">
       <div className="container">
         <div className="pg__header">
-          <h2 className="pg__title">{title}</h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="pg__title">{title}
+          </motion.h2>
           {showViewAll && (
             <Link to="/products" className="btn btn--primary pg__viewall">
               View All Products →
@@ -250,7 +256,7 @@ export default function ProductGrid({
             ))}
           </div>
         )}
-        
+
         <CursorSpotlight gridRef={gridRef} radius={300} glowRGB="40,153,213" />
 
         <motion.div className="pg__grid" layout ref={gridRef}>

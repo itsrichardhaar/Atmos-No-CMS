@@ -1,6 +1,7 @@
 // src/components/ProductCard/ProductCard.tsx
 import { Link } from "react-router-dom";
 import type { Product } from "../../types/product";
+import { motion } from "framer-motion";
 import "./ProductCard.css";
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -12,12 +13,41 @@ export default function ProductCard({ product }: { product: Product }) {
       </Link>
 
       <header className="pc__header">
-        <h3 className="pc__title">
+        <motion.h3 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          viewport={{ once: true }}
+          className="pc__title">
           <Link to={`/products/${product.slug}`}>{product.name}</Link>
-          {product.series && <span className="pc__series">{product.series}</span>}
-        </h3>
-        {product.tagline && <p className="pc__tagline">{product.tagline}</p>}
-        {product.specs && <p className="pc__specs">{product.specs}</p>}
+          {product.series && 
+          <motion.span 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="pc__series">
+              {product.series}
+            </motion.span>}
+        </motion.h3>
+        {product.tagline && 
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          viewport={{ once: true }}
+          className="pc__tagline">
+            {product.tagline}
+        </motion.p>}
+        {product.specs && 
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="pc__specs">
+          {product.specs}
+        </motion.p>}
       </header>
 
       <Link to={`/products/${product.slug}`} className="btn btn--primary">
