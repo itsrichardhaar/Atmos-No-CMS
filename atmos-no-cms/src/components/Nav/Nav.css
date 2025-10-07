@@ -26,6 +26,7 @@ html[data-hero-reveal="active"] .nav-spacer {
 .nav__bar{
   display:flex; align-items:center; justify-content:space-between;
   height: 100%;
+  padding: 20px 1rem !important;
 }
 
 
@@ -46,7 +47,6 @@ html[data-hero-reveal="active"] .nav-spacer {
     font-weight: 700; 
     letter-spacing: .02em;
     margin-top: 10px;
-    z-index: 2002;
 }
 
 .mobile__logo { 
@@ -135,7 +135,6 @@ html[data-hero-reveal="active"] .nav-spacer {
   flex-direction: column;
   gap: .25rem;                       
   width: min(680px, 92vw);
-  padding-top: 100px;
 }
 
 .menu__link{
@@ -333,6 +332,7 @@ html[data-hero-reveal="active"] .nav-spacer {
 }
 
 /* Container of decorative layers */
+
 .menu__prelayers{
   position: absolute;
   top: 0; right: 0; bottom: 0;
@@ -342,7 +342,7 @@ html[data-hero-reveal="active"] .nav-spacer {
   overflow: visible;
 }
 
-
+ /*
 .menu__prelayer{
   position: absolute;
   top: 0; right: 0; height: 100%;
@@ -353,7 +353,7 @@ html[data-hero-reveal="active"] .nav-spacer {
   background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
   backdrop-filter: saturate(120%) blur(0px); 
 }
-
+*/
 
 .menu__prelayer[data-i="1"]{ width: 100%;               transition-duration: .52s; transition-delay: 0ms; }
 .menu__prelayer[data-i="2"]{ width: 86%;  opacity:.9;   transition-duration: .48s; transition-delay: 70ms; right: 0; }
