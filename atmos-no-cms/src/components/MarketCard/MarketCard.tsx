@@ -1,6 +1,7 @@
 // src/components/MarketCard/MarketCard.tsx
 import { Link } from "react-router-dom";
 import type { Market } from "../../types/market";
+import { motion } from "framer-motion";
 import "./MarketCard.css";
 
 export default function MarketCard({ market }: { market: Market }) {
@@ -16,10 +17,22 @@ export default function MarketCard({ market }: { market: Market }) {
       </Link>
 
       <header className="mc__header">
-        <h3 className="mc__title">
+        <motion.h3 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          viewport={{ once: true }}
+          className="mc__title">
           <Link to={`/markets/${market.slug}`}>{market.name}</Link>
-        </h3>
-        <p className="mc__blurb">{market.blurb}</p>
+        </motion.h3>
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="mc__blurb">
+            {market.blurb}
+        </motion.p>
       </header>
 
       <div className="mc__ctaRow">
