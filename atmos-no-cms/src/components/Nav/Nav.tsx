@@ -73,8 +73,8 @@ export default function Nav() {
             <NavLink to="/products" className={linkClass}>Products</NavLink>
             <NavLink to="/markets" className={linkClass}>Markets</NavLink>
             <NavLink to="/contact" className={linkClass}>Contact</NavLink>
-            <NavLink to="https://mapoutcreative.com/atmosled/" className={linkClass}>Calculator</NavLink>
-            <NavLink to="https://dfuc15-ke.myshopify.com" className={linkClass}>Shop</NavLink>
+            <NavLink to="https://mapoutcreative.com/atmosled/" className={linkClass} target="_blank">Calculator</NavLink>
+            <NavLink to="https://dfuc15-ke.myshopify.com" className={linkClass} target="_blank">Shop</NavLink>
         </div>
 
         <div className="menu__meta">
