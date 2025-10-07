@@ -135,6 +135,7 @@ html[data-hero-reveal="active"] .nav-spacer {
   flex-direction: column;
   gap: .25rem;                       
   width: min(680px, 92vw);
+  padding-top: 100px;
 }
 
 .menu__link{
