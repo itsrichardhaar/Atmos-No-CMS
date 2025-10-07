@@ -15,9 +15,9 @@ export default function ProductCard({ product }: { product: Product }) {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{
             opacity: { duration: 0.6, ease: "easeOut" },
-            scale:   { duration: 1.4, ease: [0.22, 1, 0.36, 1] }
+            scale:   { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
           }}
-          viewport={{ once: true, amount: 0.4 }}
+          viewport={{ once: true, amount: 0.8}}
         >
           <img className="pc__image" src={product.image} alt={product.name} loading="lazy" />
           <div className="pc__fx" />
