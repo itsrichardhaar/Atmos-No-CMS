@@ -1,4 +1,5 @@
 import styles from "../ApproachCta/Approach.module.css";
+import { motion } from "framer-motion";
 
 export default function Approach() {
   return (
@@ -19,7 +20,12 @@ export default function Approach() {
 
           {/* Right copy */}
           <div className={styles.copy}>
-            <h2 id="approach-heading" className={styles.h2}>Our Approach</h2>
+            <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            id="approach-heading" className={styles.h2}>Our Approach</motion.h2>
             <p className={styles.p}>
               At Atmos LED, we bring clarity to a fast-moving industry by reshaping what it
               means to deliver professional-grade visual technology. Rather than simply

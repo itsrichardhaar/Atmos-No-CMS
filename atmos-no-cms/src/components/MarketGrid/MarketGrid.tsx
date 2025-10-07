@@ -15,7 +15,14 @@ export default function MarketGrid({ title = "Markets", subtitle, markets }: Pro
     <section className="mg">
       <div className="container">
         <div className={`mg__header ${subtitle ? "mg__header--withSub" : ""}`}>
-          <h2 className="mg__title">{title}</h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.05}}
+            viewport={{ once: true }}
+            className="mg__title">
+              {title}
+          </motion.h2>
           {subtitle && <p className="mg__subtitle">{subtitle}</p>}
         </div>
 

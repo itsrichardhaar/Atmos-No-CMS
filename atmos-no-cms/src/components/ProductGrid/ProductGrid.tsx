@@ -6,6 +6,26 @@ import type { Product, ProductCategory } from "../../types/product";
 import { Link } from "react-router-dom";
 import "./ProductGrid.css";
 
+const filterGroup = {
+  hidden: { opacity: 1 }, // keep container visible; we're animating children
+  visible: {
+    opacity: 1,
+    transition: {
+      // how much each child waits after the previous one
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const filterItem = {
+  hidden: { opacity: 0, y: -10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7 }, // your requested 0.5s
+  },
+};
+
 type Props = {
   title?: string;
   products: Product[];
@@ -242,19 +262,28 @@ export default function ProductGrid({
         </div>
 
         {withFilters && (
-          <div className="pg__filters" role="tablist" aria-label="Filter by category">
+          <motion.div
+            className="pg__filters"
+            role="tablist"
+            aria-label="Filter by category"
+            variants={filterGroup}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             {categories.map((cat) => (
-              <button
+              <motion.button
                 key={cat}
                 type="button"
                 className={`pill ${active === cat ? "is-active" : ""}`}
                 aria-pressed={active === cat}
                 onClick={() => setActive(cat)}
+                variants={filterItem}
               >
                 {cat}
-              </button>
+              </motion.button>
             ))}
-          </div>
+          </motion.div>
         )}
 
         <CursorSpotlight gridRef={gridRef} radius={300} glowRGB="40,153,213" />
