@@ -13,7 +13,7 @@ export default function ProductCard({ product }: { product: Product }) {
           style={{ transformOrigin: "50% 50%" }}
           initial={{ opacity: 0, scale: 0 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true, amount: 0.4 }}
         >
           <img className="pc__image" src={product.image} alt={product.name} loading="lazy" />
