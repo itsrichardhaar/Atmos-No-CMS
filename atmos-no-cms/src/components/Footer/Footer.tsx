@@ -80,7 +80,7 @@ export default function Footer() {
               <li><Link to="/markets">Markets</Link></li>
               <li><Link to="/contact">Contact</Link></li>
               <li><a href="https://mapoutcreative.com/atmosled/">Calculator</a></li>
-              <li><a href="/shop">Shop</a></li>
+              <li><a href="https://dfuc15-ke.myshopify.com">Shop</a></li>
             </ul>
           </nav>
         </div>
