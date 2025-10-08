@@ -20,7 +20,7 @@
       rgba(40,153,213,0.35),
       rgba(40,153,213,0) 68%
     );
-  filter: blur(0.5px); 
+  /*filter: blur(0.5px); */
 }
 .pg__header { 
     display: flex; 
@@ -62,15 +62,23 @@
   border-color: #00456A;
 }
 
-.pill.is-active{ background:#39BAFF; color:#fff; border-color: #39BAFF; }
+.pill.is-active { 
+  background:#39BAFF; 
+  color:#fff; 
+  border-color: #39BAFF; 
+}
 
-.pg__grid{
-  display:grid;
-  gap:20px;
+.pg__grid {
+  display: grid;
+  gap: 20px;
   grid-template-columns: repeat(3, minmax(0,1fr));
 }
-@media (max-width:1100px){ .pg__grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width:640px) { 
+@media (max-width: 1100px) { 
+  .pg__grid { 
+    grid-template-columns: repeat(2, minmax(0,1fr)); 
+  } 
+}
+@media (max-width: 640px) { 
   .pg__grid { 
     grid-template-columns: 1fr; 
   } 
@@ -84,7 +92,9 @@
 }
 
 .pg__cell{
-  transition: opacity .18s ease, transform .18s ease;
+  transition: 
+  opacity .18s ease, 
+  transform .18s ease;
 }
 .pg__cell.is-hidden{
   opacity: 0;
