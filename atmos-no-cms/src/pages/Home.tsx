@@ -15,7 +15,7 @@ export default function Home() {
       <ProductGrid
         title="Our Products"
         products={products.slice(0, 8)}
-        withFilters  // show first 6; tweak as you like
+        withFilters  
         showViewAll
       />
        <Approach />

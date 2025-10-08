@@ -21,12 +21,11 @@ const logoItem = {
   },
 };
 
-// === Title split animation (per character) ===
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
 const titleGroup: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.03 } }, // delay between chars
+  visible: { transition: { staggerChildren: 0.03 } }, 
 };
 
 const titleChar: Variants = {

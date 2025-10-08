@@ -3,7 +3,7 @@
   padding: 28px 0 56px; 
   color:#fff; 
   position: relative; 
-  z-index: 2;       /* above the glow */
+  z-index: 2;       
   overflow: visible;
 }
 
@@ -32,7 +32,7 @@
   color: #fff;
   font-size: clamp(15px, 1.2vw, 18px);
   line-height: 1.55;
-  max-width: 70ch;               /* readable width */
+  max-width: 70ch;              
 }
 
 

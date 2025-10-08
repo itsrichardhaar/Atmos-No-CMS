@@ -1,7 +1,7 @@
 /* 200vh section so the first 100vh is used for the reveal */
 .hero.hero--reveal{
   position: relative;
-  height: 250vh;                          /* <-- key: consumes first viewport */
+  height: 250vh;                          
   color: #fff;
   background: var(--bg);
   --hero-pad-y: clamp(3rem, 8vw, 6rem);
@@ -20,7 +20,7 @@
   display: flex;
   align-items: center;
   padding: calc(var(--hero-pad-y) + var(--header-h)) 0 var(--hero-pad-y);
-  position: relative;            /* keep content above bg */
+  position: relative;           
   z-index: 1;
 }
 
@@ -113,7 +113,6 @@
   justify-content: center; 
 }
 
-/* Buttons */
 .btn {
   display:inline-flex; align-items:center; justify-content:center;
   gap:.4rem; padding:.65rem 1.1rem; border-radius:var(--radius);

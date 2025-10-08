@@ -1,6 +1,6 @@
 /* src/components/FeatureGrid/FeatureGrid.module.css */
 .section {
-  color: #d7dde4;                 /* inherit-ish for dark pages */
+  color: #d7dde4;                 
 }
 .inner {
   max-width: 1200px;

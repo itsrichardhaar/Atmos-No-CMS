@@ -1,4 +1,5 @@
 // src/components/ProductUses/ProductUses.tsx
+
 import styles from "./ProductUses.module.css";
 import type { ProductUses as ProductUseItem } from "../../types/product";
 

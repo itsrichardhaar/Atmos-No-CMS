@@ -62,14 +62,14 @@
   margin: 42px 0 32px;
 }
 .aboutIntro--single {
-  display: block;            /* no grid */
+  display: block;            
 }
 .aboutIntro--single .aboutIntro__copy {
-  max-width: 820px;          /* tweak as you like */
+  max-width: 820px;          
 }
 .aboutIntro--single .aboutIntro__headline,
 .aboutIntro--single .aboutIntro__body {
-  text-align: left;          /* explicit left align */
+  text-align: left;          
 }
 .aboutIntro__headline{
   margin: 0 0 14px;

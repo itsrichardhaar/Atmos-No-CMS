@@ -2,12 +2,12 @@ import React from "react";
 import "./DotGrid.css";
 
 type DotGridProps = {
-  dotColor?: string;   // dot color (rgba recommended)
-  size?: number;       // dot diameter in px
-  gap?: number;        // spacing in px
-  offsetX?: number;    // pattern offset x (px)
-  offsetY?: number;    // pattern offset y (px)
-  reveal?: boolean;    // use the reveal mask variant
+  dotColor?: string;   
+  size?: number;      
+  gap?: number;        
+  offsetX?: number;    
+  offsetY?: number;   
+  reveal?: boolean;    
   className?: string;
   style?: React.CSSProperties;
 };

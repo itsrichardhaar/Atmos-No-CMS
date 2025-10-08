@@ -21,8 +21,8 @@ export default function Hero() {
       return Number.isFinite(n) ? n : 0;
     };
 
-    // Simple easing so hue 
-    const ease = (t: number) => 1 - Math.pow(1 - t, 3); // cubic-out
+    
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3);
 
     const update = () => {
       const rect = sectionEl.getBoundingClientRect();
@@ -30,11 +30,10 @@ export default function Hero() {
       const headerH = getHeaderH();
       const effVh = Math.max(1, vh - headerH);
 
-      // 0 → 1 across the reveal
+   
       const progRaw = Math.min(1, Math.max(0, (-rect.top) / effVh));
       const prog = ease(progRaw);
 
-      // Outer radius (unchanged)
       const start = 0;
       const end = Math.max(effVh * 1.6, 1200);
       const r = start + (end - start) * prog;
@@ -45,11 +44,10 @@ export default function Hero() {
        
         const hue = (prog * 720) % 360;
 
-        // Start bright, ease down a touch as you scroll
         const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
-        const l = clamp(94 - 2 * prog, 88, 96);   // 86% → ~78%
-        const s = clamp(100 - 2 * prog, 92, 100);  // 96% → ~90%
-        const a = 0.34 - 0.10 * prog;             // 0.34 → 0.24 (optional)
+        const l = clamp(94 - 2 * prog, 88, 96);   
+        const s = clamp(100 - 2 * prog, 92, 100);  
+        const a = 0.34 - 0.10 * prog;            
 
         dotEl.style.setProperty("--dg-hue", `${Math.round(hue)}`);
         dotEl.style.setProperty("--dg-l", `${l}%`);
@@ -61,15 +59,13 @@ export default function Hero() {
         sectionEl.classList.add("reveal-done");
         document.documentElement.setAttribute("data-hero-reveal", "done");
 
-        // Optionally “freeze” final color to a brand hue:
-        // dotEl.style.setProperty("--dg-hue", "330");
       } else {
         sectionEl.classList.remove("reveal-done");
         document.documentElement.setAttribute("data-hero-reveal", "active");
       }
     };
 
-    // Use rAF to avoid jank on fast scroll
+   
     let ticking = false;
     const onScrollOrResize = () => {
       if (ticking) return;
@@ -80,7 +76,7 @@ export default function Hero() {
       });
     };
 
-    // mark as active immediately to keep nav transparent
+    
     document.documentElement.setAttribute("data-hero-reveal", "active");
     update();
     window.addEventListener("scroll", onScrollOrResize, { passive: true });
@@ -95,7 +91,7 @@ export default function Hero() {
   return (
     <section ref={sectionRef} className="hero hero--center hero--reveal">
       <div className="hero__sticky">
-        {/* BG stack */}
+        
         <div className="hero__bg" aria-hidden="true">
           <div className="hero__bg-base" />
           <div
@@ -105,15 +101,15 @@ export default function Hero() {
                 // @ts-ignore
                 "--dg-size": "2px",
                 "--dg-gap": "22px",
-                "--dg-hue": "210",   // any starting hue
-                "--dg-s": "96%",     // ↑ brighter
-                "--dg-l": "86%",     // ↑ brighter
-                "--dg-alpha": "0.34" // ↑ slightly more visible
+                "--dg-hue": "210",  
+                "--dg-s": "96%",     
+                "--dg-l": "86%",     
+                "--dg-alpha": "0.34" 
             } as React.CSSProperties}
           />
         </div>
 
-        {/* Inner holds padding so sticky pins cleanly */}
+       
         <div className="hero__inner">
           <div className="container">
             <div className="hero__copy hero__copy--center">

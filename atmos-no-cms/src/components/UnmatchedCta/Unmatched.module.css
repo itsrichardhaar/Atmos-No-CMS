@@ -1,5 +1,4 @@
 .section {
-  /* dark radial like screenshot */
   color: #d7dde4;
 }
 
@@ -38,7 +37,7 @@
   font-size: clamp(var(--h3-min), 6.2vw, var(--h3-max));
   line-height: 1;
   font-weight: 400;
-  color: #2899D5 !important; /* bright cyan/blue like mock */
+  color: #2899D5 !important; 
 }
 
 .p {
@@ -57,7 +56,6 @@
   color: #fff; 
 }
 
-/* Responsive */
 @media (max-width: 900px) {
   .topRow {
     grid-template-columns: 1fr;

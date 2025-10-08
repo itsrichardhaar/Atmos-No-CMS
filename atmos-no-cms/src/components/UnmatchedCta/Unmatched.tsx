@@ -4,11 +4,8 @@ export default function Unmatched() {
   return (
     <section className={styles.section} aria-labelledby="unmatched-heading">
       <div className={styles.inner}>
-        {/* Top: 2-col */}
         <div className={styles.topRow}>
-          {/* Left image */}
           <figure className={styles.figure}>
-            {/* Replace with your image path */}
             <img
               src="/assets/images/capital-a.svg"
               alt="LED module showcasing mounting hardware and panel design"
@@ -17,7 +14,6 @@ export default function Unmatched() {
             />
           </figure>
 
-          {/* Right copy */}
           <div className={styles.copy}>
             <p className={styles.tagline}>
               Create immersive visuals that captivate audiences.

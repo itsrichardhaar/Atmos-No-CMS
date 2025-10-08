@@ -10,8 +10,6 @@ export default function Contact() {
     e.preventDefault();
     setSubmitting(true);
 
-    // TODO: wire up to your backend or 3rd-party form service
-    // For now we just simulate success:
     setTimeout(() => {
       setSubmitting(false);
       (e.currentTarget as HTMLFormElement).reset();

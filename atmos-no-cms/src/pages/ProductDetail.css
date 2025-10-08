@@ -1,22 +1,22 @@
 .product { 
   padding: 36px 0 72px; 
   color:#fff; 
-  position: relative;        /* anchor for ::before */
+  position: relative;        
   overflow: visible;
 }
 
 .product::before {
   content: "";
   position: absolute;
-  inset: 0;                  /* covers the whole section (shows at the top too) */
+  inset: 0;                  
   pointer-events: none;
-  z-index: 0 !important;               /* behind content & arrow */
+  z-index: 0 !important;              
   background: radial-gradient(
-    760px 760px at 48% 35%,          /* your current numbers—tweak as you like */
+    760px 760px at 48% 35%,          
     color-mix(in srgb, var(--glow-color, #29a8ff) 45%, transparent),
     transparent 78%
   );
-  opacity: .75;              /* dimmer overall */
+  opacity: .75;             
   filter: blur(0.5px);
 }
 

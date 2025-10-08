@@ -1,6 +1,6 @@
 .wrap {
   position: relative;
-  z-index: 0;                  /* stays BEHIND the arrow divider */
+  z-index: 0;                  
   pointer-events: none;
 }
 
@@ -14,5 +14,5 @@
       var(--glow-start, #29a8ff),
       var(--glow-end, rgba(0,0,0,0)) 70%
     );
-  filter: none; /* add blur() if you want softer */
+  filter: none; 
 }

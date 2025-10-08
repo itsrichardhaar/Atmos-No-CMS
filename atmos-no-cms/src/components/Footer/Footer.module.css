@@ -16,7 +16,6 @@
   align-items: start;
 }
 
-/* Left column */
 .leftCol {}
 
 .logo {
@@ -38,21 +37,17 @@
 }
 .contactItem:hover { text-decoration: underline; }
 
-/* Social icons row */
 .socials { list-style: none; padding: 0; margin: 16px 0 0; display: flex; gap: 14px; }
 .socials a { color: #e6eef5; text-decoration: none; opacity: .9; }
 .socials a:hover { opacity: 1; }
 
-/* Right column nav */
 .rightCol { justify-self: end; }
 .menu { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; text-align: right; }
 .menu a { color: #ffffff; text-decoration: none; font-size: 14px; }
 .menu a:hover { text-decoration: underline; }
 
-/* Divider */
 .hr { border: 0; border-top: 1px solid rgba(255,255,255,0.12); margin: 26px 0; }
 
-/* Bottom bar */
 .bottom {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -67,7 +62,6 @@
 .legal a { color: #c8d4df; text-decoration: none; font-size: 13px; }
 .legal a:hover { text-decoration: underline; }
 
-/* Masked icons (SVGs in /public/icons/) */
 .icon, .iconLg {
   display: inline-block;
   background: currentColor;
@@ -83,7 +77,6 @@
 .iLinkedin { -webkit-mask: url("/icons/linkedin.svg") no-repeat center / contain; mask: url("/icons/linkedin.svg") no-repeat center / contain; }
 .iInstagram{ -webkit-mask: url("/icons/instagram.svg") no-repeat center / contain; mask: url("/icons/instagram.svg") no-repeat center / contain; }
 
-/* Responsive */
 @media (max-width: 900px) {
   .top { grid-template-columns: 1fr; gap: 28px; }
   .rightCol { justify-self: start; }

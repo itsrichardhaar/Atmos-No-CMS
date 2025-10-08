@@ -1,15 +1,15 @@
 import styles from "./ArrowDivider.module.css";
 
 type Props = {
-  imageSrc?: string;     // allow override if needed
-  height?: number;       // visual height of the divider
-  shiftY?: number;       // how far it overlaps the sections (px)
+  imageSrc?: string;     
+  height?: number;       
+  shiftY?: number;       
 };
 
 export default function ArrowDivider({
   imageSrc = "/images/arrow.svg",
   height = 160,
-  shiftY = -80,         // negative pulls the arrow up to “split” sections
+  shiftY = -80,         
 }: Props) {
   return (
     <div

@@ -48,21 +48,18 @@
   will-change: transform, opacity;
 }
 
-/* TOP: full width; grow-from-left */
 .hb__bar--top{
   top: 0;
   width: 100%;
   transform-origin: left center;
 }
 
-/* MIDDLE: full width; becomes an X via ::before/::after */
 .hb__bar--mid{
   top: 50%;
   transform: translateY(-50%);
   width: 100%;
 }
 
-/* the two strokes of the X (hidden by default) */
 .hb__bar--mid::before,
 .hb__bar--mid::after{
   content: "";
@@ -80,24 +77,21 @@
     opacity   var(--hb-dur) var(--hb-ease);
 }
 
-/* BOTTOM: 50% width and right-aligned; grow-from-right */
 .hb__bar--bot{
   bottom: 0;
   width: 50%;
-  left: auto;          /* right align */
+  left: auto;         
   right: 0;
   transform-origin: right center;
 }
 
 /* =============== OPEN STATE =============== */
 
-/* Top: slight grow, then slide right & fade */
 .hb.is-open .hb__bar--top{
   transform: scaleX(1.06) translateX(14px);
   opacity: 0;
 }
 
-/* Middle: hide center line and show “X” with overshoot */
 .hb.is-open .hb__bar--mid{
   background: transparent;
 }
@@ -110,7 +104,6 @@
   opacity: 1;
 }
 
-/* Bottom: slight grow, then slide left & fade */
 .hb.is-open .hb__bar--bot{
   transform: scaleX(1.06) translateX(-14px);
   opacity: 0;
@@ -122,7 +115,6 @@
   opacity: 1;
 }
 
-/* =============== REDUCED MOTION =============== */
 @media (prefers-reduced-motion: reduce){
   .hb__bar,
   .hb__bar--mid::before,

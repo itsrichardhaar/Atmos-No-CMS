@@ -1,4 +1,5 @@
 // src/components/MarketGrid/MarketGrid.tsx
+
 import { useMemo } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
@@ -6,12 +7,11 @@ import type { Market } from "../../types/market";
 import MarketCard from "../MarketCard/MarketCard";
 import "./MarketGrid.css";
 
-// === Title split animation (per character) ===
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
 const titleGroup: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.03 } }, // delay between chars
+  visible: { transition: { staggerChildren: 0.03 } }, 
 };
 
 const titleChar: Variants = {
@@ -36,7 +36,7 @@ export default function MarketGrid({ title = "Markets", subtitle, markets }: Pro
     <section className="mg">
       <div className="container">
         <div className={`mg__header ${subtitle ? "mg__header--withSub" : ""}`}>
-          {/* Per-character animated title */}
+      
           <motion.h2
             className="mg__title"
             variants={titleGroup}
