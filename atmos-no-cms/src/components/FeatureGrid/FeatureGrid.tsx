@@ -5,7 +5,7 @@ import type { FeatureItem } from "../../types/product";
 type Props = {
   title?: string;
   items: FeatureItem[];
-  columns?: 2 | 3 | 4;   // default 3
+  columns?: 2 | 3 | 4;   
   id?: string;
   className?: string;
 };

@@ -24,9 +24,12 @@ html[data-hero-reveal="active"] .nav-spacer {
 }
 
 .nav__bar{
-  display:flex; align-items:center; justify-content:space-between;
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between;
   height: 100%;
   padding: 20px 1rem !important;
+  margin-top: -35px !important;
 }
 
 
