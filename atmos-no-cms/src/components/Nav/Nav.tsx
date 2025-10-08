@@ -35,7 +35,6 @@ export default function Nav() {
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     isActive ? "menu__link is-active" : "menu__link"
 
-  // ===== per-character label animation (stays inside each link) =====
   const EASE = [0.22, 1, 0.36, 1] as const
 
   const makeLabelGroup = (charStagger = 0.08, delayChildren = 0.28): Variants => ({
@@ -55,8 +54,8 @@ export default function Nav() {
 
   const AnimatedLabel = ({
     text,
-    delay = 0.35,     // start chars a bit after the link’s CSS slide-in
-    stagger = 0.28,   // spread out the characters so it’s obvious
+    delay = 0.35,     
+    stagger = 0.28,   
   }: {
     text: string
     delay?: number
@@ -68,7 +67,7 @@ export default function Nav() {
         className="menu__linkLabel"
         variants={makeLabelGroup(stagger, delay)}
         initial={false}
-        animate={open ? "visible" : "hidden"}  // only animate when panel is open
+        animate={open ? "visible" : "hidden"}  
         aria-hidden="true"
         style={{ display: "inline-block" }}
       >
