@@ -5,25 +5,40 @@ import ProductCard from "../ProductCard/ProductCard";
 import type { Product, ProductCategory } from "../../types/product";
 import { Link } from "react-router-dom";
 import "./ProductGrid.css";
+import type { Variants } from "framer-motion";
 
+const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
 const filterGroup = {
-  hidden: { opacity: 1 }, // keep container visible; we're animating children
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
-    transition: {
-      // how much each child waits after the previous one
-      staggerChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.1 },
   },
 };
 
 const filterItem = {
-  hidden: { opacity: 0, y: -10 },
+  hidden: { opacity: 0, y: -15 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5 }, // your requested 0.5s
+    transition: { duration: 0.5 },
+  },
+};
+
+const titleGroup: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.03 },
+  },
+};
+
+const titleChar: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: EASE_BEZIER }, // ← use the tuple
   },
 };
 
@@ -37,11 +52,9 @@ type Props = {
 
 type CatOrAll = ProductCategory | "All";
 
-/** ============== 
- * 
+/** ==============
  * CursorSpotlight / Card Glow
- * 
- * ==============  */
+ * ============== */
 function CursorSpotlight({
   gridRef,
   radius = 300,
@@ -50,7 +63,7 @@ function CursorSpotlight({
 }: {
   gridRef: React.RefObject<HTMLDivElement | null>;
   radius?: number;
-  glowRGB?: string; 
+  glowRGB?: string;
   disabled?: boolean;
 }) {
   const spotRef = useRef<HTMLDivElement | null>(null);
@@ -87,12 +100,9 @@ function CursorSpotlight({
     const ensureStates = () => {
       if (!gridRef.current) return;
       const els = Array.from(gridRef.current.querySelectorAll<HTMLElement>(".pc"));
-
       if (statesRef.current.length !== els.length) {
         statesRef.current = els.map((el) => ({
-          el,
-          x: 50, y: 50, i: 0,
-          tx: 50, ty: 50, ti: 0,
+          el, x: 50, y: 50, i: 0, tx: 50, ty: 50, ti: 0,
         }));
       }
     };
@@ -101,7 +111,6 @@ function CursorSpotlight({
       if (!gridRef.current) return;
 
       ensureStates();
-
       spot.style.left = `${e.clientX}px`;
       spot.style.top = `${e.clientY}px`;
 
@@ -125,8 +134,7 @@ function CursorSpotlight({
         const r = s.el.getBoundingClientRect();
         const relX = ((e.clientX - r.left) / r.width) * 100;
         const relY = ((e.clientY - r.top) / r.height) * 100;
-        s.tx = relX;
-        s.ty = relY;
+        s.tx = relX; s.ty = relY;
 
         const cx = r.left + r.width / 2;
         const cy = r.top + r.height / 2;
@@ -158,9 +166,8 @@ function CursorSpotlight({
 
     const LERP = (a: number, b: number, t: number) => a + (b - a) * t;
     const tick = () => {
-      const tPos = 0.18;   
-      const tInt = 0.15;  
-
+      const tPos = 0.18;
+      const tInt = 0.15;
       let anyMoving = false;
 
       statesRef.current.forEach((s) => {
@@ -202,14 +209,10 @@ function CursorSpotlight({
 
   return null;
 }
-/** ================================================================= */
 
-/** ============== 
- * 
+/** ==============
  * Product Grid
- * 
- * ==============  */
-
+ * ============== */
 export default function ProductGrid({
   title = "Our Products",
   products,
@@ -244,17 +247,34 @@ export default function ProductGrid({
 
   const gridRef = useRef<HTMLDivElement>(null);
 
+  // Build a char array from the title (keeps it TS-safe and controllable)
+  const titleChars = useMemo(() => Array.from(title), [title]);
+
   return (
     <section className="pg">
       <div className="container">
         <div className="pg__header">
-          <motion.h2 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="pg__title">{title}
+          {/* Per-character animated title, staggered on enter */}
+          <motion.h2
+            className="pg__title"
+            variants={titleGroup}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            aria-label={title}
+          >
+            {titleChars.map((ch, i) => (
+              <motion.span
+                key={i}
+                variants={titleChar}
+                className="pg__titleChar"
+                style={{ display: "inline-block" }}
+              >
+                {ch === " " ? "\u00A0" : ch}
+              </motion.span>
+            ))}
           </motion.h2>
+
           {showViewAll && (
             <Link to="/products" className="btn btn--primary pg__viewall">
               View All Products →
@@ -306,6 +326,8 @@ export default function ProductGrid({
     </section>
   );
 }
+
+
 
 
 
