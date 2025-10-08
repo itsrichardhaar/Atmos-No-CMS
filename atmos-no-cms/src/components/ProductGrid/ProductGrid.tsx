@@ -6,6 +6,7 @@ import type { Product, ProductCategory } from "../../types/product";
 import { Link } from "react-router-dom";
 import "./ProductGrid.css";
 
+
 const filterGroup = {
   hidden: { opacity: 1 }, // keep container visible; we're animating children
   visible: {

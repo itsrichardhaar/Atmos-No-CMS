@@ -88,6 +88,25 @@ body{
   line-height: 1.5;
 }
 
+:where(
+  a[href],
+  area[href],
+  button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  label[for],
+  select:not([multiple]),
+  summary,
+  [role="button"],
+  [role="link"],
+  .btn,
+  .pill,
+  [data-clickable]
+) {
+  cursor: pointer;
+}
+
 /* layout helpers */
 
 .container { 
@@ -102,7 +121,7 @@ a { color:inherit;
   text-decoration:none 
 }
 a:hover { 
-  text-decoration:none 
+  text-decoration:none !important 
 }
 
 /* ======== base button ======== */
