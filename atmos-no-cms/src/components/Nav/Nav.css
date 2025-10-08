@@ -1,4 +1,4 @@
-/* Main Navigation component */
+/* Main Navigation component CSS */
 
 .nav {
   position: sticky;
@@ -97,12 +97,13 @@ html[data-hero-reveal="active"] .nav-spacer {
 .menu__panel {
   position: absolute;
   inset: 0;
-  display: block;              /* ensure child .menu__content fills */
+  display: block;              
   background: #000;
   transform: translateX(100%);
   transition: transform .48s var(--ease-swoop);
   min-height: 100dvh;
-  padding: 0;                  /* override old padding */
+  padding: 0;      
+  padding-top: calc(2rem + env(safe-area-inset-top));            
 }
 @supports not (height: 100dvh) {
   .menu__panel { 
@@ -111,6 +112,7 @@ html[data-hero-reveal="active"] .nav-spacer {
 }
 .menu--open .menu__panel { 
     transform: translateX(0); 
+    transition: transform .48s var(--ease-swoop);
     padding-top: calc(2rem + env(safe-area-inset-top));
 }
 
@@ -118,9 +120,9 @@ html[data-hero-reveal="active"] .nav-spacer {
   position: relative;
   height: 100%;
   display: grid;
-  grid-template-rows: auto 1fr auto;   /* top (logo) / middle (links) / bottom (meta) */
-  justify-items: start;                 /* left align */
-  /* keep comfortable top padding + iOS safe area */
+  grid-template-rows: auto 1fr auto;   
+  justify-items: start;                
+  
   padding-top: calc(2rem + env(safe-area-inset-top));
   padding-bottom: 2rem;
 }
@@ -164,10 +166,10 @@ html[data-hero-reveal="active"] .nav-spacer {
 
 
 .menu__link:hover, .menu__link:focus { 
-  text-decoration: underline; 
+  text-decoration: none; 
 }
 .menu__link.is-active { 
-  text-decoration: underline; 
+  text-decoration: none; 
 }
 
 .menu__meta{
