@@ -38,10 +38,10 @@
 .pg__viewall{ white-space: nowrap; }
 
 .pg__filters{ display:flex; flex-wrap:wrap; gap:8px; margin: 6px 0 16px; }
-.pill{
-  background: #00456A;
-  border: 1px solid rgba(68,174,234,.25);
-  color: #9fd6f6;
+.pill {
+  background: transparent;
+  border: 2px solid #00456A;
+  color: #fff;
   border-radius: 999px;
   padding: 6px 10px;
   cursor: pointer;
@@ -49,9 +49,9 @@
 }
 
 .pill:hover {
-  background: rgba(68,174,234,.22);
+  background: #00456A;
   color:#fff;
-  border-color: rgba(68,174,234,.5);
+  border-color: #00456A;
 }
 
 .pill.is-active{ background:#39BAFF; color:#fff; border-color: #39BAFF; }

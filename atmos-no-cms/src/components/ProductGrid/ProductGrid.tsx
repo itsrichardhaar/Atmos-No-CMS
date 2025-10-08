@@ -22,7 +22,7 @@ const filterItem = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7 }, // your requested 0.5s
+    transition: { duration: 0.5 }, // your requested 0.5s
   },
 };
 
