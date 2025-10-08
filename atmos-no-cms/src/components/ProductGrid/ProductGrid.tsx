@@ -38,7 +38,7 @@ const titleChar: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: EASE_BEZIER }, // ← use the tuple
+    transition: { duration: 0.8, ease: EASE_BEZIER }, 
   },
 };
 
@@ -52,9 +52,9 @@ type Props = {
 
 type CatOrAll = ProductCategory | "All";
 
-/** ==============
+/** =============================
  * CursorSpotlight / Card Glow
- * ============== */
+ * ============================= */
 function CursorSpotlight({
   gridRef,
   radius = 300,
@@ -247,14 +247,14 @@ export default function ProductGrid({
 
   const gridRef = useRef<HTMLDivElement>(null);
 
-  // Build a char array from the title (keeps it TS-safe and controllable)
+
   const titleChars = useMemo(() => Array.from(title), [title]);
 
   return (
     <section className="pg">
       <div className="container">
         <div className="pg__header">
-          {/* Per-character animated title, staggered on enter */}
+          
           <motion.h2
             className="pg__title"
             variants={titleGroup}

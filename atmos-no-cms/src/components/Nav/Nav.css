@@ -142,7 +142,7 @@ html[data-hero-reveal="active"] .nav-spacer {
 }
 
 .menu__links {
-  align-self: center;    /* middle row vertically centered in remaining space */
+  align-self: center;    
   display: flex;
   flex-direction: column;
   gap: .25rem;
@@ -181,7 +181,6 @@ html[data-hero-reveal="active"] .nav-spacer {
   margin-bottom: clamp(24px, 5vh, 72px);
 }
 
-/* phone/email rows */
 .meta__row{
   display: inline-flex;
   align-items: center;
@@ -202,7 +201,6 @@ html[data-hero-reveal="active"] .nav-spacer {
     color: #fff;
 }
 
-/* social icons row */
 .menu__social{
   display: flex;
   align-items: center;
@@ -224,7 +222,6 @@ html[data-hero-reveal="active"] .nav-spacer {
   fill: currentColor; 
 }
 
-/* label to the right of icons */
 .menu__social-label {
   margin-left: .5rem;
   color: rgba(255,255,255,.9);
@@ -235,9 +232,9 @@ html[data-hero-reveal="active"] .nav-spacer {
   margin-top: 1.5rem 
 }
 
-/* ================================
-   Staggered Menu Animations (CSS-only)
-   ================================ */
+/* ==========================
+   Staggered Menu Animations 
+   ========================== */
 
 
 :root { --ease-swoop: cubic-bezier(.2,.7,.2,1); }
@@ -274,7 +271,7 @@ html[data-hero-reveal="active"] .nav-spacer {
 .menu--open .menu__links > .menu__link:nth-of-type(5) { transition-delay: .48s; }
 .menu--open .menu__links > .menu__link:nth-of-type(6) { transition-delay: .56s; }
 
-/* phone / email */
+
 .menu--open .menu__meta .meta__row:nth-of-type(1) { 
   transition-delay: .60s; 
 } 
@@ -282,7 +279,7 @@ html[data-hero-reveal="active"] .nav-spacer {
   transition-delay: .68s; 
 } 
 
-/* Socials */
+
 .menu--open .menu__social .social__link:nth-of-type(1) { 
   transition-delay: .76s; 
 }
@@ -348,7 +345,6 @@ html[data-hero-reveal="active"] .nav-spacer {
   --menu-pre-ease: cubic-bezier(.2,.7,.2,1);
 }
 
-/* Container of decorative layers */
 
 .menu__prelayers{
   position: absolute;
