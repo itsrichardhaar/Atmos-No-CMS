@@ -25,6 +25,8 @@
   margin-bottom: 20px;
 }
 
+
+
 .contactBlock { margin-top: 8px; }
 .contactTitle { font-size: 14px; color: #b9c6d3; margin-bottom: 8px; }
 .contactList { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
@@ -35,6 +37,7 @@
   color: #e6eef5;
   text-decoration: none;
 }
+
 .contactItem:hover { text-decoration: underline; }
 
 .socials { list-style: none; padding: 0; margin: 16px 0 0; display: flex; gap: 14px; }

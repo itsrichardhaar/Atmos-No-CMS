@@ -1,4 +1,7 @@
 // src/pages/About.tsx
+import { useMemo } from "react";
+import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { Link } from "react-router-dom";
 import "./About.css";
 import "./MarketDetail.css";
@@ -14,20 +17,38 @@ type TeamMember = {
 };
 
 const heroImage =
-  "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/about/About-main.png"; 
+  "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/about/About-main.png";
+
+// ---- Framer Motion title animation (same as Markets.tsx) ----
+const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
+
+const titleGroup: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.03 } },
+};
+
+const titleChar: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: EASE_BEZIER },
+  },
+};
+// -------------------------------------------------------------
 
 const intro = {
-  image: "/assets/about/about-intro.jpg", 
+  image: "/assets/about/about-intro.jpg",
   headline: "Our Team",
-  body:
-    "Driven by experts who power your vision.",
+  body: "Driven by experts who power your vision.",
 };
 
 const team: TeamMember[] = [
   {
     name: "Full name",
     title: "Job title",
-    photo: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/about/Placeholder.png",
+    photo:
+      "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/about/Placeholder.png",
     bio: "Short bio or area of focus. Keep to 1–2 lines for balance.",
     linkedin: "#",
     x: "#",
@@ -36,7 +57,8 @@ const team: TeamMember[] = [
   {
     name: "Full name",
     title: "Job title",
-    photo: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/about/Placeholder.png",
+    photo:
+      "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/about/Placeholder.png",
     bio: "Short bio or area of focus. Keep to 1–2 lines for balance.",
     linkedin: "#",
   },
@@ -66,6 +88,9 @@ const faqs: { q: string; a: string }[] = [
 ];
 
 export default function About() {
+  const title = "About Us";
+  const titleChars = useMemo(() => Array.from(title), [title]);
+
   return (
     <section className="about about--heroBleed">
       <div className="about__hero">
@@ -78,7 +103,26 @@ export default function About() {
         />
         <div className="about__heroInner">
           <div className="about__heroContent">
-            <h1 className="about__title">About Us</h1>
+            <motion.h1
+              id="about-heading"
+              className="about__title"
+              variants={titleGroup}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.6 }}
+              aria-label={title}
+            >
+              {titleChars.map((ch, i) => (
+                <motion.span
+                  key={i}
+                  variants={titleChar}
+                  className="about__titleChar"
+                  style={{ display: "inline-block" }}
+                >
+                  {ch === " " ? "\u00A0" : ch}
+                </motion.span>
+              ))}
+            </motion.h1>
           </div>
         </div>
       </div>
@@ -109,12 +153,8 @@ export default function About() {
                         LinkedIn
                       </a>
                     )}
-                    {m.x && (
-                      <a href={m.x} aria-label={`${m.name} on X`}>X</a>
-                    )}
-                    {m.site && (
-                      <a href={m.site} aria-label={`${m.name} website`}>Site</a>
-                    )}
+                    {m.x && <a href={m.x} aria-label={`${m.name} on X`}>X</a>}
+                    {m.site && <a href={m.site} aria-label={`${m.name} website`}>Site</a>}
                   </div>
                 </div>
               </li>

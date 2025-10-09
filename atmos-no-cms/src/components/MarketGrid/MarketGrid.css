@@ -24,7 +24,9 @@
   font-weight: 400;
   margin: 0;
   color: #fff;
-  width: 40%;
+  width: 460px; /*====!!!! Need to figure out mg grid title "Solutions built for.." word break ====*/
+  white-space: nowrap;
+  text-wrap: nowarp;
 }
 
 .mg__subtitle {

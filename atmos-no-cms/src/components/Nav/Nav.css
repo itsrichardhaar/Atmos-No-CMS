@@ -199,7 +199,7 @@ html[data-hero-reveal="active"] .nav-spacer {
 }
 
 .meta__row:hover .meta__icon {
-    color: #fff;
+    color: #fff !important;
 }
 
 .menu__social {
