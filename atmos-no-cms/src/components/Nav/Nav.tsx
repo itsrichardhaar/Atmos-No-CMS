@@ -1,4 +1,3 @@
-// src/components/Nav.tsx
 import { NavLink, Link, useLocation } from "react-router-dom"
 import { useEffect, useRef, useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -35,9 +34,24 @@ export default function Nav() {
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     isActive ? "menu__link is-active" : "menu__link"
 
+  // ===== Variants =====
   const EASE = [0.22, 1, 0.36, 1] as const
 
-  const makeLabelGroup = (charStagger = 0.08, delayChildren = 0.28): Variants => ({
+  // Container just toggles hidden/visible (we’ll drive per-row delays via `custom`)
+  const listGroup: Variants = { hidden: {}, visible: {} }
+
+  // Each link row uses a computed delay based on its index
+  const linkRow: Variants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.38, ease: EASE, delay: 0.08 + i * 0.16 },
+    }),
+  }
+
+  // Per-char group + char (no per-link delay; sequencing comes from row delay)
+  const makeLabelGroup = (charStagger = 0.10, delayChildren = 0.06): Variants => ({
     hidden: {},
     visible: { transition: { staggerChildren: charStagger, delayChildren } },
   })
@@ -54,8 +68,8 @@ export default function Nav() {
 
   const AnimatedLabel = ({
     text,
-    delay = 0.35,     
-    stagger = 0.28,   
+    delay = 0.06,   // small, consistent
+    stagger = 0.10,  // per-char spacing
   }: {
     text: string
     delay?: number
@@ -64,19 +78,16 @@ export default function Nav() {
     const chars = useMemo(() => Array.from(text), [text])
     return (
       <motion.span
+        key={open ? "open" : "closed"}     // re-run on open
         className="menu__linkLabel"
         variants={makeLabelGroup(stagger, delay)}
-        initial={false}
-        animate={open ? "visible" : "hidden"}  
+        initial="hidden"
+        animate={open ? "visible" : "hidden"}
         aria-hidden="true"
         style={{ display: "inline-block" }}
       >
         {chars.map((ch, i) => (
-          <motion.span
-            key={i}
-            variants={labelChar}
-            style={{ display: "inline-block" }}
-          >
+          <motion.span key={i} variants={labelChar} style={{ display: "inline-block" }}>
             {ch === " " ? "\u00A0" : ch}
           </motion.span>
         ))}
@@ -107,11 +118,7 @@ export default function Nav() {
           if ((e.target as HTMLElement).classList.contains("menu")) setOpen(false)
         }}
       >
-        <div className="menu__prelayers" aria-hidden="true">
-          <span className="menu__prelayer" data-i="1" />
-          <span className="menu__prelayer" data-i="2" />
-          <span className="menu__prelayer" data-i="3" />
-        </div>
+        {/* prelayers removed */}
 
         <nav className="menu__panel" aria-label="Primary">
           <div className="menu__content container">
@@ -120,37 +127,61 @@ export default function Nav() {
               <img src={logo} alt="ATMOS LED" className="nav__logo-img" />
             </Link>
 
-            {/* middle: links (staggered char labels) */}
-            <div className="menu__links">
-              <NavLink to="/about" className={linkClass} ref={firstLinkRef} aria-label="About">
-                <AnimatedLabel text="About" delay={0.28} />
-              </NavLink>
-              <NavLink to="/products" className={linkClass} aria-label="Products">
-                <AnimatedLabel text="Products" delay={0.32} />
-              </NavLink>
-              <NavLink to="/markets" className={linkClass} aria-label="Markets">
-                <AnimatedLabel text="Markets" delay={0.36} />
-              </NavLink>
-              <NavLink to="/contact" className={linkClass} aria-label="Contact">
-                <AnimatedLabel text="Contact" delay={0.40} />
-              </NavLink>
-              <NavLink
-                to="https://mapoutcreative.com/atmosled/"
-                className={linkClass}
-                target="_blank"
-                aria-label="Calculator"
-              >
-                <AnimatedLabel text="Calculator" delay={0.44} />
-              </NavLink>
-              <NavLink
-                to="https://dfuc15-ke.myshopify.com"
-                className={linkClass}
-                target="_blank"
-                aria-label="Shop"
-              >
-                <AnimatedLabel text="Shop" delay={0.48} />
-              </NavLink>
-            </div>
+            {/* middle: links — wrapper controls the row delay */}
+            <motion.div
+              className="menu__linksWrap"
+              variants={listGroup}
+              initial="hidden"
+              animate={open ? "visible" : "hidden"}
+            >
+              <div className="menu__links">
+                <motion.div variants={linkRow} custom={0} className="menu__linkWrapper">
+                  <NavLink to="/about" className={linkClass} ref={firstLinkRef} aria-label="About">
+                    <span className="menu__linkRow"><AnimatedLabel text="About" /></span>
+                  </NavLink>
+                </motion.div>
+
+                <motion.div variants={linkRow} custom={1} className="menu__linkWrapper">
+                  <NavLink to="/products" className={linkClass} aria-label="Products">
+                    <span className="menu__linkRow"><AnimatedLabel text="Products" /></span>
+                  </NavLink>
+                </motion.div>
+
+                <motion.div variants={linkRow} custom={2} className="menu__linkWrapper">
+                  <NavLink to="/markets" className={linkClass} aria-label="Markets">
+                    <span className="menu__linkRow"><AnimatedLabel text="Markets" /></span>
+                  </NavLink>
+                </motion.div>
+
+                <motion.div variants={linkRow} custom={3} className="menu__linkWrapper">
+                  <NavLink to="/contact" className={linkClass} aria-label="Contact">
+                    <span className="menu__linkRow"><AnimatedLabel text="Contact" /></span>
+                  </NavLink>
+                </motion.div>
+
+                <motion.div variants={linkRow} custom={4} className="menu__linkWrapper">
+                  <NavLink
+                    to="https://mapoutcreative.com/atmosled/"
+                    className={linkClass}
+                    target="_blank"
+                    aria-label="Calculator"
+                  >
+                    <span className="menu__linkRow"><AnimatedLabel text="Calculator" /></span>
+                  </NavLink>
+                </motion.div>
+
+                <motion.div variants={linkRow} custom={5} className="menu__linkWrapper">
+                  <NavLink
+                    to="https://dfuc15-ke.myshopify.com"
+                    className={linkClass}
+                    target="_blank"
+                    aria-label="Shop"
+                  >
+                    <span className="menu__linkRow"><AnimatedLabel text="Shop" /></span>
+                  </NavLink>
+                </motion.div>
+              </div>
+            </motion.div>
 
             {/* bottom: meta */}
             <div className="menu__meta">
@@ -176,7 +207,7 @@ export default function Nav() {
                 <a className="social__link" href="https://www.linkedin.com/company/atmosled" target="_blank" rel="noreferrer" aria-label="LinkedIn">
                   <svg className="social__icon" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8.98h5V24H0V8.98zM8.98 8.98h4.78v2.06h.07c.67-1.27 2.3-2.6 4.73-2.6 5.06 0 5.99 3.33 5.99 7.65V24h-5v-6.58c0-1.57-.03-3.6-2.19-3.6-2.2 0-2.54 1.72-2.54 3.48V24h-5V8.98z"/>
-                  </svg>
+                </svg>
                 </a>
                 <a className="social__link" href="https://facebook.com/atmosled" target="_blank" rel="noreferrer" aria-label="Facebook">
                   <svg className="social__icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -202,4 +233,5 @@ export default function Nav() {
     </header>
   )
 }
+
 
