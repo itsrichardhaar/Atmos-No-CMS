@@ -167,10 +167,10 @@ html[data-hero-reveal="active"] .nav-spacer {
 
 
 .menu__link:hover, .menu__link:focus { 
-  text-decoration: none; 
+  text-decoration: underline !important; 
 }
 .menu__link.is-active { 
-  text-decoration: none; 
+  text-decoration: underline !important; 
 }
 
 .menu__meta {

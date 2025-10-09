@@ -7,7 +7,7 @@
   overflow: visible;
 }
 
-.mg__header{ 
+.mg__header { 
   display:flex; 
   flex-direction: column;        
   align-items: flex-start;
@@ -15,11 +15,11 @@
   margin-bottom: 10px;        
 }
 
-.mg__header--withSub{
+.mg__header--withSub {
   margin-bottom: 40px;           
 }
 
-.mg__title{
+.mg__title {
   font-family: var(--ff-display, inherit);
   font-weight: 400;
   margin: 0;
@@ -27,7 +27,7 @@
   width: 40%;
 }
 
-.mg__subtitle{
+.mg__subtitle {
   margin: 0;
   color: #fff;
   font-size: clamp(15px, 1.2vw, 18px);
@@ -36,7 +36,7 @@
 }
 
 
-.mg__grid{
+.mg__grid {
   display:grid;
   gap:20px;
   grid-template-columns: repeat(3, minmax(0,1fr));
