@@ -260,7 +260,7 @@ export default function ProductGrid({
             variants={titleGroup}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: true, amount: 0.8 }}
             aria-label={title}
           >
             {titleChars.map((ch, i) => (
@@ -290,7 +290,7 @@ export default function ProductGrid({
             variants={filterGroup}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.8 }}
           >
             {categories.map((cat) => (
               <motion.button

@@ -30,7 +30,7 @@ export default function ProductCard({ product }: { product: Product }) {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.05 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.8 }}
           className="pc__title">
           <Link to={`/products/${product.slug}`}>{product.name}</Link>
             {product.series && 
@@ -38,7 +38,7 @@ export default function ProductCard({ product }: { product: Product }) {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.8 }}
             className="pc__series">
               {product.series}
           </motion.span>}
@@ -48,7 +48,7 @@ export default function ProductCard({ product }: { product: Product }) {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.8 }}
             className="pc__tagline">
               {product.tagline}
           </motion.p>}
@@ -57,7 +57,7 @@ export default function ProductCard({ product }: { product: Product }) {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.8 }}
           className="pc__specs">
           {product.specs}
         </motion.p>}
@@ -67,7 +67,7 @@ export default function ProductCard({ product }: { product: Product }) {
           initial={{ opacity: 0, x: -10 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.05 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.8 }}
           >
       <Link to={`/products/${product.slug}`} className="btn btn--primary">
         <span className="btn__label">Starting at ${product.startingFrom}</span>

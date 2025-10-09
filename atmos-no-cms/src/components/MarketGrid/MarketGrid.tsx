@@ -42,7 +42,7 @@ export default function MarketGrid({ title = "Markets", subtitle, markets }: Pro
             variants={titleGroup}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: true, amount: 0.8 }}
             aria-label={title}
           >
             {titleChars.map((ch, i) => (
@@ -61,7 +61,7 @@ export default function MarketGrid({ title = "Markets", subtitle, markets }: Pro
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.8 }}
               className="mg__subtitle"
             >
               {subtitle}

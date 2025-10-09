@@ -20,8 +20,8 @@ export default function MarketCard({ market }: { market: Market }) {
         <motion.h3 
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.05 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true, amount: 0.8 }}
           className="mc__title">
           <Link to={`/markets/${market.slug}`}>{market.name}</Link>
         </motion.h3>
@@ -29,7 +29,7 @@ export default function MarketCard({ market }: { market: Market }) {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.8 }}
           className="mc__blurb">
             {market.blurb}
         </motion.p>
@@ -40,7 +40,7 @@ export default function MarketCard({ market }: { market: Market }) {
           initial={{ opacity: 0, x: -10 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.08 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.8 }}
         
         >
         <Link to={`/markets/${market.slug}`} className="btn btn--secondary">

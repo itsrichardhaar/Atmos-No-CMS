@@ -114,9 +114,9 @@ export default function Hero() {
           <div className="container">
             <div className="hero__copy hero__copy--center">
               <motion.h1
-                initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
                 className="hero__title"
               >
                 Your Vision. In Full View.
@@ -125,7 +125,7 @@ export default function Hero() {
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.1 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
                 className="hero__subtitle"
               >
                 Atmos LED creates professional-grade LED display solutions built for
@@ -137,7 +137,7 @@ export default function Hero() {
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.4}}
+                transition={{ duration: 0.5, delay: 1.1}}
                 className="hero__actions hero__actions--center">
                 <Link to="/products" className="btn btn--hero">
                   Shop Our Products

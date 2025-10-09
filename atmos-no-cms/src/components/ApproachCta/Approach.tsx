@@ -65,7 +65,7 @@ export default function Approach() {
               variants={titleGroup}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
+              viewport={{ once: true, amount: 0.8 }}
               aria-label={headingText}
             >
               {chars.map((ch, i) => (
@@ -82,8 +82,8 @@ export default function Approach() {
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true, amount: 0.8 }}
               className={styles.p}
             >
               At Atmos LED, we bring clarity to a fast-moving industry by reshaping what it
@@ -95,8 +95,8 @@ export default function Approach() {
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              viewport={{ once: true, amount: 0.8 }}
               className={styles.p}
             >
               This consultative approach ensures every system we deliver is purpose-built,
