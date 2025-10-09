@@ -52,11 +52,13 @@ html[data-hero-reveal="active"] .nav-spacer {
   border-bottom: none; 
   border-color: none !important; 
 }
+
 .nav__logo { 
   font-weight: 700; 
   letter-spacing: .02em; 
   margin-top: 10px; 
 }
+
 .mobile__logo { 
   font-weight: 700; 
   letter-spacing: .02em; 
@@ -193,6 +195,20 @@ html[data-hero-reveal="active"] .nav-spacer {
   transform: translateZ(0);
 }
 
+/*
+.menu__link .menu__linkLabel > span {
+  color: #fff;                                   
+  transition: color .28s ease, transform .25s ease;
+}
+
+.menu__link:hover .menu__linkLabel > span,
+.menu__link:focus .menu__linkLabel > span {
+  color: var(--hover-accent);                   
+  transform: translateY(-1px);                  
+}
+
+*/
+
 /* ==========================
    Meta / Social Section
    ========================== */
@@ -314,7 +330,7 @@ html[data-hero-reveal="active"] .nav-spacer {
 /* ==========================
    Prelayers: fully disabled
    ========================== */
-   
+
 .menu__panel::before,
 .menu__panel::after { 
   content: none !important; 
