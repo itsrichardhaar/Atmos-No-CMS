@@ -8,9 +8,6 @@
   margin-top: -94px;
 }
 
-.dotgrid { z-index: 0; }
-.hero__inner { z-index: 2; }
-
 .hero__sticky{
   position: sticky;
   top: 0;
@@ -38,6 +35,24 @@
   background: #000; 
 }
 
+/* !!===== Change z-index to 0 to put dots behind video once transparent==== !! */
+.dotgrid {
+  z-index: 1 !important;
+}
+
+.hero__videoWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;  /* !!===== Change z-index to 1 to put dots behind video once transparent==== !! */
+  opacity: 0;
+  transition: opacity .7s cubic-bezier(.2,.7,.2,1);
+  pointer-events: none;
+}
+
+.hero__videoWrap.is-ready.is-visible {
+  opacity: 1;
+}
+
 .hero__video {
   position: absolute;
   inset: 0;
@@ -47,8 +62,7 @@
   object-fit: contain;        
   pointer-events: none;      
   mix-blend-mode: screen;     
-  opacity: 0.95;
-  transition: 0.4s ease opacity;              
+  opacity: 0.95;             
 }
 
 .hero .container, .hero__copy { position: relative; z-index: 1; }

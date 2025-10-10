@@ -12,6 +12,8 @@ export default function Hero() {
   const [videoReady, setVideoReady] = useState(false);
   const [videoSrcSet, setVideoSrcSet] = useState(false);
 
+  const [videoVisible, setVideoVisible] = useState(false);
+
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "preload";
@@ -51,8 +53,10 @@ export default function Hero() {
     if (!vid) return;
 
     const markReady = () => {
-      if (vid.readyState >= 3 /* HAVE_FUTURE_DATA */) {
+      if (vid.readyState >= 3) {
         setVideoReady(true);
+        
+        requestAnimationFrame(() => setVideoVisible(true));
       }
     };
     vid.addEventListener("loadeddata", markReady, { passive: true });
@@ -154,7 +158,7 @@ export default function Hero() {
             } as React.CSSProperties}
           />
 
-          <div className={`hero__videoWrap ${videoReady ? "is-ready" : ""}`}>
+          <div className={`hero__videoWrap ${videoReady ? "is-ready" : ""} ${videoVisible ? "is-visible" : ""}`}>
             <video
               ref={videoRef}
               className="hero__video"
