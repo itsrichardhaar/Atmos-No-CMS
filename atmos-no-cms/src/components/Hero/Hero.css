@@ -8,6 +8,9 @@
   margin-top: -94px;
 }
 
+.dotgrid { z-index: 0; }
+.hero__inner { z-index: 2; }
+
 .hero__sticky{
   position: sticky;
   top: 0;
@@ -21,9 +24,8 @@
   align-items: center;
   padding: calc(var(--hero-pad-y) + var(--header-h)) 0 var(--hero-pad-y);
   position: relative;           
-  z-index: 1;
+  z-index: 2;
 }
-
 
 .hero__bg { 
   position: absolute; 
@@ -45,7 +47,8 @@
   object-fit: contain;        
   pointer-events: none;      
   mix-blend-mode: screen;     
-  opacity: 0.95;              
+  opacity: 0.95;
+  transition: 0.4s ease opacity;              
 }
 
 .hero .container, .hero__copy { position: relative; z-index: 1; }

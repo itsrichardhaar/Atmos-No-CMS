@@ -24,7 +24,7 @@ export default function BuildDisplayCta({
 
       <div className={styles.inner}>
         <div className={styles.frame}>
-          <motion.h2 
+          <motion.h4 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05}}
@@ -32,7 +32,7 @@ export default function BuildDisplayCta({
             id="build-cta-title" 
             className={styles.title}>
               {title}
-          </motion.h2>
+          </motion.h4>
           <motion.p 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
