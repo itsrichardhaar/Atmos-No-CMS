@@ -124,7 +124,7 @@ export default function Nav() {
           <div className="menu__content container">
             {/* top: mobile logo */}
             <Link to="/" className="mobile__logo" aria-label="Go to home">
-              <img src={logo} alt="ATMOS LED" className="nav__logo-img" />
+              
             </Link>
 
             {/* middle: links — wrapper controls the row delay */}

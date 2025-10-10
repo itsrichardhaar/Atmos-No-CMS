@@ -28,28 +28,62 @@
 
 
 .contactBlock { margin-top: 8px; }
-.contactTitle { font-size: 14px; color: #b9c6d3; margin-bottom: 8px; }
+.contactTitle { font-size: 14px; color: #fff; font-weight: 700; margin-bottom: 8px; }
 .contactList { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
 .contactItem {
   display: inline-flex;
   align-items: center;
+  font-size: 14px;
   gap: 10px;
   color: #e6eef5;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
-.contactItem:hover { text-decoration: underline; }
+.contactItem:hover { 
+  text-decoration: underline !important; 
+}
 
-.socials { list-style: none; padding: 0; margin: 16px 0 0; display: flex; gap: 14px; }
-.socials a { color: #e6eef5; text-decoration: none; opacity: .9; }
-.socials a:hover { opacity: 1; }
+.socials { 
+  list-style: none; 
+  padding: 0; 
+  margin: 16px 0 0; 
+  display: flex; 
+  gap: 14px; 
+}
+.socials a { 
+  color: #e6eef5; 
+  text-decoration: none; 
+  opacity: .9; 
+}
+.socials a:hover { 
+  opacity: 1; 
+}
 
-.rightCol { justify-self: end; }
-.menu { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; text-align: right; }
-.menu a { color: #ffffff; text-decoration: none; font-size: 14px; }
-.menu a:hover { text-decoration: underline; }
+.rightCol { 
+  justify-self: end; 
+}
+.menu { 
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+  display: grid; 
+  gap: 10px; 
+  text-align: right; 
+}
+.menu a { 
+  color: #ffffff; 
+  text-decoration: none; 
+  font-size: 14px; 
+}
+.menu a:hover { 
+  text-decoration: underline !important; 
+}
 
-.hr { border: 0; border-top: 1px solid rgba(255,255,255,0.12); margin: 26px 0; }
+.hr { 
+  border: 0; 
+  border-top: 1px solid rgba(255,255,255,0.12); 
+  margin: 26px 0; 
+}
 
 .bottom {
   display: grid;
@@ -57,13 +91,24 @@
   align-items: center;
   gap: 20px;
 }
-.copy { color: #c8d4df; font-size: 13px; }
+.copy { 
+  color: #fff; 
+  font-size: 13px; 
+}
+
 .legal {
   list-style: none; padding: 0; margin: 0;
   display: flex; gap: 24px; align-items: center;
 }
-.legal a { color: #c8d4df; text-decoration: none; font-size: 13px; }
-.legal a:hover { text-decoration: underline; }
+.legal a { 
+  color: #fff; 
+  text-decoration: none; 
+  font-size: 13px; 
+}
+
+.legal a:hover { 
+  text-decoration: underline !important; 
+}
 
 .icon, .iconLg {
   display: inline-block;

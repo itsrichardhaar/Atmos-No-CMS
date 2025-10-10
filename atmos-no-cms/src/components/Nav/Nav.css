@@ -57,6 +57,7 @@ html[data-hero-reveal="active"] .nav-spacer {
   font-weight: 700; 
   letter-spacing: .02em; 
   margin-top: 10px; 
+  z-index: 2002 !important;
 }
 
 .mobile__logo { 
@@ -86,8 +87,8 @@ html[data-hero-reveal="active"] .nav-spacer {
   position: absolute;
   inset: 0;
   display: block;
-  background: #000;
-  transform: translateX(100%);
+  background: rgb(0,0,0, 0.90);
+  transform: translateX(0);
   transition: transform .48s var(--ease-swoop);
   min-height: 100dvh;
   padding: 0;
@@ -195,19 +196,18 @@ html[data-hero-reveal="active"] .nav-spacer {
   transform: translateZ(0);
 }
 
-/*
 .menu__link .menu__linkLabel > span {
   color: #fff;                                   
   transition: color .28s ease, transform .25s ease;
 }
 
 .menu__link:hover .menu__linkLabel > span,
+.menu__link:active .menu__linkLabel > span,
 .menu__link:focus .menu__linkLabel > span {
   color: var(--hover-accent);                   
   transform: translateY(-1px);                  
 }
 
-*/
 
 /* ==========================
    Meta / Social Section
