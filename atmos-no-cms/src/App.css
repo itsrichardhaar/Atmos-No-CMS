@@ -144,7 +144,7 @@ button {
 .btn--hero {
   background: #fff;
   border-radius: 50px;
-  border: solid #000 2px;
+  border: solid #fff 2px;
   color: #000;
   transition: all 0.5s ease;
 }
