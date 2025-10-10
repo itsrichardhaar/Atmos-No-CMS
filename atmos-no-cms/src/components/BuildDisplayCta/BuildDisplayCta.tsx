@@ -8,8 +8,8 @@ type Props = {
   subtitle?: string;
   buttonText?: string;
   to?: string;
-  imageSrc?: string;              // kept as a fallback / poster
-  videoSrc?: string;              // NEW: optional override
+  imageSrc?: string;              
+  videoSrc?: string;              
 };
 
 export default function BuildDisplayCta({
@@ -25,7 +25,6 @@ export default function BuildDisplayCta({
   const [ready, setReady] = useState(false);
   const [srcSet, setSrcSet] = useState(false);
 
-  // Preload connection hint (browser may warm up the request)
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "preload";
@@ -36,7 +35,6 @@ export default function BuildDisplayCta({
     return () => { document.head.removeChild(link) };
   }, [videoSrc]);
 
-  // Lazy-attach the src when the section approaches viewport
   useEffect(() => {
     const el = sectionRef.current;
     const vid = videoRef.current;
@@ -58,14 +56,12 @@ export default function BuildDisplayCta({
     return () => io.disconnect();
   }, [srcSet, videoSrc]);
 
-  // Mark ready on canplay* (then fade in via CSS)
   useEffect(() => {
     const vid = videoRef.current;
     if (!vid) return;
 
     const onReady = () => {
       if (vid.readyState >= 3) {
-        // next frame to ensure transition applies
         requestAnimationFrame(() => setReady(true));
       }
     };
@@ -81,7 +77,6 @@ export default function BuildDisplayCta({
 
   return (
     <section ref={sectionRef} className={styles.section} aria-labelledby="build-cta-title">
-      {/* Background video (behind scrim) */}
       <div className={`${styles.videoWrap} ${ready ? styles.isReady : ""}`}>
         <video
           ref={videoRef}
@@ -89,7 +84,7 @@ export default function BuildDisplayCta({
           muted
           loop
           playsInline
-          preload="metadata"     // upgraded to auto when intersecting
+          preload="metadata"     
           aria-hidden="true"
           poster={imageSrc || ""}
           controls={false}
@@ -98,10 +93,7 @@ export default function BuildDisplayCta({
         />
       </div>
 
-      {/* Scrim overlay stays above the video */}
       <div className={styles.scrim} />
-
-      {/* Foreground content */}
       <div className={styles.inner}>
         <div className={styles.frame}>
           <motion.h4
