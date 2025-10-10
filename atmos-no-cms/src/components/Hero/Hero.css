@@ -35,7 +35,7 @@
   background: #000; 
 }
 
-/* !!===== Change z-index to 0 to put dots behind video once transparent==== !! */
+
 .dotgrid {
   z-index: 1 !important;
 }
@@ -43,7 +43,7 @@
 .hero__videoWrap {
   position: absolute;
   inset: 0;
-  z-index: 0;  /* !!===== Change z-index to 1 to put dots behind video once transparent==== !! */
+  z-index: 0;  
   opacity: 0;
   transition: opacity .7s cubic-bezier(.2,.7,.2,1);
   pointer-events: none;
