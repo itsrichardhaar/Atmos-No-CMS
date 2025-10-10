@@ -6,6 +6,7 @@ export const markets: Market[] = [
     id: "m1",
     slug: "corporate-events",
     name: "Corporate Events",
+    nameWords: ["Corporate", '"Events"'],
     blurb:
       "Transform conferences and keynotes with vivid large-format displays and stage visuals.",
     gridImage: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/hero/corporate.png",
@@ -51,6 +52,7 @@ export const markets: Market[] = [
     id: "m2",
     slug: "house-of-worship",
     name: "House of Worship",
+    nameWords: ["House", "of", '"Worship"'],
     blurb:
       "From ambient glows to bold stage looks, enhance storytelling and connection.",
     gridImage: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/hero/worship.png",
@@ -98,6 +100,7 @@ export const markets: Market[] = [
     id: "m3",
     slug: "concerts-tours",
     name: "Concerts & Tours",
+    nameWords: ["Concerts", '"&"', "Tours"],
     blurb:
       "Road-ready systems that survive travel, set fast, and dazzle every show.",
     gridImage: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/hero/concerts.png",
@@ -145,6 +148,7 @@ export const markets: Market[] = [
     id: "m4",
     slug: "retail-hospitality",
     name: "Retail & Hospitality",
+    nameWords: ["Retail", '"&"', "Hospitality"],
     blurb:
       "Capture attention with digital canvases for promotions, ambience, and brand moments.",
     gridImage: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/hero/worship.png",
@@ -193,6 +197,7 @@ export const markets: Market[] = [
     id: "m5",
     slug: "virtual-production",
     name: "Virtual Production",
+    nameWords: ["Virtual", '"Production"'],
     blurb:
       "LED volumes and backgrounds for immersive in-camera workflows.",
     gridImage: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/hero/virtual.png",
@@ -240,6 +245,7 @@ export const markets: Market[] = [
     id: "m6",
     slug: "immersive-productions",
     name: "Immersive Productions",
+    nameWords: ["Immersive", '"Productions"'],
     blurb:
       "Interactive, experiential environments that react and engage.",
     gridImage: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/hero/immersive.png",
@@ -288,6 +294,7 @@ export const markets: Market[] = [
     id: "m7",
     slug: "education-institutions",
     name: "Education & Institutions",
+    nameWords: ["Education", '"&"', "Institutions"],
     blurb:
       "Clarity for lectures, assemblies, and presentations across campuses.",
     gridImage: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/hero/education.png",

@@ -250,7 +250,7 @@ export default function ProductGrid({
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"], // 0 when entering viewport, 1 when leaving
+    offset: ["start end", "end start"], 
   });
   const y = useTransform(scrollYProgress, [0, 1], ["-600px", "600px"]);
   const titleChars = useMemo(() => Array.from(title), [title]);
