@@ -16,7 +16,14 @@ export default function Nav() {
   useEffect(() => { setOpen(false) }, [location.pathname])
   useLockBodyScroll(open)
 
-  useEffect(() => { if (open) setTimeout(() => firstLinkRef.current?.focus(), 0) }, [open])
+  useEffect(() => {
+  if (!open) return;
+  const t = setTimeout(() => {
+    const active = document.querySelector<HTMLAnchorElement>('.menu__link.is-active');
+    (active ?? firstLinkRef.current)?.focus();
+  }, 0);
+  return () => clearTimeout(t);
+}, [open]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false) }
