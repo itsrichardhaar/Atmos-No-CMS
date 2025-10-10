@@ -107,6 +107,21 @@ export default function Hero() {
                 "--dg-alpha": "0.34" 
             } as React.CSSProperties}
           />
+
+          <video
+            className="hero__video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+          >
+            <source
+              src="https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/videos/1000ph_rotate.mp4"
+              type="video/mp4"
+            />
+          </video>
         </div>
 
        
