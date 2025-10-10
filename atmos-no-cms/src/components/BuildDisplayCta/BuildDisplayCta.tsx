@@ -97,7 +97,7 @@ export default function BuildDisplayCta({
       <div className={styles.inner}>
         <div className={styles.frame}>
           <motion.h4
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05}}
             viewport={{ once: true }}
@@ -107,17 +107,24 @@ export default function BuildDisplayCta({
             {title}
           </motion.h4>
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1}}
+            transition={{ duration: 0.5, delay: 0.3}}
             viewport={{ once: true }}
             className={styles.subtitle}
           >
             {subtitle}
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.55}}
+            viewport={{ once: true }}
+          >
           <Link to={to} className={styles.button} aria-label={buttonText}>
             {buttonText}
           </Link>
+          </motion.div>
         </div>
       </div>
     </section>
