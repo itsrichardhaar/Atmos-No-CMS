@@ -85,7 +85,7 @@
 }
 .button:hover { 
   box-shadow: 0 10px 22px rgba(0,0,0,.34); 
-  background: #000;
+  background: transparent;
   color: #fff;
   transition: all 0.3s ease;
 
