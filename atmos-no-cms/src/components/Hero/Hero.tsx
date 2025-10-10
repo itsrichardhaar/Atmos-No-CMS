@@ -8,10 +8,11 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const dotsRef = useRef<HTMLDivElement | null>(null);
 
+  const copyRef = useRef<HTMLDivElement | null>(null);
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [videoReady, setVideoReady] = useState(false);
   const [videoSrcSet, setVideoSrcSet] = useState(false);
-
   const [videoVisible, setVideoVisible] = useState(false);
 
   useEffect(() => {
@@ -29,7 +30,6 @@ export default function Hero() {
     const vid = videoRef.current;
     if (!el || !vid) return;
 
-
     const io = new IntersectionObserver(
       (entries) => {
         const e = entries[0];
@@ -37,11 +37,10 @@ export default function Hero() {
           vid.preload = "auto";
           vid.src = "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/videos/1000ph_rotate.mp4";
           setVideoSrcSet(true);
-       
           vid.play().catch(() => {});
         }
       },
-      { root: null, rootMargin: "200px 0px 0px 0px", threshold: 0.01 } 
+      { root: null, rootMargin: "200px 0px 0px 0px", threshold: 0.01 }
     );
 
     io.observe(el);
@@ -55,13 +54,12 @@ export default function Hero() {
     const markReady = () => {
       if (vid.readyState >= 3) {
         setVideoReady(true);
-        
         requestAnimationFrame(() => setVideoVisible(true));
       }
     };
-    vid.addEventListener("loadeddata", markReady, { passive: true });
-    vid.addEventListener("canplay", markReady, { passive: true });
-    vid.addEventListener("canplaythrough", markReady, { passive: true });
+    vid.addEventListener("loadeddata", markReady as any, { passive: true } as any);
+    vid.addEventListener("canplay", markReady as any, { passive: true } as any);
+    vid.addEventListener("canplaythrough", markReady as any, { passive: true } as any);
 
     return () => {
       vid.removeEventListener("loadeddata", markReady as any);
@@ -73,9 +71,11 @@ export default function Hero() {
   useEffect(() => {
     const sectionEl = sectionRef.current!;
     const dotEl = dotsRef.current!;
-    if (!sectionEl || !dotEl) return;
+    const copyEl = copyRef.current!;
+    if (!sectionEl || !dotEl || !copyEl) return;
 
     const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
     const getHeaderH = () => {
       const v = getComputedStyle(document.documentElement).getPropertyValue("--header-h").trim();
       const n = parseFloat(v || "0");
@@ -88,6 +88,7 @@ export default function Hero() {
       const vh = window.innerHeight || 1;
       const headerH = getHeaderH();
       const effVh = Math.max(1, vh - headerH);
+
       const progRaw = Math.min(1, Math.max(0, (-rect.top) / effVh));
       const prog = ease(progRaw);
 
@@ -102,12 +103,18 @@ export default function Hero() {
         const l = clamp(94 - 2 * prog, 88, 96);
         const s = clamp(100 - 2 * prog, 92, 100);
         const a = 0.34 - 0.10 * prog;
-
         dotEl.style.setProperty("--dg-hue", `${Math.round(hue)}`);
         dotEl.style.setProperty("--dg-l", `${l}%`);
         dotEl.style.setProperty("--dg-s", `${s}%`);
         dotEl.style.setProperty("--dg-alpha", `${a.toFixed(3)}`);
       }
+
+      
+      const liftPx = -(effVh * 1.05 * prog); 
+      copyEl.style.setProperty("--hero-copy-y", `${Math.round(liftPx)}px`);
+
+      const fade = prefersReducedMotion ? 1 : 1 - Math.min(1, progRaw * 1.25); 
+      copyEl.style.opacity = String(fade);
 
       if (progRaw >= 0.999) {
         sectionEl.classList.add("reveal-done");
@@ -165,7 +172,7 @@ export default function Hero() {
               muted
               playsInline
               loop
-              preload="metadata"    
+              preload="metadata"
               aria-hidden="true"
               poster=""
               controls={false}
@@ -177,7 +184,7 @@ export default function Hero() {
 
         <div className="hero__inner">
           <div className="container">
-            <div className="hero__copy hero__copy--center">
+            <div className="hero__copy hero__copy--center" ref={copyRef}>
               <motion.h1
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -218,6 +225,7 @@ export default function Hero() {
     </section>
   );
 }
+
 
 
 

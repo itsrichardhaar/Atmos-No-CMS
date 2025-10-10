@@ -1,12 +1,13 @@
 /* 200vh section so the first 100vh is used for the reveal */
 .hero.hero--reveal{
   position: relative;
-  height: 250vh;                          
+  height: 250vh;
   color: #fff;
   background: var(--bg);
   --hero-pad-y: clamp(3rem, 8vw, 6rem);
   margin-top: -94px;
 }
+
 
 .hero__sticky{
   position: sticky;
@@ -22,6 +23,11 @@
   padding: calc(var(--hero-pad-y) + var(--header-h)) 0 var(--hero-pad-y);
   position: relative;           
   z-index: 2;
+}
+
+.hero__copy {
+  transform: translate3d(0, var(--hero-copy-y, 0px), 0);
+  will-change: transform, opacity;
 }
 
 .hero__bg { 
