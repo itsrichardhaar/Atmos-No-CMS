@@ -1,6 +1,7 @@
 /* src/components/FeatureGrid/FeatureGrid.module.css */
 .section {
-  color: #d7dde4;                 
+  color: #d7dde4;  
+  margin-bottom: 80px;               
 }
 .inner {
   max-width: 1200px;
@@ -35,15 +36,15 @@
 }
 
 .card {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border: 1px solid rgba(255,255,255,0.06);
+  background: transparent;
+  border: none;
   border-radius: 14px;
   padding: 20px 18px;
   min-height: 180px;
 }
 .icon {
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   margin-bottom: 12px;
   opacity: 1;
   color: #2899D5;
