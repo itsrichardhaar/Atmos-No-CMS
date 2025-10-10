@@ -9,7 +9,8 @@
   position: relative;
   z-index: 0; 
   height: 30vh;
-  margin-block: -140px;            
+  margin-block: -140px;  
+  will-change: transform;          
 }
 
 .background-glow::before{
@@ -44,3 +45,6 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce){
+  .background-glow{ transform: none !important; }
+}

@@ -1,6 +1,6 @@
 // src/components/ProductGrid/ProductGrid.tsx
 import { useMemo, useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import ProductCard from "../ProductCard/ProductCard";
 import type { Product, ProductCategory } from "../../types/product";
 import { Link } from "react-router-dom";
@@ -246,12 +246,21 @@ export default function ProductGrid({
   }, [active, data, orderMap]);
 
   const gridRef = useRef<HTMLDivElement>(null);
-
-
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"], // 0 when entering viewport, 1 when leaving
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["-600px", "600px"]);
   const titleChars = useMemo(() => Array.from(title), [title]);
 
   return (
-    <section className="pg">
+    <motion.section 
+      className="pg"
+      ref={sectionRef}
+      style={reduce ? undefined : ({ ["--pg-y" as any]: y } as any)}
+    >
       <div className="container">
         <div className="pg__header">
           
@@ -323,7 +332,7 @@ export default function ProductGrid({
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
