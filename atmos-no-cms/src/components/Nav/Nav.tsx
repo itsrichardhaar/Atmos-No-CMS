@@ -17,13 +17,13 @@ export default function Nav() {
   useLockBodyScroll(open)
 
   useEffect(() => {
-  if (!open) return;
-  const t = setTimeout(() => {
-    const active = document.querySelector<HTMLAnchorElement>('.menu__link.is-active');
-    (active ?? firstLinkRef.current)?.focus();
-  }, 0);
-  return () => clearTimeout(t);
-}, [open]);
+    if (!open) return
+    const t = setTimeout(() => {
+      const active = document.querySelector<HTMLAnchorElement>('.menu__link.is-active');
+      (active ?? firstLinkRef.current)?.focus();
+    }, 0)
+    return () => clearTimeout(t)
+  }, [open])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false) }
@@ -44,39 +44,59 @@ export default function Nav() {
   // ===== Variants =====
   const EASE = [0.22, 1, 0.36, 1] as const
 
-  // Container just toggles hidden/visible (we’ll drive per-row delays via `custom`)
   const listGroup: Variants = { hidden: {}, visible: {} }
 
-  // Each link row uses a computed delay based on its index
+  
   const linkRow: Variants = {
     hidden: { opacity: 0, y: 10 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: { duration: 0.28, ease: EASE, delay: 0.08 + i * 0.16 },
+      transition: {
+        duration: 0.38,
+        ease: EASE,
+        delay: 0.08 + i * 0.16,
+        when: "beforeChildren"
+      },
     }),
   }
 
-  // Per-char group + char (no per-link delay; sequencing comes from row delay)
+  const baselineGroup: Variants = {
+    hidden: { clipPath: "inset(100% 0% 0% 0%)" }, 
+    visible: {
+      clipPath: "inset(0% 0% 0% 0%)",
+      transition: {
+        duration: 0.25,
+        ease: EASE,
+        when: "beforeChildren"
+      },
+    },
+  }
+
   const makeLabelGroup = (charStagger = 0.10, delayChildren = 0.06): Variants => ({
     hidden: {},
-    visible: { transition: { staggerChildren: charStagger, delayChildren } },
+    visible: {
+      transition: {
+        staggerChildren: charStagger,
+        delayChildren, 
+      }
+    },
   })
 
   const labelChar: Variants = {
-    hidden: { opacity: 0, y: 24, scale: 0.96 },
+    hidden: { opacity: 0, y: "1em", scale: 0.96 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.55, ease: EASE },
+      transition: { duration: 0.25, ease: EASE },
     },
   }
 
   const AnimatedLabel = ({
     text,
-    delay = 0.06,   // small, consistent
-    stagger = 0.10,  // per-char spacing
+    delay = 0.06,    
+    stagger = 0.10,  
   }: {
     text: string
     delay?: number
@@ -84,20 +104,37 @@ export default function Nav() {
   }) => {
     const chars = useMemo(() => Array.from(text), [text])
     return (
+ 
       <motion.span
-        key={open ? "open" : "closed"}     // re-run on open
-        className="menu__linkLabel"
-        variants={makeLabelGroup(stagger, delay)}
-        initial="hidden"
-        animate={open ? "visible" : "hidden"}
-        aria-hidden="true"
-        style={{ display: "inline-block" }}
+        className="menu__linkBaselineWrap"
+        variants={baselineGroup}
+        style={{
+          display: "inline-block",
+          willChange: "clip-path" 
+        }}
       >
-        {chars.map((ch, i) => (
-          <motion.span key={i} variants={labelChar} style={{ display: "inline-block" }}>
-            {ch === " " ? "\u00A0" : ch}
-          </motion.span>
-        ))}
+        <motion.span
+          key={open ? "open" : "closed"}
+          className="menu__linkLabel"
+          variants={makeLabelGroup(stagger, delay)}
+          initial="hidden"
+          animate={open ? "visible" : "hidden"}
+          aria-hidden="true"
+          style={{ display: "inline-block" }}
+        >
+          {chars.map((ch, i) => (
+            <motion.span
+              key={i}
+              variants={labelChar}
+              style={{
+                display: "inline-block",
+                transformOrigin: "bottom" 
+              }}
+            >
+              {ch === " " ? "\u00A0" : ch}
+            </motion.span>
+          ))}
+        </motion.span>
       </motion.span>
     )
   }
@@ -125,16 +162,10 @@ export default function Nav() {
           if ((e.target as HTMLElement).classList.contains("menu")) setOpen(false)
         }}
       >
-        {/* prelayers removed */}
-
         <nav className="menu__panel" aria-label="Primary">
           <div className="menu__content container">
-            {/* top: mobile logo */}
-            <Link to="/" className="mobile__logo" aria-label="Go to home">
-              
-            </Link>
+            <Link to="/" className="mobile__logo" aria-label="Go to home"></Link>
 
-            {/* middle: links — wrapper controls the row delay */}
             <motion.div
               className="menu__linksWrap"
               variants={listGroup}
@@ -190,7 +221,6 @@ export default function Nav() {
               </div>
             </motion.div>
 
-            {/* bottom: meta */}
             <div className="menu__meta">
               <a className="meta__row" href="tel:+18332866728">
                 <svg className="meta__icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -240,5 +270,6 @@ export default function Nav() {
     </header>
   )
 }
+
 
 
