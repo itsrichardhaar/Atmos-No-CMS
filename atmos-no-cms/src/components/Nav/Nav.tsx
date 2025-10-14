@@ -53,7 +53,7 @@ export default function Nav() {
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: { duration: 0.38, ease: EASE, delay: 0.08 + i * 0.16 },
+      transition: { duration: 0.28, ease: EASE, delay: 0.08 + i * 0.16 },
     }),
   }
 
@@ -69,7 +69,7 @@ export default function Nav() {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.75, ease: EASE },
+      transition: { duration: 0.55, ease: EASE },
     },
   }
 
