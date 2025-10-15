@@ -128,7 +128,8 @@
 
 .marketUseCases {
   position: relative;
-  margin: 24px 0 120px;
+  margin: 24px 0 24px;
+  padding-bottom: 120px;
   color: #fff;
 
 }
