@@ -130,11 +130,9 @@
   position: relative;
   margin: 24px 0 120px;
   color: #fff;
-  /* IMPORTANT: do NOT isolate, so bg can sit behind the previous section */
-  /* isolation: unset; */
+
 }
 
-/* BG wrapper: let it bleed upward behind Benefits */
 .marketUseCases__bg {
   position: absolute;
   top: -320px;            
@@ -153,7 +151,7 @@
   left: 0;
   width: min(1400px, 100vw); 
   height: auto;
-  opacity: 0.22;
+  opacity: 1;
   max-width: none;
   user-select: none;
 }
@@ -228,9 +226,6 @@
   line-height: 1.5;
 }
 
-/* =========================
-   Intro split (unchanged)
-   ========================= */
 .marketIntro{
   display: grid;
   grid-template-columns: 1.05fr 1fr;

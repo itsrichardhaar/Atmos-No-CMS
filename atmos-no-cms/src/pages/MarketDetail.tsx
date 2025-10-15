@@ -191,7 +191,7 @@ export default function MarketDetail() {
       {/* Use Cases Section; uses your SVGs */}
         {market.useCases && (
           <section className="marketUseCases">
-            <div className="marketUseCases__bg" aria-hidden="true">
+            <div className="marketUseCases__bg" aria-hidden="true" style={{ zIndex: 0 }} >
               {/* big background "A" */}
               <img
                 className="marketUseCases__bgImg"
@@ -205,6 +205,7 @@ export default function MarketDetail() {
             <motion.div
               className="marketUseCases__inner"
               variants={usecasesContainer}
+              style={{ position: "relative", zIndex: 1 }}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.4 }}
