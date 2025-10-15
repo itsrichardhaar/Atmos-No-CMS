@@ -114,19 +114,19 @@ export const markets: Market[] = [
       ]
     },
     useCases: {
-      headline: "Elevate presentations and conferences with dynamic LED visuals that impress every audience.",
+      headline: "Inspire connection and worship with crystal-clear displays that reach every seat.",
       items: [
         {
-          title: "Dynamic Backdrops that Reinforce Your Brand Message",
-          body: "Transform presentations and conferences with vivid LED walls that showcase your brand identity while keeping audiences visually engaged.",
+          title: "Video Walls that Connect Congregations in Worship",
+          body: "Deliver lyrics, scripture, and sermon visuals clearly to every seat with wide viewing angles and vivid color.",
         },
         {
-          title: "Product Launches That Capture Audience Attention Instantly",
-          body: "Use LED displays to create dramatic reveals and immersive visuals that highlight every product detail with clarity.",
+          title: "Enhancing Worship with Immersive Visual Storytelling",
+          body: "Support messages with high-definition video and imagery that bring services to life and deepen engagement.",
         },
         {
-          title: "Hybrid Events with Seamless Visual Integration",
-          body: "Ensure both in-person and remote participants experience crystal-clear visuals that maintain professionalism and engagement."
+          title: "Flexible Displays for Modern and Traditional Spaces",
+          body: "Seamlessly integrate LED technology into sanctuaries of all sizes without disrupting architectural design."
         }
       ]
     }
@@ -182,19 +182,19 @@ export const markets: Market[] = [
       ]
     },
     useCases: {
-      headline: "Elevate presentations and conferences with dynamic LED visuals that impress every audience.",
+      headline: "Bring live performances to life with tour-ready LED displays that captivate crowds.",
       items: [
         {
-          title: "Dynamic Backdrops that Reinforce Your Brand Message",
-          body: "Transform presentations and conferences with vivid LED walls that showcase your brand identity while keeping audiences visually engaged.",
+          title: "High-Impact Stage Backdrops with Immersive Visuals",
+          body: "Set the mood with LED backdrops that sync with live performances and captivate audiences.",
         },
         {
-          title: "Product Launches That Capture Audience Attention Instantly",
-          body: "Use LED displays to create dramatic reveals and immersive visuals that highlight every product detail with clarity.",
+          title: "Tour-Ready Panels Built for Rigorous Travel",
+          body: "Durable, crash-proof panels withstand frequent setups and teardowns while maintaining brilliant performance.",
         },
         {
-          title: "Hybrid Events with Seamless Visual Integration",
-          body: "Ensure both in-person and remote participants experience crystal-clear visuals that maintain professionalism and engagement."
+          title: "Outdoor Festival Displays Visible in Any Light",
+          body: "Ensure visibility with ultra-bright outdoor panels that perform even in direct sunlight."
         }
       ]
     }
@@ -251,19 +251,19 @@ export const markets: Market[] = [
       ]
     },
     useCases: {
-      headline: "Elevate presentations and conferences with dynamic LED visuals that impress every audience.",
+      headline: "Transform customer experiences with stunning displays that attract, inform, and inspire.",
       items: [
         {
-          title: "Dynamic Backdrops that Reinforce Your Brand Message",
-          body: "Transform presentations and conferences with vivid LED walls that showcase your brand identity while keeping audiences visually engaged.",
+          title: "Storefront Displays That Draw Customers Inside",
+          body: "Turn heads with bright, dynamic LED signage that attracts foot traffic and drives engagement.",
         },
         {
-          title: "Product Launches That Capture Audience Attention Instantly",
-          body: "Use LED displays to create dramatic reveals and immersive visuals that highlight every product detail with clarity.",
+          title: "Immersive In-Store Experiences that Elevate Shopping",
+          body: "Integrate LED displays into retail spaces to highlight promotions, storytelling, and interactive branding.",
         },
         {
-          title: "Hybrid Events with Seamless Visual Integration",
-          body: "Ensure both in-person and remote participants experience crystal-clear visuals that maintain professionalism and engagement."
+          title: "Hospitality Venues That Deliver Memorable Experiences",
+          body: "Hotels, restaurants, and entertainment venues use LED walls to set ambiance and delight guests."
         }
       ]
     }
@@ -319,19 +319,19 @@ export const markets: Market[] = [
       ]
     },
     useCases: {
-      headline: "Elevate presentations and conferences with dynamic LED visuals that impress every audience.",
+      headline: "Create lifelike, real-time environments with LED panels built for film and broadcast.",
       items: [
         {
-          title: "Dynamic Backdrops that Reinforce Your Brand Message",
-          body: "Transform presentations and conferences with vivid LED walls that showcase your brand identity while keeping audiences visually engaged.",
+          title: "Seamless Backgrounds for Film and Broadcast Shoots",
+          body: "Achieve lifelike, real-time environments that reduce post-production costs and improve creative flexibility.",
         },
         {
-          title: "Product Launches That Capture Audience Attention Instantly",
-          body: "Use LED displays to create dramatic reveals and immersive visuals that highlight every product detail with clarity.",
+          title: "Immersive XR Stages for Advanced Storytelling",
+          body: "Empower creators with LED environments that respond dynamically to lighting and camera setups.",
         },
         {
-          title: "Hybrid Events with Seamless Visual Integration",
-          body: "Ensure both in-person and remote participants experience crystal-clear visuals that maintain professionalism and engagement."
+          title: "Color-Accurate Displays for Professional Studio Workflows",
+          body: "Ensure consistent, calibrated visuals that meet broadcast and film industry standards."
         }
       ]
     }
@@ -459,19 +459,19 @@ export const markets: Market[] = [
       ]
     },
     useCases: {
-      headline: "Elevate presentations and conferences with dynamic LED visuals that impress every audience.",
+      headline: "Enhance learning and communication with LED solutions designed for schools and campuses.",
       items: [
         {
-          title: "Dynamic Backdrops that Reinforce Your Brand Message",
-          body: "Transform presentations and conferences with vivid LED walls that showcase your brand identity while keeping audiences visually engaged.",
+          title: "Lecture Halls Enhanced with Clear Visual Communication",
+          body: "Support learning with LED walls that deliver presentations, videos, and graphics visible from every seat.",
         },
         {
-          title: "Product Launches That Capture Audience Attention Instantly",
-          body: "Use LED displays to create dramatic reveals and immersive visuals that highlight every product detail with clarity.",
+          title: "Campus-Wide Messaging Made Modern and Dynamic",
+          body: "Share important announcements and branding through energy-efficient LED signage across school facilities.",
         },
         {
-          title: "Hybrid Events with Seamless Visual Integration",
-          body: "Ensure both in-person and remote participants experience crystal-clear visuals that maintain professionalism and engagement."
+          title: "Event and Sports Venue Displays for Student Engagement",
+          body: "Create professional-quality experiences at school assemblies, graduations, and athletic competitions."
         }
       ]
     }
