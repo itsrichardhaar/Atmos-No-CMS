@@ -1,3 +1,4 @@
+// src/components/Hero/Hero.tsx
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -7,24 +8,30 @@ import "../DotGrid.css";
 export default function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const dotsRef = useRef<HTMLDivElement | null>(null);
-
   const copyRef = useRef<HTMLDivElement | null>(null);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const videoWrapRef = useRef<HTMLDivElement | null>(null);
+
   const [videoReady, setVideoReady] = useState(false);
   const [videoSrcSet, setVideoSrcSet] = useState(false);
   const [videoVisible, setVideoVisible] = useState(false);
 
+  // Preload the video file early
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "preload";
     link.as = "video";
-    link.href = "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/videos/1000ph_rotate.mp4";
+    link.href =
+      "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/videos/1000ph_rotate.mp4";
     link.type = "video/mp4";
     document.head.appendChild(link);
-    return () => { document.head.removeChild(link) };
+    return () => {
+      document.head.removeChild(link);
+    };
   }, []);
 
+  // Lazy set the video src when hero enters viewport
   useEffect(() => {
     const el = sectionRef.current;
     const vid = videoRef.current;
@@ -35,7 +42,8 @@ export default function Hero() {
         const e = entries[0];
         if (e.isIntersecting && !videoSrcSet) {
           vid.preload = "auto";
-          vid.src = "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/videos/1000ph_rotate.mp4";
+          vid.src =
+            "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/videos/1000ph_rotate.mp4";
           setVideoSrcSet(true);
           vid.play().catch(() => {});
         }
@@ -47,6 +55,7 @@ export default function Hero() {
     return () => io.disconnect();
   }, [videoSrcSet]);
 
+  // Mark video ready/visible once it can play
   useEffect(() => {
     const vid = videoRef.current;
     if (!vid) return;
@@ -68,20 +77,27 @@ export default function Hero() {
     };
   }, []);
 
+  // Scroll-driven reveal + overtake
   useEffect(() => {
     const sectionEl = sectionRef.current!;
     const dotEl = dotsRef.current!;
     const copyEl = copyRef.current!;
-    if (!sectionEl || !dotEl || !copyEl) return;
+    const videoWrapEl = videoWrapRef.current!;
+    const nextEl = sectionEl?.nextElementSibling as HTMLElement | null; // should be .afterHero
+    if (!sectionEl || !dotEl || !copyEl || !videoWrapEl || !nextEl) return;
 
-    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    const prefersReducedMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
 
     const getHeaderH = () => {
-      const v = getComputedStyle(document.documentElement).getPropertyValue("--header-h").trim();
+      const v = getComputedStyle(document.documentElement)
+        .getPropertyValue("--header-h")
+        .trim();
       const n = parseFloat(v || "0");
       return Number.isFinite(n) ? n : 0;
     };
     const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+    const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 
     const update = () => {
       const rect = sectionEl.getBoundingClientRect();
@@ -89,33 +105,46 @@ export default function Hero() {
       const headerH = getHeaderH();
       const effVh = Math.max(1, vh - headerH);
 
-      const progRaw = Math.min(1, Math.max(0, (-rect.top) / effVh));
+      // Base progress across the first viewport of sticky hero
+      const progRaw = clamp((-rect.top) / effVh, 0, 1);
       const prog = ease(progRaw);
 
-      const start = 0;
+      // Dot reveal radius and tint
       const end = Math.max(effVh * 1.6, 1200);
-      const r = start + (end - start) * prog;
-      dotEl.style.setProperty("--maskR", `${Math.round(r)}px`);
+      dotEl.style.setProperty("--maskR", `${Math.round(end * prog)}px`);
 
       if (!prefersReducedMotion) {
         const hue = (prog * 720) % 360;
-        const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
         const l = clamp(94 - 2 * prog, 88, 96);
         const s = clamp(100 - 2 * prog, 92, 100);
-        const a = 0.34 - 0.10 * prog;
+        const a = 0.34 - 0.1 * prog;
         dotEl.style.setProperty("--dg-hue", `${Math.round(hue)}`);
         dotEl.style.setProperty("--dg-l", `${l}%`);
         dotEl.style.setProperty("--dg-s", `${s}%`);
         dotEl.style.setProperty("--dg-alpha", `${a.toFixed(3)}`);
       }
 
-      
-      const liftPx = -(effVh * 1.05 * prog); 
+      // Copy lift + fade
+      const liftPx = -(effVh * 1.05 * prog);
       copyEl.style.setProperty("--hero-copy-y", `${Math.round(liftPx)}px`);
+      const copyFade = prefersReducedMotion ? 1 : 1 - clamp(progRaw * 1.25, 0, 1);
+      copyEl.style.opacity = String(copyFade);
 
-      const fade = prefersReducedMotion ? 1 : 1 - Math.min(1, progRaw * 1.25); 
-      copyEl.style.opacity = String(fade);
+      // Overtake span (~150vh): move the entire next block upward
+      const overtakeSpanPx = effVh * 1.5;
+      const overtakeProgRaw = clamp((-rect.top) / overtakeSpanPx, 0, 1);
+      const overtakeProg = ease(overtakeProgRaw);
 
+      // Slide the sibling up from 0 -> -100vh (adjust to -effVh * 1.2 for deeper overtake)
+      const translateYPx = -overtakeProg * effVh;
+      nextEl.style.setProperty("--overtake-y", `${translateYPx}px`);
+
+      // Fade hero video out in sync with the overtake
+      const videoFadeMatch = 1 - overtakeProgRaw;
+      const finalVideoFade = Math.min(copyFade, videoFadeMatch);
+      videoWrapEl.style.opacity = String(finalVideoFade);
+
+      // Mark state for CSS hooks if needed
       if (progRaw >= 0.999) {
         sectionEl.classList.add("reveal-done");
         document.documentElement.setAttribute("data-hero-reveal", "done");
@@ -151,21 +180,29 @@ export default function Hero() {
       <div className="hero__sticky">
         <div className="hero__bg" aria-hidden="true">
           <div className="hero__bg-base" />
+
           <div
             ref={dotsRef}
             className="dotgrid dotgrid--reveal"
-            style={{
-              // @ts-ignore
-              "--dg-size": "2px",
-              "--dg-gap": "22px",
-              "--dg-hue": "210",
-              "--dg-s": "96%",
-              "--dg-l": "86%",
-              "--dg-alpha": "0.34",
-            } as React.CSSProperties}
+            style={
+              {
+                // @ts-ignore
+                "--dg-size": "2px",
+                "--dg-gap": "22px",
+                "--dg-hue": "210",
+                "--dg-s": "96%",
+                "--dg-l": "86%",
+                "--dg-alpha": "0.34",
+              } as React.CSSProperties
+            }
           />
 
-          <div className={`hero__videoWrap ${videoReady ? "is-ready" : ""} ${videoVisible ? "is-visible" : ""}`}>
+          <div
+            ref={videoWrapRef}
+            className={`hero__videoWrap ${videoReady ? "is-ready" : ""} ${
+              videoVisible ? "is-visible" : ""
+            }`}
+          >
             <video
               ref={videoRef}
               className="hero__video"
@@ -225,6 +262,9 @@ export default function Hero() {
     </section>
   );
 }
+
+
+
 
 
 

@@ -1,13 +1,20 @@
 /* 200vh section so the first 100vh is used for the reveal */
 .hero.hero--reveal{
   position: relative;
-  height: 250vh;
+  height: 200vh;
   color: #fff;
   background: var(--bg);
   --hero-pad-y: clamp(3rem, 8vw, 6rem);
   margin-top: -94px;
+  z-index: 1;
 }
 
+.afterHero {
+  position: relative;
+  z-index: 3;                   /* above the sticky hero */
+  transform: translateY(var(--overtake-y, 0px)); /* start at 0, then move up (negative) */
+  will-change: transform;
+}
 
 .hero__sticky{
   position: sticky;
