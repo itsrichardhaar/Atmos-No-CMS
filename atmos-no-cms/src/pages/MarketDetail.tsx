@@ -6,8 +6,8 @@ import { markets } from "../data/markets";
 import "./MarketDetail.css";
 import BuildDisplayCta from "../components/BuildDisplayCta/BuildDisplayCta";
 
-import largeAMarkUrl from "/public/icons/large-a.svg";
-import smallAMarkUrl from "/public/icons/small-a.svg";
+import largeAMarkUrl from "../../src/assets/icons/large-a.svg";
+import smallAMarkUrl from "../../src/assets/icons/small-a.svg";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
