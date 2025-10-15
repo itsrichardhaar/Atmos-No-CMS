@@ -6,6 +6,11 @@ export type MarketBenefit = {
   body: string;
 };
 
+export type MarketUseCaseItem = {
+  title: string;
+  body: string;
+};
+
 export type Market = {
   id: string;
   slug: string;              
@@ -19,6 +24,11 @@ export type Market = {
     image: string;        
     headline: string;     
     body: string;
+  };
+
+  useCases?: {
+    headline: string;
+    items: MarketUseCaseItem[];
   };
 
   benefits?: {

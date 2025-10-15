@@ -45,9 +45,27 @@ export const markets: Market[] = [
           body: "",
         }
       ]
+    },
+    useCases: {
+      headline: "Elevate presentations and conferences with dynamic LED visuals that impress every audience.",
+      items: [
+        {
+          title: "Dynamic Backdrops that Reinforce Your Brand Message",
+          body: "Transform presentations and conferences with vivid LED walls that showcase your brand identity while keeping audiences visually engaged.",
+        },
+        {
+          title: "Product Launches That Capture Audience Attention Instantly",
+          body: "Use LED displays to create dramatic reveals and immersive visuals that highlight every product detail with clarity.",
+        },
+        {
+          title: "Hybrid Events with Seamless Visual Integration",
+          body: "Ensure both in-person and remote participants experience crystal-clear visuals that maintain professionalism and engagement."
+        }
+      ]
     }
-
   },
+
+
   {
     id: "m2",
     slug: "house-of-worship",
@@ -94,8 +112,28 @@ export const markets: Market[] = [
           body: "",
         }
       ]
+    },
+    useCases: {
+      headline: "Elevate presentations and conferences with dynamic LED visuals that impress every audience.",
+      items: [
+        {
+          title: "Dynamic Backdrops that Reinforce Your Brand Message",
+          body: "Transform presentations and conferences with vivid LED walls that showcase your brand identity while keeping audiences visually engaged.",
+        },
+        {
+          title: "Product Launches That Capture Audience Attention Instantly",
+          body: "Use LED displays to create dramatic reveals and immersive visuals that highlight every product detail with clarity.",
+        },
+        {
+          title: "Hybrid Events with Seamless Visual Integration",
+          body: "Ensure both in-person and remote participants experience crystal-clear visuals that maintain professionalism and engagement."
+        }
+      ]
     }
   },
+
+
+
   {
     id: "m3",
     slug: "concerts-tours",
@@ -142,8 +180,28 @@ export const markets: Market[] = [
           body: "",
         }
       ]
+    },
+    useCases: {
+      headline: "Elevate presentations and conferences with dynamic LED visuals that impress every audience.",
+      items: [
+        {
+          title: "Dynamic Backdrops that Reinforce Your Brand Message",
+          body: "Transform presentations and conferences with vivid LED walls that showcase your brand identity while keeping audiences visually engaged.",
+        },
+        {
+          title: "Product Launches That Capture Audience Attention Instantly",
+          body: "Use LED displays to create dramatic reveals and immersive visuals that highlight every product detail with clarity.",
+        },
+        {
+          title: "Hybrid Events with Seamless Visual Integration",
+          body: "Ensure both in-person and remote participants experience crystal-clear visuals that maintain professionalism and engagement."
+        }
+      ]
     }
   },
+
+
+
   {
     id: "m4",
     slug: "retail-hospitality",
@@ -191,8 +249,28 @@ export const markets: Market[] = [
           body: "",
         }
       ]
+    },
+    useCases: {
+      headline: "Elevate presentations and conferences with dynamic LED visuals that impress every audience.",
+      items: [
+        {
+          title: "Dynamic Backdrops that Reinforce Your Brand Message",
+          body: "Transform presentations and conferences with vivid LED walls that showcase your brand identity while keeping audiences visually engaged.",
+        },
+        {
+          title: "Product Launches That Capture Audience Attention Instantly",
+          body: "Use LED displays to create dramatic reveals and immersive visuals that highlight every product detail with clarity.",
+        },
+        {
+          title: "Hybrid Events with Seamless Visual Integration",
+          body: "Ensure both in-person and remote participants experience crystal-clear visuals that maintain professionalism and engagement."
+        }
+      ]
     }
   },
+
+
+
   {
     id: "m5",
     slug: "virtual-production",
@@ -239,8 +317,29 @@ export const markets: Market[] = [
           body: "",
         }
       ]
+    },
+    useCases: {
+      headline: "Elevate presentations and conferences with dynamic LED visuals that impress every audience.",
+      items: [
+        {
+          title: "Dynamic Backdrops that Reinforce Your Brand Message",
+          body: "Transform presentations and conferences with vivid LED walls that showcase your brand identity while keeping audiences visually engaged.",
+        },
+        {
+          title: "Product Launches That Capture Audience Attention Instantly",
+          body: "Use LED displays to create dramatic reveals and immersive visuals that highlight every product detail with clarity.",
+        },
+        {
+          title: "Hybrid Events with Seamless Visual Integration",
+          body: "Ensure both in-person and remote participants experience crystal-clear visuals that maintain professionalism and engagement."
+        }
+      ]
     }
   },
+
+
+
+
   {
     id: "m6",
     slug: "immersive-productions",
@@ -288,8 +387,29 @@ export const markets: Market[] = [
           body: "",
         }
       ]
+    },
+    useCases: {
+      headline: "Elevate presentations and conferences with dynamic LED visuals that impress every audience.",
+      items: [
+        {
+          title: "Dynamic Backdrops that Reinforce Your Brand Message",
+          body: "Transform presentations and conferences with vivid LED walls that showcase your brand identity while keeping audiences visually engaged.",
+        },
+        {
+          title: "Product Launches That Capture Audience Attention Instantly",
+          body: "Use LED displays to create dramatic reveals and immersive visuals that highlight every product detail with clarity.",
+        },
+        {
+          title: "Hybrid Events with Seamless Visual Integration",
+          body: "Ensure both in-person and remote participants experience crystal-clear visuals that maintain professionalism and engagement."
+        }
+      ]
     }
   },
+
+
+
+
   {
     id: "m7",
     slug: "education-institutions",
@@ -335,6 +455,23 @@ export const markets: Market[] = [
           image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/education-and-institutions/education-benefit-4.png",
           title: "Versatile applications for events, signage, and branding",
           body: "",
+        }
+      ]
+    },
+    useCases: {
+      headline: "Elevate presentations and conferences with dynamic LED visuals that impress every audience.",
+      items: [
+        {
+          title: "Dynamic Backdrops that Reinforce Your Brand Message",
+          body: "Transform presentations and conferences with vivid LED walls that showcase your brand identity while keeping audiences visually engaged.",
+        },
+        {
+          title: "Product Launches That Capture Audience Attention Instantly",
+          body: "Use LED displays to create dramatic reveals and immersive visuals that highlight every product detail with clarity.",
+        },
+        {
+          title: "Hybrid Events with Seamless Visual Integration",
+          body: "Ensure both in-person and remote participants experience crystal-clear visuals that maintain professionalism and engagement."
         }
       ]
     }

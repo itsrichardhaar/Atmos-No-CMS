@@ -6,55 +6,53 @@ import { markets } from "../data/markets";
 import "./MarketDetail.css";
 import BuildDisplayCta from "../components/BuildDisplayCta/BuildDisplayCta";
 
+/** SVG assets */
+import largeAMarkUrl from "../assets/marks/large-a.svg";   // update paths if needed
+import smallAMarkUrl from "../assets/marks/small-a.svg";
+
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
+/** Hero title animation */
 const titleGroup: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.06 } }, // stagger by phrase/word-block
+  visible: { transition: { staggerChildren: 0.06 } },
 };
-
 const wordGroup: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.03 } }, // then stagger chars inside each word
+  visible: { transition: { staggerChildren: 0.03 } },
 };
-
 const charVar: Variants = {
   hidden: { opacity: 0, y: 12 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE_BEZIER } },
 };
 
-// ===== Parsing helper =====
-// We accept either:
-//  - market.name with optional "quoted phrases" to force a line break before them
-//  - market.nameWords?: string[] to explicitly define words/phrases; quotes there also force a break
-type Token = { phrase: string; breakBefore: boolean };
+/** UseCases animation */
+const usecasesContainer: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE_BEZIER } },
+};
 
+// ===== helper for animated H1 =====
+type Token = { phrase: string; breakBefore: boolean };
 function buildTokens(name: string, nameWords?: string[]): Token[] {
-  // If nameWords provided, treat each item as a word/phrase. Quotes mean “break before”.
   if (nameWords && nameWords.length) {
     return nameWords.map((w, idx) => {
       const hasLeadingQuote = w.startsWith('"') || w.startsWith("'");
       const cleaned = w.replace(/^['"]+|['"]+$/g, "");
-      return {
-        phrase: cleaned,
-        breakBefore: hasLeadingQuote && idx > 0, // force a break before the first quoted item (not at index 0)
-      };
+      return { phrase: cleaned, breakBefore: hasLeadingQuote && idx > 0 };
     });
   }
-
-  // Otherwise parse `name`:
-  // - capture "double-quoted" or 'single-quoted' phrases as blocks
-  // - everything else split by whitespace
   const out: Token[] = [];
   const re = /"([^"]+)"|'([^']+)'|(\S+)/g;
   let m: RegExpExecArray | null;
   while ((m = re.exec(name))) {
     const quoted = m[1] ?? m[2];
-    if (quoted) {
-      out.push({ phrase: quoted, breakBefore: out.length > 0 });
-    } else if (m[3]) {
-      out.push({ phrase: m[3], breakBefore: false });
-    }
+    if (quoted) out.push({ phrase: quoted, breakBefore: out.length > 0 });
+    else if (m[3]) out.push({ phrase: m[3], breakBefore: false });
   }
   return out.length ? out : [{ phrase: name, breakBefore: false }];
 }
@@ -78,8 +76,6 @@ export default function MarketDetail() {
 
   const heroSrc = market.heroImage;
 
-  // Build tokens (words/phrases) once. If you’ve added `nameWords` to your data/type, pass it here.
-  // If you haven't changed your type, (market as any).nameWords is fine too.
   const tokens = useMemo(
     () => buildTokens(market.name ?? "", (market as any).nameWords),
     [market.name, (market as any).nameWords]
@@ -87,19 +83,11 @@ export default function MarketDetail() {
 
   return (
     <section className="market market--heroBleed">
-      {/* FULL-BLEED HERO */}
+      {/* HERO */}
       <div className="market__hero">
-        <img
-          src={heroSrc}
-          alt={market.name}
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
-        />
+        <img src={heroSrc} alt={market.name} loading="eager" decoding="async" fetchPriority="high" />
         <div className="market__heroInner">
           <div className="market__heroContent">
-            {/* Animated H1: wraps by words/phrases, animates by characters.
-                Quoted tokens in data force a line break BEFORE that token. */}
             <motion.h1
               className="market__title"
               variants={titleGroup}
@@ -136,7 +124,6 @@ export default function MarketDetail() {
                         </motion.span>
                       );
                     })}
-                    {/* normal space between blocks that DON'T force a break */}
                     {ti < tokens.length - 1 && !tokens[ti + 1].breakBefore ? " " : null}
                   </span>
                 );
@@ -148,16 +135,11 @@ export default function MarketDetail() {
 
       {/* CONTENT */}
       <div className="container market__wrap">
-        {/* Intro split (image + big headline + body) */}
+        {/* Intro split */}
         {market.intro && (
           <section className="marketIntro">
             <figure className="marketIntro__media">
-              <img
-                src={market.intro.image}
-                alt=""
-                loading="lazy"
-                decoding="async"
-              />
+              <img src={market.intro.image} alt="" loading="lazy" decoding="async" />
             </figure>
             <div className="marketIntro__copy">
               <h2 className="marketIntro__headline">
@@ -173,12 +155,10 @@ export default function MarketDetail() {
           </section>
         )}
 
-        {/* Benefits grid */}
+        {/* Benefits (kept where it was) */}
         {market.benefits?.items?.length ? (
           <section className="marketBenefits">
-            {market.benefits.title && (
-              <h2 className="marketBenefits__title">{market.benefits.title}</h2>
-            )}
+            {market.benefits.title && <h2 className="marketBenefits__title">{market.benefits.title}</h2>}
             <ul className="marketBenefits__grid" role="list">
               {market.benefits.items.map((b, i) => (
                 <li key={i} className="marketBenefits__card">
@@ -192,12 +172,61 @@ export default function MarketDetail() {
             </ul>
           </section>
         ) : null}
+
+        {/* === NEW ORDER: UseCases AFTER Benefits, BEFORE CTA === */}
+        {market.useCases && (
+          <section className="marketUseCases">
+            {/* Large background “A” that bleeds upward behind Benefits */}
+            <div className="marketUseCases__bg" aria-hidden="true">
+              <img
+                className="marketUseCases__bgImg"
+                src={largeAMarkUrl}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            <motion.div
+              className="marketUseCases__inner"
+              variants={usecasesContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
+            >
+              <div className="marketUseCases__headlineWrap">
+                <img
+                  className="marketUseCases__mark"
+                  src={smallAMarkUrl}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <motion.h2 className="marketUseCases__headline" variants={fadeUp}>
+                  {market.useCases.headline}
+                </motion.h2>
+              </div>
+
+              <ul className="marketUseCases__grid" role="list">
+                {market.useCases.items.map((it, i) => (
+                  <motion.li key={i} className="marketUseCases__card" variants={fadeUp}>
+                    <h3 className="marketUseCases__h3">{it.title}</h3>
+                    <p className="marketUseCases__p">{it.body}</p>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          </section>
+        )}
       </div>
 
+      {/* CTA stays last */}
       <BuildDisplayCta />
     </section>
   );
 }
+
+
 
 
 
