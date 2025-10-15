@@ -124,27 +124,22 @@ export default function Hero() {
         dotEl.style.setProperty("--dg-alpha", `${a.toFixed(3)}`);
       }
 
-      // Copy lift + fade
       const liftPx = -(effVh * 1.05 * prog);
       copyEl.style.setProperty("--hero-copy-y", `${Math.round(liftPx)}px`);
       const copyFade = prefersReducedMotion ? 1 : 1 - clamp(progRaw * 1.25, 0, 1);
       copyEl.style.opacity = String(copyFade);
 
-      // Overtake span (~150vh): move the entire next block upward
       const overtakeSpanPx = effVh * 1.5;
       const overtakeProgRaw = clamp((-rect.top) / overtakeSpanPx, 0, 1);
       const overtakeProg = ease(overtakeProgRaw);
 
-      // Slide the sibling up from 0 -> -100vh (adjust to -effVh * 1.2 for deeper overtake)
       const translateYPx = -overtakeProg * effVh;
       nextEl.style.setProperty("--overtake-y", `${translateYPx}px`);
 
-      // Fade hero video out in sync with the overtake
       const videoFadeMatch = 1 - overtakeProgRaw;
       const finalVideoFade = Math.min(copyFade, videoFadeMatch);
       videoWrapEl.style.opacity = String(finalVideoFade);
 
-      // Mark state for CSS hooks if needed
       if (progRaw >= 0.999) {
         sectionEl.classList.add("reveal-done");
         document.documentElement.setAttribute("data-hero-reveal", "done");
