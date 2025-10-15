@@ -19,7 +19,8 @@ type TeamMember = {
 const heroImage =
   "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/about/About-main.png";
 
-// ---- Framer Motion title animation (same as Markets.tsx) ----
+import largeAMarkUrl from "../../src/assets/icons/large-a.svg";
+
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
 const titleGroup: Variants = {
@@ -137,7 +138,18 @@ export default function About() {
         </section>
 
         <section className="aboutTeam">
-          <ul className="aboutTeam__grid" role="list">
+        {/* Background large “A” */}
+        <div className="aboutTeam__bg" aria-hidden="true">
+          <img
+            className="aboutTeam__bgImg"
+            src={largeAMarkUrl}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <ul className="aboutTeam__grid" role="list">
             {team.map((m, i) => (
               <li key={i} className="aboutTeam__card">
                 <div className="aboutTeam__photoWrap">
@@ -160,7 +172,7 @@ export default function About() {
               </li>
             ))}
           </ul>
-        </section>
+      </section>
 
         <section className="aboutCTA">
           <h2 className="aboutCTA__h2">Join the Team</h2>
@@ -172,15 +184,37 @@ export default function About() {
           </div>
         </section>
 
-        <section className="aboutFaqs">
-          <h2 className="aboutFaqs__title">FAQs</h2>
-          <div className="aboutFaqs__list" role="list">
-            {faqs.map((f, i) => (
-              <details key={i} className="aboutFaqs__item">
-                <summary className="aboutFaqs__q">{f.q}</summary>
-                <p className="aboutFaqs__a">{f.a}</p>
-              </details>
-            ))}
+        {/* FAQs */}
+        <section className="aboutFaqs aboutFaqs--split">
+          {/* Left intro column */}
+          <aside className="aboutFaqs__intro">
+            <h2 className="aboutFaqs__kicker">FAQs</h2>
+            <p className="aboutFaqs__lead">
+              Find quick answers to the most common questions about Atmos LED
+              displays, from choosing the right panel to installation, support,
+              and long-term performance.
+            </p>
+
+            <Link className="aboutFaqs__cta" to="/contact">
+              <span>Contact Us</span>
+              <span className="aboutFaqs__ctaArrow" aria-hidden="true">›</span>
+            </Link>
+          </aside>
+
+          {/* Right accordion column */}
+          <div className="aboutFaqs__right">
+            <div className="aboutFaqs__list" role="list">
+              {faqs.map((f, i) => (
+                <details key={i} className="aboutFaqs__item">
+                  <summary className="aboutFaqs__q">
+                    {f.q}
+                  </summary>
+                  <div className="aboutFaqs__aWrap">
+                    <p className="aboutFaqs__a">{f.a}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
       </div>
