@@ -62,8 +62,8 @@
 
 .marketBenefits{
   position: relative;
-  margin: 80px 0 10px;
-  margin-bottom: 80px;
+  margin: 180px 0 10px;
+  margin-bottom: 120px;
   z-index: 1; 
 }
 .marketBenefits__title{
@@ -128,8 +128,9 @@
 
 .marketUseCases {
   position: relative;
-  margin: 24px 0 24px;
-  padding-bottom: 120px;
+  margin-top: 180px;
+  margin-bottom: 20px;
+  padding-bottom: 240px;
   color: #fff;
 
 }
@@ -149,8 +150,8 @@
 .marketUseCases__bgImg {
   position: absolute;
   top: 0;
-  left: 0;
-  width: min(1400px, 100vw); 
+  right: 0 !important;
+  width: min(1000px, 100vw); 
   height: auto;
   opacity: 1;
   max-width: none;
