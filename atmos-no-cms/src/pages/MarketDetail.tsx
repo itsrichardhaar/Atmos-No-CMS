@@ -6,13 +6,12 @@ import { markets } from "../data/markets";
 import "./MarketDetail.css";
 import BuildDisplayCta from "../components/BuildDisplayCta/BuildDisplayCta";
 
-/** SVG assets */
-import largeAMarkUrl from "../assets/marks/large-a.svg";   // update paths if needed
-import smallAMarkUrl from "../assets/marks/small-a.svg";
+import largeAMarkUrl from "/public/icons/large-a.svg";
+import smallAMarkUrl from "/public/icons/small-a.svg";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
-/** Hero title animation */
+/** Existing title animation for the hero */
 const titleGroup: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.06 } },
@@ -26,7 +25,7 @@ const charVar: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE_BEZIER } },
 };
 
-/** UseCases animation */
+/** NEW: subtle stagger for the Figma section */
 const usecasesContainer: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.08 } },
@@ -36,7 +35,7 @@ const fadeUp: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE_BEZIER } },
 };
 
-// ===== helper for animated H1 =====
+// ===== Parsing helper for animated H1 =====
 type Token = { phrase: string; breakBefore: boolean };
 function buildTokens(name: string, nameWords?: string[]): Token[] {
   if (nameWords && nameWords.length) {
@@ -46,6 +45,7 @@ function buildTokens(name: string, nameWords?: string[]): Token[] {
       return { phrase: cleaned, breakBefore: hasLeadingQuote && idx > 0 };
     });
   }
+
   const out: Token[] = [];
   const re = /"([^"]+)"|'([^']+)'|(\S+)/g;
   let m: RegExpExecArray | null;
@@ -83,9 +83,15 @@ export default function MarketDetail() {
 
   return (
     <section className="market market--heroBleed">
-      {/* HERO */}
+      {/* FULL-BLEED HERO */}
       <div className="market__hero">
-        <img src={heroSrc} alt={market.name} loading="eager" decoding="async" fetchPriority="high" />
+        <img
+          src={heroSrc}
+          alt={market.name}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
         <div className="market__heroInner">
           <div className="market__heroContent">
             <motion.h1
@@ -135,11 +141,17 @@ export default function MarketDetail() {
 
       {/* CONTENT */}
       <div className="container market__wrap">
-        {/* Intro split */}
+
+        {/* Intro split (image + headline + body) */}
         {market.intro && (
           <section className="marketIntro">
             <figure className="marketIntro__media">
-              <img src={market.intro.image} alt="" loading="lazy" decoding="async" />
+              <img
+                src={market.intro.image}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
             </figure>
             <div className="marketIntro__copy">
               <h2 className="marketIntro__headline">
@@ -155,10 +167,12 @@ export default function MarketDetail() {
           </section>
         )}
 
-        {/* Benefits (kept where it was) */}
+        {/* Benefits grid */}
         {market.benefits?.items?.length ? (
           <section className="marketBenefits">
-            {market.benefits.title && <h2 className="marketBenefits__title">{market.benefits.title}</h2>}
+            {market.benefits.title && (
+              <h2 className="marketBenefits__title">{market.benefits.title}</h2>
+            )}
             <ul className="marketBenefits__grid" role="list">
               {market.benefits.items.map((b, i) => (
                 <li key={i} className="marketBenefits__card">
@@ -172,12 +186,13 @@ export default function MarketDetail() {
             </ul>
           </section>
         ) : null}
+      </div>
 
-        {/* === NEW ORDER: UseCases AFTER Benefits, BEFORE CTA === */}
+      {/* Use Cases Section; uses your SVGs */}
         {market.useCases && (
           <section className="marketUseCases">
-            {/* Large background “A” that bleeds upward behind Benefits */}
             <div className="marketUseCases__bg" aria-hidden="true">
+              {/* big background "A" */}
               <img
                 className="marketUseCases__bgImg"
                 src={largeAMarkUrl}
@@ -195,6 +210,7 @@ export default function MarketDetail() {
               viewport={{ once: true, amount: 0.4 }}
             >
               <div className="marketUseCases__headlineWrap">
+                {/* small "A" to the left of headline */}
                 <img
                   className="marketUseCases__mark"
                   src={smallAMarkUrl}
@@ -218,14 +234,11 @@ export default function MarketDetail() {
             </motion.div>
           </section>
         )}
-      </div>
 
-      {/* CTA stays last */}
       <BuildDisplayCta />
     </section>
   );
 }
-
 
 
 
