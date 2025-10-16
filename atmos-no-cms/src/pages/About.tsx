@@ -1,6 +1,6 @@
 // src/pages/About.tsx
 import { useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { Link } from "react-router-dom";
 import "./About.css";
@@ -23,11 +23,13 @@ import largeAMarkUrl from "../../src/assets/icons/large-a.svg";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
+/* -----------------------------
+   Keep H1 animation EXACTLY as-is
+----------------------------- */
 const titleGroup: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.03 } },
 };
-
 const titleChar: Variants = {
   hidden: { opacity: 0, y: 12 },
   visible: {
@@ -36,7 +38,50 @@ const titleChar: Variants = {
     transition: { duration: 0.8, ease: EASE_BEZIER },
   },
 };
-// -------------------------------------------------------------
+
+/* -----------------------------
+   Reused ProductGrid-style motions
+----------------------------- */
+// General stagger container (like PG filterGroup)
+const filterGroup: Variants = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
+// Row/item reveal (like PG filterItem)
+const filterItem: Variants = {
+  hidden: { opacity: 0, y: -15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
+// Soft fade up used for one-offs
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: EASE_BEZIER },
+  },
+};
+// Left→Right stagger for card grids (team)
+const ltrContainer: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+const slideInLtr: Variants = {
+  hidden: { opacity: 0, x: -16, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: { duration: 0.55, ease: EASE_BEZIER },
+  },
+};
 
 const intro = {
   image: "/assets/about/about-intro.jpg",
@@ -89,8 +134,12 @@ const faqs: { q: string; a: string }[] = [
 ];
 
 export default function About() {
+  const reduce = useReducedMotion();
   const title = "About Us";
   const titleChars = useMemo(() => Array.from(title), [title]);
+
+  const motionProps = (variants: Variants, amount = 0.75) =>
+    reduce ? {} : { variants, initial: "hidden", whileInView: "visible", viewport: { once: true, amount } };
 
   return (
     <section className="about about--heroBleed">
@@ -104,6 +153,7 @@ export default function About() {
         />
         <div className="about__heroInner">
           <div className="about__heroContent">
+            {/* H1 stays exactly the same */}
             <motion.h1
               id="about-heading"
               className="about__title"
@@ -130,28 +180,37 @@ export default function About() {
 
       {/* CONTENT */}
       <div className="container about__wrap">
-        <section className="aboutIntro aboutIntro--single">
+        {/* Intro — reuse PG filter-style stagger */}
+        <motion.section className="aboutIntro aboutIntro--single" {...motionProps(filterGroup, 0.8)}>
           <div className="aboutIntro__copy">
-            <h2 className="aboutIntro__headline">{intro.headline}</h2>
-            <p className="aboutIntro__body">{intro.body}</p>
+            <motion.h2 className="aboutIntro__headline" variants={filterItem}>
+              {intro.headline}
+            </motion.h2>
+            <motion.p className="aboutIntro__body" variants={filterItem}>
+              {intro.body}
+            </motion.p>
           </div>
-        </section>
+        </motion.section>
 
+        {/* Team — bg fades in; grid uses left→right stagger like your card grids */}
         <section className="aboutTeam">
-        {/* Background large “A” */}
-        <div className="aboutTeam__bg" aria-hidden="true">
-          <img
-            className="aboutTeam__bgImg"
-            src={largeAMarkUrl}
-            alt=""
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
+          <motion.div className="aboutTeam__bg" aria-hidden="true" {...motionProps(fadeUp, 0.6)}>
+            <img
+              className="aboutTeam__bgImg"
+              src={largeAMarkUrl}
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          </motion.div>
 
-        <ul className="aboutTeam__grid" role="list">
+          <motion.ul
+            className="aboutTeam__grid"
+            role="list"
+            {...motionProps(ltrContainer, 0.75)}
+          >
             {team.map((m, i) => (
-              <li key={i} className="aboutTeam__card">
+              <motion.li key={i} className="aboutTeam__card" variants={slideInLtr}>
                 <div className="aboutTeam__photoWrap">
                   <img src={m.photo} alt={m.name} loading="lazy" decoding="async" />
                 </div>
@@ -161,20 +220,21 @@ export default function About() {
                   {m.bio && <p className="aboutTeam__bio">{m.bio}</p>}
                   <div className="aboutTeam__links">
                     {m.linkedin && (
-                      <a href={m.linkedin} aria-label={`${m.name} on LinkedIn`}>
+                      <Link to={m.linkedin} aria-label={`${m.name} on LinkedIn`}>
                         LinkedIn
-                      </a>
+                      </Link>
                     )}
-                    {m.x && <a href={m.x} aria-label={`${m.name} on X`}>X</a>}
-                    {m.site && <a href={m.site} aria-label={`${m.name} website`}>Site</a>}
+                    {m.x && <Link to={m.x} aria-label={`${m.name} on X`}>X</Link>}
+                    {m.site && <Link to={m.site} aria-label={`${m.name} website`}>Site</Link>}
                   </div>
                 </div>
-              </li>
+              </motion.li>
             ))}
-          </ul>
-      </section>
+          </motion.ul>
+        </section>
 
-        <section className="aboutCTA">
+        {/* CTA — subtle fadeUp for cohesion */}
+        <motion.section className="aboutCTA" {...motionProps(fadeUp, 0.7)}>
           <h2 className="aboutCTA__h2">Join the Team</h2>
           <p className="aboutCTA__p">Interested in a career with Atmos LED?</p>
           <div className="aboutCTA__actions">
@@ -182,40 +242,40 @@ export default function About() {
               Let’s Talk
             </Link>
           </div>
-        </section>
+        </motion.section>
 
-        {/* FAQs */}
+        {/* FAQs — left column fades; right list staggers in rows */}
         <section className="aboutFaqs aboutFaqs--split">
           {/* Left intro column */}
-          <aside className="aboutFaqs__intro">
-            <h2 className="aboutFaqs__kicker">FAQs</h2>
-            <p className="aboutFaqs__lead">
+          <motion.aside className="aboutFaqs__intro" {...motionProps(filterGroup, 0.75)}>
+            <motion.h2 className="aboutFaqs__kicker" variants={filterItem}>FAQs</motion.h2>
+            <motion.p className="aboutFaqs__lead" variants={filterItem}>
               Find quick answers to the most common questions about Atmos LED
               displays, from choosing the right panel to installation, support,
               and long-term performance.
-            </p>
+            </motion.p>
 
-            <Link className="aboutFaqs__cta" to="/contact">
-              <span>Contact Us</span>
-              <span className="aboutFaqs__ctaArrow" aria-hidden="true">›</span>
-            </Link>
-          </aside>
+            <motion.div variants={filterItem}>
+              <Link className="aboutFaqs__cta" to="/contact">
+                <span>Contact Us</span>
+                <span className="aboutFaqs__ctaArrow" aria-hidden="true">›</span>
+              </Link>
+            </motion.div>
+          </motion.aside>
 
           {/* Right accordion column */}
-          <div className="aboutFaqs__right">
+          <motion.div className="aboutFaqs__right" {...motionProps(filterGroup, 0.8)}>
             <div className="aboutFaqs__list" role="list">
               {faqs.map((f, i) => (
-                <details key={i} className="aboutFaqs__item">
-                  <summary className="aboutFaqs__q">
-                    {f.q}
-                  </summary>
+                <motion.details key={i} className="aboutFaqs__item" variants={filterItem}>
+                  <summary className="aboutFaqs__q">{f.q}</summary>
                   <div className="aboutFaqs__aWrap">
                     <p className="aboutFaqs__a">{f.a}</p>
                   </div>
-                </details>
+                </motion.details>
               ))}
             </div>
-          </div>
+          </motion.div>
         </section>
       </div>
     </section>
