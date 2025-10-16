@@ -25,6 +25,11 @@
   will-change: transform;
   /*filter: blur(0.5px); */
 }
+
+.pg.pg--noAfter:after {
+  display: none;
+}
+
 .pg__header { 
     display: flex; 
     align-items: end; 

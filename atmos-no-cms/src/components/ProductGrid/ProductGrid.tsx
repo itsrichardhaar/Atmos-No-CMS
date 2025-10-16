@@ -233,6 +233,7 @@ export default function ProductGrid({
   }, [data]);
 
   const [active, setActive] = useState<CatOrAll>(defaultCategory);
+  const isFiltered = active !== "All";
 
   const orderMap = useMemo(() => {
     const m = new Map<string, number>();
@@ -257,7 +258,7 @@ export default function ProductGrid({
 
   return (
     <motion.section 
-      className="pg"
+      className={`pg ${isFiltered ? "pg--noAfter" : ""}`}
       ref={sectionRef}
       style={reduce ? undefined : ({ ["--pg-y" as any]: y } as any)}
     >
