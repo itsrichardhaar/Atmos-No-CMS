@@ -13,7 +13,10 @@ export default function Home() {
     <>
       <Hero />
       {/* The block that will slide up over the hero */}
-      <div className="afterHero">
+      <div 
+        className="afterHero"
+        style={{ marginBottom: "var(--overtake-y)" }}
+      >
         <ProductGrid
           title="Our Products"
           products={products.slice(0, 8)}
