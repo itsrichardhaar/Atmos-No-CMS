@@ -1,73 +1,81 @@
-import { NavLink, Link, useLocation } from "react-router-dom"
-import { useEffect, useRef, useState, useMemo } from "react"
-import { motion } from "framer-motion"
-import type { Variants } from "framer-motion"
-import useLockBodyScroll from "../../hooks/useLockBodyScroll"
-import HamburgerButton from "../HamburgerButton/Hamburger"
-import logo from "/assets/logos/Company Logo.png"
-import "./Nav.css"
+import { NavLink, Link, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState, useMemo } from "react";
+import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
+import useLockBodyScroll from "../../hooks/useLockBodyScroll";
+import HamburgerButton from "../HamburgerButton/Hamburger";
+import logo from "/assets/logos/Company Logo.png";
+import "./Nav.css";
 
 export default function Nav() {
-  const [open, setOpen] = useState(false)
-  const [solid, setSolid] = useState(false)
-  const location = useLocation()
-  const firstLinkRef = useRef<HTMLAnchorElement>(null)
+  const [open, setOpen] = useState(false);
+  const [solid, setSolid] = useState(false);
+  const location = useLocation();
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
-  useEffect(() => { setOpen(false) }, [location.pathname])
-  useLockBodyScroll(open)
+  // Close menu on route change
+  useEffect(() => { setOpen(false); }, [location.pathname]);
+  useLockBodyScroll(open);
 
+  // Focus active link when menu opens
   useEffect(() => {
-    if (!open) return
-      const t = setTimeout(() => {
-        const active = document.querySelector<HTMLAnchorElement>('.menu__link.is-active');
-        (active ?? firstLinkRef.current)?.focus();
-      }, 0)
-      return () => clearTimeout(t)
-    }, [open])
+    if (!open) return;
+    const t = setTimeout(() => {
+      const active = document.querySelector<HTMLAnchorElement>(".menu__link.is-active");
+      (active ?? firstLinkRef.current)?.focus();
+    }, 0);
+    return () => clearTimeout(t);
+  }, [open]);
 
-    useEffect(() => {
-      const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false) }
-      window.addEventListener("keydown", onKey)
-      return () => window.removeEventListener("keydown", onKey)
-    }, [])
+  // ESC to close
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
-    useEffect(() => {
-    let raf = 0;
-    let lastSolid = false;
+  // ✅ Replace scroll rAF with IntersectionObserver sentinel
+  useEffect(() => {
+    const sentinel = document.createElement("div");
+    sentinel.setAttribute("data-nav-sentinel", "");
+    Object.assign(sentinel.style, {
+      position: "absolute",
+      top: "0px",
+      left: "0px",
+      width: "1px",
+      height: "1px",
+      pointerEvents: "none",
+      opacity: "0",
+    });
+    document.body.prepend(sentinel);
 
-    const read = () => {
-      const nextSolid = window.pageYOffset > 10;
-      if (nextSolid !== lastSolid) {
-        lastSolid = nextSolid;
-        setSolid(nextSolid);
-      }
-      raf = 0;
-    };
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        // Solid when sentinel is not visible (i.e., scrolled > ~10px)
+        setSolid(!entry.isIntersecting);
+      },
+      { root: null, rootMargin: "-10px 0px 0px 0px", threshold: 0 }
+    );
 
-    const onScroll = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(read);
-    };
+    obs.observe(sentinel);
 
-    lastSolid = window.pageYOffset > 10;
-    setSolid(lastSolid);
+    // Initialize for mid-page loads
+    setSolid(window.pageYOffset > 10);
 
-    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (raf) cancelAnimationFrame(raf);
+      obs.disconnect();
+      if (sentinel.parentNode) sentinel.parentNode.removeChild(sentinel);
     };
   }, []);
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    isActive ? "menu__link is-active" : "menu__link"
+    isActive ? "menu__link is-active" : "menu__link";
 
   // ===== Variants =====
-  const EASE = [0.22, 1, 0.36, 1] as const
+  const EASE = [0.22, 1, 0.36, 1] as const;
 
-  const listGroup: Variants = { hidden: {}, visible: {} }
+  const listGroup: Variants = { hidden: {}, visible: {} };
 
-  
   const linkRow: Variants = {
     hidden: { opacity: 0, y: 10 },
     visible: (i: number) => ({
@@ -77,32 +85,27 @@ export default function Nav() {
         duration: 0.38,
         ease: EASE,
         delay: 0.08 + i * 0.16,
-        when: "beforeChildren"
+        when: "beforeChildren",
       },
     }),
-  }
+  };
 
   const baselineGroup: Variants = {
-    hidden: { clipPath: "inset(100% 0% 0% 0%)" }, 
+    hidden: { clipPath: "inset(100% 0% 0% 0%)" },
     visible: {
       clipPath: "inset(0% 0% 0% 0%)",
       transition: {
         duration: 0.25,
         ease: EASE,
-        when: "beforeChildren"
+        when: "beforeChildren",
       },
     },
-  }
+  };
 
-  const makeLabelGroup = (charStagger = 0.10, delayChildren = 0.06): Variants => ({
+  const makeLabelGroup = (charStagger = 0.1, delayChildren = 0.06): Variants => ({
     hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: charStagger,
-        delayChildren, 
-      }
-    },
-  })
+    visible: { transition: { staggerChildren: charStagger, delayChildren } },
+  });
 
   const labelChar: Variants = {
     hidden: { opacity: 0, y: "1em", scale: 0.96 },
@@ -112,27 +115,23 @@ export default function Nav() {
       scale: 1,
       transition: { duration: 0.25, ease: EASE },
     },
-  }
+  };
 
   const AnimatedLabel = ({
     text,
-    delay = 0.06,    
-    stagger = 0.10,  
+    delay = 0.06,
+    stagger = 0.1,
   }: {
-    text: string
-    delay?: number
-    stagger?: number
+    text: string;
+    delay?: number;
+    stagger?: number;
   }) => {
-    const chars = useMemo(() => Array.from(text), [text])
+    const chars = useMemo(() => Array.from(text), [text]);
     return (
- 
       <motion.span
         className="menu__linkBaselineWrap"
         variants={baselineGroup}
-        style={{
-          display: "inline-block",
-          willChange: "clip-path" 
-        }}
+        style={{ display: "inline-block", willChange: "clip-path" }}
       >
         <motion.span
           key={open ? "open" : "closed"}
@@ -147,18 +146,15 @@ export default function Nav() {
             <motion.span
               key={i}
               variants={labelChar}
-              style={{
-                display: "inline-block",
-                transformOrigin: "bottom" 
-              }}
+              style={{ display: "inline-block", transformOrigin: "bottom" }}
             >
               {ch === " " ? "\u00A0" : ch}
             </motion.span>
           ))}
         </motion.span>
       </motion.span>
-    )
-  }
+    );
+  };
 
   return (
     <header className={`nav ${open ? "is-open" : ""} ${solid ? "is-solid" : "is-transparent"}`}>
@@ -169,7 +165,7 @@ export default function Nav() {
 
         <HamburgerButton
           isOpen={open}
-          onToggle={() => setOpen(o => !o)}
+          onToggle={() => setOpen((o) => !o)}
           className="site-hamburger"
         />
       </div>
@@ -180,7 +176,7 @@ export default function Nav() {
         role="dialog"
         aria-modal="true"
         onClick={(e) => {
-          if ((e.target as HTMLElement).classList.contains("menu")) setOpen(false)
+          if ((e.target as HTMLElement).classList.contains("menu")) setOpen(false);
         }}
       >
         <nav className="menu__panel" aria-label="Primary">
@@ -274,7 +270,7 @@ export default function Nav() {
                 </a>
                 <a className="social__link" href="https://instagram.com/atmosled" target="_blank" rel="noreferrer" aria-label="Instagram">
                   <svg className="social__icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5a5.5 5.5 0 110 11 5.5 5.5 0 010-11zm0 2a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.75-2.25a1 1 0 110 2 1 1 0 010-2z"/>
+                    <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 00-5-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5a5.5 5.5 0 110 11 5.5 5.5 0 010-11zm0 2a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.75-2.25a1 1 0 110 2 1 1 0 010-2z"/>
                   </svg>
                 </a>
                 <a className="social__link" href="https://youtube.com/@atmosled" target="_blank" rel="noreferrer" aria-label="YouTube">
@@ -289,8 +285,9 @@ export default function Nav() {
         </nav>
       </div>
     </header>
-  )
+  );
 }
+
 
 
 
