@@ -13,11 +13,11 @@ export default function Nav() {
   const location = useLocation();
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
-  // Close menu on route change
+
   useEffect(() => { setOpen(false); }, [location.pathname]);
   useLockBodyScroll(open);
 
-  // Focus active link when menu opens
+
   useEffect(() => {
     if (!open) return;
     const t = setTimeout(() => {
@@ -27,14 +27,14 @@ export default function Nav() {
     return () => clearTimeout(t);
   }, [open]);
 
-  // ESC to close
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // ✅ Replace scroll rAF with IntersectionObserver sentinel
+
   useEffect(() => {
     const sentinel = document.createElement("div");
     sentinel.setAttribute("data-nav-sentinel", "");
@@ -51,7 +51,6 @@ export default function Nav() {
 
     const obs = new IntersectionObserver(
       ([entry]) => {
-        // Solid when sentinel is not visible (i.e., scrolled > ~10px)
         setSolid(!entry.isIntersecting);
       },
       { root: null, rootMargin: "-10px 0px 0px 0px", threshold: 0 }
@@ -59,7 +58,6 @@ export default function Nav() {
 
     obs.observe(sentinel);
 
-    // Initialize for mid-page loads
     setSolid(window.pageYOffset > 10);
 
     return () => {

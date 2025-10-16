@@ -11,11 +11,8 @@
   top: 0;
   z-index: 2100;
   background-color: rgba(0,0,0,0.9);
-  transition: background-color .25s ease,
-              border-color .25s ease;
+  transition: background-color .25s ease, border-color .25s ease;
   will-change: background-color;
-  /* DO NOT add transforms here (they create containing blocks for position: fixed) */
-  /* transform: translateZ(0);  <-- leave commented unless absolutely needed */
 }
 
 .nav-spacer { height: 0; }
@@ -73,7 +70,7 @@ html[data-hero-reveal="active"] .nav-spacer {
 .menu {
   position: fixed;
   inset: 0;
-  z-index: 5000;              /* was 4000 */
+  z-index: 5000;             
   background: rgba(0,0,0,.25);
   opacity: 0;
   pointer-events: none;
@@ -119,13 +116,13 @@ html[data-hero-reveal="active"] .nav-spacer {
   background: #000 !important;
   border-bottom: none;
   border-color: none !important;
-  z-index: 5001;              /* ↑ above .menu */
+  z-index: 5001;              
 }
 
 .nav__logo,
 .site-hamburger {
-  position: relative;         /* create local stacking context */
-  z-index: 5002;              /* ↑ above both .nav and .menu */
+  position: relative;         
+  z-index: 5002;             
   pointer-events: auto;
 }
 .nav.is-open .nav__logo { 
