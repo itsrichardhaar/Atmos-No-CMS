@@ -11,10 +11,10 @@
 
 .afterHero {
   position: relative;
-  z-index: 3;                 
-  transform: translate3d(0, var(--overtake-y, 0px), 0);
-  margin-bottom: var(--overtake-y, 0px);
+  z-index: 3;                   /* above the sticky hero */
+  transform: translateY(var(--overtake-y, 0px)); /* start at 0, then move up (negative) */
   will-change: transform;
+  margin-bottom: -704px;
 }
 
 .hero__sticky{
