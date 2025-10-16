@@ -1,3 +1,4 @@
+// src/pages/MarketDetail.tsx
 import { useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -25,14 +26,24 @@ const charVar: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE_BEZIER } },
 };
 
-/** NEW: subtle stagger for the Figma section */
-const usecasesContainer: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-};
+/** Subtle fade for headlines/one-offs */
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 14 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE_BEZIER } },
+};
+
+/** Shared left→right stagger for grids (Use Cases + Benefits) */
+const ltrContainer: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+const slideInLtr: Variants = {
+  hidden: { opacity: 0, x: -16 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: EASE_BEZIER },
+  },
 };
 
 // ===== Parsing helper for animated H1 =====
@@ -141,7 +152,6 @@ export default function MarketDetail() {
 
       {/* CONTENT */}
       <div className="container market__wrap">
-
         {/* Intro split (image + headline + body) */}
         {market.intro && (
           <section className="marketIntro">
@@ -167,79 +177,88 @@ export default function MarketDetail() {
           </section>
         )}
 
-        {/* Benefits grid */}
+        {/* Benefits grid (now with L→R stagger) */}
         {market.benefits?.items?.length ? (
           <section className="marketBenefits">
             {market.benefits.title && (
               <h2 className="marketBenefits__title">{market.benefits.title}</h2>
             )}
-            <ul className="marketBenefits__grid" role="list">
+
+            <motion.ul
+              className="marketBenefits__grid"
+              role="list"
+              variants={ltrContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.85 }}   // ⬅ later trigger
+            >
               {market.benefits.items.map((b, i) => (
-                <li key={i} className="marketBenefits__card">
+                <motion.li key={i} className="marketBenefits__card" variants={slideInLtr}>
                   <span className="marketBenefits__thumb">
                     <img src={b.image} alt="" loading="lazy" decoding="async" />
                   </span>
                   <h3 className="marketBenefits__h3">{b.title}</h3>
                   <p className="marketBenefits__p">{b.body}</p>
-                </li>
+                </motion.li>
               ))}
-            </ul>
+            </motion.ul>
           </section>
         ) : null}
       </div>
 
-      {/* Use Cases Section; uses your SVGs */}
-        {market.useCases && (
-          <section className="marketUseCases">
-            <div className="marketUseCases__bg" aria-hidden="true" style={{ zIndex: 0 }} >
-              {/* big background "A" */}
+      {/* Use Cases Section; uses your SVGs (cards now L→R stagger) */}
+      {market.useCases && (
+        <section className="marketUseCases">
+          <div className="marketUseCases__bg" aria-hidden="true" style={{ zIndex: 0 }}>
+            {/* big background "A" */}
+            <img
+              className="marketUseCases__bgImg"
+              src={largeAMarkUrl}
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div className="marketUseCases__inner" style={{ position: "relative", zIndex: 1 }}>
+            <div className="marketUseCases__headlineWrap">
+              {/* small "A" to the left of headline */}
               <img
-                className="marketUseCases__bgImg"
-                src={largeAMarkUrl}
+                className="marketUseCases__mark"
+                src={smallAMarkUrl}
                 alt=""
                 loading="lazy"
                 decoding="async"
               />
+              <motion.h2 className="marketUseCases__headline" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }}>
+                {market.useCases.headline}
+              </motion.h2>
             </div>
 
-            <motion.div
-              className="marketUseCases__inner"
-              variants={usecasesContainer}
-              style={{ position: "relative", zIndex: 1 }}
+            <motion.ul
+              className="marketUseCases__grid"
+              role="list"
+              variants={ltrContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.4 }}
+              viewport={{ once: true, amount: 0.85 }}
             >
-              <div className="marketUseCases__headlineWrap">
-                {/* small "A" to the left of headline */}
-                <img
-                  className="marketUseCases__mark"
-                  src={smallAMarkUrl}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                />
-                <motion.h2 className="marketUseCases__headline" variants={fadeUp}>
-                  {market.useCases.headline}
-                </motion.h2>
-              </div>
-
-              <ul className="marketUseCases__grid" role="list">
-                {market.useCases.items.map((it, i) => (
-                  <motion.li key={i} className="marketUseCases__card" variants={fadeUp}>
-                    <h3 className="marketUseCases__h3">{it.title}</h3>
-                    <p className="marketUseCases__p">{it.body}</p>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          </section>
-        )}
+              {market.useCases.items.map((it, i) => (
+                <motion.li key={i} className="marketUseCases__card" variants={slideInLtr}>
+                  <h3 className="marketUseCases__h3">{it.title}</h3>
+                  <p className="marketUseCases__p">{it.body}</p>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </div>
+        </section>
+      )}
 
       <BuildDisplayCta />
     </section>
   );
 }
+
 
 
 
