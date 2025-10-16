@@ -18,48 +18,46 @@ export default function Nav() {
 
   useEffect(() => {
     if (!open) return
-    const t = setTimeout(() => {
-      const active = document.querySelector<HTMLAnchorElement>('.menu__link.is-active');
-      (active ?? firstLinkRef.current)?.focus();
-    }, 0)
-    return () => clearTimeout(t)
-  }, [open])
+      const t = setTimeout(() => {
+        const active = document.querySelector<HTMLAnchorElement>('.menu__link.is-active');
+        (active ?? firstLinkRef.current)?.focus();
+      }, 0)
+      return () => clearTimeout(t)
+    }, [open])
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false) }
-    window.addEventListener("keydown", onKey)
-    return () => window.removeEventListener("keydown", onKey)
-  }, [])
+    useEffect(() => {
+      const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false) }
+      window.addEventListener("keydown", onKey)
+      return () => window.removeEventListener("keydown", onKey)
+    }, [])
 
-  useEffect(() => {
-  let raf = 0;
-  let lastSolid = false;
+    useEffect(() => {
+    let raf = 0;
+    let lastSolid = false;
 
-  const read = () => {
-    // Use pageYOffset to stay robust; Lenis updates this too.
-    const nextSolid = window.pageYOffset > 10;
-    if (nextSolid !== lastSolid) {
-      lastSolid = nextSolid;
-      setSolid(nextSolid);
-    }
-    raf = 0;
-  };
+    const read = () => {
+      const nextSolid = window.pageYOffset > 10;
+      if (nextSolid !== lastSolid) {
+        lastSolid = nextSolid;
+        setSolid(nextSolid);
+      }
+      raf = 0;
+    };
 
-  const onScroll = () => {
-    if (raf) return;
-    raf = requestAnimationFrame(read);
-  };
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(read);
+    };
 
-  // initialize once (no flash)
-  lastSolid = window.pageYOffset > 10;
-  setSolid(lastSolid);
+    lastSolid = window.pageYOffset > 10;
+    setSolid(lastSolid);
 
-  window.addEventListener("scroll", onScroll, { passive: true });
-  return () => {
-    window.removeEventListener("scroll", onScroll);
-    if (raf) cancelAnimationFrame(raf);
-  };
-}, []);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     isActive ? "menu__link is-active" : "menu__link"
