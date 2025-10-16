@@ -32,11 +32,34 @@ export default function Nav() {
   }, [])
 
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 10)
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+  let raf = 0;
+  let lastSolid = false;
+
+  const read = () => {
+    // Use pageYOffset to stay robust; Lenis updates this too.
+    const nextSolid = window.pageYOffset > 10;
+    if (nextSolid !== lastSolid) {
+      lastSolid = nextSolid;
+      setSolid(nextSolid);
+    }
+    raf = 0;
+  };
+
+  const onScroll = () => {
+    if (raf) return;
+    raf = requestAnimationFrame(read);
+  };
+
+  // initialize once (no flash)
+  lastSolid = window.pageYOffset > 10;
+  setSolid(lastSolid);
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  return () => {
+    window.removeEventListener("scroll", onScroll);
+    if (raf) cancelAnimationFrame(raf);
+  };
+}, []);
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     isActive ? "menu__link is-active" : "menu__link"
