@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource-variable/funnel-display": "^5.2.7",
     "@fontsource-variable/inter": "^5.2.7",
+    "@studio-freight/lenis": "^1.0.42",
     "framer-motion": "^12.23.13",
     "gsap": "^3.13.0",
     "motion-plus": "https://api.motion.dev/registry?package=motion-plus&version=1.5.4&token=3167adee5026a89b00508e3fed7f6ede4fc341720036487264f9ed58ee96c255",
