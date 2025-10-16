@@ -184,10 +184,8 @@ export default function Hero() {
                 // @ts-ignore
                 "--dg-size": "2px",
                 "--dg-gap": "22px",
-                "--dg-hue": "210",
-                "--dg-s": "96%",
-                "--dg-l": "86%",
-                "--dg-alpha": "0.34",
+                "--dg-color": "#2899D5",
+                "--dg-alpha-pct": "65%",
               } as React.CSSProperties
             }
           />

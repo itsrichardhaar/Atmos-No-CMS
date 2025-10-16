@@ -13,7 +13,7 @@ type DotGridProps = {
 };
 
 export default function DotGrid({
-  dotColor = "rgba(255,255,255,0.22)",
+  dotColor = "#2899D5",
   size = 2,
   gap = 22,
   offsetX = 0,
