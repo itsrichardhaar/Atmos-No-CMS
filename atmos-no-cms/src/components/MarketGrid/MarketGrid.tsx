@@ -1,42 +1,30 @@
-// src/components/MarketGrid/MarketGrid.tsx
-
-import { useMemo } from "react";
-import { motion } from "framer-motion";
+import { useMemo, useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import type { Market } from "../../types/market";
 import MarketCard from "../MarketCard/MarketCard";
+import CursorSpotlight from "../CursorSpotlight";
 import "./MarketGrid.css";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
-const titleGroup: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.03 } }, 
-};
-
+const titleGroup: Variants = { hidden: {}, visible: { transition: { staggerChildren: 0.03 } } };
 const titleChar: Variants = {
   hidden: { opacity: 0, y: 12 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: EASE_BEZIER },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE_BEZIER } },
 };
 
-type Props = {
-  title?: string;
-  subtitle?: string;
-  markets: Market[];
-};
+type Props = { title?: string; subtitle?: string; markets: Market[] };
 
 export default function MarketGrid({ title = "Markets", subtitle, markets }: Props) {
   const titleChars = useMemo(() => Array.from(title), [title]);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion(); // boolean | null
 
   return (
     <section className="mg">
       <div className="container">
         <div className={`mg__header ${subtitle ? "mg__header--withSub" : ""}`}>
-      
           <motion.h2
             className="mg__title"
             variants={titleGroup}
@@ -46,11 +34,7 @@ export default function MarketGrid({ title = "Markets", subtitle, markets }: Pro
             aria-label={title}
           >
             {titleChars.map((ch, i) => (
-              <motion.span
-                key={i}
-                variants={titleChar}
-                style={{ display: "inline-block" }}
-              >
+              <motion.span key={i} variants={titleChar} style={{ display: "inline-block" }}>
                 {ch === " " ? "\u00A0" : ch}
               </motion.span>
             ))}
@@ -69,7 +53,17 @@ export default function MarketGrid({ title = "Markets", subtitle, markets }: Pro
           )}
         </div>
 
-        <motion.div className="mg__grid" layout>
+        {/* Cursor spotlight / glow — disabled for reduced motion */}
+        <CursorSpotlight
+          gridRef={gridRef}
+          cardSelector=".mc"
+          radius={300}
+          glowRGB="40,153,213"
+          disabled={reduce ?? false}
+          spotlightClass="mg-spotlight"
+        />
+
+        <motion.div className="mg__grid" layout ref={gridRef}>
           {markets.map((m) => (
             <motion.div
               key={m.slug}
@@ -86,5 +80,7 @@ export default function MarketGrid({ title = "Markets", subtitle, markets }: Pro
     </section>
   );
 }
+
+
 
 

@@ -6,7 +6,7 @@ import "./MarketCard.css";
 
 export default function MarketCard({ market }: { market: Market }) {
   return (
-    <article className="mc">
+    <article className="mc mc--glow">
       <Link
         to={`/markets/${market.slug}`}
         className="mc__imageWrap"

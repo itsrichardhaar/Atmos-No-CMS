@@ -1,12 +1,26 @@
 /* src/components/MarketCard/MarketCard.css */
+
+/* ===== Base card (existing) ===== */
 .mc{
   background: linear-gradient(to bottom, #2b2b2b 0%, #000 70%);
   border-radius: 8px;
-  
   color: #fff;
   box-shadow: 0 10px 30px rgba(0,0,0,.25);
   display: grid;
   gap: 10px;
+
+  /* enable overlays / ring */
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;  /* keep blend/mask local to card */
+  z-index: 0;
+
+  /* glow custom props (same family as ProductCard) */
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 220px;       /* adjust to 260–300 for wider look */
+  --glow-rgb: 40,153,213;
 }
 
 .mc__imageWrap{ position: relative; display:block; border-radius:4px; overflow:hidden; aspect-ratio: 4/3; }
@@ -24,3 +38,55 @@
 
 .mc__ctaRow{ margin-top: 8px; padding-left: 20px; padding-bottom: 20px;}
 .btn--sm{ padding:5px 14px; font-size: 14px; }
+
+/* ===== ProductGrid-style border glow ring (exact mask trick) ===== */
+.mc.mc--glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;                 /* ring thickness (match ProductCard) */
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(
+      var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+      rgba(var(--glow-rgb), calc(var(--glow-intensity) * 0.85)) 0%,
+      rgba(var(--glow-rgb), calc(var(--glow-intensity) * 0.45)) 32%,
+      transparent 60%
+    );
+
+  /* punch gradient into a ring — identical to .pc.pc--glow */
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+
+  opacity: 1;
+  transition: opacity .2s ease;
+}
+
+/* ===== Firefox fallback (mirrors ProductCard) ===== */
+@-moz-document url-prefix() {
+  .mc.mc--glow::after {
+    mask: none !important;
+    -webkit-mask: none !important;
+    border: 6px solid transparent;  /* similar visual weight */
+    background: none !important;
+    border-image: radial-gradient(
+        var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+        rgba(var(--glow-rgb), calc(var(--glow-intensity) * 0.85)) 0%,
+        rgba(var(--glow-rgb), calc(var(--glow-intensity) * 0.45)) 32%,
+        transparent 60%
+      ) 1;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+
