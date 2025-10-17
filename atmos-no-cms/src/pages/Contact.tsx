@@ -1,16 +1,15 @@
 // src/pages/Contact.tsx
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import type { FormEvent } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useAnimation, useInView } from "framer-motion";
 import type { Variants } from "framer-motion";
 import "./Contact.css";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
 /* -----------------------------
-   Reused from ProductGrid
+   Variants (unchanged)
 ----------------------------- */
-// Title split/stagger (by chars)
 const titleGroup: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.03 } },
@@ -24,36 +23,62 @@ const titleChar: Variants = {
   },
 };
 
-// "Filter" style group/row reveal
-const filterGroup = {
+const filterGroup: Variants = {
   hidden: { opacity: 1 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
-const filterItem = {
+const filterItem: Variants = {
   hidden: { opacity: 0, y: -15 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-// Simple fade for tagline/intro to match PG header vibe
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 12 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: EASE_BEZIER },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_BEZIER } },
 };
 
 export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const reduce = useReducedMotion();
+
+  // --- NEW: control when animations are allowed to start
+  const [ready, setReady] = useState(false); // becomes true after first user interaction
+  useEffect(() => {
+    if (reduce) return setReady(false); // skip anim logic if reduced motion
+    const markReady = () => setReady(true);
+
+    // First scroll or pointer makes us "ready"
+    window.addEventListener("scroll", markReady, { once: true, passive: true });
+    window.addEventListener("pointerdown", markReady, { once: true, passive: true });
+
+    // Fallback: if they tab into the page
+    window.addEventListener("keydown", markReady, { once: true, passive: true } as any);
+
+    return () => {
+      window.removeEventListener("scroll", markReady as any);
+      window.removeEventListener("pointerdown", markReady as any);
+      window.removeEventListener("keydown", markReady as any);
+    };
+  }, [reduce]);
+
+  // --- NEW: use refs + inView + animation controls so they don't fire on initial paint
+  const headerRef = useRef<HTMLDivElement | null>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  // Shrink the "viewport" a bit so elements must be scrolled further before counting as in-view
+  const headerInView = useInView(headerRef, { amount: 0.6, margin: "0px 0px -15% 0px" });
+  const formInView = useInView(formRef, { amount: 0.5, margin: "0px 0px -15% 0px" });
+
+  const headerControls = useAnimation();
+  const formControls = useAnimation();
+
+  useEffect(() => {
+    if (!reduce && ready && headerInView) headerControls.start("visible");
+  }, [reduce, ready, headerInView, headerControls]);
+
+  useEffect(() => {
+    if (!reduce && ready && formInView) formControls.start("visible");
+  }, [reduce, ready, formInView, formControls]);
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -69,15 +94,17 @@ export default function Contact() {
   const title = "Contact us";
   const titleChars = useMemo(() => Array.from(title), []);
 
-  // Helper to disable animations when user prefers reduced motion
-  const motionProps = (variants: Variants, amount = 0.75) =>
-    reduce ? {} : { variants, initial: "hidden", whileInView: "visible", viewport: { once: true, amount } };
+  // Helper: props for animated blocks
+  const animProps = (controls: ReturnType<typeof useAnimation>) =>
+    reduce
+      ? {} // no animation if user prefers reduced motion
+      : { variants: filterGroup, initial: "hidden", animate: controls };
 
   return (
     <section className="contact">
       <div className="contact__wrap">
-        {/* Header: tagline -> split-char title -> intro */}
-        <motion.div {...motionProps(filterGroup, 0.8)}>
+        {/* Header: gated by user interaction + inView */}
+        <motion.div ref={headerRef} {...animProps(headerControls)}>
           <motion.p className="contact__tagline" variants={fadeUp}>
             Tagline
           </motion.p>
@@ -100,12 +127,13 @@ export default function Contact() {
           </motion.p>
         </motion.div>
 
-        {/* Form: apply ProductGrid's filter-like stagger row-by-row */}
+        {/* Form: also gated; rows still stagger via filterItem */}
         <motion.form
+          ref={formRef}
           className="contactForm"
           onSubmit={onSubmit}
           noValidate
-          {...motionProps(filterGroup, 0.8)}
+          {...animProps(formControls)}
         >
           {/* Row: First/Last */}
           <motion.div className="contactForm__row contactForm__row--2" variants={filterItem}>
@@ -211,6 +239,7 @@ export default function Contact() {
     </section>
   );
 }
+
 
 
 

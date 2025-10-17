@@ -1,3 +1,4 @@
+// App.tsx
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import Nav from "./components/Nav/Nav";
@@ -9,16 +10,24 @@ export default function App() {
   const location = useLocation();
   const rafRef = useRef<number | null>(null);
 
+  // Set manual restoration once
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+  }, []);
+
   useEffect(() => {
     const lenis = getLenis();
 
-    // Keep your existing scroll listeners working:
-    // Lenis still updates window scroll and fires 'scroll' events.
     const onRaf = (time: number) => {
-      lenis.raf(time);
+      lenis.raf?.(time);
       rafRef.current = requestAnimationFrame(onRaf);
     };
     rafRef.current = requestAnimationFrame(onRaf);
+
+    // Nudge IO after first RAF so in-view checks run even if we're already at top
+    requestAnimationFrame(() => window.dispatchEvent(new Event("scroll")));
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
@@ -38,6 +47,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
