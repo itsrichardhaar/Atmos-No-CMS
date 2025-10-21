@@ -8,7 +8,6 @@ import "./Contact.css";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
-// Read and normalize the site key (Vite inlines VITE_* at build time)
 const RECAPTCHA_SITE_KEY = (import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "").trim();
 
 /* -----------------------------
@@ -173,7 +172,7 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Radios two-column */}
+          {/* Radios btns */}
           <motion.fieldset className="contactForm__row contactForm__radios" variants={filterItem}>
             <legend>Which best describes you?</legend>
             <div className="radioCol">
@@ -196,7 +195,7 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* reCAPTCHA (guarded so it never renders with an empty key) */}
+          {/* reCAPTCHA */}
           <motion.div className="contactForm__row" variants={filterItem}>
             {RECAPTCHA_SITE_KEY ? (
               <ReCAPTCHA
