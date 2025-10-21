@@ -1,0 +1,21 @@
+.cookieBanner {
+  position: fixed; inset: auto 16px 16px 16px;
+  z-index: 4000;
+  background: rgba(0,0,0,.9);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  max-width: 720px;
+  margin: 0 auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.cookieBanner__content { padding: 16px; }
+.cookieBanner__text { margin: 0 0 10px; line-height: 1.4; }
+.cookieBanner__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.cookieBanner__form { display: grid; gap: 10px; }
+.cookieBanner__row { display: flex; align-items: center; gap: 8px; }
+
+.btn { padding: 8px 12px; border-radius: 8px; border: 1px solid #444; background: #1f1f1f; color:#fff; }
+.btn:hover { background: #2a2a2a; }
+.btn--primary { background: #2899D5; border-color: #2899D5; }
+.btn--secondary { background: transparent; border-color: #666; }

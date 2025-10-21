@@ -6,7 +6,7 @@
   width: 100vw;
   left: 50%; right: 50%;
   margin-left: -50vw; margin-right: -50vw;
-  margin-top: -134px;
+  margin-top: -106px;
   height: clamp(380px, 70vh, 720px);
   overflow: hidden;
   z-index: 0;

@@ -13,6 +13,7 @@ import ProductsPage from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import MarketDetail from "./pages/MarketDetail"
 import "./App.css"
+import { ConsentProvider } from "./consent/ConsentContext";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
+    <ConsentProvider>
     <RouterProvider router={router} />
+    </ConsentProvider>
   </React.StrictMode>
 )
 

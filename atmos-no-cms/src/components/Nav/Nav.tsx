@@ -10,6 +10,7 @@ import "./Nav.css";
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
+  const [armed, setArmed] = useState(false);   
   const location = useLocation();
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
@@ -17,6 +18,10 @@ export default function Nav() {
   useEffect(() => { setOpen(false); }, [location.pathname]);
   useLockBodyScroll(open);
 
+  useEffect(() => {
+    setSolid(false);
+      setArmed(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -51,20 +56,28 @@ export default function Nav() {
 
     const obs = new IntersectionObserver(
       ([entry]) => {
-        setSolid(!entry.isIntersecting);
+        if (!armed) return;
++        setSolid(!entry.isIntersecting);
       },
       { root: null, rootMargin: "-10px 0px 0px 0px", threshold: 0 }
     );
 
     obs.observe(sentinel);
 
-    setSolid(window.pageYOffset > 10);
+    const armOnScroll = () => {
+      if (armed) return;
+      setArmed(true);
+      // After arming, compute once from current position:
+      const atTop = (window.pageYOffset || document.documentElement.scrollTop || 0) <= 10;
+      setSolid(!atTop);
+    };
+    window.addEventListener("scroll", armOnScroll, { passive: true });
 
     return () => {
       obs.disconnect();
       if (sentinel.parentNode) sentinel.parentNode.removeChild(sentinel);
     };
-  }, []);
+  }, [armed]);
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     isActive ? "menu__link is-active" : "menu__link";

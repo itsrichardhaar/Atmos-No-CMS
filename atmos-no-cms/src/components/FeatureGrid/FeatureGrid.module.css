@@ -23,6 +23,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  overflow: visible;
 }
 .cols2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .cols3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -41,6 +42,7 @@
   border-radius: 14px;
   padding: 20px 18px;
   min-height: 180px;
+  will-change: transform, opacity;
 }
 .icon {
   width: 36px;

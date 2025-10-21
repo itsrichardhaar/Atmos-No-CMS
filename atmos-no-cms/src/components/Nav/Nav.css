@@ -10,7 +10,7 @@
   position: sticky;
   top: 0;
   z-index: 2100;
-  background-color: rgba(0,0,0,0.9);
+  background-color: transparent;
   transition: background-color .25s ease, border-color .25s ease;
   will-change: background-color;
 }
@@ -37,7 +37,7 @@ html[data-hero-reveal="active"] .nav-spacer {
 }
 
 .nav.is-transparent { 
-  background-color: #000; 
+  background-color: transparent;
   box-shadow: none; 
 }
 .nav.is-solid { 

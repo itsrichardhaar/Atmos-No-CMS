@@ -5,6 +5,7 @@ import Nav from "./components/Nav/Nav";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer/Footer";
 import { getLenis, destroyLenis } from "./lib/lenis";
+import CookieBanner from "./consent/CookieBanner";
 
 export default function App() {
   const location = useLocation();
@@ -39,6 +40,7 @@ export default function App() {
     <div className="min-h-dvh">
       <Nav />
       <div className="nav-spacer" aria-hidden="true" />
+      <CookieBanner />
       <ScrollToTop />
       <div key={location.key}>
         <Outlet />
