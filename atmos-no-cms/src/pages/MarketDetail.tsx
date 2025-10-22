@@ -6,13 +6,14 @@ import type { Variants } from "framer-motion";
 import { markets } from "../data/markets";
 import "./MarketDetail.css";
 import BuildDisplayCta from "../components/BuildDisplayCta/BuildDisplayCta";
+import Seo from "../seo/Seo";
 
 import largeAMarkUrl from "../../src/assets/icons/large-a.svg";
 import smallAMarkUrl from "../../src/assets/icons/small-a.svg";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
-/** Existing title animation for the hero */
+/** ====== HERO TITLE VARIANTS ====== */
 const titleGroup: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.06 } },
@@ -26,13 +27,13 @@ const charVar: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE_BEZIER } },
 };
 
-/** Subtle fade for headlines/one-offs */
+/** ====== GENERIC FADE UP ====== */
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 14 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE_BEZIER } },
 };
 
-/** Shared left→right stagger for grids (Use Cases + Benefits) */
+/** ====== LTR GRID STAGGER ====== */
 const ltrContainer: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.08 } },
@@ -44,6 +45,26 @@ const slideInLtr: Variants = {
     x: 0,
     transition: { duration: 0.6, ease: EASE_BEZIER },
   },
+};
+
+/** ====== INTRO HEADLINE animation ====== **/
+const introLineOnly: Variants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.06 * i, duration: 0.45, ease: EASE_BEZIER }
+  }),
+};
+
+/** ====== INTRO BODY animation ====== **/
+const bodySentenceVar: Variants = {
+  hidden: { opacity: 0, y: 6 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.03 * i, duration: 0.35, ease: EASE_BEZIER }
+  }),
 };
 
 // ===== Parsing helper for animated H1 =====
@@ -66,6 +87,11 @@ function buildTokens(name: string, nameWords?: string[]): Token[] {
     else if (m[3]) out.push({ phrase: m[3], breakBefore: false });
   }
   return out.length ? out : [{ phrase: name, breakBefore: false }];
+}
+
+function splitSentences(text: string): string[] {
+  const parts = text.match(/[^.!?]+[.!?]+(?:\s|$)|[^.!?]+$/g);
+  return parts ? parts.map(s => s.trim()) : [text];
 }
 
 export default function MarketDetail() {
@@ -92,8 +118,42 @@ export default function MarketDetail() {
     [market.name, (market as any).nameWords]
   );
 
+  const bodySentences = useMemo(
+    () => (market.intro?.body ? splitSentences(market.intro.body) : []),
+    [market.intro?.body]
+  );
+
+  // ── SEO: dynamic meta + Breadcrumb JSON-LD ───────────────────────────────
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Markets",
+        "item": "https://atmos-no-cms.vercel.app/markets"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": market.name,
+        "item": `https://atmos-no-cms.vercel.app/markets/${market.slug}`
+      }
+    ]
+  };
+
   return (
     <section className="market market--heroBleed">
+      <Seo
+        title={`${market.name} LED Displays`}
+        description={market.blurb}
+        path={`/markets/${market.slug}`}
+        image={heroSrc}
+        type="article"
+        jsonLd={breadcrumbLd}
+      />
+
       {/* FULL-BLEED HERO */}
       <div className="market__hero">
         <img
@@ -152,7 +212,7 @@ export default function MarketDetail() {
 
       {/* CONTENT */}
       <div className="container market__wrap">
-        {/* Intro split (image + headline + body) */}
+        {/* Intro split */}
         {market.intro && (
           <section className="marketIntro">
             <figure className="marketIntro__media">
@@ -164,20 +224,51 @@ export default function MarketDetail() {
               />
             </figure>
             <div className="marketIntro__copy">
-              <h2 className="marketIntro__headline">
-                {market.intro.headline.split("\n").map((line, i) => (
-                  <span key={i}>
-                    {line}
-                    <br />
-                  </span>
-                ))}
+              {/* ===== Animated intro headline ===== */}
+              <h2
+                className="marketIntro__headline"
+                aria-label={market.intro.headline.replace(/\n/g, " ")}
+              >
+                {market.intro.headline
+                  .split("\n")
+                  .map((line, i, arr) => (
+                    <motion.span
+                      key={i}
+                      custom={i}
+                      variants={introLineOnly}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.6 }}
+                      style={{ display: "block", willChange: "transform" }}
+                    >
+                      {line}
+                      {i < arr.length - 1 ? <br /> : null}
+                    </motion.span>
+                  ))}
               </h2>
-              <p className="marketIntro__body">{market.intro.body}</p>
+
+              {/* ===== Animated intro body ===== */}
+              <p className="marketIntro__body" aria-label={market.intro.body}>
+                {bodySentences.map((s, i) => (
+                  <motion.span
+                    key={i}
+                    custom={i}
+                    variants={bodySentenceVar}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.6 }}
+                    style={{ display: "inline-block", willChange: "transform" }}
+                  >
+                    {s}
+                    {i < bodySentences.length - 1 ? " " : null}
+                  </motion.span>
+                ))}
+              </p>
             </div>
           </section>
         )}
 
-        {/* Benefits grid (now with L→R stagger) */}
+        {/* Benefits grid */}
         {market.benefits?.items?.length ? (
           <section className="marketBenefits">
             {market.benefits.title && (
@@ -190,7 +281,7 @@ export default function MarketDetail() {
               variants={ltrContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.85 }}   // ⬅ later trigger
+              viewport={{ once: true, amount: 0.85 }}
             >
               {market.benefits.items.map((b, i) => (
                 <motion.li key={i} className="marketBenefits__card" variants={slideInLtr}>
@@ -206,11 +297,11 @@ export default function MarketDetail() {
         ) : null}
       </div>
 
-      {/* Use Cases Section; uses your SVGs (cards now L→R stagger) */}
+      {/* Use Cases Section */}
       {market.useCases && (
         <section className="marketUseCases">
           <div className="marketUseCases__bg" aria-hidden="true" style={{ zIndex: 0 }}>
-            {/* big background "A" */}
+            {/* Background "A" */}
             <img
               className="marketUseCases__bgImg"
               src={largeAMarkUrl}
@@ -222,7 +313,6 @@ export default function MarketDetail() {
 
           <div className="marketUseCases__inner" style={{ position: "relative", zIndex: 1 }}>
             <div className="marketUseCases__headlineWrap">
-              {/* small "A" to the left of headline */}
               <img
                 className="marketUseCases__mark"
                 src={smallAMarkUrl}
@@ -230,7 +320,13 @@ export default function MarketDetail() {
                 loading="lazy"
                 decoding="async"
               />
-              <motion.h2 className="marketUseCases__headline" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }}>
+              <motion.h2
+                className="marketUseCases__headline"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.4 }}
+              >
                 {market.useCases.headline}
               </motion.h2>
             </div>
@@ -258,6 +354,9 @@ export default function MarketDetail() {
     </section>
   );
 }
+
+
+
 
 
 

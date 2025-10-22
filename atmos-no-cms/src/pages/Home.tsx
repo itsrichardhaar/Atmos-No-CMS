@@ -7,10 +7,39 @@ import BuildDisplayCta from "../components/BuildDisplayCta/BuildDisplayCta";
 import MarketGrid from "../components/MarketGrid/MarketGrid";
 import { markets } from "../data/markets";
 import BackgroundGlow from "../components/BackgroundGlow/BackgroundGlow";
+import Seo from "../seo/Seo";
 
 export default function Home() {
   return (
     <>
+      <Seo
+        title="LED Displays & Immersive Visual Solutions"
+        description="Atmos LED delivers indoor/outdoor LED displays and turnkey installations for worship spaces, live events, retail, education, and more."
+        path="/"
+        image="https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/social/home.jpg"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Atmos LED",
+            "url": "https://atmos-no-cms.vercel.app/",
+            "logo": "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/brand/logo.png",
+            "sameAs": ["https://www.linkedin.com/company/atmos-led"]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Atmos LED",
+            "url": "https://atmos-no-cms.vercel.app/",
+            // Include this ONLY if /search exists:
+              // ,"potentialAction": {
+              //   "@type": "SearchAction",
+              //   "target": "https://atmos-no-cms.vercel.app/search?q={query}",
+              //   "query-input": "required name=query"
+              // }
+          }
+        ]}
+      />
       <Hero />
       {/* The block that will slide up over the hero */}
       <div className="afterHero">
