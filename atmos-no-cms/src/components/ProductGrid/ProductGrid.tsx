@@ -38,7 +38,7 @@ const titleChar: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: EASE_BEZIER }, 
+    transition: { duration: 0.8, ease: EASE_BEZIER },
   },
 };
 
@@ -251,20 +251,21 @@ export default function ProductGrid({
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"], 
+    offset: ["start end", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], ["-600px", "600px"]);
-  const titleChars = useMemo(() => Array.from(title), [title]);
+
+  // Build title as words -> chars to avoid breaking words mid-line
+  const titleWords = useMemo(() => title.split(/\s+/), [title]);
 
   return (
-    <motion.section 
+    <motion.section
       className={`pg ${isFiltered ? "pg--noAfter" : ""}`}
       ref={sectionRef}
       style={reduce ? undefined : ({ ["--pg-y" as any]: y } as any)}
     >
       <div className="container">
         <div className="pg__header">
-          
           <motion.h2
             className="pg__title"
             variants={titleGroup}
@@ -273,16 +274,24 @@ export default function ProductGrid({
             viewport={{ once: true, amount: 0.8 }}
             aria-label={title}
           >
-            {titleChars.map((ch, i) => (
-              <motion.span
-                key={i}
-                variants={titleChar}
-                className="pg__titleChar"
-                style={{ display: "inline-block" }}
-              >
-                {ch === " " ? "\u00A0" : ch}
-              </motion.span>
-            ))}
+            {titleWords.map((word, wi) => {
+              const chars = Array.from(word);
+              return (
+                <span key={`w-${wi}`} className="pg__titleWord" style={{ display: "inline-block" }}>
+                  {chars.map((ch, ci) => (
+                    <motion.span
+                      key={`c-${wi}-${ci}`}
+                      variants={titleChar}
+                      className="pg__titleChar"
+                      style={{ display: "inline-block" }}
+                    >
+                      {ch}
+                    </motion.span>
+                  ))}
+                  {wi < titleWords.length - 1 ? <span className="pg__titleSpace">{'\u00A0'}</span> : null}
+                </span>
+              );
+            })}
           </motion.h2>
 
           {showViewAll && (
@@ -336,6 +345,7 @@ export default function ProductGrid({
     </motion.section>
   );
 }
+
 
 
 

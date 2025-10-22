@@ -1,10 +1,10 @@
 /* src/components/ProductGrid.css */
 
 .pg { 
-    padding: 28px 0 56px; color:#fff; 
-    position: relative;
-    isolation: isolate;
-    --pg-y: 0px;
+  padding: 28px 0 56px; color:#fff; 
+  position: relative;
+  isolation: isolate;
+  --pg-y: 0px;
 }
 .pg::after {
   content: "";
@@ -31,18 +31,25 @@
 }
 
 .pg__header { 
-    display: flex; 
-    align-items: end; 
-    justify-content: space-between; 
-    gap: 12px; 
-    margin-bottom: 20px; 
+  display: flex; 
+  align-items: end; 
+  justify-content: space-between; 
+  gap: 12px; 
+  margin-bottom: 20px; 
 }
+
 .pg__title { 
-    font-family: var(--ff-display, inherit); 
-    font-weight: 400;
-    margin: 0; 
-    color: #2899D5;
+  font-family: var(--ff-display, inherit); 
+  font-weight: 400;
+  margin: 0; 
+  color: #2899D5;
 }
+
+/* prevent mid-word breaks when animating per-char */
+.pg__titleWord { 
+  white-space: nowrap; 
+}
+.pg__titleSpace { display: inline-block; }
 
 .pg__viewall { 
   white-space: nowrap; 
@@ -95,20 +102,54 @@
   }
 }
 
+/* hidden cell transition helpers */
 .pg__cell.is-hidden{
   display: none;              
 }
-
 .pg__cell{
   transition: 
-  opacity .18s ease, 
-  transform .18s ease;
+    opacity .18s ease, 
+    transform .18s ease;
 }
 .pg__cell.is-hidden{
   opacity: 0;
   transform: scale(0.98);
 }
 
+/* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .pg { --pg-y: 0px !important; }
+}
+
+/* ============================
+   Mobile stacking adjustments
+   ============================ */
+@media (max-width: 640px) {
+  .pg__header {
+    flex-direction: column;     /* Stack title and button */
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .pg__title {
+    margin: 0;
+  }
+
+  .pg__viewall {
+    width: 100%;                /* Full-width button */
+    text-align: center;
+  }
+
+  .pg__filters {
+    display: grid;              /* Pills stack below */
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .pg .pill {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
 }
