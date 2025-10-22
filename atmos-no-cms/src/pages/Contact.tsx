@@ -3,17 +3,19 @@ import { useMemo, useState, useEffect, useRef } from "react";
 import type { FormEvent } from "react";
 import { motion, useReducedMotion, useAnimation, useInView } from "framer-motion";
 import type { Variants } from "framer-motion";
-import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from "react-google-recaptcha"; 
 import "./Contact.css";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
-
 const RECAPTCHA_SITE_KEY = (import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "").trim();
 
 /* -----------------------------
-   Variants
+   Variants (unchanged)
 ----------------------------- */
-const titleGroup: Variants = { hidden: {}, visible: { transition: { staggerChildren: 0.03 } } };
+const titleGroup: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.03 } },
+};
 const titleChar: Variants = {
   hidden: { opacity: 0, y: 12 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE_BEZIER } },
@@ -34,15 +36,12 @@ const fadeUp: Variants = {
 export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const reduce = useReducedMotion();
-
-  // reCAPTCHA
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA | null>(null);
 
-  // Gate animations until the user interacts
   const [ready, setReady] = useState(false);
   useEffect(() => {
-    if (reduce) { setReady(false); return; }
+    if (reduce) return setReady(false);
     const markReady = () => setReady(true);
     window.addEventListener("scroll", markReady, { once: true, passive: true });
     window.addEventListener("pointerdown", markReady, { once: true, passive: true });
@@ -54,7 +53,6 @@ export default function Contact() {
     };
   }, [reduce]);
 
-  // inView + controls
   const headerRef = useRef<HTMLDivElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
   const headerInView = useInView(headerRef, { amount: 0.6, margin: "0px 0px -15% 0px" });
@@ -67,19 +65,14 @@ export default function Contact() {
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (!RECAPTCHA_SITE_KEY) {
-      alert("reCAPTCHA is not configured. Please set VITE_RECAPTCHA_SITE_KEY.");
-      return;
-    }
     if (!captchaToken) {
       alert("Please verify that you’re not a robot.");
+
       recaptchaRef.current?.getValue();
       return;
     }
 
     setSubmitting(true);
-
-    // TODO: send form + captchaToken to your backend here.
 
     setTimeout(() => {
       setSubmitting(false);
@@ -106,12 +99,7 @@ export default function Contact() {
 
           <motion.h1 className="contact__title" variants={titleGroup} aria-label={title}>
             {titleChars.map((ch, i) => (
-              <motion.span
-                key={i}
-                variants={titleChar}
-                style={{ display: "inline-block" }}
-                className="contact__titleChar"
-              >
+              <motion.span key={i} variants={titleChar} style={{ display: "inline-block" }} className="contact__titleChar">
                 {ch === " " ? "\u00A0" : ch}
               </motion.span>
             ))}
@@ -123,13 +111,7 @@ export default function Contact() {
         </motion.div>
 
         {/* Form */}
-        <motion.form
-          ref={formRef}
-          className="contactForm"
-          onSubmit={onSubmit}
-          noValidate
-          {...animProps(formControls)}
-        >
+        <motion.form ref={formRef} className="contactForm" onSubmit={onSubmit} noValidate {...animProps(formControls)}>
           {/* Row: First/Last */}
           <motion.div className="contactForm__row contactForm__row--2" variants={filterItem}>
             <div className="field">
@@ -172,7 +154,7 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Radios btns */}
+          {/* Radios two-column */}
           <motion.fieldset className="contactForm__row contactForm__radios" variants={filterItem}>
             <legend>Which best describes you?</legend>
             <div className="radioCol">
@@ -197,20 +179,14 @@ export default function Contact() {
 
           {/* reCAPTCHA */}
           <motion.div className="contactForm__row" variants={filterItem}>
-            {RECAPTCHA_SITE_KEY ? (
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey={RECAPTCHA_SITE_KEY}
-                theme="dark"
-                onChange={(token) => setCaptchaToken(token)}
-                onExpired={() => setCaptchaToken(null)}
-                onErrored={() => setCaptchaToken(null)}
-              />
-            ) : (
-              <p style={{ color: "#f99", margin: 0 }}>
-                reCAPTCHA isn’t configured. Set <code>VITE_RECAPTCHA_SITE_KEY</code> in your env and redeploy.
-              </p>
-            )}
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={RECAPTCHA_SITE_KEY}
+              theme="dark"          // matches your design
+              onChange={(token) => setCaptchaToken(token)}
+              onExpired={() => setCaptchaToken(null)}
+              onErrored={() => setCaptchaToken(null)} 
+            />
           </motion.div>
 
           {/* Submit */}
@@ -230,7 +206,6 @@ export default function Contact() {
     </section>
   );
 }
-
 
 
 
