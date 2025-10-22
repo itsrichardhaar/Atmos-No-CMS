@@ -1,14 +1,13 @@
 // src/pages/Contact.tsx
 import { useMemo, useState, useEffect, useRef } from "react";
 import type { FormEvent } from "react";
-import { motion, useReducedMotion, useAnimation, useInView } from "framer-motion";
+import { motion, useReducedMotion, useAnimation } from "framer-motion"; // ⬅ removed useInView
 import type { Variants } from "framer-motion";
 import ReCAPTCHA from "react-google-recaptcha";
 import "./Contact.css";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
-// Read and normalize the site key (Vite inlines VITE_* at build time)
 const RECAPTCHA_SITE_KEY = (import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "").trim();
 
 /* -----------------------------
@@ -40,30 +39,20 @@ export default function Contact() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA | null>(null);
 
-  // Gate animations until the user interacts
-  const [ready, setReady] = useState(false);
-  useEffect(() => {
-    if (reduce) { setReady(false); return; }
-    const markReady = () => setReady(true);
-    window.addEventListener("scroll", markReady, { once: true, passive: true });
-    window.addEventListener("pointerdown", markReady, { once: true, passive: true });
-    window.addEventListener("keydown", markReady as any, { once: true } as any);
-    return () => {
-      window.removeEventListener("scroll", markReady as any);
-      window.removeEventListener("pointerdown", markReady as any);
-      window.removeEventListener("keydown", markReady as any);
-    };
-  }, [reduce]);
-
-  // inView + controls
-  const headerRef = useRef<HTMLDivElement | null>(null);
-  const formRef = useRef<HTMLFormElement | null>(null);
-  const headerInView = useInView(headerRef, { amount: 0.6, margin: "0px 0px -15% 0px" });
-  const formInView = useInView(formRef, { amount: 0.5, margin: "0px 0px -15% 0px" });
+  // Controls (no in-view gating)
   const headerControls = useAnimation();
   const formControls = useAnimation();
-  useEffect(() => { if (!reduce && ready && headerInView) headerControls.start("visible"); }, [reduce, ready, headerInView, headerControls]);
-  useEffect(() => { if (!reduce && ready && formInView) formControls.start("visible"); }, [reduce, ready, formInView, formControls]);
+
+  // ▶️ Animate everything on mount (if not reduced motion)
+  useEffect(() => {
+    if (reduce) return;
+    // Kick off next frame so layout is ready before anims
+    const id = requestAnimationFrame(() => {
+      headerControls.start("visible");
+      formControls.start("visible");
+    });
+    return () => cancelAnimationFrame(id);
+  }, [reduce, headerControls, formControls]);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -100,7 +89,7 @@ export default function Contact() {
     <section className="contact">
       <div className="contact__wrap">
         {/* Header */}
-        <motion.div ref={headerRef} {...animProps(headerControls)}>
+        <motion.div {...animProps(headerControls)}>
           <motion.p className="contact__tagline" variants={fadeUp}>
             Tagline
           </motion.p>
@@ -125,7 +114,6 @@ export default function Contact() {
 
         {/* Form */}
         <motion.form
-          ref={formRef}
           className="contactForm"
           onSubmit={onSubmit}
           noValidate
@@ -196,7 +184,7 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* reCAPTCHA (guarded so it never renders with an empty key) */}
+          {/* reCAPTCHA */}
           <motion.div className="contactForm__row" variants={filterItem}>
             {RECAPTCHA_SITE_KEY ? (
               <ReCAPTCHA
