@@ -110,6 +110,20 @@
   text-decoration: underline !important; 
 }
 
+.cookieLink {
+  background: none;
+  font-size: 13px !important;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  font: inherit;
+  padding: 0;
+}
+.cookieLink:hover {
+  text-decoration: underline !important;
+}
+
 .icon, .iconLg {
   display: inline-block;
   background: currentColor;

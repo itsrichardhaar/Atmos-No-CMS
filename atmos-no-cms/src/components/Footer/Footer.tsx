@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
+import CookieSettingsLink from "../../consent/CookieSettingsLink";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -94,7 +95,9 @@ export default function Footer() {
           <ul className={styles.legal}>
             <li><Link to="/privacy">Privacy Policy</Link></li>
             <li><Link to="/terms">Terms of Service</Link></li>
-            <li><Link to="/cookies">Cookies Settings</Link></li>
+            <li>
+              <CookieSettingsLink className={styles.cookieLink} />
+            </li>
           </ul>
         </div>
       </div>
