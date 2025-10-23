@@ -20,22 +20,25 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const lenis = getLenis();
+  const lenis = getLenis();
 
-    const onRaf = (time: number) => {
-      lenis.raf?.(time);
-      rafRef.current = requestAnimationFrame(onRaf);
-    };
+  // If Lenis is disabled on this device, do nothing (native scroll)
+  if (!lenis) return;
+
+  const onRaf = (time: number) => {
+    lenis?.raf?.(time);
     rafRef.current = requestAnimationFrame(onRaf);
+  };
+  rafRef.current = requestAnimationFrame(onRaf);
 
-    // Nudge IO after first RAF so in-view checks run even if we're already at top
-    requestAnimationFrame(() => window.dispatchEvent(new Event("scroll")));
+  // Nudge IO after first RAF so in-view checks run even if we're already at top
+  requestAnimationFrame(() => window.dispatchEvent(new Event("scroll")));
 
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      destroyLenis();
-    };
-  }, []);
+  return () => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    destroyLenis();
+  };
+}, []);
 
   return (
     <div className="min-h-dvh">
