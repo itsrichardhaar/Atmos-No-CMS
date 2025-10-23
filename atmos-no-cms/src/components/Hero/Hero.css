@@ -19,17 +19,25 @@
 .hero__sticky{
   position: sticky;
   top: 0;
-  min-height: 100dvh;
+  min-height: 100vh;
   display: block;                
 }
 
+@supports (min-height: 100svh) {
+   .hero__sticky { min-height: 100svh; }
+ }
+
 .hero__inner{
-  min-height: 100dvh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   padding: calc(var(--hero-pad-y) + var(--header-h)) 0 var(--hero-pad-y);
   position: relative;           
   z-index: 2;
+}
+
+@supports (min-height: 100svh) {
+  .hero__inner { min-height: 100svh; }
 }
 
 .hero__copy {

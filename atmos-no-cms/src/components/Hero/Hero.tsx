@@ -23,7 +23,7 @@ export default function Hero() {
     link.rel = "preload";
     link.as = "video";
     link.href =
-      "#";
+      "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/videos/1000ph_rotate.mp4";
     link.type = "video/mp4";
     document.head.appendChild(link);
     return () => {
@@ -43,7 +43,7 @@ export default function Hero() {
         if (e.isIntersecting && !videoSrcSet) {
           vid.preload = "auto";
           vid.src =
-            "#";
+            "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/videos/1000ph_rotate.mp4";
           setVideoSrcSet(true);
           vid.play().catch(() => {});
         }
