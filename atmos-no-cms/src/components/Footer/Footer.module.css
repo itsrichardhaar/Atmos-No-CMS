@@ -113,6 +113,7 @@
 .cookieLink {
   background: none;
   font-size: 13px !important;
+  color: #fff !important;
   border: none;
   color: inherit;
   cursor: pointer;
