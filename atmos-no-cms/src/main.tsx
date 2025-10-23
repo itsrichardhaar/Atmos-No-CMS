@@ -13,6 +13,7 @@ import ProductsPage from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import MarketDetail from "./pages/MarketDetail"
 import PrivacyPolicy from "./pages/PrivacyPolicy"
+import Terms from "./pages/Terms"
 import "./App.css"
 import { ConsentProvider } from "./consent/ConsentContext";
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: "products/:slug", element: <ProductDetail /> },
       { path: "markets/:slug", element: <MarketDetail /> },
       { path: "privacy-policy", element: <PrivacyPolicy /> },
+      { path: "terms", element: <Terms /> },
       { path: "*", element: <NotFound /> },
     ],
   },

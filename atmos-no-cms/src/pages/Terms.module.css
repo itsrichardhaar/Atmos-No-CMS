@@ -1,0 +1,92 @@
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 36px) 16px 80px;
+  color: var(--text, #eaeaea);
+}
+
+.header h1 {
+  font-size: clamp(28px, 5vw, 44px);
+  margin: 0 0 6px;
+}
+.meta { color: #9ca3af; margin: 0 0 14px; }
+
+/* Tabs */
+.tabsWrap {
+  position: sticky;
+  top: calc(var(--header-h, 72px) + 0px);
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: saturate(120%) blur(10px);
+  z-index: 1;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.06);
+  box-shadow: 0 6px 24px rgba(0,0,0,.18);
+}
+
+.tabs {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0;
+}
+
+.tab {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: #cbd5e1;
+  padding: 14px 12px;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: color .2s ease, background .2s ease;
+}
+.tab:hover { color: #fff; background: rgba(255,255,255,.04); }
+.isActive { color: #fff; }
+
+.ink {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 3px;
+  background: #2899D5;
+  transition: transform .28s cubic-bezier(.2,.7,.2,1), width .28s;
+  border-bottom-left-radius: 3px; border-bottom-right-radius: 3px;
+}
+
+/* Panel content */
+.panel {
+  margin-top: 18px;
+  padding: clamp(16px, 3vw, 24px);
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+}
+
+.h2 {
+  font-size: clamp(22px, 3.6vw, 28px);
+  margin: 0 0 8px;
+}
+.h3 {
+  font-size: clamp(16px, 2.6vw, 18px);
+  margin: 16px 0 6px;
+}
+.panel p { line-height: 1.65; margin: 0 0 12px; }
+.panel ul { margin: 8px 0 12px 1.1rem; line-height: 1.6; }
+
+/* Inline link-button variant reused from privacy page */
+.linkBtn {
+  background: none; border: none; padding: 0; cursor: pointer;
+  color: #2899D5; text-decoration: underline; font: inherit;
+}
+
+/* Small screens: make tabs scrollable */
+@media (max-width: 720px) {
+  .tabs {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  .tab { flex: 0 0 auto; }
+  .ink { display: none; } /* optional: hide ink on narrow scrollable tabs */
+}
