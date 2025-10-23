@@ -174,11 +174,45 @@ export default function Nav() {
           <img src={logo} alt="ATMOS LED" className="nav__logo-img" />
         </Link>
 
+        <div className="nav__actions">
+          <a
+            href="https://dfuc15-ke.myshopify.com"
+            className="nav__storeBtn"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open the store in a new tab"
+          >
+            {/* shopping bag icon */}
+            <svg className="nav__storeIcon" viewBox="0 0 24 24" aria-hidden="true">
+            {/* bag body */}
+            <path
+              d="M6.5 7h11a1 1 0 0 1 .99 1.1l-1.06 9.4A2 2 0 0 1 15.46 20H8.54a2 2 0 0 1-1.97-1.5L5.5 8.1A1 1 0 0 1 6.5 7Z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.9"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            {/* handle */}
+            <path
+              d="M8.2 7a3.8 3.8 0 0 1 7.6 0"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.9"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+            <span className="nav__storeLabel">Store</span>
+          </a>
+        
+
         <HamburgerButton
           isOpen={open}
           onToggle={() => setOpen((o) => !o)}
           className="site-hamburger"
         />
+        </div>
       </div>
 
       <div

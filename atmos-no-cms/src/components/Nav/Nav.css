@@ -63,6 +63,57 @@ html[data-hero-reveal="active"] .nav-spacer {
   letter-spacing: .02em; 
 }
 
+.nav__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;            
+  position: relative;
+  z-index: 5002;        
+}
+
+.nav__storeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  height: 36px;
+  padding: 0 .9rem;
+  border-radius: 9999px;
+  background: #00456A;       
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  
+  transition: background .3s ease, box-shadow .3s ease;
+}
+
+.nav.is-open .nav__storeBtn { z-index: 5002; }
+
+/* Icon sizing */
+.nav__storeIcon {
+  width: 18px;
+  height: 18px;
+  color: currentColor;
+  flex: 0 0 auto;
+}
+
+/* Label */
+.nav__storeLabel { font-size: 14px; }
+
+/* Hover / focus states */
+.nav__storeBtn:hover,
+.nav__storeBtn:focus-visible {
+  background:#2899D5;
+  text-decoration: none;
+}
+
+/* Very narrow viewports: allow icon-only if space is tight */
+@media (max-width: 360px) {
+  .nav__storeLabel { display: none; }
+  .nav__storeBtn { padding: 0 .6rem; }
+}
+
 /* ==========================
    Fullscreen Menu Shell
    ========================== */
