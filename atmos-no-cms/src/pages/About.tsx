@@ -138,8 +138,17 @@ export default function About() {
   const title = "About Us";
   const titleChars = useMemo(() => Array.from(title), [title]);
 
+  // Keep existing helper
   const motionProps = (variants: Variants, amount = 0.75) =>
     reduce ? {} : { variants, initial: "hidden", whileInView: "visible", viewport: { once: true, amount } };
+
+  // NEW: Mobile detection to disable only slide-in animations on narrow viewports
+  const isMobile = useMemo(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 900px)").matches,
+    []
+  );
 
   return (
     <section className="about about--heroBleed">
@@ -207,10 +216,14 @@ export default function About() {
           <motion.ul
             className="aboutTeam__grid"
             role="list"
-            {...motionProps(ltrContainer, 0.75)}
+            {...(isMobile ? {} : motionProps(ltrContainer, 0.75))}
           >
             {team.map((m, i) => (
-              <motion.li key={i} className="aboutTeam__card" variants={slideInLtr}>
+              <motion.li
+                key={i}
+                className="aboutTeam__card"
+                {...(isMobile ? {} : { variants: slideInLtr })}
+              >
                 <div className="aboutTeam__photoWrap">
                   <img src={m.photo} alt={m.name} loading="lazy" decoding="async" />
                 </div>
@@ -281,4 +294,5 @@ export default function About() {
     </section>
   );
 }
+
 

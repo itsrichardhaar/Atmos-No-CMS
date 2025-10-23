@@ -87,7 +87,7 @@
 }
 @media (max-width: 900px){
   .abouttIntro{
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     gap: 22px;
   }
 }

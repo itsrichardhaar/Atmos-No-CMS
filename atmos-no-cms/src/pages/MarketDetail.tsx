@@ -143,6 +143,14 @@ export default function MarketDetail() {
     ]
   };
 
+  // NEW: Mobile detection — disables only the left→right slide-ins on mobile (≤900px)
+  const isMobile = useMemo(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 900px)").matches,
+    []
+  );
+
   return (
     <section className="market market--heroBleed">
       <Seo
@@ -278,13 +286,21 @@ export default function MarketDetail() {
             <motion.ul
               className="marketBenefits__grid"
               role="list"
-              variants={ltrContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.85 }}
+              {...(isMobile
+                ? {}
+                : {
+                    variants: ltrContainer,
+                    initial: "hidden",
+                    whileInView: "visible",
+                    viewport: { once: true, amount: 0.85 },
+                  })}
             >
               {market.benefits.items.map((b, i) => (
-                <motion.li key={i} className="marketBenefits__card" variants={slideInLtr}>
+                <motion.li
+                  key={i}
+                  className="marketBenefits__card"
+                  {...(isMobile ? {} : { variants: slideInLtr })}
+                >
                   <span className="marketBenefits__thumb">
                     <img src={b.image} alt="" loading="lazy" decoding="async" />
                   </span>
@@ -334,13 +350,21 @@ export default function MarketDetail() {
             <motion.ul
               className="marketUseCases__grid"
               role="list"
-              variants={ltrContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.85 }}
+              {...(isMobile
+                ? {}
+                : {
+                    variants: ltrContainer,
+                    initial: "hidden",
+                    whileInView: "visible",
+                    viewport: { once: true, amount: 0.85 },
+                  })}
             >
               {market.useCases.items.map((it, i) => (
-                <motion.li key={i} className="marketUseCases__card" variants={slideInLtr}>
+                <motion.li
+                  key={i}
+                  className="marketUseCases__card"
+                  {...(isMobile ? {} : { variants: slideInLtr })}
+                >
                   <h3 className="marketUseCases__h3">{it.title}</h3>
                   <p className="marketUseCases__p">{it.body}</p>
                 </motion.li>
@@ -354,6 +378,7 @@ export default function MarketDetail() {
     </section>
   );
 }
+
 
 
 

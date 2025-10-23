@@ -107,8 +107,21 @@
 }
 
 @media (max-width: 640px){
-  .marketBenefits__grid { 
-    grid-template-columns: 1fr; 
+  .marketBenefits__grid { grid-template-columns: 1fr; }
+
+  /* Increase specificity + place at end to override later base rules */
+  .marketBenefits__grid .marketBenefits__card {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .marketBenefits__grid .marketBenefits__card .marketBenefits__thumb {
+    justify-self: center;
+    margin-inline: auto; /* ensures perfect centering */
+  }
+
+  .marketBenefits {
+    margin-top: 80px !important;
   }
 }
 
@@ -159,7 +172,6 @@
   margin-bottom: 20px;
   padding-bottom: 180px;
   color: #fff;
-
 }
 
 .marketUseCases__bg {
@@ -238,6 +250,14 @@
 }
 @media (max-width: 640px) {
   .marketUseCases__grid { grid-template-columns: 1fr; }
+
+  .marketUseCases {
+  position: relative;
+  margin-top: 80px;
+  margin-bottom: 20px;
+  padding-bottom: 40px;
+  color: #fff;
+}
 }
 
 .marketUseCases__card { text-align: left; }

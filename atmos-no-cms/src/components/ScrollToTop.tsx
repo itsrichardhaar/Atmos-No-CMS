@@ -3,26 +3,21 @@ import { useEffect, useRef } from "react";
 import { useLocation, useNavigationType } from "react-router-dom";
 import { getLenis } from "../lib/lenis";
 
-function getHeaderOffset() {
-  const raw = getComputedStyle(document.documentElement)
-    .getPropertyValue("--header-h")
-    .replace("px", "");
-  return (Number(raw) || 0) + 0;
+function isCoarsePointer() {
+  return window.matchMedia?.("(pointer: coarse)")?.matches ?? false;
 }
 
 function nativeScrollTo(y: number) {
-  // Write to both potential scroll roots (iOS can vary)
-  const html = document.documentElement;
-  const body = document.body as HTMLElement;
-  // Use window first (safest), then explicit roots
+  // Force all potential roots to the same exact position
   window.scrollTo({ top: y, left: 0, behavior: "auto" });
-  html.scrollTop = y;
-  body.scrollTop = y;
+  document.documentElement.scrollTop = y;
+  (document.body as HTMLElement).scrollTop = y;
 }
 
 function getYForEl(el: HTMLElement, offset = 0) {
   const rect = el.getBoundingClientRect();
-  return Math.max(0, rect.top + (window.scrollY || window.pageYOffset || 0) - offset);
+  const base = window.scrollY || window.pageYOffset || 0;
+  return Math.max(0, rect.top + base - offset);
 }
 
 export default function ScrollToTop() {
@@ -31,97 +26,83 @@ export default function ScrollToTop() {
   const guardRef = useRef(0);
 
   useEffect(() => {
-    // Respect back/forward (native restoration)
-    if (navType === "POP") return;
+    if (navType === "POP") return; // respect native back/forward restoration
 
-    // Avoid double-running if React StrictMode mounts twice
     guardRef.current++;
 
     const lenis = getLenis?.();
-    const offset = getHeaderOffset();
+    const coarse = isCoarsePointer();
 
     const nudge = () => {
-      // Re-run observers / in-view logic immediately
       requestAnimationFrame(() => window.dispatchEvent(new Event("scroll")));
     };
 
     const snapTop = () => {
-      if (lenis?.scrollTo) {
-        lenis.scrollTo(0, { immediate: true });
-      } else {
-        nativeScrollTo(0);
-      }
+      if (lenis?.scrollTo) lenis.scrollTo(0, { immediate: true });
+      // Always force exact 0 after Lenis to avoid fractional Y
+      nativeScrollTo(0);
       nudge();
     };
 
     const snapToHash = (id: string) => {
       const el = document.getElementById(id);
       if (!el) return;
-      const y = getYForEl(el, offset);
-      if (lenis?.scrollTo) {
-        lenis.scrollTo(y, { immediate: true });
-      } else {
-        nativeScrollTo(y);
-      }
+      const y = getYForEl(el, /* offset: fixed header? */ 0);
+      if (lenis?.scrollTo) lenis.scrollTo(y, { immediate: true });
+      nativeScrollTo(y);
       nudge();
     };
 
-    // Phase 1: Run as soon as the new route paints
+    // ---- Phase A: run on the very next paint
     requestAnimationFrame(() => {
-      if (hash) {
-        snapToHash(hash.slice(1));
-      } else {
-        snapTop();
-      }
+      if (hash) snapToHash(hash.slice(1));
+      else snapTop();
     });
 
-    // Phase 2: Re-apply after very short delay to beat iOS URL bar collapse
-    const t1 = setTimeout(() => {
-      if (hash) {
-        snapToHash(hash.slice(1));
-      } else {
-        snapTop();
-      }
-    }, 40);
+    if (coarse) {
+      // ---- Mobile/tablet only: re-apply around URL-bar collapse
+      const t1 = setTimeout(() => {
+        if (hash) snapToHash(hash.slice(1));
+        else snapTop();
+      }, 40);
 
-    // Phase 3: Listen for visualViewport changes briefly and re-apply once
-    const vv = (window as any).visualViewport as VisualViewport | undefined;
-    let reApplied = false;
-    const reapply = () => {
-      if (reApplied) return;
-      reApplied = true;
-      if (hash) {
-        snapToHash(hash.slice(1));
-      } else {
-        snapTop();
-      }
-    };
+      const vv = (window as any).visualViewport as VisualViewport | undefined;
+      let reApplied = false;
+      const reapply = () => {
+        if (reApplied) return;
+        reApplied = true;
+        if (hash) snapToHash(hash.slice(1));
+        else snapTop();
+      };
 
-    if (vv) {
-      const onVV = () => reapply();
-      vv.addEventListener("resize", onVV, { passive: true } as any);
-      vv.addEventListener("scroll", onVV, { passive: true } as any);
-      // Stop listening after a short window (URL bar settle)
+      if (vv) {
+        vv.addEventListener("resize", reapply as any, { passive: true } as any);
+        vv.addEventListener("scroll", reapply as any, { passive: true } as any);
+      }
       const t2 = setTimeout(() => {
-        vv.removeEventListener("resize", onVV as any);
-        vv.removeEventListener("scroll", onVV as any);
+        vv?.removeEventListener("resize", reapply as any);
+        vv?.removeEventListener("scroll", reapply as any);
       }, 600);
 
       return () => {
         clearTimeout(t1);
         clearTimeout(t2);
-        vv.removeEventListener("resize", onVV as any);
-        vv.removeEventListener("scroll", onVV as any);
+        vv?.removeEventListener("resize", reapply as any);
+        vv?.removeEventListener("scroll", reapply as any);
       };
+    } else {
+      // ---- Desktop: one extra hard snap on the following frame (belts & suspenders)
+      const t = requestAnimationFrame(() => {
+        if (hash) snapToHash(hash.slice(1));
+        else snapTop();
+      });
+      return () => cancelAnimationFrame(t);
     }
-
-    return () => {
-      clearTimeout(t1);
-    };
   }, [pathname, hash, navType]);
 
   return null;
 }
+
 
 
 

@@ -42,7 +42,7 @@ html[data-hero-reveal="active"] .nav-spacer {
 }
 .nav.is-solid { 
   background-color: #000; 
-  box-shadow: 0 1px 0 rgba(255,255,255,.06);
+  /* box-shadow: 0 1px 0 rgba(255,255,255,.06); */
 }
 
 .nav.is-open { 
