@@ -6,6 +6,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer/Footer";
 import { getLenis, destroyLenis } from "./lib/lenis";
 import CookieBanner from "./consent/CookieBanner";
+import CookieSettingsModal from "./consent/CookieSettingsModal";
 
 export default function App() {
   const location = useLocation();
@@ -41,6 +42,7 @@ export default function App() {
       <Nav />
       <div className="nav-spacer" aria-hidden="true" />
       <CookieBanner />
+      <CookieSettingsModal />
       <ScrollToTop />
       <div key={location.key}>
         <Outlet />

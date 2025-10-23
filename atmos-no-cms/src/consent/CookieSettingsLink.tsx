@@ -1,10 +1,11 @@
 import { useConsent } from "./ConsentContext";
 
 export default function CookieSettingsLink({ className }: { className?: string }) {
-  const { resetConsent } = useConsent();
+  const { openSettings } = useConsent();
   return (
-    <button type="button" className={className} onClick={resetConsent}>
+    <button type="button" className={className} onClick={openSettings}>
       Cookie settings
     </button>
   );
 }
+

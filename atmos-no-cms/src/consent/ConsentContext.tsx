@@ -1,13 +1,13 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 export type ConsentCategories = {
-  necessary: true;        // always true; not configurable
+  necessary: true;
   analytics: boolean;
   marketing: boolean;
 };
 
 export type ConsentState =
-  | { status: "unknown"; categories: ConsentCategories }     // no choice yet
+  | { status: "unknown"; categories: ConsentCategories }
   | { status: "accepted" | "rejected" | "custom"; categories: ConsentCategories };
 
 type Ctx = {
@@ -16,11 +16,15 @@ type Ctx = {
   rejectAll: () => void;
   updateCategories: (partial: Partial<Omit<ConsentCategories, "necessary">>) => void;
   saveCustom: () => void;
-  resetConsent: () => void; // expose for “reopen settings”
+  resetConsent: () => void;
+
+  // NEW: settings modal control
+  settingsOpen: boolean;
+  openSettings: () => void;
+  closeSettings: () => void;
 };
 
 const ConsentContext = createContext<Ctx | null>(null);
-
 const STORAGE_KEY = "cookieConsent.v1";
 
 const defaultCategories: ConsentCategories = {
@@ -35,13 +39,14 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
     categories: defaultCategories,
   });
 
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
   // load from storage
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as ConsentState;
-        // sanity: necessary must always be true
         parsed.categories.necessary = true;
         setConsent(parsed);
       }
@@ -56,10 +61,16 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
   }, [consent]);
 
   const acceptAll = () =>
-    setConsent({ status: "accepted", categories: { necessary: true, analytics: true, marketing: true } });
+    setConsent({
+      status: "accepted",
+      categories: { necessary: true, analytics: true, marketing: true },
+    });
 
   const rejectAll = () =>
-    setConsent({ status: "rejected", categories: { necessary: true, analytics: false, marketing: false } });
+    setConsent({
+      status: "rejected",
+      categories: { necessary: true, analytics: false, marketing: false },
+    });
 
   const updateCategories = (partial: Partial<Omit<ConsentCategories, "necessary">>) =>
     setConsent((prev) => ({
@@ -72,7 +83,23 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
 
   const resetConsent = () => setConsent({ status: "unknown", categories: defaultCategories });
 
-  const value = useMemo(() => ({ consent, acceptAll, rejectAll, updateCategories, saveCustom, resetConsent }), [consent]);
+  const openSettings = () => setSettingsOpen(true);
+  const closeSettings = () => setSettingsOpen(false);
+
+  const value = useMemo(
+    () => ({
+      consent,
+      acceptAll,
+      rejectAll,
+      updateCategories,
+      saveCustom,
+      resetConsent,
+      settingsOpen,
+      openSettings,
+      closeSettings,
+    }),
+    [consent, settingsOpen]
+  );
 
   return <ConsentContext.Provider value={value}>{children}</ConsentContext.Provider>;
 }
@@ -82,3 +109,4 @@ export function useConsent() {
   if (!ctx) throw new Error("useConsent must be used within ConsentProvider");
   return ctx;
 }
+

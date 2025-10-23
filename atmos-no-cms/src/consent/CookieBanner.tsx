@@ -3,54 +3,32 @@ import { useConsent } from "./ConsentContext";
 import "./cookie.css";
 
 export default function CookieBanner() {
-  const { consent, acceptAll, rejectAll, updateCategories, saveCustom } = useConsent();
-  const [openCustomize, setOpenCustomize] = useState(false);
+  const { consent, acceptAll, rejectAll, openSettings } = useConsent();
+  const [visible, setVisible] = useState(true);
 
-  if (consent.status !== "unknown") return null;
+  // Show the banner only when status is unknown and local hide not set
+  if (consent.status !== "unknown" || !visible) return null;
 
   return (
-    <div className="cookieBanner" role="dialog" aria-live="polite">
-      <div className="cookieBanner__content">
-        <p className="cookieBanner__text">
-          We use cookies to enhance site navigation, analyze usage, and assist in our marketing efforts.
-          You can accept, reject, or customize your choices. You can change your consent anytime in “Cookie settings”.
-        </p>
-        {!openCustomize ? (
-          <div className="cookieBanner__actions">
-            <button className="btn btn--secondary" onClick={() => setOpenCustomize(true)}>Customize</button>
-            <button className="btn" onClick={rejectAll}>Reject non-essential</button>
-            <button className="btn btn--primary" onClick={acceptAll}>Accept all</button>
-          </div>
-        ) : (
-          <form
-            className="cookieBanner__form"
-            onSubmit={(e) => { e.preventDefault(); saveCustom(); }}
-          >
-            <label className="cookieBanner__row">
-              <input type="checkbox" checked readOnly disabled />
-              <span>Strictly necessary (always on)</span>
-            </label>
-            <label className="cookieBanner__row">
-              <input
-                type="checkbox"
-                onChange={(e) => updateCategories({ analytics: e.target.checked })}
-              />
-              <span>Analytics</span>
-            </label>
-            <label className="cookieBanner__row">
-              <input
-                type="checkbox"
-                onChange={(e) => updateCategories({ marketing: e.target.checked })}
-              />
-              <span>Marketing</span>
-            </label>
-            <div className="cookieBanner__actions">
-              <button type="button" className="btn" onClick={rejectAll}>Reject non-essential</button>
-              <button type="submit" className="btn btn--primary">Save choices</button>
-            </div>
-          </form>
-        )}
+    <div className="cookieBar" role="dialog" aria-live="polite">
+      <div className="cookieBar__inner">
+        <div className="cookieBar__copy">
+          <strong className="cookieBar__title">We Value Your Privacy</strong>
+          <p>
+            We use cookies and other similar technologies to operate and improve our site, as described in our{" "}
+            <a href="/cookie-policy" className="cookieBar__link">Cookie Policy</a>.
+            With your consent, our third-party partners may also use these technologies for analytics and advertising purposes.
+            You can manage your settings at any time through{" "}
+            <button className="cookieBar__linkBtn" onClick={openSettings}>Cookie Preferences</button>.
+          </p>
+        </div>
+        <div className="cookieBar__actions">
+          <button className="btn btn--ghost" onClick={() => { rejectAll(); setVisible(false); }}>Decline</button>
+          <button className="btn btn--dark" onClick={() => { acceptAll(); setVisible(false); }}>Accept</button>
+          <button className="btn btn--secondary" onClick={openSettings}>Cookie Preferences</button>
+        </div>
       </div>
     </div>
   );
 }
+
