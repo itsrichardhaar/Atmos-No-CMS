@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./PrivacyPolicy.module.css";
+import CookieSettingsLink from "../consent/CookieSettingsLink";
 
 
 function getHeaderOffset() {
@@ -185,12 +186,13 @@ export default function PrivacyPolicy() {
         id: "cookies",
         title: "Cookies & Similar Technologies",
         body: (
-          <p>
-            We use cookies to operate our site (strictly necessary) and, with your consent, to enable analytics and marketing.
-            Manage your choices anytime via <button className={styles.inlineBtn} onClick={() => scrollToId("your-choices")}>Cookie Preferences</button>.
-            See our Cookie Policy for details.
-          </p>
-        ),
+            <p>
+                We use cookies to operate our site (strictly necessary) and, with your consent, to enable analytics and marketing.
+                Manage your choices anytime via{" "}
+                <CookieSettingsLink className={styles.inlineBtn}>Cookie Preferences</CookieSettingsLink>.
+                See our Cookie Policy for details.
+            </p>
+            ),
       },
       {
         id: "sharing",
@@ -207,18 +209,16 @@ export default function PrivacyPolicy() {
         id: "your-choices",
         title: "Your Choices & Rights",
         body: (
-          <>
+        <>
             <p>
-              Depending on your location, you may have rights to access, correct, delete, or export your data, and to object to or restrict certain processing.
+            Depending on your location, you may have rights to access, correct, delete, or export your data, and to object to or restrict certain processing.
             </p>
             <p>
-              For cookie choices, open <button className={styles.inlineBtn} onClick={() => {
-                // opens the cookie modal from the consent context (uses global event to avoid direct import)
-                document.dispatchEvent(new CustomEvent("open-cookie-settings"));
-              }}>Cookie Preferences</button>.
+            For cookie choices, open{" "}
+            <CookieSettingsLink className={styles.inlineBtn}>Cookie Preferences</CookieSettingsLink>.
             </p>
             <p>To exercise other rights, contact support@atmosled.com.</p>
-          </>
+        </>
         ),
       },
       {

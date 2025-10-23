@@ -93,7 +93,7 @@ export default function Footer() {
         <div className={styles.bottom}>
           <div className={styles.copy}>© {year} Atmos LED. All rights reserved.</div>
           <ul className={styles.legal}>
-            <li><Link to="/privacy">Privacy Policy</Link></li>
+            <li><Link to="/privacy-policy">Privacy Policy</Link></li>
             <li><Link to="/terms">Terms of Service</Link></li>
             <li>
               <CookieSettingsLink className={styles.cookieLink} />

@@ -16,7 +16,7 @@ export default function CookieBanner() {
           <strong className="cookieBar__title">We Value Your Privacy</strong>
           <p>
             We use cookies and other similar technologies to operate and improve our site, as described in our{" "}
-            <a href="/cookie-policy" className="cookieBar__link">Cookie Policy</a>.
+            <a href="privacy-policy#cookies" className="cookieBar__link">Cookie Policy</a>.
             With your consent, our third-party partners may also use these technologies for analytics and advertising purposes.
             You can manage your settings at any time through{" "}
             <button className="cookieBar__linkBtn" onClick={openSettings}>Cookie Preferences</button>.

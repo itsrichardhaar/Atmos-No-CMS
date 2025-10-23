@@ -39,7 +39,7 @@ export default function CookieSettingsModal() {
         <h2 id="cookieModalTitle" className="cookieModal__title">Cookie Preferences</h2>
         <p className="cookieModal__lead">
           We use different types of cookies on our websites as listed below. You can change your selections at any time.
-          View our <a href="/cookie-policy" className="cookieModal__link">Cookie Policy</a> for more information.
+          View our <a href="/privacy-policy#cookies" className="cookieModal__link">Cookie Policy</a> for more information.
         </p>
 
         {/* Cards */}
