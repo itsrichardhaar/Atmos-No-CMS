@@ -70,7 +70,7 @@ export default function ProductCard({ product }: { product: Product }) {
           viewport={{ once: true, amount: 0.8 }}
           >
       <Link to={`/products/${product.slug}`} className="btn btn--primary">
-        <span className="btn__label">Starting at ${product.startingFrom}</span>
+        <span className="btn__label">Shop {product.name} Series</span>
         <span className="btn__arrows" aria-hidden="true">
           <span className="btn__arrow btn__arrow--off"></span>
           <span className="btn__arrow btn__arrow--on"></span>
