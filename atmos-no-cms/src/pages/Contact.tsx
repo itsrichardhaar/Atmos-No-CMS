@@ -1,13 +1,12 @@
 // src/pages/Contact.tsx
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useMemo, useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import { motion, useReducedMotion, useAnimation } from "framer-motion";
 import type { Variants } from "framer-motion";
-import ReCAPTCHA from "react-google-recaptcha";
 import "./Contact.css";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
-const RECAPTCHA_SITE_KEY = (import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "").trim();
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xldogbak";
 
 /* -----------------------------
    Variants
@@ -30,10 +29,6 @@ export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const reduce = useReducedMotion();
 
-  // reCAPTCHA
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const recaptchaRef = useRef<ReCAPTCHA | null>(null);
-
   // Controls (no in-view gating)
   const headerControls = useAnimation();
   const formControls = useAnimation();
@@ -50,28 +45,29 @@ export default function Contact() {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    if (!RECAPTCHA_SITE_KEY) {
-      alert("reCAPTCHA is not configured. Please set VITE_RECAPTCHA_SITE_KEY.");
-      return;
-    }
-    if (!captchaToken) {
-      alert("Please verify that you’re not a robot.");
-      recaptchaRef.current?.getValue();
-      return;
-    }
-
     setSubmitting(true);
 
-    // TODO: send form + captchaToken to your backend here.
+    try {
+      const formData = new FormData(e.currentTarget);
+      const payload: Record<string, any> = Object.fromEntries(formData.entries());
 
-    setTimeout(() => {
-      setSubmitting(false);
-      (e.currentTarget as HTMLFormElement).reset();
-      recaptchaRef.current?.reset();
-      setCaptchaToken(null);
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.errors?.[0]?.message || `Request failed: ${res.status}`);
+
       alert("Thanks! We received your message.");
-    }, 500);
+      (e.currentTarget as HTMLFormElement).reset();
+    } catch (err: any) {
+      console.error(err);
+      alert(err.message || "Sorry, something went wrong.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const title = "Get a Quote";
@@ -84,7 +80,12 @@ export default function Contact() {
       <div className="contact__wrap">
         {/* Header */}
         <motion.div {...animProps(headerControls)}>
-          <motion.h1 className="contact__title" variants={titleGroup} aria-label={title}>
+          <motion.h1
+            className="contact__title"
+            variants={titleGroup}
+            aria-label={title}
+            style={{ marginBottom: "clamp(16px, 3.5vh, 40px)" }} // spacing under the title
+          >
             {titleChars.map((ch, i) => (
               <motion.span
                 key={i}
@@ -104,9 +105,24 @@ export default function Contact() {
           onSubmit={onSubmit}
           noValidate
           {...animProps(formControls)}
+          style={{ marginTop: "clamp(8px, 2.5vh, 28px)", display: "grid", gap: "18px" }} // tidy row gaps
         >
+          {/* Hidden helpers for Formspree */}
+          <input type="hidden" name="_subject" value="New quote request" />
+          <input
+            type="text"
+            name="_gotcha"
+            style={{ display: "none" }}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+
           {/* Row: First/Last */}
-          <motion.div className="contactForm__row contactForm__row--2" variants={filterItem}>
+          <motion.div
+            className="contactForm__row contactForm__row--2"
+            variants={filterItem}
+            style={{ gap: "16px" }}
+          >
             <div className="field">
               <label htmlFor="first">First name</label>
               <input id="first" name="first" type="text" autoComplete="given-name" />
@@ -118,7 +134,11 @@ export default function Contact() {
           </motion.div>
 
           {/* Row: Email/Phone */}
-          <motion.div className="contactForm__row contactForm__row--2" variants={filterItem}>
+          <motion.div
+            className="contactForm__row contactForm__row--2"
+            variants={filterItem}
+            style={{ gap: "16px" }}
+          >
             <div className="field">
               <label htmlFor="email">Email</label>
               <input id="email" name="email" type="email" autoComplete="email" required />
@@ -155,30 +175,21 @@ export default function Contact() {
           <motion.div className="contactForm__row" variants={filterItem}>
             <div className="field">
               <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" rows={7} placeholder="Tell us about your project…" />
+              <textarea
+                id="message"
+                name="message"
+                rows={7}
+                placeholder="Tell us about your project…"
+              />
             </div>
           </motion.div>
 
-          {/* reCAPTCHA */}
-          <motion.div className="contactForm__row" variants={filterItem}>
-            {RECAPTCHA_SITE_KEY ? (
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey={RECAPTCHA_SITE_KEY}
-                theme="dark"
-                onChange={(token) => setCaptchaToken(token)}
-                onExpired={() => setCaptchaToken(null)}
-                onErrored={() => setCaptchaToken(null)}
-              />
-            ) : (
-              <p style={{ color: "#f99", margin: 0 }}>
-                reCAPTCHA isn’t configured. Set <code>VITE_RECAPTCHA_SITE_KEY</code> in your env and redeploy.
-              </p>
-            )}
-          </motion.div>
-
           {/* Submit */}
-          <motion.div className="contactForm__actions" variants={filterItem}>
+          <motion.div
+            className="contactForm__actions"
+            variants={filterItem}
+            style={{ display: "flex", alignItems: "center", marginTop: 4, minHeight: 48 }}
+          >
             <motion.button
               className="btn btn--primary contactForm__submit"
               disabled={submitting}
@@ -194,6 +205,9 @@ export default function Contact() {
     </section>
   );
 }
+
+
+
 
 
 
