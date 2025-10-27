@@ -160,12 +160,12 @@ export default function Contact() {
           {/* Row: First / Last */}
           <motion.div className="contactForm__row contactForm__row--2" variants={filterItem} style={{ gap: 16 }}>
             <div className="field">
-              <label htmlFor="first">First name</label>
-              <input id="first" name="first" type="text" autoComplete="given-name" />
+              <label htmlFor="name">Name</label>
+              <input id="name" name="name" type="text" autoComplete="given-name" />
             </div>
             <div className="field">
-              <label htmlFor="last">Last name</label>
-              <input id="last" name="last" type="text" autoComplete="family-name" />
+              <label htmlFor="organization">Organization</label>
+              <input id="organization" name="organization" type="text" autoComplete="company-name" />
             </div>
           </motion.div>
 
