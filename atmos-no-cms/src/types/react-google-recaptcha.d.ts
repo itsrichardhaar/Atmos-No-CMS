@@ -1,3 +1,4 @@
+// types/react-google-recaptcha.d.ts
 declare module "react-google-recaptcha" {
   import * as React from "react";
 
@@ -9,13 +10,14 @@ declare module "react-google-recaptcha" {
     sitekey: string;
     onChange?: (token: string | null) => void;
     onExpired?: () => void;
-    onErrored?: () => void; // NOTE: library uses onErrored
+    onErrored?: () => void;
     size?: ReCAPTCHASize;
     theme?: ReCAPTCHATheme;
-    tabindex?: number;
+    tabIndex?: number;        
     hl?: string;
-    badge?: ReCAPTCHABadge;
+    badge?: ReCAPTCHABadge;   
     isolated?: boolean;
+    className?: string;       
   }
 
   export default class ReCAPTCHA extends React.Component<ReCAPTCHAProps> {
@@ -24,3 +26,4 @@ declare module "react-google-recaptcha" {
     executeAsync(): Promise<string>;
   }
 }
+
