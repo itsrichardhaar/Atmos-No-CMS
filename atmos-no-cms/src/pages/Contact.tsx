@@ -28,6 +28,9 @@ const filterItem: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
+console.log("[recaptcha] site key present:", Boolean(RECAPTCHA_SITE_KEY), RECAPTCHA_SITE_KEY);
+
+
 export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
