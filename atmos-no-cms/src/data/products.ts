@@ -27,7 +27,7 @@ export const products: Product[] = [
         body: "Adaptable panels bring reliable visuals to temporary outdoor events that demand performance and durability."
       }
     ],
-    shopUrl: "https://your-shop.myshopify.com/products/element",
+    shopUrl: "https://dfuc15-ke.myshopify.com/products/element",
     glowColor: "#D81279",
     features: [
       { icon: "/icons/features/burst.svg",
@@ -94,7 +94,7 @@ export const products: Product[] = [
         body: "Compact, transportable LED posters that make setup simple while maximizing impact."
       }
     ],
-    shopUrl: "https://your-shop.myshopify.com/products/kiosk",
+    shopUrl: "https://dfuc15-ke.myshopify.com/products/kiosk",
     glowColor: "#DC902A",
     features: [
       { icon: "/icons/features/burst.svg",
@@ -161,7 +161,7 @@ export const products: Product[] = [
         body: "Incorporate transparent LED seamlessly into glass and structures for subtle, dynamic visuals."
       }
     ],
-    shopUrl: "https://your-shop.myshopify.com/products/phantom",
+    shopUrl: "https://dfuc15-ke.myshopify.com/products/phantom",
     glowColor: "#1D458B",
     features: [
       { icon: "/icons/features/burst.svg",
@@ -228,7 +228,7 @@ export const products: Product[] = [
         body: "Transform building facades into digital canvases with bold, weatherproof LED solutions."
       }
     ],
-    shopUrl: "https://your-shop.myshopify.com/products/stratos",
+    shopUrl: "https://dfuc15-ke.myshopify.com/products/stratos",
     glowColor: "#F18037",
     features: [
       { icon: "/icons/features/burst.svg",
@@ -295,7 +295,7 @@ export const products: Product[] = [
         body: "Engage visitors with interactive storytelling and environments that respond to every step."
       }
     ],
-    shopUrl: "https://your-shop.myshopify.com/products/trek",
+    shopUrl: "https://dfuc15-ke.myshopify.com/products/trek",
     glowColor: "#035F66",
     features: [
       { icon: "/icons/features/burst.svg",
@@ -362,7 +362,7 @@ export const products: Product[] = [
         body: "Tool-free, magnetic modules ensure quick installation and maintenance, keeping tight timelines on track."
       }
     ],
-    shopUrl: "https://your-shop.myshopify.com/products/vision",
+    shopUrl: "https://dfuc15-ke.myshopify.com/products/vision",
     glowColor: "#6A449B",
     features: [
       { icon: "/icons/features/burst.svg",
@@ -429,7 +429,7 @@ export const products: Product[] = [
         body: "Transform boardrooms and lobbies with slim, seamless walls that showcase premium branding."
       }
     ],
-    shopUrl: "https://your-shop.myshopify.com/products/vivid",
+    shopUrl: "https://dfuc15-ke.myshopify.com/products/vivid",
     glowColor: "#223C78",
     features: [
       { icon: "/icons/features/burst.svg",
@@ -496,7 +496,7 @@ export const products: Product[] = [
         body: "Balance affordability with reliable LED performance at scale."
       }
     ],
-    shopUrl: "https://your-shop.myshopify.com/products/vue",
+    shopUrl: "https://dfuc15-ke.myshopify.com/products/vue",
     glowColor: "#F5CC19",
     features: [
       { icon: "/icons/features/burst.svg",
@@ -563,7 +563,7 @@ export const products: Product[] = [
       body: "Balance affordability with reliable LED performance at scale."
     }
   ],
-  shopUrl: "https://your-shop.myshopify.com/products/vivid",
+  shopUrl: "https://dfuc15-ke.myshopify.com/products/vivid",
   glowColor: "#3BBE7A",
   features: [
       { icon: "/icons/features/burst.svg",
@@ -630,7 +630,7 @@ export const products: Product[] = [
       body: "Balance affordability with reliable LED performance at scale."
     }
   ],
-  shopUrl: "https://your-shop.myshopify.com/products/vue",
+  shopUrl: "https://dfuc15-ke.myshopify.com/products/vue",
   glowColor: "#3BBE7A",
   features: [
       { icon: "/icons/features/burst.svg",
