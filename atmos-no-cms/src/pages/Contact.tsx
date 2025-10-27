@@ -1,13 +1,12 @@
 // src/pages/Contact.tsx
 import { useMemo, useState, useEffect, useRef } from "react";
 import type { FormEvent } from "react";
-import { motion, useReducedMotion, useAnimation } from "framer-motion"; // ⬅ removed useInView
+import { motion, useReducedMotion, useAnimation } from "framer-motion";
 import type { Variants } from "framer-motion";
 import ReCAPTCHA from "react-google-recaptcha";
 import "./Contact.css";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
-
 const RECAPTCHA_SITE_KEY = (import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "").trim();
 
 /* -----------------------------
@@ -26,10 +25,6 @@ const filterItem: Variants = {
   hidden: { opacity: 0, y: -15 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_BEZIER } },
-};
 
 export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
@@ -46,7 +41,6 @@ export default function Contact() {
   // ▶️ Animate everything on mount (if not reduced motion)
   useEffect(() => {
     if (reduce) return;
-    // Kick off next frame so layout is ready before anims
     const id = requestAnimationFrame(() => {
       headerControls.start("visible");
       formControls.start("visible");
@@ -80,7 +74,7 @@ export default function Contact() {
     }, 500);
   }
 
-  const title = "Contact us";
+  const title = "Get a Quote";
   const titleChars = useMemo(() => Array.from(title), []);
   const animProps = (controls: ReturnType<typeof useAnimation>) =>
     reduce ? {} : { variants: filterGroup, initial: "hidden", animate: controls };
@@ -90,10 +84,6 @@ export default function Contact() {
       <div className="contact__wrap">
         {/* Header */}
         <motion.div {...animProps(headerControls)}>
-          <motion.p className="contact__tagline" variants={fadeUp}>
-            Tagline
-          </motion.p>
-
           <motion.h1 className="contact__title" variants={titleGroup} aria-label={title}>
             {titleChars.map((ch, i) => (
               <motion.span
@@ -106,10 +96,6 @@ export default function Contact() {
               </motion.span>
             ))}
           </motion.h1>
-
-          <motion.p className="contact__intro" variants={fadeUp}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </motion.p>
         </motion.div>
 
         {/* Form */}
@@ -149,38 +135,27 @@ export default function Contact() {
               <label htmlFor="topic">Choose a topic</label>
               <div className="selectWrap">
                 <select id="topic" name="topic" defaultValue="">
-                  <option value="" disabled>Select one…</option>
+                  <option value="" disabled>
+                    Select one…
+                  </option>
                   <option>Sales / New project</option>
                   <option>Service & Support</option>
                   <option>Partnerships</option>
                   <option>Careers</option>
                   <option>Other</option>
                 </select>
-                <span className="selectCaret" aria-hidden="true">▾</span>
+                <span className="selectCaret" aria-hidden="true">
+                  ▾
+                </span>
               </div>
             </div>
           </motion.div>
-
-          {/* Radios two-column */}
-          <motion.fieldset className="contactForm__row contactForm__radios" variants={filterItem}>
-            <legend>Which best describes you?</legend>
-            <div className="radioCol">
-              <label className="radio"><input type="radio" name="persona" value="first" /><span>First choice</span></label>
-              <label className="radio"><input type="radio" name="persona" value="third" /><span>Third choice</span></label>
-              <label className="radio"><input type="radio" name="persona" value="fifth" /><span>Fifth choice</span></label>
-            </div>
-            <div className="radioCol">
-              <label className="radio"><input type="radio" name="persona" value="second" /><span>Second choice</span></label>
-              <label className="radio"><input type="radio" name="persona" value="fourth" /><span>Fourth choice</span></label>
-              <label className="radio"><input type="radio" name="persona" value="other" /><span>Other</span></label>
-            </div>
-          </motion.fieldset>
 
           {/* Message */}
           <motion.div className="contactForm__row" variants={filterItem}>
             <div className="field">
               <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" rows={7} placeholder="Type your message..." />
+              <textarea id="message" name="message" rows={7} placeholder="Tell us about your project…" />
             </div>
           </motion.div>
 
@@ -219,6 +194,7 @@ export default function Contact() {
     </section>
   );
 }
+
 
 
 

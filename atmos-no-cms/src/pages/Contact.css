@@ -28,6 +28,7 @@
   font-size: clamp(40px, 9vw, 96px);
   color: var(--market-accent, #2899D5);
   line-height: .95;
+  margin-bottom: 40px;
 }
 
 .contact__intro {
