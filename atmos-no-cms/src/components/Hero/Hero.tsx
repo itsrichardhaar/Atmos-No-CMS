@@ -185,7 +185,7 @@ export default function Hero() {
                 "--dg-size": "2px",
                 "--dg-gap": "22px",
                 "--dg-color": "#2899D5",
-                "--dg-alpha-pct": "65%",
+                "--dg-alpha-pct": "45%",
               } as React.CSSProperties
             }
           />
