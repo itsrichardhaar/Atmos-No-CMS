@@ -275,9 +275,9 @@ export default function Nav() {
                     to="https://dfuc15-ke.myshopify.com"
                     className={linkClass}
                     target="_blank"
-                    aria-label="Shop"
+                    aria-label="Store"
                   >
-                    <span className="menu__linkRow"><AnimatedLabel text="Shop" /></span>
+                    <span className="menu__linkRow"><AnimatedLabel text="Store" /></span>
                   </NavLink>
                 </motion.div>
               </div>
