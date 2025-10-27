@@ -9,6 +9,7 @@ import "./Contact.css";
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xldogbak";
 const RECAPTCHA_SITE_KEY = (import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "").trim();
+const hasSiteKey = Boolean(RECAPTCHA_SITE_KEY);
 
 /* -----------------------------
    Animation Variants
@@ -212,18 +213,38 @@ export default function Contact() {
 
           {/* reCAPTCHA widget */}
           {!!RECAPTCHA_SITE_KEY && (
-            <motion.div className="contactForm__row" variants={filterItem}>
+            <div
+            className="contactForm__row recaptchaRow"
+            // NOTE: not animated; keep it plain to avoid iframe render issues
+            style={{
+              position: "relative",
+              zIndex: 5,
+              padding: "4px 0",
+              minHeight: 78,         // v2 checkbox height
+            }}
+          >
+            {!hasSiteKey && (
+              <p style={{ color: "#f99", margin: 0 }}>
+                reCAPTCHA site key is missing. Set <code>VITE_RECAPTCHA_SITE_KEY</code> in your production env and redeploy.
+              </p>
+            )}
+
+            {hasSiteKey && (
               <ReCAPTCHA
                 ref={recaptchaRef}
                 sitekey={RECAPTCHA_SITE_KEY}
                 theme="dark"
+                size="normal"            // ensure checkbox mode
+                hl="en"
                 onChange={(token) => setCaptchaToken(token)}
                 onExpired={() => setCaptchaToken(null)}
                 onErrored={() => setCaptchaToken(null)}
+                // Make the box impossible to hide by layout quirks
+                className="recaptchaBox"
               />
-            </motion.div>
+            )}
+          </div>
           )}
-
           {/* Submit */}
           <motion.div
             className="contactForm__actions"
