@@ -11,7 +11,7 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/xldogbak";
 const RECAPTCHA_SITE_KEY = (import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? "").trim();
 
 /* -----------------------------
-   Variants
+   Animation Variants
 ----------------------------- */
 const titleGroup: Variants = { hidden: {}, visible: { transition: { staggerChildren: 0.03 } } };
 const titleChar: Variants = {
@@ -29,12 +29,13 @@ const filterItem: Variants = {
 
 export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA | null>(null);
   const reduce = useReducedMotion();
 
-  // Anim controls
+  // Animate on mount
   const headerControls = useAnimation();
   const formControls = useAnimation();
-
   useEffect(() => {
     if (reduce) return;
     const id = requestAnimationFrame(() => {
@@ -44,34 +45,45 @@ export default function Contact() {
     return () => cancelAnimationFrame(id);
   }, [reduce, headerControls, formControls]);
 
-  // reCAPTCHA v2
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const recaptchaRef = useRef<ReCAPTCHA | null>(null);
-
+  /* -----------------------------
+     Submit handler (Formspree + reCAPTCHA)
+  ----------------------------- */
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
 
     try {
-      // If Custom reCAPTCHA is on in Formspree, require a token
       if (RECAPTCHA_SITE_KEY && !captchaToken) {
         throw new Error("Please verify that you’re not a robot.");
       }
 
-      const formData = new FormData(e.currentTarget);
-      const payload: Record<string, any> = Object.fromEntries(formData.entries());
+      const form = e.currentTarget;
+      const fd = new FormData(form);
 
-      // Formspree expects this exact field name
-      if (captchaToken) payload["g-recaptcha-response"] = captchaToken;
+      // Required for Formspree custom reCAPTCHA
+      if (captchaToken) fd.set("g-recaptcha-response", captchaToken);
+
+      // Optional helpers
+      fd.set("_subject", "New quote request");
+
+      // Convert to URL-encoded string (safer than JSON with Formspree + reCAPTCHA)
+      const body = new URLSearchParams();
+      fd.forEach((value, key) => {
+        body.append(key, String(value));
+      });
 
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        },
+        body: body.toString(),
       });
 
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
+        console.error("Formspree error:", data);
         const msg =
           data?.errors?.map((e: any) => e.message).join(", ") ||
           data?.message ||
@@ -79,27 +91,32 @@ export default function Contact() {
         throw new Error(msg);
       }
 
-      alert("Thanks! We received your message.");
-      (e.currentTarget as HTMLFormElement).reset();
+      alert("✅ Thanks! We received your message.");
+      form.reset();
       recaptchaRef.current?.reset();
       setCaptchaToken(null);
     } catch (err: any) {
-      console.error(err);
-      alert(err.message || "Sorry, something went wrong.");
+      alert(err.message || "❌ Sorry, something went wrong.");
     } finally {
       setSubmitting(false);
     }
   }
 
+  /* -----------------------------
+     Animation helpers
+  ----------------------------- */
   const title = "Get a Quote";
   const titleChars = useMemo(() => Array.from(title), []);
   const animProps = (controls: ReturnType<typeof useAnimation>) =>
     reduce ? {} : { variants: filterGroup, initial: "hidden", animate: controls };
 
+  /* -----------------------------
+     JSX
+  ----------------------------- */
   return (
     <section className="contact">
       <div className="contact__wrap">
-        {/* Header */}
+        {/* Title */}
         <motion.div {...animProps(headerControls)}>
           <motion.h1
             className="contact__title"
@@ -128,11 +145,17 @@ export default function Contact() {
           {...animProps(formControls)}
           style={{ marginTop: "clamp(8px, 2.5vh, 28px)", display: "grid", gap: "18px" }}
         >
-          {/* Hidden helpers for Formspree */}
+          {/* Honeypot + Subject */}
           <input type="hidden" name="_subject" value="New quote request" />
-          <input type="text" name="_gotcha" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+          <input
+            type="text"
+            name="_gotcha"
+            style={{ display: "none" }}
+            tabIndex={-1}
+            autoComplete="off"
+          />
 
-          {/* Row: First/Last */}
+          {/* Row: First / Last */}
           <motion.div className="contactForm__row contactForm__row--2" variants={filterItem} style={{ gap: 16 }}>
             <div className="field">
               <label htmlFor="first">First name</label>
@@ -144,7 +167,7 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Row: Email/Phone */}
+          {/* Row: Email / Phone */}
           <motion.div className="contactForm__row contactForm__row--2" variants={filterItem} style={{ gap: 16 }}>
             <div className="field">
               <label htmlFor="email">Email</label>
@@ -178,11 +201,16 @@ export default function Contact() {
           <motion.div className="contactForm__row" variants={filterItem}>
             <div className="field">
               <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" rows={7} placeholder="Tell us about your project…" />
+              <textarea
+                id="message"
+                name="message"
+                rows={7}
+                placeholder="Tell us about your project…"
+              />
             </div>
           </motion.div>
 
-          {/* reCAPTCHA widget (required for Custom reCAPTCHA) */}
+          {/* reCAPTCHA widget */}
           {!!RECAPTCHA_SITE_KEY && (
             <motion.div className="contactForm__row" variants={filterItem}>
               <ReCAPTCHA
@@ -217,6 +245,7 @@ export default function Contact() {
     </section>
   );
 }
+
 
 
 
