@@ -261,7 +261,7 @@ export default function Nav() {
 
                 <motion.div variants={linkRow} custom={4} className="menu__linkWrapper">
                   <NavLink
-                    to="https://mapoutcreative.com/atmosled/"
+                    to="https://mapoutcreative.com/calculator/"
                     className={linkClass}
                     target="_blank"
                     aria-label="Calculator"
