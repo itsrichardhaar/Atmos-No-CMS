@@ -113,7 +113,7 @@ export default function Approach() {
         <div className={styles.strip}>
           <div className={styles.stripLeft}>
             <small className={styles.stripKicker}>
-              Used by the world’s leading companies
+              Powered by Global Leaders
             </small>
           </div>
           <motion.ul
@@ -125,19 +125,10 @@ export default function Approach() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.li variants={logoItem}>
-              <img src="/assets/logos/webflow.svg" alt="Webflow" />
+              <img src="/assets/logos/Brompton_Logo.webp" alt="Brompton" />
             </motion.li>
             <motion.li variants={logoItem}>
-              <img src="/assets/logos/relume.svg" alt="Relume" />
-            </motion.li>
-            <motion.li variants={logoItem}>
-              <img src="/assets/logos/webflow.svg" alt="Webflow" />
-            </motion.li>
-            <motion.li variants={logoItem}>
-              <img src="/assets/logos/relume.svg" alt="Relume" />
-            </motion.li>
-            <motion.li variants={logoItem}>
-              <img src="/assets/logos/webflow.svg" alt="Webflow" />
+              <img src="/assets/logos/NovaStar_Logo.webp" alt="NovaStar" />
             </motion.li>
           </motion.ul>
         </div>

@@ -50,56 +50,70 @@
 }
 
 .strip {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 20px;
+  display: flex;                /* was grid */
   align-items: center;
+  justify-content: flex-start;  /* keep everything left */
+  gap: 16px;                    /* small space between text and first logo */
+  flex-wrap: wrap;              /* allow logos to wrap on small screens */
   margin-top: 36px;
   padding-top: 40px;
   padding-bottom: 40px;
 }
 
-.stripLeft {}
+.stripLeft {
+  display: contents;            /* keep DOM for semantics; no layout box */
+}
 
 .stripKicker {
   color: #fff;
   font-size: 16px;
   letter-spacing: 0.3px;
   font-weight: 700;
+  white-space: nowrap;          /* don't let this wrap */
 }
 
+/* Logo row sits immediately after the kicker */
 .logoRow {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 18px;                    /* tweak as desired */
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.logoRow img {
-  height: auto; 
-  width: 80%;
-  opacity: 0.95;
-  filter: grayscale(100%) brightness(1.35);
+.logoRow li {
+  display: flex;
+  align-items: center;
 }
 
+.logoRow img {
+  height: 50px;                 /* consistent visual height */
+  width: auto;                  /* maintain aspect */
+  opacity: 0.95;
+  filter: grayscale(100%) brightness(1.35);
+  object-fit: contain;
+}
+
+/* Responsive refinements */
 @media (max-width: 900px) {
   .topRow {
     grid-template-columns: 1fr;
     gap: 28px;
   }
-  .copy {
-    margin: 0;
-  }
+  .copy { margin: 0; }
+
   .strip {
-    grid-template-columns: 1fr;
-    justify-items: start;
-    row-gap: 12px;
+    gap: 12px;                  /* slightly tighter on mobile */
   }
+
   .logoRow {
-    flex-wrap: wrap;
-    gap: 16px;
+    gap: 14px;
+    flex-wrap: wrap;            /* logos can break to next line */
+  }
+
+  .logoRow img {
+    height: 22px;               /* a touch smaller on mobile */
   }
 }
 
