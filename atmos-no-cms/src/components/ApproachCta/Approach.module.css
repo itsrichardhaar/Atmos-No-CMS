@@ -53,7 +53,7 @@
   display: flex;                /* was grid */
   align-items: center;
   justify-content: flex-start;  /* keep everything left */
-  gap: 16px;                    /* small space between text and first logo */
+  gap: 36px;                    /* small space between text and first logo */
   flex-wrap: wrap;              /* allow logos to wrap on small screens */
   margin-top: 36px;
   padding-top: 40px;
