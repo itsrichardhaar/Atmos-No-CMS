@@ -16,9 +16,9 @@ export default function BuildDisplayCta({
   title = "Build Your Display Now.",
   subtitle = "Use our custom wall builder to create a solution for your space today.",
   buttonText = "Build Your Display",
-  to = "https://mapoutcreative.com/atmosled/",
+  to = "https://mapoutcreative.com/calculator/",
   imageSrc = "/assets/images/build-cta.png",
-  videoSrc = "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/videos/Atmos_wall_bg-2.mp4",
+  videoSrc = "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/videos/Atmos_wall_bg-3.mp4",
 }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
