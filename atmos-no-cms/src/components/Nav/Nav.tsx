@@ -13,15 +13,13 @@ type HeroPhase = "none" | "active" | "done";
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
-  const [armed, setArmed] = useState(false); // becomes true after a real scroll > 2px
+  const [armed, setArmed] = useState(false); 
   const [heroPhase, setHeroPhase] = useState<HeroPhase>("none");
   const location = useLocation();
 
-  // Refs
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const menuPanelRef = useRef<HTMLDivElement>(null);
 
-  // ---- utilities
   const getY = () =>
     window.scrollY ||
     document.documentElement.scrollTop ||
@@ -37,36 +35,32 @@ export default function Nav() {
     return "none";
   };
 
-  // Close menu on route change
   useEffect(() => {
     setOpen(false);
   }, [location.pathname]);
 
   useLockBodyScroll(open);
 
-  // Reset nav state on route change
+
   useEffect(() => {
-    // Always recompute hero phase (home page may mount hero)
     const phase = readHeroPhase();
     setHeroPhase(phase);
 
-    // Start transparent; if not on hero, compute based on current Y next frame
     setArmed(false);
     setSolid(false);
 
     const t = requestAnimationFrame(() => {
       if (phase === "active") {
-        // While hero is running, nav stays transparent regardless of scroll
+       
         setSolid(false);
       } else {
-        // No hero (or already done): reflect true scroll position
+      
         setSolid(!atTop());
       }
     });
     return () => cancelAnimationFrame(t);
   }, [location.pathname]);
 
-  // Watch data-hero-reveal changes (home only)
   useEffect(() => {
     const el = document.documentElement;
     const mo = new MutationObserver(() => {
@@ -74,21 +68,18 @@ export default function Nav() {
       setHeroPhase(phase);
 
       if (phase === "active") {
-        // Force transparent and disarm while hero intro is playing
         setSolid(false);
         setArmed(false);
       } else if (phase === "done" || phase === "none") {
-        // Hero finished/absent: recompute from current Y (stay disarmed until real scroll)
         setSolid(!atTop());
       }
     });
     mo.observe(el, { attributes: true, attributeFilter: ["data-hero-reveal"] });
-    // Initialize once on mount
+
     setHeroPhase(readHeroPhase());
     return () => mo.disconnect();
   }, []);
 
-  // Focus logic when menu opens
   useEffect(() => {
     if (!open) return;
     const t = setTimeout(() => {
@@ -99,26 +90,23 @@ export default function Nav() {
     return () => clearTimeout(t);
   }, [open]);
 
-  // Esc to close
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Scroll / resize: disabled while heroPhase === "active"
   useEffect(() => {
     let ticking = false;
 
     const onScrollOrResize = () => {
-      if (heroPhase === "active") return; // ignore until hero finishes
+      if (heroPhase === "active") return; 
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         const y = getY();
 
         if (!armed) {
-          // Arm only after a real user scroll > 2px
           if (y > 2) setArmed(true);
           setSolid(y > 2 ? true : false);
         } else {
@@ -129,7 +117,6 @@ export default function Nav() {
       });
     };
 
-    // Initial compute (if hero isn't controlling)
     if (heroPhase !== "active") onScrollOrResize();
 
     window.addEventListener("scroll", onScrollOrResize, { passive: true });
@@ -143,7 +130,6 @@ export default function Nav() {
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     isActive ? "menu__link is-active" : "menu__link";
 
-  // ===== Variants (unchanged) =====
   const EASE = [0.22, 1, 0.36, 1] as const;
   const listGroup: Variants = { hidden: {}, visible: {} };
   const linkRow: Variants = {

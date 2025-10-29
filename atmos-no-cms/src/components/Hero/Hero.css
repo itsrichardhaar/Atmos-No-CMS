@@ -160,6 +160,12 @@
   .hero__grid { 
     grid-template-columns: 1fr; 
   } 
+
+
+.hero__video {
+  width: 200% !important;
+  left: -50% !important;           
+}
 }
 
 .hero--center .hero__copy--center{
