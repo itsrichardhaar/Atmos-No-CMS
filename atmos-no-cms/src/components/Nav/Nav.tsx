@@ -8,44 +8,87 @@ import HamburgerButton from "../HamburgerButton/Hamburger";
 import logo from "/assets/logos/Company Logo.png";
 import "./Nav.css";
 
+type HeroPhase = "none" | "active" | "done";
+
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
-  const [armed, setArmed] = useState(false); 
+  const [armed, setArmed] = useState(false); // becomes true after a real scroll > 2px
+  const [heroPhase, setHeroPhase] = useState<HeroPhase>("none");
   const location = useLocation();
 
-  
+  // Refs
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const menuPanelRef = useRef<HTMLDivElement>(null);
 
- 
+  // ---- utilities
   const getY = () =>
     window.scrollY ||
     document.documentElement.scrollTop ||
     (document.body as HTMLElement).scrollTop ||
     0;
 
-  const isAtTop = () => getY() <= 2;
+  const atTop = () => getY() <= 2;
 
+  const readHeroPhase = (): HeroPhase => {
+    const v = document.documentElement.getAttribute("data-hero-reveal");
+    if (v === "active") return "active";
+    if (v === "done") return "done";
+    return "none";
+  };
 
+  // Close menu on route change
   useEffect(() => {
     setOpen(false);
   }, [location.pathname]);
 
   useLockBodyScroll(open);
 
-  
+  // Reset nav state on route change
   useEffect(() => {
+    // Always recompute hero phase (home page may mount hero)
+    const phase = readHeroPhase();
+    setHeroPhase(phase);
+
+    // Start transparent; if not on hero, compute based on current Y next frame
     setArmed(false);
-    
     setSolid(false);
+
     const t = requestAnimationFrame(() => {
-      setSolid(!isAtTop() /* becomes solid if page loads scrolled */);
+      if (phase === "active") {
+        // While hero is running, nav stays transparent regardless of scroll
+        setSolid(false);
+      } else {
+        // No hero (or already done): reflect true scroll position
+        setSolid(!atTop());
+      }
     });
     return () => cancelAnimationFrame(t);
   }, [location.pathname]);
 
+  // Watch data-hero-reveal changes (home only)
+  useEffect(() => {
+    const el = document.documentElement;
+    const mo = new MutationObserver(() => {
+      const phase = readHeroPhase();
+      setHeroPhase(phase);
 
+      if (phase === "active") {
+        // Force transparent and disarm while hero intro is playing
+        setSolid(false);
+        setArmed(false);
+      } else if (phase === "done" || phase === "none") {
+        // Hero finished/absent: recompute from current Y (stay disarmed until real scroll)
+        setSolid(!atTop());
+      }
+    });
+    mo.observe(el, { attributes: true, attributeFilter: ["data-hero-reveal"] });
+    // Initialize once on mount
+    setHeroPhase(readHeroPhase());
+    return () => mo.disconnect();
+  }, []);
+
+  // Focus logic when menu opens
   useEffect(() => {
     if (!open) return;
     const t = setTimeout(() => {
@@ -56,44 +99,51 @@ export default function Nav() {
     return () => clearTimeout(t);
   }, [open]);
 
-
+  // Esc to close
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
- 
+  // Scroll / resize: disabled while heroPhase === "active"
   useEffect(() => {
     let ticking = false;
-    const onScroll = () => {
+
+    const onScrollOrResize = () => {
+      if (heroPhase === "active") return; // ignore until hero finishes
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         const y = getY();
+
         if (!armed) {
-          if (y > 2) setArmed(true); 
-          setSolid(y > 2 ? true : false); 
+          // Arm only after a real user scroll > 2px
+          if (y > 2) setArmed(true);
+          setSolid(y > 2 ? true : false);
         } else {
           setSolid(y > 2);
         }
+
         ticking = false;
       });
     };
 
-   
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
+    // Initial compute (if hero isn't controlling)
+    if (heroPhase !== "active") onScrollOrResize();
+
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize, { passive: true });
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
     };
-  }, [armed]); 
+  }, [armed, heroPhase]);
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     isActive ? "menu__link is-active" : "menu__link";
 
+  // ===== Variants (unchanged) =====
   const EASE = [0.22, 1, 0.36, 1] as const;
   const listGroup: Variants = { hidden: {}, visible: {} };
   const linkRow: Variants = {
@@ -180,31 +230,26 @@ export default function Nav() {
                     <span className="menu__linkRow"><AnimatedLabel text="About" /></span>
                   </NavLink>
                 </motion.div>
-
                 <motion.div variants={linkRow} custom={1} className="menu__linkWrapper">
                   <NavLink to="/products" end className={linkClass} aria-label="Products">
                     <span className="menu__linkRow"><AnimatedLabel text="Products" /></span>
                   </NavLink>
                 </motion.div>
-
                 <motion.div variants={linkRow} custom={2} className="menu__linkWrapper">
                   <NavLink to="/markets" end className={linkClass} aria-label="Markets">
                     <span className="menu__linkRow"><AnimatedLabel text="Markets" /></span>
                   </NavLink>
                 </motion.div>
-
                 <motion.div variants={linkRow} custom={3} className="menu__linkWrapper">
                   <NavLink to="/contact" end className={linkClass} aria-label="Contact">
                     <span className="menu__linkRow"><AnimatedLabel text="Contact" /></span>
                   </NavLink>
                 </motion.div>
-
                 <motion.div variants={linkRow} custom={4} className="menu__linkWrapper">
                   <a href="https://mapoutcreative.com/calculator/" className="menu__link" target="_blank" rel="noreferrer" aria-label="Calculator">
                     <span className="menu__linkRow"><AnimatedLabel text="Calculator" /></span>
                   </a>
                 </motion.div>
-
                 <motion.div variants={linkRow} custom={5} className="menu__linkWrapper">
                   <a href="https://dfuc15-ke.myshopify.com" className="menu__link" target="_blank" rel="noreferrer" aria-label="Store">
                     <span className="menu__linkRow"><AnimatedLabel text="Store" /></span>
@@ -262,10 +307,4 @@ export default function Nav() {
     </header>
   );
 }
-
-
-
-
-
-
 

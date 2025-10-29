@@ -10,7 +10,7 @@
   color: #fff;
   background: var(--bg);
   --hero-pad-y: clamp(3rem, 8vw, 6rem);
-  margin-top: -94px;
+  margin-top: -104px;
   z-index: 1;
 }
 

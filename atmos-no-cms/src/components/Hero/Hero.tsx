@@ -17,13 +17,13 @@ export default function Hero() {
   // Text + lines
   const LINE1 = "Your Vision.";
   const LINE2 = "In Full View.";
-  const TITLE = `${LINE1} ${LINE2}`;
+  const TITLE = `${LINE1} ${LINE2}`; 
   const charsLine1 = useMemo(() => Array.from(LINE1), []);
   const charsLine2 = useMemo(() => Array.from(LINE2), []);
   const totalLen = charsLine1.length + 1 + charsLine2.length;
 
-  // Typewriter / reveal phasing
-  const [typeCount, setTypeCount] = useState(0);
+  // Typewriter
+  const [typeCount, setTypeCount] = useState(0); 
   const [subsProg, setSubsProg] = useState(0);
   const [btnProg, setBtnProg] = useState(0);
   const [allowReveal, setAllowReveal] = useState(false);
@@ -32,7 +32,7 @@ export default function Hero() {
     typeof window !== "undefined" &&
     window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
 
-  // Preload video early
+  // Preload video
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "preload";
@@ -42,20 +42,16 @@ export default function Hero() {
     link.type = "video/mp4";
     document.head.appendChild(link);
 
-    // ✅ return void, not the removed node
     return () => {
-      if (link.parentNode) {
-        link.parentNode.removeChild(link);
-      }
+      
+      if (link.parentNode) link.parentNode.removeChild(link);
     };
   }, []);
 
-  // Lazy-set video src when hero is near the viewport
   useEffect(() => {
     const el = sectionRef.current;
     const vid = videoRef.current;
     if (!el || !vid) return;
-
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !videoSrcSet) {
@@ -68,16 +64,14 @@ export default function Hero() {
       },
       { rootMargin: "200px 0px 0px 0px", threshold: 0.01 }
     );
-
     io.observe(el);
     return () => io.disconnect();
   }, [videoSrcSet]);
 
-  // Mark video ready/visible
+  // Mark ready
   useEffect(() => {
     const vid = videoRef.current;
     if (!vid) return;
-
     const markReady = () => {
       if (vid.readyState >= 3) {
         setVideoReady(true);
@@ -87,7 +81,6 @@ export default function Hero() {
     vid.addEventListener("loadeddata", markReady as any, { passive: true } as any);
     vid.addEventListener("canplay", markReady as any, { passive: true } as any);
     vid.addEventListener("canplaythrough", markReady as any, { passive: true } as any);
-
     return () => {
       vid.removeEventListener("loadeddata", markReady as any);
       vid.removeEventListener("canplay", markReady as any);
@@ -95,12 +88,11 @@ export default function Hero() {
     };
   }, []);
 
-  // Scroll-driven typewriter + staged reveals + overtake
   useEffect(() => {
     const sectionEl = sectionRef.current!;
     const copyEl = copyRef.current!;
     const videoWrapEl = videoWrapRef.current!;
-    const nextEl = sectionEl?.nextElementSibling as HTMLElement | null;
+    const nextEl = sectionEl?.nextElementSibling as HTMLElement | null; 
     if (!sectionEl || !copyEl || !videoWrapEl || !nextEl) return;
 
     if (prefersReducedMotion) {
@@ -128,7 +120,7 @@ export default function Hero() {
 
       const progRaw = clamp((-rect.top) / effVh, 0, 1);
 
-      // Typewriter (~18%)
+      // Typewriter (first ~18%)
       const typePhaseEnd = 0.18;
       const typeProg = clamp(progRaw / typePhaseEnd, 0, 1);
       const newCount = Math.round(typeProg * totalLen);
@@ -148,31 +140,39 @@ export default function Hero() {
       if (sRounded !== subsProg) setSubsProg(sRounded);
       if (bRounded !== btnProg) setBtnProg(bRounded);
 
-      const canReveal = rawBtn >= 1 && newCount >= totalLen;
+      const canReveal =
+        rawBtn >= 1 && newCount >= totalLen;
       if (canReveal !== allowReveal) setAllowReveal(canReveal);
 
       if (allowReveal) {
-        // Fade hero copy out (no upward motion)
         const copyFade = 1 - clamp((progRaw - subsPhaseEnd) / 0.35, 0, 1);
         copyEl.style.opacity = String(copyFade);
         copyEl.style.transform = "none";
 
-        // Slide the next section upward (overtake)
         const overtakeSpanPx = effVh * 1.5;
         const overtakeProgRaw = clamp((-rect.top) / overtakeSpanPx, 0, 1);
         const overtakeProg = ease(overtakeProgRaw);
         const translateYPx = -overtakeProg * effVh;
         nextEl.style.setProperty("--overtake-y", `${translateYPx}px`);
 
-        // Keep video opacity matching the overtake fade
         const videoFadeMatch = 1 - overtakeProgRaw;
         const finalVideoFade = Math.min(copyFade, videoFadeMatch);
         videoWrapEl.style.opacity = String(finalVideoFade);
+
+        if (progRaw >= 0.999) {
+          sectionEl.classList.add("reveal-done");
+          document.documentElement.setAttribute("data-hero-reveal", "done");
+        } else {
+          sectionEl.classList.remove("reveal-done");
+          document.documentElement.setAttribute("data-hero-reveal", "active");
+        }
       } else {
         copyEl.style.opacity = "1";
         copyEl.style.transform = "none";
         nextEl.style.setProperty("--overtake-y", `0px`);
         videoWrapEl.style.opacity = "1";
+        sectionEl.classList.remove("reveal-done");
+        document.documentElement.setAttribute("data-hero-reveal", "active");
       }
     };
 
@@ -186,16 +186,17 @@ export default function Hero() {
       });
     };
 
+    document.documentElement.setAttribute("data-hero-reveal", "active");
     update();
     window.addEventListener("scroll", onScrollOrResize, { passive: true });
     window.addEventListener("resize", onScrollOrResize);
     return () => {
       window.removeEventListener("scroll", onScrollOrResize);
       window.removeEventListener("resize", onScrollOrResize);
+      document.documentElement.setAttribute("data-hero-reveal", "done");
     };
   }, [prefersReducedMotion, totalLen, typeCount, subsProg, btnProg, allowReveal]);
 
-  // Accent: last revealed character
   const accentIndex = typeCount < totalLen ? Math.max(0, typeCount - 1) : -1;
 
   const renderLine = (chars: string[], lineOffset: number) =>
@@ -259,7 +260,6 @@ export default function Hero() {
                   </span>
                 </span>
               </h1>
-
               <p
                 className="hero__subtitle"
                 style={{
@@ -272,7 +272,6 @@ export default function Hero() {
                 trusted warranty, our panels deliver brilliant visuals, easy integration,
                 and long-term performance for any environment.
               </p>
-
               <div
                 className="hero__actions hero__actions--center"
                 style={{
@@ -293,7 +292,6 @@ export default function Hero() {
     </section>
   );
 }
-
 
 
 
