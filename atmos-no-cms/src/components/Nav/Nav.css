@@ -16,7 +16,7 @@
 }
 
 .nav-spacer { height: 0; }
-
+/*
 html[data-hero-reveal="active"] .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -27,7 +27,7 @@ html[data-hero-reveal="active"] .nav {
 html[data-hero-reveal="active"] .nav-spacer { 
   height: var(--header-h); 
 }
-
+*/
 .nav__bar {
   display:flex;
   align-items:center;

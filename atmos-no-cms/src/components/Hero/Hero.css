@@ -21,8 +21,8 @@
 
 .hero__letters {
   display: inline-flex;
-  flex-wrap: nowrap;            /* no wrapping between letter spans */
-  gap: 0;                       /* just in case */
+  flex-wrap: nowrap;            
+  gap: 0;                      
 }
 
 .hero__titleWrap { white-space: pre-wrap; }
