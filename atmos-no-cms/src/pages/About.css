@@ -144,7 +144,9 @@
   z-index: 1; 
 }
 @media (max-width: 900px){
-  .aboutTeam__grid { grid-template-columns: 1fr; }
+  .aboutTeam__grid { 
+    grid-template-columns: 1fr; 
+  }
 }
 .aboutTeam__card {
   display: grid;
@@ -153,7 +155,12 @@
   align-items: start;
 }
 @media (max-width: 720px){
-  .aboutTeam__card { grid-template-columns: 1fr; }
+  .aboutTeam__card { 
+    grid-template-columns: 1fr; 
+  }
+  .about--heroBleed .about__hero {
+    height: max(220px, 40vh);
+  }
 }
 .aboutTeam__photoWrap {
   width: 100%;
