@@ -20,11 +20,11 @@
   position: fixed;
   left: 0; right: 0; bottom: 0;
   z-index: 4000;
-  background: #fff;
-  border-top: 1px solid #e6e6e6;
+  background: #000;
+  border-top: 1px solid rgba(255,255,255,.12);
   box-shadow: 0 -8px 24px rgba(0,0,0,.06);
   font-size: 14px;
-  color: #222;
+  color: #fff;
 }
 .cookieBar__inner {
   max-width: 1200px;
@@ -48,14 +48,14 @@
 /* Buttons (unified with your palette) */
 .btn { padding: 10px 14px; border-radius: 8px; border: 1px solid transparent; cursor: pointer; }
 .btn--secondary { background: #f2f4f7; color:#111; border-color: #e5e7eb;}
-.btn--ghost { background: #fff; color:#111 !important; border-color: #e5e7eb; transition: all ease 0.5s !important;}
+.btn--ghost { background: #fff; color:#111 !important; border-color: #e5e7eb; transition: all ease 0.3s !important;}
 .btn--dark { background: #2b2f33; color:#fff; }
 .btn--primary { background: #2899D5; color:#fff; }
 .btn:hover { filter: brightness(0.98); }
 .btn--ghost:hover {
   background: #2b2f33;
   color: #fff !important;
-  transition: all ease 0.5s !important;
+  transition: all ease 0.3s !important;
 }
 /* === Modal === */
 .cookieModal__scrim {
