@@ -200,24 +200,25 @@ export default function Hero() {
   const accentIndex = typeCount < totalLen ? Math.max(0, typeCount - 1) : -1;
 
   const renderLine = (chars: string[], lineOffset: number) =>
-    chars.map((ch, i) => {
-      const globalIndex = lineOffset + i;
-      const visible = globalIndex < typeCount;
-      const isAccent = globalIndex === accentIndex;
-      const char = ch === " " ? "\u00A0" : ch;
-      return (
-        <span
-          key={globalIndex}
-          className={`hero__letter ${visible ? "is-visible" : ""} ${isAccent ? "is-accent" : ""}`}
-          style={{
-            color: !visible ? "transparent" : isAccent ? "var(--hero-accent)" : "var(--hero-fg)",
-          }}
-          aria-hidden="true"
-        >
-          {char}
-        </span>
-      );
-    });
+  chars.map((ch, i) => {
+    const globalIndex = lineOffset + i;
+    const visible = globalIndex < typeCount;
+    const isAccent = globalIndex === accentIndex;
+    const char = ch === " " ? "\u00A0" : ch;
+    return (
+      <span
+        key={globalIndex}
+        className={[
+          "hero__letter",
+          visible ? "is-visible" : "",
+          isAccent ? "is-accent" : ""
+        ].join(" ")}
+        aria-hidden="true"
+      >
+        {char}
+      </span>
+    );
+  });
 
   const offsetLine1 = 0;
   const offsetLine2 = charsLine1.length + 1;

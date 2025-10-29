@@ -30,7 +30,11 @@
 .hero__letter {
   display: inline-block;
   opacity: 0;
-  transition: opacity 220ms ease, color 160ms ease;
+  color: transparent;
+  /* Animate opacity for the “fade in”, but make color changes instantaneous */
+  transition:
+    opacity 420ms cubic-bezier(.22,1,.36,1),
+    color 0ms linear;
   will-change: opacity, color;
 }
 
@@ -38,7 +42,15 @@
 .hero__letter.is-visible { opacity: 1; }
 
 
-.hero__letter.is-accent { font-weight: inherit; }
+.hero__letter.is-accent {
+  color: var(--hero-accent) !important;
+  /* Optional subtle emphasis while blue; remove if you want it perfectly flat */
+  text-shadow: 0 0 0.35em rgba(40,153,213,0.45);
+}
+
+.hero__letter.is-visible:not(.is-accent) {
+  color: var(--hero-fg) !important;
+}
 
 .hero__copy { transform: none; }
 
