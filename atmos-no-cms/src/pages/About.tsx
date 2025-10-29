@@ -7,7 +7,7 @@ import "./About.css";
 import "./MarketDetail.css";
 
 const heroImage =
-  "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/about/About-main.png";
+  "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/about/LED_Detail.webp";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
