@@ -20,10 +20,10 @@ export default function Hero() {
   const TITLE = `${LINE1} ${LINE2}`; 
   const charsLine1 = useMemo(() => Array.from(LINE1), []);
   const charsLine2 = useMemo(() => Array.from(LINE2), []);
-  const totalLen = charsLine1.length + 1 /* space between lines in original */ + charsLine2.length;
+  const totalLen = charsLine1.length + 1 + charsLine2.length;
 
-  // Typewriter + gating state
-  const [typeCount, setTypeCount] = useState(0); // 0..totalLen (we'll skip the space between lines)
+  // Typewriter
+  const [typeCount, setTypeCount] = useState(0); 
   const [subsProg, setSubsProg] = useState(0);
   const [btnProg, setBtnProg] = useState(0);
   const [allowReveal, setAllowReveal] = useState(false);
@@ -43,12 +43,11 @@ export default function Hero() {
     document.head.appendChild(link);
 
     return () => {
-      // Don't return the result of removeChild; just do the side-effect
+      
       if (link.parentNode) link.parentNode.removeChild(link);
     };
   }, []);
 
-  // Set src when in view
   useEffect(() => {
     const el = sectionRef.current;
     const vid = videoRef.current;
@@ -69,7 +68,7 @@ export default function Hero() {
     return () => io.disconnect();
   }, [videoSrcSet]);
 
-  // Mark ready/visible
+  // Mark ready
   useEffect(() => {
     const vid = videoRef.current;
     if (!vid) return;
@@ -89,12 +88,11 @@ export default function Hero() {
     };
   }, []);
 
-  // Scroll-driven typing + overtake (no dot reveal, copy only fades)
   useEffect(() => {
     const sectionEl = sectionRef.current!;
     const copyEl = copyRef.current!;
     const videoWrapEl = videoWrapRef.current!;
-    const nextEl = sectionEl?.nextElementSibling as HTMLElement | null; // Product Grid wrapper
+    const nextEl = sectionEl?.nextElementSibling as HTMLElement | null; 
     if (!sectionEl || !copyEl || !videoWrapEl || !nextEl) return;
 
     if (prefersReducedMotion) {
@@ -120,16 +118,15 @@ export default function Hero() {
       const headerH = getHeaderH();
       const effVh = Math.max(1, vh - headerH);
 
-      // 0..1 across hero viewport
       const progRaw = clamp((-rect.top) / effVh, 0, 1);
 
-      // Phase A: Typewriter (first ~18%)
+      // Typewriter (first ~18%)
       const typePhaseEnd = 0.18;
       const typeProg = clamp(progRaw / typePhaseEnd, 0, 1);
       const newCount = Math.round(typeProg * totalLen);
       if (newCount !== typeCount) setTypeCount(newCount);
 
-      // Phase B: Subtitle/Button (next ~15%)
+      // Subtitle/Button (next ~15%)
       const subsPhaseStart = typePhaseEnd;
       const subsPhaseEnd = subsPhaseStart + 0.15;
       const subsPhaseSpan = Math.max(0.001, subsPhaseEnd - subsPhaseStart);
@@ -143,12 +140,10 @@ export default function Hero() {
       if (sRounded !== subsProg) setSubsProg(sRounded);
       if (bRounded !== btnProg) setBtnProg(bRounded);
 
-      // Gate overtake until title fully typed + button phase finished
       const canReveal =
         rawBtn >= 1 && newCount >= totalLen;
       if (canReveal !== allowReveal) setAllowReveal(canReveal);
 
-      // After gate: fade hero copy (no Y), overtake next section, keep video fade
       if (allowReveal) {
         const copyFade = 1 - clamp((progRaw - subsPhaseEnd) / 0.35, 0, 1);
         copyEl.style.opacity = String(copyFade);
@@ -200,16 +195,12 @@ export default function Hero() {
       window.removeEventListener("resize", onScrollOrResize);
       document.documentElement.setAttribute("data-hero-reveal", "done");
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefersReducedMotion, totalLen, typeCount, subsProg, btnProg, allowReveal]);
 
-  // Accent index: the most recently revealed character in the whole title
   const accentIndex = typeCount < totalLen ? Math.max(0, typeCount - 1) : -1;
 
-  // Helper to render one line with global indexing (so accent rolls across both lines)
   const renderLine = (chars: string[], lineOffset: number) =>
     chars.map((ch, i) => {
-      // Skip the implicit single space that existed between lines in the original title.
       const globalIndex = lineOffset + i;
       const visible = globalIndex < typeCount;
       const isAccent = globalIndex === accentIndex;
@@ -228,8 +219,6 @@ export default function Hero() {
       );
     });
 
-  // globalIndex offsets:
-  // line1 starts at 0, then there was a space between sentences in the original -> offset2 = line1.length + 1
   const offsetLine1 = 0;
   const offsetLine2 = charsLine1.length + 1;
 
@@ -261,7 +250,6 @@ export default function Hero() {
         <div className="hero__inner">
           <div className="container">
             <div className="hero__copy hero__copy--center" ref={copyRef}>
-              {/* === TWO-LINE TYPEWRITER WITH LEADING ACCENT; NO CARET === */}
               <h1 className="hero__title" aria-label={TITLE}>
                 <span className="hero__titleWrap">
                   <span className="hero__line">
@@ -272,8 +260,6 @@ export default function Hero() {
                   </span>
                 </span>
               </h1>
-
-              {/* Subtitle waits for typing; fades/slides with scroll */}
               <p
                 className="hero__subtitle"
                 style={{
@@ -286,8 +272,6 @@ export default function Hero() {
                 trusted warranty, our panels deliver brilliant visuals, easy integration,
                 and long-term performance for any environment.
               </p>
-
-              {/* Button fades after subtitle begins */}
               <div
                 className="hero__actions hero__actions--center"
                 style={{
