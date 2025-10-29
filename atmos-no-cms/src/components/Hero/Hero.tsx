@@ -1,13 +1,10 @@
 // src/components/Hero/Hero.tsx
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Hero.css";
-import "../DotGrid.css";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const dotsRef = useRef<HTMLDivElement | null>(null);
   const copyRef = useRef<HTMLDivElement | null>(null);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -17,7 +14,25 @@ export default function Hero() {
   const [videoSrcSet, setVideoSrcSet] = useState(false);
   const [videoVisible, setVideoVisible] = useState(false);
 
-  // Preload the video file early
+  // Text + lines
+  const LINE1 = "Your Vision.";
+  const LINE2 = "In Full View.";
+  const TITLE = `${LINE1} ${LINE2}`; 
+  const charsLine1 = useMemo(() => Array.from(LINE1), []);
+  const charsLine2 = useMemo(() => Array.from(LINE2), []);
+  const totalLen = charsLine1.length + 1 /* space between lines in original */ + charsLine2.length;
+
+  // Typewriter + gating state
+  const [typeCount, setTypeCount] = useState(0); // 0..totalLen (we'll skip the space between lines)
+  const [subsProg, setSubsProg] = useState(0);
+  const [btnProg, setBtnProg] = useState(0);
+  const [allowReveal, setAllowReveal] = useState(false);
+
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
+  // Preload video
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "preload";
@@ -26,21 +41,21 @@ export default function Hero() {
       "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/videos/1000ph_rotate.mp4";
     link.type = "video/mp4";
     document.head.appendChild(link);
+
     return () => {
-      document.head.removeChild(link);
+      // Don't return the result of removeChild; just do the side-effect
+      if (link.parentNode) link.parentNode.removeChild(link);
     };
   }, []);
 
-  // Lazy set the video src when hero enters viewport
+  // Set src when in view
   useEffect(() => {
     const el = sectionRef.current;
     const vid = videoRef.current;
     if (!el || !vid) return;
-
     const io = new IntersectionObserver(
       (entries) => {
-        const e = entries[0];
-        if (e.isIntersecting && !videoSrcSet) {
+        if (entries[0].isIntersecting && !videoSrcSet) {
           vid.preload = "auto";
           vid.src =
             "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/videos/1000ph_rotate.mp4";
@@ -48,18 +63,16 @@ export default function Hero() {
           vid.play().catch(() => {});
         }
       },
-      { root: null, rootMargin: "200px 0px 0px 0px", threshold: 0.01 }
+      { rootMargin: "200px 0px 0px 0px", threshold: 0.01 }
     );
-
     io.observe(el);
     return () => io.disconnect();
   }, [videoSrcSet]);
 
-  // Mark video ready/visible once it can play
+  // Mark ready/visible
   useEffect(() => {
     const vid = videoRef.current;
     if (!vid) return;
-
     const markReady = () => {
       if (vid.readyState >= 3) {
         setVideoReady(true);
@@ -69,7 +82,6 @@ export default function Hero() {
     vid.addEventListener("loadeddata", markReady as any, { passive: true } as any);
     vid.addEventListener("canplay", markReady as any, { passive: true } as any);
     vid.addEventListener("canplaythrough", markReady as any, { passive: true } as any);
-
     return () => {
       vid.removeEventListener("loadeddata", markReady as any);
       vid.removeEventListener("canplay", markReady as any);
@@ -77,17 +89,20 @@ export default function Hero() {
     };
   }, []);
 
-  // Scroll-driven reveal + overtake
+  // Scroll-driven typing + overtake (no dot reveal, copy only fades)
   useEffect(() => {
     const sectionEl = sectionRef.current!;
-    const dotEl = dotsRef.current!;
     const copyEl = copyRef.current!;
     const videoWrapEl = videoWrapRef.current!;
-    const nextEl = sectionEl?.nextElementSibling as HTMLElement | null; // should be .afterHero
-    if (!sectionEl || !dotEl || !copyEl || !videoWrapEl || !nextEl) return;
+    const nextEl = sectionEl?.nextElementSibling as HTMLElement | null; // Product Grid wrapper
+    if (!sectionEl || !copyEl || !videoWrapEl || !nextEl) return;
 
-    const prefersReducedMotion =
-      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    if (prefersReducedMotion) {
+      setTypeCount(totalLen);
+      setSubsProg(1);
+      setBtnProg(1);
+      setAllowReveal(true);
+    }
 
     const getHeaderH = () => {
       const v = getComputedStyle(document.documentElement)
@@ -105,45 +120,62 @@ export default function Hero() {
       const headerH = getHeaderH();
       const effVh = Math.max(1, vh - headerH);
 
-      // Base progress across the first viewport of sticky hero
+      // 0..1 across hero viewport
       const progRaw = clamp((-rect.top) / effVh, 0, 1);
-      const prog = ease(progRaw);
 
-      // Dot reveal radius and tint
-      const end = Math.max(effVh * 1.6, 1200);
-      dotEl.style.setProperty("--maskR", `${Math.round(end * prog)}px`);
+      // Phase A: Typewriter (first ~18%)
+      const typePhaseEnd = 0.18;
+      const typeProg = clamp(progRaw / typePhaseEnd, 0, 1);
+      const newCount = Math.round(typeProg * totalLen);
+      if (newCount !== typeCount) setTypeCount(newCount);
 
-      if (!prefersReducedMotion) {
-        const hue = (prog * 720) % 360;
-        const l = clamp(94 - 2 * prog, 88, 96);
-        const s = clamp(100 - 2 * prog, 92, 100);
-        const a = 0.34 - 0.1 * prog;
-        dotEl.style.setProperty("--dg-hue", `${Math.round(hue)}`);
-        dotEl.style.setProperty("--dg-l", `${l}%`);
-        dotEl.style.setProperty("--dg-s", `${s}%`);
-        dotEl.style.setProperty("--dg-alpha", `${a.toFixed(3)}`);
-      }
+      // Phase B: Subtitle/Button (next ~15%)
+      const subsPhaseStart = typePhaseEnd;
+      const subsPhaseEnd = subsPhaseStart + 0.15;
+      const subsPhaseSpan = Math.max(0.001, subsPhaseEnd - subsPhaseStart);
+      const rawSubs = clamp((progRaw - subsPhaseStart) / subsPhaseSpan, 0, 1);
+      const easedSubs = ease(rawSubs);
+      const rawBtn = clamp((rawSubs - 0.25) / 0.75, 0, 1);
+      const easedBtn = ease(rawBtn);
 
-      const liftPx = -(effVh * 1.05 * prog);
-      copyEl.style.setProperty("--hero-copy-y", `${Math.round(liftPx)}px`);
-      const copyFade = prefersReducedMotion ? 1 : 1 - clamp(progRaw * 1.25, 0, 1);
-      copyEl.style.opacity = String(copyFade);
+      const sRounded = Math.round(easedSubs * 100) / 100;
+      const bRounded = Math.round(easedBtn * 100) / 100;
+      if (sRounded !== subsProg) setSubsProg(sRounded);
+      if (bRounded !== btnProg) setBtnProg(bRounded);
 
-      const overtakeSpanPx = effVh * 1.5;
-      const overtakeProgRaw = clamp((-rect.top) / overtakeSpanPx, 0, 1);
-      const overtakeProg = ease(overtakeProgRaw);
+      // Gate overtake until title fully typed + button phase finished
+      const canReveal =
+        rawBtn >= 1 && newCount >= totalLen;
+      if (canReveal !== allowReveal) setAllowReveal(canReveal);
 
-      const translateYPx = -overtakeProg * effVh;
-      nextEl.style.setProperty("--overtake-y", `${translateYPx}px`);
+      // After gate: fade hero copy (no Y), overtake next section, keep video fade
+      if (allowReveal) {
+        const copyFade = 1 - clamp((progRaw - subsPhaseEnd) / 0.35, 0, 1);
+        copyEl.style.opacity = String(copyFade);
+        copyEl.style.transform = "none";
 
-      const videoFadeMatch = 1 - overtakeProgRaw;
-      const finalVideoFade = Math.min(copyFade, videoFadeMatch);
-      videoWrapEl.style.opacity = String(finalVideoFade);
+        const overtakeSpanPx = effVh * 1.5;
+        const overtakeProgRaw = clamp((-rect.top) / overtakeSpanPx, 0, 1);
+        const overtakeProg = ease(overtakeProgRaw);
+        const translateYPx = -overtakeProg * effVh;
+        nextEl.style.setProperty("--overtake-y", `${translateYPx}px`);
 
-      if (progRaw >= 0.999) {
-        sectionEl.classList.add("reveal-done");
-        document.documentElement.setAttribute("data-hero-reveal", "done");
+        const videoFadeMatch = 1 - overtakeProgRaw;
+        const finalVideoFade = Math.min(copyFade, videoFadeMatch);
+        videoWrapEl.style.opacity = String(finalVideoFade);
+
+        if (progRaw >= 0.999) {
+          sectionEl.classList.add("reveal-done");
+          document.documentElement.setAttribute("data-hero-reveal", "done");
+        } else {
+          sectionEl.classList.remove("reveal-done");
+          document.documentElement.setAttribute("data-hero-reveal", "active");
+        }
       } else {
+        copyEl.style.opacity = "1";
+        copyEl.style.transform = "none";
+        nextEl.style.setProperty("--overtake-y", `0px`);
+        videoWrapEl.style.opacity = "1";
         sectionEl.classList.remove("reveal-done");
         document.documentElement.setAttribute("data-hero-reveal", "active");
       }
@@ -168,33 +200,47 @@ export default function Hero() {
       window.removeEventListener("resize", onScrollOrResize);
       document.documentElement.setAttribute("data-hero-reveal", "done");
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [prefersReducedMotion, totalLen, typeCount, subsProg, btnProg, allowReveal]);
+
+  // Accent index: the most recently revealed character in the whole title
+  const accentIndex = typeCount < totalLen ? Math.max(0, typeCount - 1) : -1;
+
+  // Helper to render one line with global indexing (so accent rolls across both lines)
+  const renderLine = (chars: string[], lineOffset: number) =>
+    chars.map((ch, i) => {
+      // Skip the implicit single space that existed between lines in the original title.
+      const globalIndex = lineOffset + i;
+      const visible = globalIndex < typeCount;
+      const isAccent = globalIndex === accentIndex;
+      const char = ch === " " ? "\u00A0" : ch;
+      return (
+        <span
+          key={globalIndex}
+          className={`hero__letter ${visible ? "is-visible" : ""} ${isAccent ? "is-accent" : ""}`}
+          style={{
+            color: !visible ? "transparent" : isAccent ? "var(--hero-accent)" : "var(--hero-fg)",
+          }}
+          aria-hidden="true"
+        >
+          {char}
+        </span>
+      );
+    });
+
+  // globalIndex offsets:
+  // line1 starts at 0, then there was a space between sentences in the original -> offset2 = line1.length + 1
+  const offsetLine1 = 0;
+  const offsetLine2 = charsLine1.length + 1;
 
   return (
     <section ref={sectionRef} className="hero hero--center hero--reveal">
       <div className="hero__sticky">
         <div className="hero__bg" aria-hidden="true">
           <div className="hero__bg-base" />
-
-          <div
-            ref={dotsRef}
-            className="dotgrid dotgrid--reveal"
-            style={
-              {
-                // @ts-ignore
-                "--dg-size": "2px",
-                "--dg-gap": "22px",
-                "--dg-color": "#2899D5",
-                "--dg-alpha-pct": "45%",
-              } as React.CSSProperties
-            }
-          />
-
           <div
             ref={videoWrapRef}
-            className={`hero__videoWrap ${videoReady ? "is-ready" : ""} ${
-              videoVisible ? "is-visible" : ""
-            }`}
+            className={`hero__videoWrap ${videoReady ? "is-ready" : ""} ${videoVisible ? "is-visible" : ""}`}
           >
             <video
               ref={videoRef}
@@ -215,37 +261,44 @@ export default function Hero() {
         <div className="hero__inner">
           <div className="container">
             <div className="hero__copy hero__copy--center" ref={copyRef}>
-              <motion.h1
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-                className="hero__title"
-              >
-                Your Vision. In Full View.
-              </motion.h1>
+              {/* === TWO-LINE TYPEWRITER WITH LEADING ACCENT; NO CARET === */}
+              <h1 className="hero__title" aria-label={TITLE}>
+                <span className="hero__titleWrap">
+                  <span className="hero__line">
+                    <span className="hero__letters">{renderLine(charsLine1, offsetLine1)}</span>
+                  </span>
+                  <span className="hero__line">
+                    <span className="hero__letters">{renderLine(charsLine2, offsetLine2)}</span>
+                  </span>
+                </span>
+              </h1>
 
-              <motion.p
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
+              {/* Subtitle waits for typing; fades/slides with scroll */}
+              <p
                 className="hero__subtitle"
+                style={{
+                  opacity: subsProg,
+                  transform: `translateY(${Math.round((1 - subsProg) * 14)}px)`,
+                }}
               >
                 Atmos LED creates professional-grade LED display solutions built for
                 impact, reliability, and flexibility. Backed by U.S. support and a
                 trusted warranty, our panels deliver brilliant visuals, easy integration,
                 and long-term performance for any environment.
-              </motion.p>
+              </p>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 1.1 }}
+              {/* Button fades after subtitle begins */}
+              <div
                 className="hero__actions hero__actions--center"
+                style={{
+                  opacity: btnProg,
+                  transform: `translateY(${Math.round((1 - btnProg) * 12)}px)`,
+                }}
               >
                 <Link to="/products" className="btn btn--hero">
                   Shop Our Products
                 </Link>
-              </motion.div>
+              </div>
             </div>
           </div>
 
@@ -255,6 +308,10 @@ export default function Hero() {
     </section>
   );
 }
+
+
+
+
 
 
 

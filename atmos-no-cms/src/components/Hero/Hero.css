@@ -1,4 +1,9 @@
 /* 200vh section so the first 100vh is used for the reveal */
+:root {
+  --hero-accent: #2899D5;
+  --hero-fg: #fff; 
+}
+
 .hero.hero--reveal{
   position: relative;
   height: 200vh;
@@ -8,6 +13,34 @@
   margin-top: -94px;
   z-index: 1;
 }
+
+.hero__line {
+  display: block;
+  white-space: nowrap;          
+}
+
+.hero__letters {
+  display: inline-flex;
+  flex-wrap: nowrap;            /* no wrapping between letter spans */
+  gap: 0;                       /* just in case */
+}
+
+.hero__titleWrap { white-space: pre-wrap; }
+
+.hero__letter {
+  display: inline-block;
+  opacity: 0;
+  transition: opacity 220ms ease, color 160ms ease;
+  will-change: opacity, color;
+}
+
+
+.hero__letter.is-visible { opacity: 1; }
+
+
+.hero__letter.is-accent { font-weight: inherit; }
+
+.hero__copy { transform: none; }
 
 .afterHero{
   position: relative;
