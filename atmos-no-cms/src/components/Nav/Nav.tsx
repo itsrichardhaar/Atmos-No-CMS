@@ -1,3 +1,4 @@
+// src/components/Nav/Nav.tsx
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState, useMemo } from "react";
 import { motion } from "framer-motion";
@@ -10,36 +11,47 @@ import "./Nav.css";
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
-  const [armed, setArmed] = useState(false);   
+  const [armed, setArmed] = useState(false);
   const location = useLocation();
+
+  // Refs
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
 
-  useEffect(() => { setOpen(false); }, [location.pathname]);
   useLockBodyScroll(open);
 
   useEffect(() => {
     setSolid(false);
-      setArmed(false);
+    setArmed(false);
   }, [location.pathname]);
 
+  // ✅ Focus logic: prefer active link; otherwise focus panel (prevents About from looking active on /)
   useEffect(() => {
     if (!open) return;
     const t = setTimeout(() => {
       const active = document.querySelector<HTMLAnchorElement>(".menu__link.is-active");
-      (active ?? firstLinkRef.current)?.focus();
+      if (active) {
+        active.focus();
+      } else {
+        menuPanelRef.current?.focus();
+      }
     }, 0);
     return () => clearTimeout(t);
   }, [open]);
 
-
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-
+  // Transparent/solid nav sentinel
   useEffect(() => {
     const sentinel = document.createElement("div");
     sentinel.setAttribute("data-nav-sentinel", "");
@@ -57,7 +69,7 @@ export default function Nav() {
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (!armed) return;
-+        setSolid(!entry.isIntersecting);
+        setSolid(!entry.isIntersecting);
       },
       { root: null, rootMargin: "-10px 0px 0px 0px", threshold: 0 }
     );
@@ -67,7 +79,6 @@ export default function Nav() {
     const armOnScroll = () => {
       if (armed) return;
       setArmed(true);
-      // After arming, compute once from current position:
       const atTop = (window.pageYOffset || document.documentElement.scrollTop || 0) <= 10;
       setSolid(!atTop);
     };
@@ -76,6 +87,7 @@ export default function Nav() {
     return () => {
       obs.disconnect();
       if (sentinel.parentNode) sentinel.parentNode.removeChild(sentinel);
+      window.removeEventListener("scroll", armOnScroll);
     };
   }, [armed]);
 
@@ -184,34 +196,33 @@ export default function Nav() {
           >
             {/* shopping bag icon */}
             <svg className="nav__storeIcon" viewBox="0 0 24 24" aria-hidden="true">
-            {/* bag body */}
-            <path
-              d="M6.5 7h11a1 1 0 0 1 .99 1.1l-1.06 9.4A2 2 0 0 1 15.46 20H8.54a2 2 0 0 1-1.97-1.5L5.5 8.1A1 1 0 0 1 6.5 7Z"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.9"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            {/* handle */}
-            <path
-              d="M8.2 7a3.8 3.8 0 0 1 7.6 0"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.9"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+              {/* bag body */}
+              <path
+                d="M6.5 7h11a1 1 0 0 1 .99 1.1l-1.06 9.4A2 2 0 0 1 15.46 20H8.54a2 2 0 0 1-1.97-1.5L5.5 8.1A1 1 0 0 1 6.5 7Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.9"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              {/* handle */}
+              <path
+                d="M8.2 7a3.8 3.8 0 0 1 7.6 0"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.9"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
             <span className="nav__storeLabel">Store</span>
           </a>
-        
 
-        <HamburgerButton
-          isOpen={open}
-          onToggle={() => setOpen((o) => !o)}
-          className="site-hamburger"
-        />
+          <HamburgerButton
+            isOpen={open}
+            onToggle={() => setOpen((o) => !o)}
+            className="site-hamburger"
+          />
         </div>
       </div>
 
@@ -225,7 +236,11 @@ export default function Nav() {
         }}
       >
         <nav className="menu__panel" aria-label="Primary">
-          <div className="menu__content container">
+          <div
+            className="menu__content container"
+            ref={menuPanelRef}
+            tabIndex={-1} // allow focusing the panel when no active link
+          >
             <Link to="/" className="mobile__logo" aria-label="Go to home"></Link>
 
             <motion.div
@@ -235,50 +250,54 @@ export default function Nav() {
               animate={open ? "visible" : "hidden"}
             >
               <div className="menu__links">
+                {/* Internal links (exact match) */}
                 <motion.div variants={linkRow} custom={0} className="menu__linkWrapper">
-                  <NavLink to="/about" className={linkClass} ref={firstLinkRef} aria-label="About">
+                  <NavLink to="/about" end className={linkClass} ref={firstLinkRef} aria-label="About">
                     <span className="menu__linkRow"><AnimatedLabel text="About" /></span>
                   </NavLink>
                 </motion.div>
 
                 <motion.div variants={linkRow} custom={1} className="menu__linkWrapper">
-                  <NavLink to="/products" className={linkClass} aria-label="Products">
+                  <NavLink to="/products" end className={linkClass} aria-label="Products">
                     <span className="menu__linkRow"><AnimatedLabel text="Products" /></span>
                   </NavLink>
                 </motion.div>
 
                 <motion.div variants={linkRow} custom={2} className="menu__linkWrapper">
-                  <NavLink to="/markets" className={linkClass} aria-label="Markets">
+                  <NavLink to="/markets" end className={linkClass} aria-label="Markets">
                     <span className="menu__linkRow"><AnimatedLabel text="Markets" /></span>
                   </NavLink>
                 </motion.div>
 
                 <motion.div variants={linkRow} custom={3} className="menu__linkWrapper">
-                  <NavLink to="/contact" className={linkClass} aria-label="Contact">
+                  <NavLink to="/contact" end className={linkClass} aria-label="Contact">
                     <span className="menu__linkRow"><AnimatedLabel text="Contact" /></span>
                   </NavLink>
                 </motion.div>
 
+                {/* External links use <a>, not NavLink */}
                 <motion.div variants={linkRow} custom={4} className="menu__linkWrapper">
-                  <NavLink
-                    to="https://mapoutcreative.com/calculator/"
-                    className={linkClass}
+                  <a
+                    href="https://mapoutcreative.com/calculator/"
+                    className="menu__link"
                     target="_blank"
+                    rel="noreferrer"
                     aria-label="Calculator"
                   >
                     <span className="menu__linkRow"><AnimatedLabel text="Calculator" /></span>
-                  </NavLink>
+                  </a>
                 </motion.div>
 
                 <motion.div variants={linkRow} custom={5} className="menu__linkWrapper">
-                  <NavLink
-                    to="https://dfuc15-ke.myshopify.com"
-                    className={linkClass}
+                  <a
+                    href="https://dfuc15-ke.myshopify.com"
+                    className="menu__link"
                     target="_blank"
+                    rel="noreferrer"
                     aria-label="Store"
                   >
                     <span className="menu__linkRow"><AnimatedLabel text="Store" /></span>
-                  </NavLink>
+                  </a>
                 </motion.div>
               </div>
             </motion.div>
@@ -286,8 +305,10 @@ export default function Nav() {
             <div className="menu__meta">
               <a className="meta__row" href="tel:+18332866728">
                 <svg className="meta__icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M22 16.92v2a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.62-3.07 19.6 19.6 0 0 1-6-6A19.8 19.8 0 0 1 3.08 4.18 2 2 0 0 1 5.06 2h2a2 2 0 0 1 2 1.72c.12.86.33 1.69.62 2.49a2 2 0 0 1-.45 2.11L8.09 9.49a16.9 16.9 0 0 0 6.42 6.42l1.17-1.16a2 2 0 0 1 2.11-.45c.8.29 1.63.5 2.49.62A2 2 0 0 1 22 16.92Z"
-                    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path
+                    d="M22 16.92v2a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.62-3.07 19.6 19.6 0 0 1-6-6A19.8 19.8 0 0 1 3.08 4.18 2 2 0 0 1 5.06 2h2a2 2 0 0 1 2 1.72c.12.86.33 1.69.62 2.49a2 2 0 0 1-.45 2.11L8.09 9.49a16.9 16.9 0 0 0 6.42 6.42l1.17-1.16a2 2 0 0 1 2.11-.45c.8.29 1.63.5 2.49.62A2 2 0 0 1 22 16.92Z"
+                    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                  />
                 </svg>
                 <span>(833) 286-6728</span>
               </a>
@@ -295,9 +316,9 @@ export default function Nav() {
               <a className="meta__row" href="mailto:support@atmosled.co">
                 <svg className="meta__icon" viewBox="0 0 24 24" aria-hidden="true">
                   <rect x="3" y="5" width="18" height="14" rx="2" ry="2"
-                    fill="none" stroke="currentColor" strokeWidth="2"/>
+                    fill="none" stroke="currentColor" strokeWidth="2" />
                   <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" strokeWidth="2"
-                    strokeLinecap="round" strokeLinejoin="round"/>
+                    strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 <span>support@atmosled.co</span>
               </a>
@@ -306,7 +327,7 @@ export default function Nav() {
                 <a className="social__link" href="https://www.linkedin.com/company/atmosled" target="_blank" rel="noreferrer" aria-label="LinkedIn">
                   <svg className="social__icon" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8.98h5V24H0V8.98zM8.98 8.98h4.78v2.06h.07c.67-1.27 2.3-2.6 4.73-2.6 5.06 0 5.99 3.33 5.99 7.65V24h-5v-6.58c0-1.57-.03-3.6-2.19-3.6-2.2 0-2.54 1.72-2.54 3.48V24h-5V8.98z"/>
-                </svg>
+                  </svg>
                 </a>
                 <a className="social__link" href="https://facebook.com/atmosled" target="_blank" rel="noreferrer" aria-label="Facebook">
                   <svg className="social__icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -332,6 +353,7 @@ export default function Nav() {
     </header>
   );
 }
+
 
 
 
