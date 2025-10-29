@@ -92,8 +92,15 @@ export default function About() {
   const title = "About Us";
   const titleChars = useMemo(() => Array.from(title), [title]);
 
+  // In-view helper (unchanged) for sections that should wait for scroll
   const motionProps = (variants: Variants, amount = 0.75) =>
-    reduce ? {} : { variants, initial: "hidden", whileInView: "visible", viewport: { once: true, amount } };
+    reduce
+      ? {}
+      : { variants, initial: "hidden", whileInView: "visible", viewport: { once: true, amount } };
+
+  // NEW: mount-based helper so above-the-fold content plays on page load
+  const mountProps = (variants: Variants) =>
+    reduce ? {} : { variants, initial: "hidden", animate: "visible" };
 
   return (
     <section className="about about--heroBleed">
@@ -134,8 +141,11 @@ export default function About() {
 
       {/* CONTENT */}
       <div className="container about__wrap">
-        {/* Intro — now renders 3 separate paragraphs */}
-        <motion.section className="aboutIntro aboutIntro--single" {...motionProps(filterGroup, 0.8)}>
+        {/* Intro — headline + paragraphs animate on mount (no scroll needed) */}
+        <motion.section
+          className="aboutIntro aboutIntro--single"
+          {...mountProps(filterGroup)}
+        >
           <div className="aboutIntro__copy">
             <motion.h2 className="aboutIntro__headline" variants={filterItem}>
               {intro.headline}
@@ -149,9 +159,7 @@ export default function About() {
           </div>
         </motion.section>
 
-        {/* Team section removed per request */}
-
-        {/* CTA — subtle fadeUp for cohesion */}
+        {/* CTA — still uses in-view */}
         <motion.section className="aboutCTA" {...motionProps(fadeUp, 0.7)}>
           <h2 className="aboutCTA__h2">Join the Team</h2>
           <p className="aboutCTA__p">Interested in a career with Atmos LED?</p>
@@ -197,6 +205,3 @@ export default function About() {
     </section>
   );
 }
-
-
-
