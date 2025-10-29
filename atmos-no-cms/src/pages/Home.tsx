@@ -53,7 +53,7 @@ export default function Home() {
         <BackgroundGlow />
         <MarketGrid
           title="Solutions built for..."
-          subtitle="Atmos LED delivers dynamic lighting solutions designed for Places of Worship, Live Events, and Commercial spaces. Our systems are crafted to elevate spiritual experiences, captivate audiences, and enhance everyday environments with precision, reliability, and effortless control. Whether you’re illuminating a sanctuary, energizing a stage, or brightening a workspace, Atmos LED brings clarity, emotion, and innovation to every moment."
+          subtitle="Atmos LED delivers professional LED display solutions designed for Houses of Worship, Live Events, Commercial spaces, and more. Our systems are built to engage audiences, elevate presentations, and enhance environments with exceptional image quality, reliability, and seamless integration. Atmos LED delivers clarity, impact, and innovation—on every screen."
           markets={markets}
         />
         <BuildDisplayCta />
