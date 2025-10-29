@@ -84,7 +84,13 @@
   color: #fff;
   font-size: clamp(15px, 1.2vw, 16px);
   line-height: 1.5;
+  margin-bottom: 1.25rem;
 }
+
+.aboutIntro__body:last-child {
+  margin-bottom: 0; 
+}
+
 @media (max-width: 900px){
   .abouttIntro{
     grid-template-columns: 1fr !important;

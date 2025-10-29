@@ -6,20 +6,8 @@ import { Link } from "react-router-dom";
 import "./About.css";
 import "./MarketDetail.css";
 
-type TeamMember = {
-  name: string;
-  title: string;
-  photo: string;
-  bio?: string;
-  linkedin?: string;
-  x?: string;
-  site?: string;
-};
-
 const heroImage =
   "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/about/About-main.png";
-
-import largeAMarkUrl from "../../src/assets/icons/large-a.svg";
 
 const EASE_BEZIER = [0.22, 1, 0.36, 1] as const;
 
@@ -42,7 +30,6 @@ const titleChar: Variants = {
 /* -----------------------------
    Reused ProductGrid-style motions
 ----------------------------- */
-// General stagger container (like PG filterGroup)
 const filterGroup: Variants = {
   hidden: { opacity: 1 },
   visible: {
@@ -50,7 +37,6 @@ const filterGroup: Variants = {
     transition: { staggerChildren: 0.1 },
   },
 };
-// Row/item reveal (like PG filterItem)
 const filterItem: Variants = {
   hidden: { opacity: 0, y: -15 },
   visible: {
@@ -59,7 +45,6 @@ const filterItem: Variants = {
     transition: { duration: 0.5 },
   },
 };
-// Soft fade up used for one-offs
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 12 },
   visible: {
@@ -68,47 +53,16 @@ const fadeUp: Variants = {
     transition: { duration: 0.6, ease: EASE_BEZIER },
   },
 };
-// Left→Right stagger for card grids (team)
-const ltrContainer: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-};
-const slideInLtr: Variants = {
-  hidden: { opacity: 0, x: -16, scale: 0.98 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    scale: 1,
-    transition: { duration: 0.55, ease: EASE_BEZIER },
-  },
-};
 
 const intro = {
   image: "/assets/about/about-intro.jpg",
-  headline: "Our Team",
-  body: "Driven by experts who power your vision.",
+  headline: "Who We Are",
+  body: [
+    "At Atmos LED, we bring clarity to a fast-moving industry by redefining what it means to deliver professional-grade visual technology. Founded by Connor Young, a seasoned audiovisual expert with more than a decade of experience in large-format audio system design and integration, Atmos LED was built to simplify and strengthen the way LED systems are sourced and deployed.",
+    "After years of working with houses of worship, concert venues, and live productions—and running his own AV integration company—Connor saw firsthand how fragmented and unpredictable the LED process could be. Atmos LED was created to change that.",
+    "Rather than simply supplying LED panels, we act as strategic partners—collaborating closely with dealers and integrators to understand the unique demands of each venue, timeline, and budget. With a consultative approach and thousands of panels stocked in the U.S., we help our partners move faster, plan smarter, and deliver with confidence. In a market often defined by delays and compromises, we offer something different: speed, consistency, and trusted support from people who understand the work firsthand.",
+  ],
 };
-
-const team: TeamMember[] = [
-  {
-    name: "Full name",
-    title: "Job title",
-    photo:
-      "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/about/Placeholder.png",
-    bio: "Short bio or area of focus. Keep to 1–2 lines for balance.",
-    linkedin: "#",
-    x: "#",
-    site: "#",
-  },
-  {
-    name: "Full name",
-    title: "Job title",
-    photo:
-      "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/about/Placeholder.png",
-    bio: "Short bio or area of focus. Keep to 1–2 lines for balance.",
-    linkedin: "#",
-  },
-];
 
 const faqs: { q: string; a: string }[] = [
   {
@@ -138,17 +92,8 @@ export default function About() {
   const title = "About Us";
   const titleChars = useMemo(() => Array.from(title), [title]);
 
-  // Keep existing helper
   const motionProps = (variants: Variants, amount = 0.75) =>
     reduce ? {} : { variants, initial: "hidden", whileInView: "visible", viewport: { once: true, amount } };
-
-  // NEW: Mobile detection to disable only slide-in animations on narrow viewports
-  const isMobile = useMemo(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(max-width: 900px)").matches,
-    []
-  );
 
   return (
     <section className="about about--heroBleed">
@@ -189,62 +134,22 @@ export default function About() {
 
       {/* CONTENT */}
       <div className="container about__wrap">
-        {/* Intro — reuse PG filter-style stagger */}
+        {/* Intro — now renders 3 separate paragraphs */}
         <motion.section className="aboutIntro aboutIntro--single" {...motionProps(filterGroup, 0.8)}>
           <div className="aboutIntro__copy">
             <motion.h2 className="aboutIntro__headline" variants={filterItem}>
               {intro.headline}
             </motion.h2>
-            <motion.p className="aboutIntro__body" variants={filterItem}>
-              {intro.body}
-            </motion.p>
+
+            {intro.body.map((para, idx) => (
+              <motion.p key={idx} className="aboutIntro__body" variants={filterItem}>
+                {para}
+              </motion.p>
+            ))}
           </div>
         </motion.section>
 
-        {/* Team — bg fades in; grid uses left→right stagger like your card grids */}
-        <section className="aboutTeam">
-          <motion.div className="aboutTeam__bg" aria-hidden="true" {...motionProps(fadeUp, 0.6)}>
-            <img
-              className="aboutTeam__bgImg"
-              src={largeAMarkUrl}
-              alt=""
-              loading="lazy"
-              decoding="async"
-            />
-          </motion.div>
-
-          <motion.ul
-            className="aboutTeam__grid"
-            role="list"
-            {...(isMobile ? {} : motionProps(ltrContainer, 0.75))}
-          >
-            {team.map((m, i) => (
-              <motion.li
-                key={i}
-                className="aboutTeam__card"
-                {...(isMobile ? {} : { variants: slideInLtr })}
-              >
-                <div className="aboutTeam__photoWrap">
-                  <img src={m.photo} alt={m.name} loading="lazy" decoding="async" />
-                </div>
-                <div className="aboutTeam__meta">
-                  <h3 className="aboutTeam__name">{m.name}</h3>
-                  <p className="aboutTeam__title">{m.title}</p>
-                  {m.bio && <p className="aboutTeam__bio">{m.bio}</p>}
-                  <div className="aboutTeam__links">
-                    {m.linkedin && (
-                      <Link to={m.linkedin} aria-label={`${m.name} on LinkedIn`}>
-                        LinkedIn
-                      </Link>
-                    )}
-                    {m.x && <Link to={m.x} aria-label={`${m.name} on X`}>X</Link>}
-                    {m.site && <Link to={m.site} aria-label={`${m.name} website`}>Site</Link>}
-                  </div>
-                </div>
-              </motion.li>
-            ))}
-          </motion.ul>
-        </section>
+        {/* Team section removed per request */}
 
         {/* CTA — subtle fadeUp for cohesion */}
         <motion.section className="aboutCTA" {...motionProps(fadeUp, 0.7)}>
@@ -259,7 +164,6 @@ export default function About() {
 
         {/* FAQs — left column fades; right list staggers in rows */}
         <section className="aboutFaqs aboutFaqs--split">
-          {/* Left intro column */}
           <motion.aside className="aboutFaqs__intro" {...motionProps(filterGroup, 0.75)}>
             <motion.h2 className="aboutFaqs__kicker" variants={filterItem}>FAQs</motion.h2>
             <motion.p className="aboutFaqs__lead" variants={filterItem}>
@@ -276,7 +180,6 @@ export default function About() {
             </motion.div>
           </motion.aside>
 
-          {/* Right accordion column */}
           <motion.div className="aboutFaqs__right" {...motionProps(filterGroup, 0.8)}>
             <div className="aboutFaqs__list" role="list">
               {faqs.map((f, i) => (
@@ -294,5 +197,6 @@ export default function About() {
     </section>
   );
 }
+
 
 
