@@ -128,9 +128,9 @@
   height: 100%;    
   pointer-events: none;      
   mix-blend-mode: screen;     
-  opacity: 0.95;        
+  opacity: 1;        
   object-position: center center;
-  object-fit: cover !important;     
+  object-fit: cover !important;    
 }
 
 .hero .container, .hero__copy { position: relative; z-index: 1; }
