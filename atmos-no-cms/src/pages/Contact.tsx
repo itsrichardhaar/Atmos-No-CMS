@@ -107,7 +107,7 @@ export default function Contact() {
   /* -----------------------------
      Animation helpers
   ----------------------------- */
-  const title = "Get a Quote";
+  const title = "Contact Us";
   const titleChars = useMemo(() => Array.from(title), []);
   const animProps = (controls: ReturnType<typeof useAnimation>) =>
     reduce ? {} : { variants: filterGroup, initial: "hidden", animate: controls };
