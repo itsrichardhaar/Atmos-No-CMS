@@ -42,7 +42,11 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <article className="pc pc--glow">
-      <LinkMaybeExternal to={to} className="pc__imageWrap" ariaLabel={`${product.name} details`}>
+      <LinkMaybeExternal
+        to={to}
+        className="pc__imageWrap"
+        ariaLabel={`${product.name} details`}
+      >
         <motion.div
           className="pc__imageAnim"
           style={{ transformOrigin: "50% 50%" }}
@@ -107,6 +111,20 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
       </header>
 
+      {/* 👇 new download link section */}
+      {product.specSheetUrl && (
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4 }}
+          viewport={{ once: true, amount: 0.8 }}
+        >
+          <LinkMaybeExternal to={product.specSheetUrl} className="pc__download">
+            Download Spec Sheet
+          </LinkMaybeExternal>
+        </motion.div>
+      )}
+
       <motion.div
         initial={{ opacity: 0, x: -10 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -124,5 +142,6 @@ export default function ProductCard({ product }: { product: Product }) {
     </article>
   );
 }
+
 
 

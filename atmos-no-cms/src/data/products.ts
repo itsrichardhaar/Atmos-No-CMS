@@ -29,6 +29,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/element",
     glowColor: "#D81279",
+    specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Element_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -96,6 +97,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/kiosk",
     glowColor: "#DC902A",
+    specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Kiosk_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -163,6 +165,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/phantom",
     glowColor: "#1D458B",
+    specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Phantom_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -230,6 +233,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/stratos",
     glowColor: "#F18037",
+    specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Stratos_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -297,6 +301,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/trek",
     glowColor: "#035F66",
+    specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Trek_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -364,6 +369,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/vision",
     glowColor: "#6A449B",
+    specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Vision_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -431,6 +437,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/vivid",
     glowColor: "#223C78",
+    specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Vivid_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -498,6 +505,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/vue",
     glowColor: "#F5CC19",
+    specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Vue_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -565,6 +573,7 @@ export const products: Product[] = [
   ],
   shopUrl: "https://dfuc15-ke.myshopify.com/products/vivid",
   glowColor: "#3BBE7A",
+  specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Vivid_Series_Sales_Sheet.pdf",
   features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -632,6 +641,7 @@ export const products: Product[] = [
   ],
   shopUrl: "https://dfuc15-ke.myshopify.com/products/vue",
   glowColor: "#3BBE7A",
+  specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Vue_Series_Sales_Sheet.pdf",
   features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",

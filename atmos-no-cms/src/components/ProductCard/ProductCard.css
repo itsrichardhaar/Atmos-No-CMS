@@ -3,7 +3,7 @@
 .pc{
   background: linear-gradient(to bottom, #363636 0%, #000 70%);
   border-radius: 8px;
-  padding: 14px;
+  padding: 26px;
   color: #fff;
   box-shadow: 0 10px 30px rgba(0,0,0,.25);
   display: grid;
@@ -102,12 +102,29 @@
   margin-left: 2px; 
   font-size: .8rem; 
   color:#fff; 
-  font-weight: 400; 
+  font-weight: 400;
 }
 .pc__tagline { 
   margin: 2px 0 0; 
   color: rgba(255,255,255,.75); 
   font-size: 16px; 
+}
+
+.pc__download {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 4px;
+  text-decoration: underline;
+}
+.pc__download:hover {
+  color: #39BAFF;
+  
+  text-decoration: underline !important;
 }
 
 @-moz-document url-prefix() {
