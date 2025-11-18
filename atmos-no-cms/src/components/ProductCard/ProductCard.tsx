@@ -37,11 +37,13 @@ function LinkMaybeExternal({
 }
 
 export default function ProductCard({ product }: { product: Product }) {
-  const to = product.shopUrl ?? `/products/${product.slug}`;
+  // 🔹 Always use internal slug-based route for the main card link
+  const to = `/products/${product.slug}`;
   const title = `Shop ${product.name} Series`;
 
   return (
     <article className="pc pc--glow">
+      {/* Image links to internal product page */}
       <LinkMaybeExternal
         to={to}
         className="pc__imageWrap"
@@ -58,7 +60,12 @@ export default function ProductCard({ product }: { product: Product }) {
           }}
           viewport={{ once: true, amount: 0.95 }}
         >
-          <img className="pc__image" src={product.image} alt={product.name} loading="lazy" />
+          <img
+            className="pc__image"
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
+          />
           <div className="pc__fx" />
         </motion.div>
         <div className="pc__fx" />
@@ -72,6 +79,7 @@ export default function ProductCard({ product }: { product: Product }) {
           viewport={{ once: true, amount: 0.95 }}
           className="pc__title"
         >
+          {/* Title links to internal product page */}
           <LinkMaybeExternal to={to}>{product.name}</LinkMaybeExternal>
           {product.series && (
             <motion.span
@@ -111,6 +119,7 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
       </header>
 
+      {/* Button goes to internal product page */}
       <motion.div
         initial={{ opacity: 0, x: -10 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -126,6 +135,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </LinkMaybeExternal>
       </motion.div>
 
+      {/* Spec sheet stays external */}
       {product.specSheetUrl && (
         <motion.div
           initial={{ opacity: 0, x: -10 }}
@@ -133,7 +143,10 @@ export default function ProductCard({ product }: { product: Product }) {
           transition={{ duration: 0.4 }}
           viewport={{ once: true, amount: 0.8 }}
         >
-          <LinkMaybeExternal to={product.specSheetUrl} className="pc__download">
+          <LinkMaybeExternal
+            to={product.specSheetUrl}
+            className="pc__download"
+          >
             Download Spec Sheet
           </LinkMaybeExternal>
         </motion.div>
@@ -141,6 +154,7 @@ export default function ProductCard({ product }: { product: Product }) {
     </article>
   );
 }
+
 
 
 
