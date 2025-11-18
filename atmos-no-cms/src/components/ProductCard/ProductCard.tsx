@@ -37,7 +37,6 @@ function LinkMaybeExternal({
 }
 
 export default function ProductCard({ product }: { product: Product }) {
-  // 🔹 Always use internal slug-based route for the main card link
   const to = `/products/${product.slug}`;
   const title = `Shop ${product.name} Series`;
 
@@ -136,21 +135,6 @@ export default function ProductCard({ product }: { product: Product }) {
       </motion.div>
 
       {/* Spec sheet stays external */}
-      {product.specSheetUrl && (
-        <motion.div
-          initial={{ opacity: 0, x: -10 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4 }}
-          viewport={{ once: true, amount: 0.8 }}
-        >
-          <LinkMaybeExternal
-            to={product.specSheetUrl}
-            className="pc__download"
-          >
-            Download Spec Sheet
-          </LinkMaybeExternal>
-        </motion.div>
-      )}
     </article>
   );
 }

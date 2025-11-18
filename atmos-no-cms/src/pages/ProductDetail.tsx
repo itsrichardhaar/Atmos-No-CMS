@@ -63,7 +63,16 @@ export default function ProductDetail() {
           )}
 
           <div className="product__actions">
-            {!!product.startingFrom && <span className="product__price">Starting at ${product.startingFrom}</span>}
+            {product.specSheetUrl && (
+              <a
+                href={product.specSheetUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="pc__download"
+              >
+                Download Spec Sheet
+              </a>
+            )}
             {product.shopUrl && (
               <a href={product.shopUrl} target="_blank" rel="noreferrer" className="btn btn--primary">
                 Shop {product.name} Series
