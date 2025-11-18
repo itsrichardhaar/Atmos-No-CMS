@@ -37,14 +37,14 @@ function LinkMaybeExternal({
 }
 
 export default function ProductCard({ product }: { product: Product }) {
-  const to = `/products/${product.slug}`;
-  const title = `Shop ${product.name} Series`;
+  // Internal detail page
+  const detailUrl = `/products/${product.slug}`;
 
   return (
     <article className="pc pc--glow">
       {/* Image links to internal product page */}
       <LinkMaybeExternal
-        to={to}
+        to={detailUrl}
         className="pc__imageWrap"
         ariaLabel={`${product.name} details`}
       >
@@ -79,7 +79,7 @@ export default function ProductCard({ product }: { product: Product }) {
           className="pc__title"
         >
           {/* Title links to internal product page */}
-          <LinkMaybeExternal to={to}>{product.name}</LinkMaybeExternal>
+          <LinkMaybeExternal to={detailUrl}>{product.name}</LinkMaybeExternal>
           {product.series && (
             <motion.span
               initial={{ opacity: 0 }}
@@ -118,26 +118,39 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
       </header>
 
-      {/* Button goes to internal product page */}
+      {/* Actions: Learn More (internal) + Shop (external) */}
       <motion.div
+        className="pc__actions"
         initial={{ opacity: 0, x: -10 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.05 }}
         viewport={{ once: true, amount: 0.8 }}
       >
-        <LinkMaybeExternal to={to} className="btn btn--primary">
-          <span className="btn__label">{title}</span>
+        <LinkMaybeExternal to={detailUrl} className="btn btn--primary">
+          <span className="btn__label">Learn More</span>
           <span className="btn__arrows" aria-hidden="true">
             <span className="btn__arrow btn__arrow--off"></span>
             <span className="btn__arrow btn__arrow--on"></span>
           </span>
         </LinkMaybeExternal>
-      </motion.div>
 
-      {/* Spec sheet stays external */}
+        {product.shopUrl && (
+          <LinkMaybeExternal
+            to={product.shopUrl}
+            className="btn btn--primary"
+          >
+            <span className="btn__label">Shop</span>
+            <span className="btn__arrows" aria-hidden="true">
+              <span className="btn__arrow btn__arrow--off"></span>
+              <span className="btn__arrow btn__arrow--on"></span>
+            </span>
+          </LinkMaybeExternal>
+        )}
+      </motion.div>
     </article>
   );
 }
+
 
 
 

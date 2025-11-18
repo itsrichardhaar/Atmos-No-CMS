@@ -110,6 +110,14 @@
   font-size: 16px; 
 }
 
+.pc__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px; /* ← adjust this value for more/less spacing */
+  align-items: center;
+  margin-top: 8px;
+}
+
 .pc__download {
   display: inline-flex;
   gap: 4px;
