@@ -40,7 +40,7 @@ export default function ProductDetail() {
           {product.description && <p className="product__desc">{product.description}</p>}
 
           <div className="pixel__heading__wrapper">
-            <p className="pixel__heading">{product.name} is Available</p>
+            <p className="pixel__heading">{product.name} Series is Available</p>
             <p className="pixel__heading">In The Following Pixel Pitches:</p>
           </div>
 
