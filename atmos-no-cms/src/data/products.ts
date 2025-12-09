@@ -6,12 +6,12 @@ export const products: Product[] = [
     slug: "element",
     name: "Element",
     series: "Series",
-    tagline: "Efficient. Accurate. Versatile.",
+    tagline: "Powerful. Weatherproof. Performance Driven.",
     startingFrom: 555,
     image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/products/Element.png",
     categories: ["Indoor Performance", "Compact & Versatile"],
     specs: ["E2.6 / EX2.6  •  E2.9 / EX2.9  •  E3.9  •  E4.8 / EX4.8"],
-    description: "The Element Series is our IP65-rated LED panel designed for excellent visuals for any indoor installation or production deployment. Built for demanding outdoor environments, it features a durable die-cast aluminum cabinet and a modular design with fast-locking mechanisms. With high brightness, wide viewing angles, and front-and-back maintenance, it ensures seamless visuals even in direct sunlight—ideal for concerts, sports, exhibitions, and stage productions. ",
+    description: "The Element Series is our IP65-rated LED panel designed for excellent visuals for any indoor or outdoor installation or production deployment. Built for demanding outdoor environments, it features a durable die-cast aluminum cabinet and a modular design with fast-locking mechanisms. With high brightness, wide viewing angles, and front-and-back maintenance, it ensures seamless visuals even in direct sunlight—ideal for concerts, sports, exhibitions, and stage productions. ",
     useTitle: "Versatile Outdoor and Touring Applications",
     productUses: [
       {
@@ -41,7 +41,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/matrix.svg",
         title: "Flexible Pixel Pitches for Every Project",
-        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+        body: "1.2 to 2.5 pixel pitch options."
       },
       { icon: "/icons/features/headset.svg",
         title: "Expert Support and Trusted Warranty",
@@ -74,12 +74,12 @@ export const products: Product[] = [
     slug: "kiosk",
     name: "Kiosk",
     series: "Series",
-    tagline: "Modular kiosk-ready panels.",
+    tagline: "Modular all-in-one kiosk panels.",
     startingFrom: 555,
     image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/products/kiosk.png",
     categories: ["Indoor Performance", "Compact & Versatile"],
     specs: ["KI1.2  •  KI1.5  •  KI1.8  •  KI2.5"],
-    description: "The Kiosk Series offers a sleek, ultra-slim design with flexible installation options, including hanging, wall mounting, and seamless splicing. Its lightweight build and compact form make it easy to transport and set up. With remote-control compatibility via laptop, mobile device, or cloud platform, it’s an excellent solution for digital signage in shopping malls, retail stores, conference rooms, exhibitions, and event spaces. ",
+    description: "The Kiosk Series offers a sleek, ultra-slim design with flexible installation options, including hanging, wall mounting, and seamless splicing up to 8 units. Its lightweight build and compact form make it easy to transport and set up. With remote-control compatibility via laptop, mobile device, or cloud platform, it’s an excellent solution for digital signage in shopping malls, retail stores, conference rooms, exhibitions, and event spaces. ",
     useTitle: "Flexible Signage Solutions with the Kiosk Series",
     productUses: [
       {
@@ -100,8 +100,8 @@ export const products: Product[] = [
     specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Kiosk_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
-        title: "Stunning Visuals with High Refresh Rates",
-        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+        title: "Stunning Visuals",
+        body: "Up to 3840Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
       },
       { icon: "/icons/features/shield.svg",
         title: "Durable LED Panels Built to Last",
@@ -117,7 +117,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/sun.svg",
         title: "Energy Efficiency with Brilliant Brightness",
-        body: "600–10,000 nits with efficient power design to reduce operating costs."
+        body: "600–800 nits with efficient power design to reduce operating costs."
       },
       { icon: "/icons/features/layers.svg",
         title: "Lightweight Panels for Easy Installation",
@@ -125,15 +125,11 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/shape.svg",
         title: "Creative LED Solutions for Unique Designs",
-        body: "Flat, curved, convex/concave—engineered for custom builds."
+        body: "Stand-alone or splice kiosk arrangements for creative spaces."
       },
       { icon: "/icons/features/eye.svg",
         title: "Vivid Color Accuracy and Wide Viewing",
         body: "Ultra-wide angles and high contrast ensure consistent visuals."
-      },
-      { icon: "/icons/features/storm.svg",
-        title: "Weatherproof Displays for Outdoor Reliability",
-        body: "IP-rated protection for harsh environments and round-the-clock operation."
       },
     ],
   },
@@ -142,17 +138,17 @@ export const products: Product[] = [
     slug: "phantom",
     name: "Phantom",
     series: "Series",
-    tagline: "High-impact visuals for bold spaces.",
+    tagline: "Transparent. Lightweight. Impactful.",
     startingFrom: 595,
     image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/products/phantom.png",
     categories: ["Creative & Immersive", "Indoor Performance"],
     specs: ["PH3.9  •  PH7.8"],
-    description: "The Phantom Series is our transparent LED panel designed for indoor and outdoor applications requiring ultimate concealment and disguise. Engineered for seamless integration, it delivers 5000nits of brightness, 16-bit grayscale, and a 7680Hz refresh rate for crisp, high-contrast visuals. With up to 50% transparency, it blends effortlessly into its surroundings, making it ideal for retail, exhibitions, and immersive digital displays. ",
+    description: "The Phantom Series is our transparent LED panel designed for indoor and outdoor applications requiring ultimate concealment and disguise. Engineered for seamless integration, it delivers 5000nits of brightness, 16-bit grayscale, and a 7680Hz refresh rate for crisp, high-contrast visuals. With up to 50% transparency, it blends effortlessly into its surroundings, making it ideal for production or installation applications that demand ultimate concealment and performance. ",
     useTitle: "Where Transparency Creates New Possibilities",
     productUses: [
       {
       heading: "Retail Storefront Displays",
-      body: "Blend digital content with physical displays while maintaining visibility into the store."
+      body: "Provide large-format displays indoors or outdoors, while allowing air to flow through the panels."
       },
       {
         heading: "Exhibition Installations",
@@ -177,7 +173,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/matrix.svg",
         title: "Flexible Pixel Pitches for Every Project",
-        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+        body: "3.9-7.8 pixel pitch options, including transparent."
       },
       { icon: "/icons/features/headset.svg",
         title: "Expert Support and Trusted Warranty",
@@ -185,15 +181,15 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/sun.svg",
         title: "Energy Efficiency with Brilliant Brightness",
-        body: "600–10,000 nits with efficient power design to reduce operating costs."
+        body: "5000 nits with efficient power design to reduce operating costs."
       },
       { icon: "/icons/features/layers.svg",
         title: "Lightweight Panels for Easy Installation",
-        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
+        body: "Slim frames."
       },
       { icon: "/icons/features/shape.svg",
         title: "Creative LED Solutions for Unique Designs",
-        body: "Flat, curved, convex/concave—engineered for custom builds."
+        body: "LED solutions to blend in to the environment and be seen when needed."
       },
       { icon: "/icons/features/eye.svg",
         title: "Vivid Color Accuracy and Wide Viewing",
@@ -210,7 +206,7 @@ export const products: Product[] = [
     slug: "stratos",
     name: "Stratos",
     series: "Series",
-    tagline: "Outdoor brightness. Built to endure.",
+    tagline: "Bright. Weatherproof. Reliable.",
     startingFrom: 655,
     image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/products/stratos.png",
     categories: ["Outdoor & Weatherproof"],
@@ -236,8 +232,8 @@ export const products: Product[] = [
     specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Stratos_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
-        title: "Stunning Visuals with High Refresh Rates",
-        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+        title: "Stunning Visuals",
+        body: "Up to 3840Hz for smooth playback and vibrant color—ideal for signage, billboards, and large outdoor spaces."
       },
       { icon: "/icons/features/shield.svg",
         title: "Durable LED Panels Built to Last",
@@ -245,7 +241,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/matrix.svg",
         title: "Flexible Pixel Pitches for Every Project",
-        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+        body: "2.9- 10 pixel pitch options, including transparent and interactive LED floors."
       },
       { icon: "/icons/features/headset.svg",
         title: "Expert Support and Trusted Warranty",
@@ -253,7 +249,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/sun.svg",
         title: "Energy Efficiency with Brilliant Brightness",
-        body: "600–10,000 nits with efficient power design to reduce operating costs."
+        body: "4500–10,000 nits with efficient power design to reduce operating costs."
       },
       { icon: "/icons/features/layers.svg",
         title: "Lightweight Panels for Easy Installation",
@@ -261,7 +257,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/shape.svg",
         title: "Creative LED Solutions for Unique Designs",
-        body: "Flat, curved, convex/concave—engineered for custom builds."
+        body: "displays designed to showcase your message in large-format applications."
       },
       { icon: "/icons/features/eye.svg",
         title: "Vivid Color Accuracy and Wide Viewing",
@@ -278,7 +274,7 @@ export const products: Product[] = [
     slug: "trek",
     name: "Trek",
     series: "Series",
-    tagline: "Portable, rental-friendly LED.",
+    tagline: "Rugged. Immersive. Interactive.",
     startingFrom: 585,
     image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/products/trek.png",
     categories: ["Compact & Versatile", "Creative & Immersive"],
@@ -304,8 +300,8 @@ export const products: Product[] = [
     specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Trek_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
-        title: "Stunning Visuals with High Refresh Rates",
-        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+        title: "Stunning Visuals",
+        body: "Up to 3840Hz for smooth playback and vibrant color—ideal for ideal for indoor stage floor displays, interactive attractions, and virtual productions."
       },
       { icon: "/icons/features/shield.svg",
         title: "Durable LED Panels Built to Last",
@@ -313,7 +309,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/matrix.svg",
         title: "Flexible Pixel Pitches for Every Project",
-        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+        body: "2.5-4.8 pixel pitch available, including transparent and interactive LED floors."
       },
       { icon: "/icons/features/headset.svg",
         title: "Expert Support and Trusted Warranty",
@@ -329,15 +325,11 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/shape.svg",
         title: "Creative LED Solutions for Unique Designs",
-        body: "Flat, curved, convex/concave—engineered for custom builds."
+        body: "Engineered to immerse your guests  into a digital environment."
       },
       { icon: "/icons/features/eye.svg",
         title: "Vivid Color Accuracy and Wide Viewing",
         body: "Ultra-wide angles and high contrast ensure consistent visuals."
-      },
-      { icon: "/icons/features/storm.svg",
-        title: "Weatherproof Displays for Outdoor Reliability",
-        body: "IP-rated protection for harsh environments and round-the-clock operation."
       },
     ],
   },
@@ -346,12 +338,12 @@ export const products: Product[] = [
     slug: "vision",
     name: "Vision",
     series: "Series",
-    tagline: "Fine-pitch clarity for premium interiors.",
+    tagline: "Dynamic. Versatile. Creative.",
     startingFrom: 635,
     image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/products/vision.png",
     categories: ["Indoor Performance"],
     specs: ["V1.9  •  V2.9 / VX2.6  •  V2.9 / VX2.9  •  V3.9 / VX3.9"],
-    description: "The Vision Series is our premier production LED panel designed to provide superb visuals for any indoor installation or production deployment. Featuring multiple pixel pitch options and a 7680Hz refresh rate, it delivers stunning, high-definition imagery. Its modular design ensures quick, tool-free maintenance, while optional curved panels support concave, convex, and curvilinear configurations, making it a versatile choice for dynamic visual setups. ",
+    description: "The Vision Series is our premier production LED panel designed to provide superb visuals for any indoor installation or production deployment. Featuring multiple pixel pitch options and a 7680Hz refresh rate, it delivers stunning, high-definition imagery. Its modular design ensures quick, tool-free maintenance, while optional curved panels support flex, concave, convex, and curvilinear configurations, making it a versatile choice for dynamic visual setups. ",
     useTitle: "Where Vision Series Makes the Biggest Impact",
     productUses: [
       {
@@ -360,7 +352,7 @@ export const products: Product[] = [
       },
       {
         heading: "Flexible Event Builds",
-        body: "Adapt to any venue with modular panels that support flat, concave, or convex designs."
+        body: "Adapt to any venue with modular panels that support flex, flat, concave, or convex designs."
       },
       {
         heading: "Fast Turnaround Productions",
@@ -381,7 +373,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/matrix.svg",
         title: "Flexible Pixel Pitches for Every Project",
-        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+        body: "1.9 to 3.9 pixel pitch options, including transparent."
       },
       { icon: "/icons/features/headset.svg",
         title: "Expert Support and Trusted Warranty",
@@ -389,7 +381,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/sun.svg",
         title: "Energy Efficiency with Brilliant Brightness",
-        body: "600–10,000 nits with efficient power design to reduce operating costs."
+        body: "600–1200 nits with efficient power design to reduce operating costs."
       },
       { icon: "/icons/features/layers.svg",
         title: "Lightweight Panels for Easy Installation",
@@ -397,15 +389,11 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/shape.svg",
         title: "Creative LED Solutions for Unique Designs",
-        body: "Flat, curved, convex/concave—engineered for custom builds."
+        body: "Flex, Flat, curved, convex/concave—engineered for custom builds."
       },
       { icon: "/icons/features/eye.svg",
         title: "Vivid Color Accuracy and Wide Viewing",
         body: "Ultra-wide angles and high contrast ensure consistent visuals."
-      },
-      { icon: "/icons/features/storm.svg",
-        title: "Weatherproof Displays for Outdoor Reliability",
-        body: "IP-rated protection for harsh environments and round-the-clock operation."
       },
     ],
   },
@@ -414,7 +402,7 @@ export const products: Product[] = [
     slug: "vivid",
     name: "Vivid",
     series: "Series",
-    tagline: "Punchy color. Effortless install.",
+    tagline: "Sleek. Bold. Engaging.",
     startingFrom: 565,
     image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/products/vivid.png",
     categories: ["Indoor Performance", "Creative & Immersive"],
@@ -449,7 +437,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/matrix.svg",
         title: "Flexible Pixel Pitches for Every Project",
-        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+        body: "0.7- 2.3 pixel pitch options, including transparent and interactive LED floors."
       },
       { icon: "/icons/features/headset.svg",
         title: "Expert Support and Trusted Warranty",
@@ -457,7 +445,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/sun.svg",
         title: "Energy Efficiency with Brilliant Brightness",
-        body: "600–10,000 nits with efficient power design to reduce operating costs."
+        body: "600–1200 nits with efficient power design to reduce operating costs."
       },
       { icon: "/icons/features/layers.svg",
         title: "Lightweight Panels for Easy Installation",
@@ -465,15 +453,11 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/shape.svg",
         title: "Creative LED Solutions for Unique Designs",
-        body: "Flat, curved, convex/concave—engineered for custom builds."
+        body: "Build UHD displays that are designed to impress."
       },
       { icon: "/icons/features/eye.svg",
         title: "Vivid Color Accuracy and Wide Viewing",
         body: "Ultra-wide angles and high contrast ensure consistent visuals."
-      },
-      { icon: "/icons/features/storm.svg",
-        title: "Weatherproof Displays for Outdoor Reliability",
-        body: "IP-rated protection for harsh environments and round-the-clock operation."
       },
     ],
   },
@@ -482,7 +466,7 @@ export const products: Product[] = [
     slug: "vue",
     name: "Vue",
     series: "Series",
-    tagline: "Balanced performance, smart value.",
+    tagline: "Simple. Efficient. Effective.",
     startingFrom: 545,
     image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/products/vue.png",
     categories: ["Compact & Versatile"],
@@ -509,7 +493,7 @@ export const products: Product[] = [
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
-        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for houses of worship, retail, education, and corporate applications."
       },
       { icon: "/icons/features/shield.svg",
         title: "Durable LED Panels Built to Last",
@@ -517,7 +501,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/matrix.svg",
         title: "Flexible Pixel Pitches for Every Project",
-        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+        body: "1.2-2.5 pixel pitch options."
       },
       { icon: "/icons/features/headset.svg",
         title: "Expert Support and Trusted Warranty",
@@ -525,159 +509,19 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/sun.svg",
         title: "Energy Efficiency with Brilliant Brightness",
-        body: "600–10,000 nits with efficient power design to reduce operating costs."
+        body: "600 nits with efficient power design to reduce operating costs."
       },
       { icon: "/icons/features/layers.svg",
         title: "Lightweight Panels for Easy Installation",
-        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
+        body: "Slim frames, magnetic modules, and front-serviceable design speed up installs."
       },
       { icon: "/icons/features/shape.svg",
         title: "Creative LED Solutions for Unique Designs",
-        body: "Flat, curved, convex/concave—engineered for custom builds."
+        body: "LED made simple."
       },
       { icon: "/icons/features/eye.svg",
         title: "Vivid Color Accuracy and Wide Viewing",
         body: "Ultra-wide angles and high contrast ensure consistent visuals."
-      },
-      { icon: "/icons/features/storm.svg",
-        title: "Weatherproof Displays for Outdoor Reliability",
-        body: "IP-rated protection for harsh environments and round-the-clock operation."
-      },
-    ],
-  },
-  {
-  id: "p7",
-  slug: "vivid",
-  name: "Vivid",
-  series: "Series",
-  tagline: "Punchy color. Effortless install.",
-  startingFrom: 555, 
-  image: "/assets/products/vivid.png",
-  categories: ["Indoor Performance", "Creative & Immersive"],
-  specs: ["V1.7", "V1.9", "V1.12", "V1.5", "V1.8", "V2.3"],
-  description: "Vivid Series focuses on saturated color and simple installs for retail, hospitality, and venues.",
-  useTitle: "Practical",
-  productUses: [
-    {
-      heading: "Campus and Classroom Displays",
-      body: "Deliver clear, engaging visuals for lectures, assemblies, and presentations."
-    },
-    {
-      heading: "Digital Signage Solutions",
-      body: "Enhance communications in retail, corporate, and institutional environments."
-    },
-    {
-      heading: "Budget-Friendly Installations",
-      body: "Balance affordability with reliable LED performance at scale."
-    }
-  ],
-  shopUrl: "https://dfuc15-ke.myshopify.com/products/vivid",
-  glowColor: "#3BBE7A",
-  specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Vivid_Series_Sales_Sheet.pdf",
-  features: [
-      { icon: "/icons/features/burst.svg",
-        title: "Stunning Visuals with High Refresh Rates",
-        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
-      },
-      { icon: "/icons/features/shield.svg",
-        title: "Durable LED Panels Built to Last",
-        body: "Die-cast aluminum + protective features for long-term performance in tough environments."
-      },
-      { icon: "/icons/features/matrix.svg",
-        title: "Flexible Pixel Pitches for Every Project",
-        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
-      },
-      { icon: "/icons/features/headset.svg",
-        title: "Expert Support and Trusted Warranty",
-        body: "U.S.-based support, fast integration, and a trusted two-year warranty."
-      },
-      { icon: "/icons/features/sun.svg",
-        title: "Energy Efficiency with Brilliant Brightness",
-        body: "600–10,000 nits with efficient power design to reduce operating costs."
-      },
-      { icon: "/icons/features/layers.svg",
-        title: "Lightweight Panels for Easy Installation",
-        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
-      },
-      { icon: "/icons/features/shape.svg",
-        title: "Creative LED Solutions for Unique Designs",
-        body: "Flat, curved, convex/concave—engineered for custom builds."
-      },
-      { icon: "/icons/features/eye.svg",
-        title: "Vivid Color Accuracy and Wide Viewing",
-        body: "Ultra-wide angles and high contrast ensure consistent visuals."
-      },
-      { icon: "/icons/features/storm.svg",
-        title: "Weatherproof Displays for Outdoor Reliability",
-        body: "IP-rated protection for harsh environments and round-the-clock operation."
-      },
-    ],
-  },
-  {
-  id: "p8",
-  slug: "vue",
-  name: "Vue",
-  series: "Series",
-  tagline: "Balanced performance, smart value.",
-  startingFrom: 555,
-  image: "/assets/products/vue.png",
-  categories: ["Compact & Versatile"],
-  specs: ["VU1.2", "VU1.5", "VU1.8", "VU2.5"],
-  description: "Vue Series offers a balanced package of brightness, efficiency, and serviceability for broad use cases.",
-  useTitle: "Practical Solutions Powered by the Vue Series",
-  productUses: [
-    {
-      heading: "Campus and Classroom Displays",
-      body: "Deliver clear, engaging visuals for lectures, assemblies, and presentations."
-    },
-    {
-      heading: "Digital Signage Solutions",
-      body: "Enhance communications in retail, corporate, and institutional environments."
-    },
-    {
-      heading: "Budget-Friendly Installations",
-      body: "Balance affordability with reliable LED performance at scale."
-    }
-  ],
-  shopUrl: "https://dfuc15-ke.myshopify.com/products/vue",
-  glowColor: "#3BBE7A",
-  specSheetUrl: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/spec-sheets/Atmos_Vue_Series_Sales_Sheet.pdf",
-  features: [
-      { icon: "/icons/features/burst.svg",
-        title: "Stunning Visuals with High Refresh Rates",
-        body: "Up to 7680Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
-      },
-      { icon: "/icons/features/shield.svg",
-        title: "Durable LED Panels Built to Last",
-        body: "Die-cast aluminum + protective features for long-term performance in tough environments."
-      },
-      { icon: "/icons/features/matrix.svg",
-        title: "Flexible Pixel Pitches for Every Project",
-        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
-      },
-      { icon: "/icons/features/headset.svg",
-        title: "Expert Support and Trusted Warranty",
-        body: "U.S.-based support, fast integration, and a trusted two-year warranty."
-      },
-      { icon: "/icons/features/sun.svg",
-        title: "Energy Efficiency with Brilliant Brightness",
-        body: "600–10,000 nits with efficient power design to reduce operating costs."
-      },
-      { icon: "/icons/features/layers.svg",
-        title: "Lightweight Panels for Easy Installation",
-        body: "Slim frames, magnetic modules, and quick serviceability speed up installs."
-      },
-      { icon: "/icons/features/shape.svg",
-        title: "Creative LED Solutions for Unique Designs",
-        body: "Flat, curved, convex/concave—engineered for custom builds."
-      },
-      { icon: "/icons/features/eye.svg",
-        title: "Vivid Color Accuracy and Wide Viewing",
-        body: "Ultra-wide angles and high contrast ensure consistent visuals."
-      },
-      { icon: "/icons/features/storm.svg",
-        title: "Weatherproof Displays for Outdoor Reliability",
-        body: "IP-rated protection for harsh environments and round-the-clock operation."
       },
     ],
   },
