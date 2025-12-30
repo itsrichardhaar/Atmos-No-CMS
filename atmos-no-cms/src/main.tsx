@@ -6,6 +6,7 @@ import Home from "./pages/Home"
 import About from "./pages/About"
 import Contact from "./pages/Contact"
 import Markets from "./pages/Markets"
+import Support from "./pages/support";
 import Shop from "./pages/Shop"
 import Calculator from "./pages/Calculator"
 import NotFound from "./pages/NotFound"
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: "products", element: <ProductsPage /> },
       { path: "contact", element: <Contact /> },
       { path: "markets", element: <Markets /> },
+      { path: "support", element: <Support /> },
       { path: "calculator", element: <Calculator /> },
       { path: "shop", element: <Shop /> },
       { path: "products/:slug", element: <ProductDetail /> },
