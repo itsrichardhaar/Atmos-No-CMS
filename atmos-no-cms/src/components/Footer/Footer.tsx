@@ -36,14 +36,14 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a className={styles.contactItem} href="mailto:support@atmosled.com">
+                  <a className={styles.contactItem} href="mailto:support@atmosled.co">
                     <svg className="meta__icon" viewBox="0 0 24 24" aria-hidden="true">
                     <rect x="3" y="5" width="18" height="14" rx="2" ry="2"
                         fill="none" stroke="currentColor" strokeWidth="2"/>
                     <path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" strokeWidth="2"
                         strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                    <span>support@atmosled.com</span>
+                    <span>support@atmosled.co</span>
                   </a>
                 </li>
               </ul>
