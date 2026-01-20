@@ -1,10 +1,9 @@
 // src/types/product.ts
 
 export type ProductCategory =
-  | "Indoor Performance"
-  | "Outdoor & Weatherproof"
+  | "Indoor"
+  | "Outdoor"
   | "Creative & Immersive"
-  | "Compact & Versatile";
 
 export type ProductUses = {
   heading: string;

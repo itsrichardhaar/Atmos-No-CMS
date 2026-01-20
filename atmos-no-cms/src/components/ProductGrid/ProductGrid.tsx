@@ -227,10 +227,29 @@ export default function ProductGrid({
   }, [products]);
 
   const categories = useMemo<CatOrAll[]>(() => {
-    const set = new Set<ProductCategory>();
-    data.forEach((p) => p.categories.forEach((c) => set.add(c)));
-    return ["All", ...Array.from(set)];
+  const set = new Set<ProductCategory>();
+  data.forEach((p) => p.categories.forEach((c) => set.add(c)));
+
+  const preferredOrder: ProductCategory[] = [
+      "Indoor",
+      "Outdoor",
+      "Creative & Immersive",
+    ];
+
+    const ordered = Array.from(set).sort((a, b) => {
+      const ia = preferredOrder.indexOf(a);
+      const ib = preferredOrder.indexOf(b);
+
+      // Categories not found in preferredOrder go last, keeping relative order
+      if (ia === -1 && ib === -1) return 0;
+      if (ia === -1) return 1;
+      if (ib === -1) return -1;
+      return ia - ib;
+    });
+
+    return ["All", ...ordered];
   }, [data]);
+
 
   const [active, setActive] = useState<CatOrAll>(defaultCategory);
   const isFiltered = active !== "All";
