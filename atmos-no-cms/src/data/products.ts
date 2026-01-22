@@ -41,7 +41,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/matrix.svg",
         title: "Flexible Pixel Pitches for Every Project",
-        body: "1.2 to 2.5 pixel pitch options."
+        body: "2.6 to 4.8 pixel pitch options."
       },
       { icon: "/icons/features/headset.svg",
         title: "Expert Support and Trusted Warranty",
@@ -49,7 +49,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/sun.svg",
         title: "Energy Efficiency with Brilliant Brightness",
-        body: "600–10,000 nits with efficient power design to reduce operating costs."
+        body: "4500 nits with efficient power design to reduce operating costs."
       },
       { icon: "/icons/features/layers.svg",
         title: "Lightweight Panels for Easy Installation",
@@ -73,13 +73,13 @@ export const products: Product[] = [
     id: "p2",
     slug: "kiosk",
     name: "Kiosk",
-    series: "Series",
+    series: "System",
     tagline: "Modular all-in-one kiosk panels.",
     startingFrom: 555,
     image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/products/kiosk.png",
-    categories: ["Indoor"],
+    categories: ["Indoor", "Creative & Immersive"],
     specs: ["KI1.2  •  KI1.5  •  KI1.8  •  KI2.5"],
-    description: "The Kiosk Series offers a sleek, ultra-slim design with flexible installation options, including hanging, wall mounting, and seamless splicing up to 8 units. Its lightweight build and compact form make it easy to transport and set up. With remote-control compatibility via laptop, mobile device, or cloud platform, it’s an excellent solution for digital signage in shopping malls, retail stores, conference rooms, exhibitions, and event spaces. ",
+    description: "The Kiosk System offers a sleek, ultra-slim design with flexible installation options, including hanging, wall mounting, and seamless splicing up to 8 units. Its lightweight build and compact form make it easy to transport and set up. With remote-control compatibility via laptop, mobile device, or cloud platform, it’s an excellent solution for digital signage in shopping malls, retail stores, conference rooms, exhibitions, and event spaces. ",
     useTitle: "Flexible Signage Solutions with the Kiosk Series",
     productUses: [
       {
@@ -101,7 +101,7 @@ export const products: Product[] = [
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals",
-        body: "Up to 3840Hz for smooth playback and vibrant color—ideal for worship, events, and concerts."
+        body: "With up to 3840Hz for smooth playback and vibrant color, the Kiosk is an all-in-one solution for a variety of applications."
       },
       { icon: "/icons/features/shield.svg",
         title: "Durable LED Panels Built to Last",
@@ -109,7 +109,7 @@ export const products: Product[] = [
       },
       { icon: "/icons/features/matrix.svg",
         title: "Flexible Pixel Pitches for Every Project",
-        body: "From ultra-fine to 10mm options, including transparent and interactive LED floors."
+        body: "From 1.2 to 2.5mm options, allowing for superior, sharp, detailed imagery when you need it."
       },
       { icon: "/icons/features/headset.svg",
         title: "Expert Support and Trusted Warranty",
@@ -147,7 +147,7 @@ export const products: Product[] = [
     useTitle: "Where Transparency Creates New Possibilities",
     productUses: [
       {
-      heading: "Retail Storefront Displays",
+      heading: "Concert and Productions",
       body: "Provide large-format displays indoors or outdoors, while allowing air to flow through the panels."
       },
       {

@@ -141,7 +141,7 @@ export const markets: Market[] = [
     heroImage: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/hero/concerts.png",
     intro: {
       image: "https://springercdn-cf.s3.us-east-1.amazonaws.com/atmos-led/markets/detail/concerts-and-tours/concerts-main.png",
-      headline: "High-impace LED\n" +
+      headline: "High-impact LED\n" +
                 "panels built for\n" +
                 "touring, concerts, and\n" +
                 "live productions\n" +
