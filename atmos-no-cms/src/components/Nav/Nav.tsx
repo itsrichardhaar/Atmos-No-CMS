@@ -294,18 +294,24 @@ export default function Nav() {
                 </motion.div>
 
                 <motion.div variants={linkRow} custom={3} className="menu__linkWrapper" style={{ willChange: "transform, opacity" }}>
+                  <NavLink to="/support" end className={linkClass} aria-label="Support">
+                    <span className="menu__linkRow"><AnimatedLabel text="Support" /></span>
+                  </NavLink>
+                </motion.div>
+
+                <motion.div variants={linkRow} custom={4} className="menu__linkWrapper" style={{ willChange: "transform, opacity" }}>
                   <NavLink to="/contact" end className={linkClass} aria-label="Contact">
                     <span className="menu__linkRow"><AnimatedLabel text="Contact" /></span>
                   </NavLink>
                 </motion.div>
 
-                <motion.div variants={linkRow} custom={4} className="menu__linkWrapper" style={{ willChange: "transform, opacity" }}>
+                <motion.div variants={linkRow} custom={5} className="menu__linkWrapper" style={{ willChange: "transform, opacity" }}>
                   <a href="https://mapoutcreative.com/calculator/" className="menu__link" target="_blank" rel="noreferrer" aria-label="Calculator">
                     <span className="menu__linkRow"><AnimatedLabel text="Calculator" /></span>
                   </a>
                 </motion.div>
 
-                <motion.div variants={linkRow} custom={5} className="menu__linkWrapper" style={{ willChange: "transform, opacity" }}>
+                <motion.div variants={linkRow} custom={6} className="menu__linkWrapper" style={{ willChange: "transform, opacity" }}>
                   <a href="https://dfuc15-ke.myshopify.com" className="menu__link" target="_blank" rel="noreferrer" aria-label="Store">
                     <span className="menu__linkRow"><AnimatedLabel text="Store" /></span>
                   </a>
@@ -347,14 +353,9 @@ export default function Nav() {
                     <path d="M22 12a10 10 0 10-11.56 9.87v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.88h-2.34v6.99A10 10 0 0022 12z"/>
                   </svg>
                 </a>
-                <a className="social__link" href="https://instagram.com/atmosled" target="_blank" rel="noreferrer" aria-label="Instagram">
+                <a className="social__link" href="https://www.instagram.com/atmosledco/" target="_blank" rel="noreferrer" aria-label="Instagram">
                   <svg className="social__icon" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 00-5-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5a5.5 5.5 0 110 11 5.5 5.5 0 010-11zm0 2a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.75-2.25a1 1 0 110 2 1 1 0 010-2z"/>
-                  </svg>
-                </a>
-                <a className="social__link" href="https://youtube.com/@atmosled" target="_blank" rel="noreferrer" aria-label="YouTube">
-                  <svg className="social__icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M23.5 7.2a3 3 0 00-2.1-2.1C19.6 4.5 12 4.5 12 4.5s-7.6 0-9.4.6A3 3 0 00.5 7.2C0 9 0 12 0 12s0 3 .5 4.8a3 3 0 002.1 2.1c1.8.6 9.4.6 9.4.6s7.6 0 9.4-.6a3 3 0 002.1-2.1C24 15 24 12 24 12s0-3-.5-4.8zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
                   </svg>
                 </a>
                 <span className="menu__social-label">Get Connected</span>
