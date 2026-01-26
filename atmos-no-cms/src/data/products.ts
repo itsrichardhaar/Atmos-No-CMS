@@ -29,7 +29,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/element",
     glowColor: "#D81279",
-    specSheetUrl: "/public/assets/spec_sheets/Atmos_Element_Series_Sales_Sheet.pdf",
+    specSheetUrl: "/assets/spec_sheets/Atmos_Element_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -97,7 +97,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/kiosk",
     glowColor: "#DC902A",
-    specSheetUrl: "/public/assets/spec_sheets/Atmos_Kiosk_Series_Sales_Sheet-3.pdf",
+    specSheetUrl: "/assets/spec_sheets/Atmos_Kiosk_Series_Sales_Sheet-3.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals",
@@ -161,7 +161,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/phantom",
     glowColor: "#1D458B",
-    specSheetUrl: "/public/assets/spec_sheets/Atmos_Phantom_Series_Sales_Sheet-3.pdf",
+    specSheetUrl: "/assets/spec_sheets/Atmos_Phantom_Series_Sales_Sheet-3.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -229,7 +229,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/stratos",
     glowColor: "#F18037",
-    specSheetUrl: "/public/assets/spec_sheets/Atmos_Stratos_Series_Sales_Sheet.pdf",
+    specSheetUrl: "/assets/spec_sheets/Atmos_Stratos_Series_Sales_Sheet.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals",
@@ -297,7 +297,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/trek",
     glowColor: "#035F66",
-    specSheetUrl: "/public/assets/spec_sheets/Atmos_Trek_Series_Sales_Sheet-3.pdf",
+    specSheetUrl: "/assets/spec_sheets/Atmos_Trek_Series_Sales_Sheet-3.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals",
@@ -361,7 +361,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/vision",
     glowColor: "#6A449B",
-    specSheetUrl: "/public/assets/spec_sheets/Atmos_Vision_Series_Sales_Sheet-3.pdf",
+    specSheetUrl: "/assets/spec_sheets/Atmos_Vision_Series_Sales_Sheet-3.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -425,7 +425,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/vivid",
     glowColor: "#223C78",
-    specSheetUrl: "/public/assets/spec_sheets/Atmos_Vivid_Series_Sales_Sheet-3.pdf",
+    specSheetUrl: "/assets/spec_sheets/Atmos_Vivid_Series_Sales_Sheet-3.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
@@ -489,7 +489,7 @@ export const products: Product[] = [
     ],
     shopUrl: "https://dfuc15-ke.myshopify.com/products/vue",
     glowColor: "#F5CC19",
-    specSheetUrl: "/public/assets/spec_sheets/Atmos_Vue_Series_Sales_Sheet-3.pdf",
+    specSheetUrl: "/assets/spec_sheets/Atmos_Vue_Series_Sales_Sheet-3.pdf",
     features: [
       { icon: "/icons/features/burst.svg",
         title: "Stunning Visuals with High Refresh Rates",
