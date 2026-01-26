@@ -223,7 +223,7 @@ export default function ProductGrid({
   const data = useMemo(() => {
     const byId = new Map<string, Product>();
     for (const p of products) if (!byId.has(p.id)) byId.set(p.id, p);
-    return Array.from(byId.values());
+    return Array.from(byId.values()).reverse();
   }, [products]);
 
   const categories = useMemo<CatOrAll[]>(() => {
