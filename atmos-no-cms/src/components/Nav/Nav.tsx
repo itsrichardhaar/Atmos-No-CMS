@@ -306,7 +306,7 @@ export default function Nav() {
                 </motion.div>
 
                 <motion.div variants={linkRow} custom={5} className="menu__linkWrapper" style={{ willChange: "transform, opacity" }}>
-                  <a href="https://mapoutcreative.com/calculator/" className="menu__link" target="_blank" rel="noreferrer" aria-label="Calculator">
+                  <a href="https://calculate.atmosled.co" className="menu__link" target="_blank" rel="noreferrer" aria-label="Calculator">
                     <span className="menu__linkRow"><AnimatedLabel text="Calculator" /></span>
                   </a>
                 </motion.div>

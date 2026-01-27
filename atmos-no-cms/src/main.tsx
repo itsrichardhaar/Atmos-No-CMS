@@ -8,7 +8,6 @@ import Contact from "./pages/Contact"
 import Markets from "./pages/Markets"
 import Shop from "./pages/Shop"
 import Support from "./pages/Support";
-import Calculator from "./pages/Calculator"
 import NotFound from "./pages/NotFound"
 import ProductsPage from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
@@ -27,7 +26,6 @@ const router = createBrowserRouter([
       { path: "products", element: <ProductsPage /> },
       { path: "contact", element: <Contact /> },
       { path: "markets", element: <Markets /> },
-      { path: "calculator", element: <Calculator /> },
       { path: "support", element: <Support /> },
       { path: "shop", element: <Shop /> },
       { path: "products/:slug", element: <ProductDetail /> },
